@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\HomeController; 
+use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\Web\DashboardController;
 use App\Http\Controllers\Web\MenuController;
 use App\Http\Controllers\Web\PermissionController;
@@ -12,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 // ─── Guest Routes ──────────────────────────────────────────────────────────────
 Route::middleware('guest')->group(function () {
     Route::get('/login', [AuthController::class, 'loginForm'])->name('login');
-    Route::post('/login', [AuthController::class, 'login'])->name('login.post');
+    Route::post('/login', [AuthController::class, 'login'])->name('login.post'); 
 
     Route::get('/forgot-password', [AuthController::class, 'forgotForm'])->name('forgot.password');
     Route::post('/forgot-password', [AuthController::class, 'sendOtp'])->name('otp.send');
@@ -29,7 +31,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
     // Dashboard
-    Route::get('/', [DashboardController::class, 'index'])->name('web.dashboard');
+    Route::get('/web/dashboard', [DashboardController::class, 'index'])->name('web.dashboard');
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
 
     // Change Password
@@ -82,6 +84,16 @@ Route::middleware('auth')->group(function () {
                 'show' => 'web.users.show',
             ]);
 
+            // Blogs
+    Route::resource('blogs', UserController::class)
+            ->names([
+                'index' => 'web.blogs.index',
+                'create' => 'web.blogs.create',
+                'edit' => 'web.blogs.edit',
+                'update' => 'web.blogs.update',
+                'show' => 'web.blogs.show',
+            ]);
+
     // Tracking
     Route::resource('tracking', TrackingController::class)
             ->except(['destroy', 'edit', 'update'])
@@ -94,3 +106,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/tracking/{tracking}/edit', [TrackingController::class, 'edit'])->name('web.tracking.edit');
     Route::put('/tracking/{tracking}', [TrackingController::class, 'update'])->name('web.tracking.update');
 });
+
+Route::get('/', [HomeController::class, 'index'])->name('index');
+Route::get('/purchase', [PurchaseController::class, 'index'])->name('purchase');
