@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\Password;
 
 class UserController extends BaseApiController
 {
@@ -32,7 +33,7 @@ class UserController extends BaseApiController
             'email'     => 'required|email|unique:users,email',
             'phone'     => 'required|string|max:20',
             'role_id'   => 'required|exists:roles,id',
-            'password'  => 'required|string|min:8|confirmed',
+            'password'  => ['required', 'confirmed', Password::min(8)->mixedCase()->numbers()->symbols()],//'required|string|min:8|confirmed',
             'status'    => 'in:active,inactive',
         ]);
 

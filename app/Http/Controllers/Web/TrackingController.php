@@ -48,7 +48,7 @@ class TrackingController extends Controller
         $ip = $request->ip();
 
         $tracking = new Tracking();
-        $tracking->user_id = Auth::id();;
+        $tracking->user_id = Auth::id();
         $tracking->date = $request->date;
         $tracking->vendor = $request->vendor;
         $tracking->in_time = $request->in_time;

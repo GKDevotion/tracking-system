@@ -4,6 +4,8 @@ namespace App\Http\Controllers\API;
 
 use App\Models\Tracking;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Stevebauman\Location\Facades\Location;
 
 class TrackingController extends BaseApiController
 {
@@ -29,13 +31,54 @@ class TrackingController extends BaseApiController
             'short_description' => 'nullable|string|max:500',
             'latitude'          => 'nullable|numeric|between:-90,90',
             'longitude'         => 'nullable|numeric|between:-180,180',
-            'address'           => 'nullable|string|max:500',
+            // 'address'           => 'nullable|string|max:500',
         ]);
 
-        $data['user_id'] = $request->user()->id;
-        $data['status']  = 'in';
+        // $data['user_id'] = $request->user()->id;
+        // $data['status']  = 'in';
 
-        $tracking = Tracking::create($data);
+        // $tracking = Tracking::create($data);
+
+        $ip = $request->ip();
+
+        $tracking = new Tracking();
+        $tracking->user_id = Auth::id();
+        $tracking->date = $request->date;
+        $tracking->vendor = $request->vendor;
+        $tracking->in_time = $request->in_time;
+        $tracking->out_time = $request->out_time;
+        $tracking->short_description = $request->short_description;
+        $tracking->description = $request->description;
+        $tracking->ip = $ip;
+
+        if ( $ip == "127.0.0.1" ) {
+            $ip = "122.173.87.53";
+        }
+
+        if ( $ip != "127.0.0.1" && strlen( $ip ) > 8) {
+
+            $locationPosition = Location::get( $ip );
+            $locationPosition = json_encode($locationPosition);
+            $locationPosition = json_decode($locationPosition, 1);
+
+            $tracking->areaCode = $locationPosition['areaCode'];
+            $tracking->cityName = $locationPosition['cityName'];
+            $tracking->countryCode = $locationPosition['countryCode'];
+            $tracking->countryName = $locationPosition['countryName'];
+            $tracking->ip = $locationPosition['ip'];
+            $tracking->isoCode = $locationPosition['isoCode'];
+            $tracking->latitude =  $request->latitude ?? $locationPosition['latitude'];
+            $tracking->longitude = $request->longitude ?? $locationPosition['longitude'];
+            $tracking->metroCode = $locationPosition['metroCode'];
+            $tracking->postalCode = $locationPosition['postalCode'];
+            $tracking->regionCode = $locationPosition['regionCode'];
+            $tracking->regionName = $locationPosition['regionName'];
+            $tracking->zipCode = $locationPosition['zipCode'];
+            $tracking->address = $request->address ?? null;
+        }
+
+
+        $tracking->save();
 
         return $this->success('Tracking created.', $tracking->load('user'), 201);
     }

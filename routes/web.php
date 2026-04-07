@@ -43,6 +43,7 @@ Route::middleware('auth')->group(function () {
             ->names([
                 'index' => 'web.roles.index',
                 'create' => 'web.roles.create',
+                'store' => 'web.roles.store',
                 'edit' => 'web.roles.edit',
                 'update' => 'web.roles.update',
             ]);

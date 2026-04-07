@@ -64,4 +64,9 @@ class MenuController extends BaseApiController
         $menu->delete();
         return $this->success('Menu deleted.');
     }
+
+    public function parentMenu(){
+        $menu = Menu::whereNull('parent_id')->where('is_active', true)->orderBy('sort_order')->get();
+        return $this->success('Parent Menu retrived.', $menu);
+    }
 }

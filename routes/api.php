@@ -32,6 +32,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // Menus
     Route::apiResource('menus', MenuController::class);
+    Route::get('parent-menu', [MenuController::class, 'parentMenu']);
 
     // Permissions
     Route::get('/permissions/{role}', [PermissionController::class, 'show']);
