@@ -24,13 +24,13 @@ class UserController extends Controller
 
         $roles = Role::where('is_active', true)->get();
 
-        return view('users.index', compact('users', 'roles'));
+        return view('backend.pages.users.index', compact('users', 'roles'));
     }
 
     public function create()
     {
         $roles = Role::where('is_active', true)->get();
-        return view('users.form', ['user' => new User(), 'roles' => $roles]);
+        return view('backend.pages.users.form', ['user' => new User(), 'roles' => $roles]);
     }
 
     public function store(Request $request)
@@ -57,13 +57,13 @@ class UserController extends Controller
         $user->load('role');
         $permissions = Permission::where('role_id', $user->role_id)->with('menu')->get();
 
-        return view('users.view', compact('user', 'permissions'));
+        return view('backend.pages.users.view', compact('user', 'permissions'));
     }
 
     public function edit(User $user)
     {
         $roles = Role::where('is_active', true)->get();
-        return view('users.form', compact('user', 'roles'));
+        return view('backend.pages.users.form', compact('user', 'roles'));
     }
 
     public function update(Request $request, User $user)

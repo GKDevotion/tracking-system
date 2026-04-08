@@ -1,12 +1,14 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Web\CategoryController;
 use App\Http\Controllers\HomeController; 
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\Web\DashboardController;
 use App\Http\Controllers\Web\MenuController;
 use App\Http\Controllers\Web\PermissionController;
 use App\Http\Controllers\Web\RoleController;
+use App\Http\Controllers\Web\TagController;
 use App\Http\Controllers\Web\TrackingController;
 use App\Http\Controllers\Web\UserController;
 use Illuminate\Support\Facades\Route;
@@ -103,8 +105,37 @@ Route::middleware('auth')->group(function () {
                 'store' => 'web.tracking.store',
                 'show' => 'web.tracking.show',
             ]);
+            
     Route::get('/tracking/{tracking}/edit', [TrackingController::class, 'edit'])->name('web.tracking.edit');
     Route::put('/tracking/{tracking}', [TrackingController::class, 'update'])->name('web.tracking.update');
+
+    Route::resource('category', CategoryController::class)
+            ->except(['destroy', 'edit', 'update'])
+            ->names([
+                'index' => 'web.category.index',
+                'create' => 'web.category.create',
+                'store' => 'web.category.store',
+                'show' => 'web.category.show',
+                'destroy' => 'web.category.destroy',
+            ]);
+            
+    Route::get('/category/{category}/edit', [CategoryController::class, 'edit'])->name('web.category.edit');
+    Route::put('/category/{category}', [CategoryController::class, 'update'])->name('web.category.update');
+    Route::delete('/category/{category}', [CategoryController::class, 'destroy'])->name('web.category.destroy');
+
+    Route::resource('tag', TagController::class)
+            ->except(['destroy', 'edit', 'update'])
+            ->names([
+                'index' => 'web.tag.index',
+                'create' => 'web.tag.create',
+                'store' => 'web.tag.store',
+                'show' => 'web.tag.show',
+                'destroy' => 'web.tag.destroy',
+            ]);
+            
+    Route::get('/tag/{tag}/edit', [TagController::class, 'edit'])->name('web.tag.edit');
+    Route::put('/tag/{tag}', [TagController::class, 'update'])->name('web.tag.update');
+    Route::delete('/tag/{tag}', [TagController::class, 'destroy'])->name('web.tag.destroy');
 });
 
 Route::get('/', [HomeController::class, 'index'])->name('index');

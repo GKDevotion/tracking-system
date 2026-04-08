@@ -13,7 +13,7 @@ class PermissionController extends Controller
     public function index()
     {
         $roles = Role::where('is_active', true)->get();
-        return view('permissions.index', compact('roles'));
+        return view('backend.pages.permissions.index', compact('roles'));
     }
 
     public function show(Role $role)
@@ -21,7 +21,7 @@ class PermissionController extends Controller
         $menus       = Menu::whereNull('parent_id')->with('children')->where('is_active', true)->orderBy('sort_order')->get();
         $permissions = Permission::where('role_id', $role->id)->get()->keyBy('menu_id');
 
-        return view('permissions.edit', compact('role', 'menus', 'permissions'));
+        return view('backend.pages.permissions.edit', compact('role', 'menus', 'permissions'));
     }
 
     public function update(Request $request, Role $role)

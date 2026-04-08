@@ -18,13 +18,13 @@ class MenuController extends Controller
             ->paginate(10)
             ->withQueryString();
 
-        return view('menus.index', compact('menus'));
+        return view('backend.pages.menus.index', compact('menus'));
     }
 
     public function create()
     {
         $parents = Menu::whereNull('parent_id')->where('is_active', true)->orderBy('sort_order')->get();
-        return view('menus.form', ['menu' => new Menu(), 'parents' => $parents]);
+        return view('backend.pages.menus.form', ['menu' => new Menu(), 'parents' => $parents]);
     }
 
     public function store(Request $request)
@@ -53,7 +53,7 @@ class MenuController extends Controller
             ->orderBy('sort_order')
             ->get();
 
-        return view('menus.form', compact('menu', 'parents'));
+        return view('backend.pages.menus.form', compact('menu', 'parents'));
     }
 
     public function update(Request $request, Menu $menu)

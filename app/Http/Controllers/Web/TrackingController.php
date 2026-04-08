@@ -20,12 +20,13 @@ class TrackingController extends Controller
             ->paginate(10)
             ->withQueryString();
 
-        return view('tracking.index', compact('trackings'));
+        return view('backend.pages.tracking.index', compact('trackings'));
     }
 
     public function create()
     {
-        return view('tracking.form');
+        
+        return view('backend.pages.tracking.form');
     }
 
     public function store(Request $request)
@@ -95,12 +96,12 @@ class TrackingController extends Controller
     public function show(Tracking $tracking)
     {
         $tracking->load('user');
-        return view('tracking.view', compact('tracking'));
+        return view('backend.pages.tracking.view', compact('tracking'));
     }
 
     public function edit(Tracking $tracking)
     {
-        return view('tracking.form', compact('tracking'));
+        return view('backend.pages.tracking.form', compact('tracking'));
     }
 
     public function update(Request $request, Tracking $tracking)

@@ -20,7 +20,7 @@ class DashboardController extends Controller
         $totalUsers     = \App\Models\User::count();
         $totalVendors   = Tracking::distinct('vendor')->count('vendor');
 
-        return view('dashboard.index', compact(
+        return view('backend.pages.dashboard.index', compact(
             'filter', 'chartData', 'latest10',
             'totalTrackings', 'todayTrackings', 'totalUsers', 'totalVendors'
         ));

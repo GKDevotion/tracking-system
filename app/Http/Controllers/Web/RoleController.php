@@ -17,12 +17,12 @@ class RoleController extends Controller
             ->paginate(10)
             ->withQueryString();
 
-        return view('roles.index', compact('roles'));
+        return view('backend.pages.roles.index', compact('roles'));
     }
 
     public function create()
     {
-        return view('roles.form', ['role' => new Role()]);
+        return view('backend.pages.roles.form', ['role' => new Role()]);
     }
 
     public function store(Request $request)
@@ -40,7 +40,7 @@ class RoleController extends Controller
 
     public function edit(Role $role)
     {
-        return view('roles.form', compact('role'));
+        return view('backend.pages.roles.form', compact('role'));
     }
 
     public function update(Request $request, Role $role)
