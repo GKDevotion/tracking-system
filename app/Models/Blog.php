@@ -3,13 +3,17 @@
 namespace App\Models;
 
 use App\Models\Categories;
-use App\User;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
 
 class Blog extends Model
 {
+    use HasFactory, SoftDeletes;
+
     protected $table = "blogs";
     protected $fillable = [
         'user_id',
@@ -19,16 +23,14 @@ class Blog extends Model
         'slug',
         'image',
         'sort_url',
-        'image',
-        'podcast_url', 
+        'podcast_url',
         'short_description',
         'keyword',
-        'description', 
-        'status', 
+        'description',
+        'status',
     ];
-    use HasFactory;
 
- 
+
     public static function boot()
     {
         parent::boot();
@@ -42,6 +44,12 @@ class Blog extends Model
             $model->updated_at = Carbon::now('Asia/Dubai');
         });
     }
+
+        public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
 
     public function category()
     {
@@ -60,7 +68,9 @@ class Blog extends Model
 
     public function tags()
     {
-        return $this->belongsToMany(Tag::class, 'blog_tag_maps', 'blog_id', 'tag_id');
+        return $this->belongsToMany(Tag::class, 'blog_tag_maps', 'blog_id', 'tag_id')
+            ->withPivot(['category_id', 'sub_category_id'])
+            ->withTimestamps();
     }
 
 

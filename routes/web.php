@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Web\BlogController;
 use App\Http\Controllers\Web\CategoryController;
 use App\Http\Controllers\HomeController; 
 use App\Http\Controllers\PurchaseController;
@@ -87,14 +88,19 @@ Route::middleware('auth')->group(function () {
             ]);
 
             // Blogs
-    Route::resource('blogs', UserController::class)
+    Route::resource('blog', BlogController::class)
+            ->except(['destroy', 'edit', 'update'])
             ->names([
                 'index' => 'web.blogs.index',
                 'create' => 'web.blogs.create',
-                'edit' => 'web.blogs.edit',
-                'update' => 'web.blogs.update',
+                'store' => 'web.blogs.store',
                 'show' => 'web.blogs.show',
+                'destroy' => 'web.blogs.destroy',
             ]);
+            
+    Route::get('/blog/{blog}/edit', [BlogController::class, 'edit'])->name('web.blogs.edit');
+    Route::put('/blog/{blog}', [BlogController::class, 'update'])->name('web.blogs.update');
+    Route::delete('/blog/{blog}', [BlogController::class, 'destroy'])->name('web.blogs.destroy');
 
     // Tracking
     Route::resource('tracking', TrackingController::class)
