@@ -35,14 +35,14 @@
             <table class="table table-hover mb-0">
                 <thead>
                     <tr>
-                        <th>Sr</th>
-                        <th>Image</th>
-                        <th>Title</th>
-                        <th>Category</th>
-                        <th>Author</th>
-                        <th>Status</th>
-                        <th>Created At</th>
-                        <th>Action</th>
+                        <th width="50">Sr</th>
+                        <th width="100">Image</th>
+                        <th width="200">Title</th>
+                        <th width="150">Category</th>
+                        <th width="200">Short Description</th>
+                        <th width="100">Status</th>
+                        <th width="150">Created At</th>
+                        <th width="150">Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -51,16 +51,16 @@
                             <td>{{ $dataArr->firstItem() + $i }}</td>
                             <td>
                                 @if($blog->image)
-                                    <img src="{{ asset('storage/app/public/' . $blog->image) }}" width="60" height="60" style="object-fit:cover;" class="rounded">
+                                    <img src="{{ asset('storage/app/public/' . $blog->image) }}" width="100" height="100" style="object-fit:cover;" class="rounded">
                                 @else
-                                    <img src="{{ url('public/img/devotion-group-favicon.png') }}" width="60" height="60" style="object-fit:cover;" class="rounded">
+                                    <img src="{{ url('public/frontend/images/favicon.png') }}" width="100" height="100" style="object-fit:cover;" class="rounded">
                                 @endif
                             </td>
                             <td><strong>{{ $blog->title }}</strong></td>
                             <td>
-                                <span class="badge bg-info">{{ $blog->category->title ?? 'N/A' }}</span>
+                                <span>{{ $blog->category->title ?? 'N/A' }}</span>
                             </td>
-                            <td>{{ $blog->user->name ?? 'N/A' }}</td>
+                            <td>{{ Str::limit($blog->short_description, 100) }}</td>
                             <td>
                                 <span class="badge {{ $blog->status ? 'bg-success' : 'bg-secondary' }}">
                                     {{ $blog->status ? 'Active' : 'Inactive' }}

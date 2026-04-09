@@ -40,7 +40,8 @@
                                     <select class="form-control category_id" id="category_id" name="category_id">
                                         <option value="0">Select Category</option>
                                         @foreach ($categories as $category)
-                                            <option value="{{ $category->id }}" {{ old('category_id', $blog->category_id ?? '') == $category->id ? 'selected' : '' }}>
+                                            <option value="{{ $category->id }}"
+                                                {{ old('category_id', $blog->category_id ?? '') == $category->id ? 'selected' : '' }}>
                                                 {{ $category->title }}
                                             </option>
                                         @endforeach
@@ -89,8 +90,9 @@
                             {{-- Description --}}
                             <div class="col-12">
                                 <label class="form-label">Description</label>
-                                <textarea name="description" rows="5" class="form-control @error('description') is-invalid @enderror"
-                                    placeholder="Enter full description">{{ old('description', $blog->description ?? '') }}</textarea>
+                                <textarea id="description" name="description" rows="5"
+                                    class="form-control @error('description') is-invalid @enderror" placeholder="Enter full description">{{ old('description', $blog->description ?? '') }}</textarea>
+
                                 @error('description')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -192,41 +194,59 @@
 @endsection
 
 @push('scripts')
-<script>
-    function updateSubCategories(selectedCategoryId) {
-        const subCategoryOptions = document.querySelectorAll('.sub-category');
+    <script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
 
-        // Hide all sub-category options
-        subCategoryOptions.forEach(option => {
-            option.classList.add('d-none');
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#description'), {
+                toolbar: [
+                    'heading', '|',
+                    'bold', 'italic', 'link',
+                    'bulletedList', 'numberedList', '|',
+                    'blockQuote', 'insertTable', '|',
+                    'undo', 'redo'
+                ]
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
+
+    <script>
+        function updateSubCategories(selectedCategoryId) {
+            const subCategoryOptions = document.querySelectorAll('.sub-category');
+
+            // Hide all sub-category options
+            subCategoryOptions.forEach(option => {
+                option.classList.add('d-none');
+            });
+
+            // Show sub-categories for the selected parent category
+            if (selectedCategoryId && selectedCategoryId != '0') {
+                const relevantSubCategories = document.querySelectorAll('.parent-category-' + selectedCategoryId);
+                relevantSubCategories.forEach(option => {
+                    option.classList.remove('d-none');
+                });
+            }
+        }
+
+        // Update sub-categories based on selected category
+        document.getElementById('category_id').addEventListener('change', function() {
+            const selectedCategoryId = this.value;
+            updateSubCategories(selectedCategoryId);
+
+            // Reset sub-category selection when category changes
+            document.getElementById('sub_category_id').value = '0';
         });
 
-        // Show sub-categories for the selected parent category
-        if (selectedCategoryId && selectedCategoryId != '0') {
-            const relevantSubCategories = document.querySelectorAll('.parent-category-' + selectedCategoryId);
-            relevantSubCategories.forEach(option => {
-                option.classList.remove('d-none');
-            });
-        }
-    }
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const categorySelect = document.getElementById('category_id');
+            const selectedCategoryId = categorySelect.value;
 
-    // Update sub-categories based on selected category
-    document.getElementById('category_id').addEventListener('change', function() {
-        const selectedCategoryId = this.value;
-        updateSubCategories(selectedCategoryId);
-
-        // Reset sub-category selection when category changes
-        document.getElementById('sub_category_id').value = '0';
-    });
-
-    // Initialize on page load
-    document.addEventListener('DOMContentLoaded', function() {
-        const categorySelect = document.getElementById('category_id');
-        const selectedCategoryId = categorySelect.value;
-
-        if (selectedCategoryId && selectedCategoryId != '0') {
-            updateSubCategories(selectedCategoryId);
-        }
-    });
-</script>
+            if (selectedCategoryId && selectedCategoryId != '0') {
+                updateSubCategories(selectedCategoryId);
+            }
+        });
+    </script>
 @endpush

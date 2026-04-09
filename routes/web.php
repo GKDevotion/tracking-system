@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\BlogsController;
 use App\Http\Controllers\Web\BlogController;
 use App\Http\Controllers\Web\CategoryController;
 use App\Http\Controllers\HomeController; 
@@ -88,7 +89,7 @@ Route::middleware('auth')->group(function () {
             ]);
 
             // Blogs
-    Route::resource('blog', BlogController::class)
+    Route::resource('admin/blog', BlogController::class)
             ->except(['destroy', 'edit', 'update'])
             ->names([
                 'index' => 'web.blogs.index',
@@ -98,9 +99,9 @@ Route::middleware('auth')->group(function () {
                 'destroy' => 'web.blogs.destroy',
             ]);
             
-    Route::get('/blog/{blog}/edit', [BlogController::class, 'edit'])->name('web.blogs.edit');
-    Route::put('/blog/{blog}', [BlogController::class, 'update'])->name('web.blogs.update');
-    Route::delete('/blog/{blog}', [BlogController::class, 'destroy'])->name('web.blogs.destroy');
+    Route::get('/admin/blog/{blog}/edit', [BlogController::class, 'edit'])->name('web.blogs.edit');
+    Route::put('/admin/blog/{blog}', [BlogController::class, 'update'])->name('web.blogs.update');
+    Route::delete('/admin/blog/{blog}', [BlogController::class, 'destroy'])->name('web.blogs.destroy');
 
     // Tracking
     Route::resource('tracking', TrackingController::class)
@@ -146,3 +147,6 @@ Route::middleware('auth')->group(function () {
 
 Route::get('/', [HomeController::class, 'index'])->name('index');
 Route::get('/purchase', [PurchaseController::class, 'index'])->name('purchase');
+
+Route::get('news-analysis', [BlogsController::class, 'index'])->name('news.analysis');
+Route::get('/blog/{slug}', [BlogsController::class, 'show']) ->name('blog.details');

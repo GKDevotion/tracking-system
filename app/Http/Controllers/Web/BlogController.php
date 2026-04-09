@@ -38,13 +38,10 @@ class BlogController extends Controller
     {
         $data = $request->validate([
             'title' => 'required|min:1|max:255|unique:blogs,title',
-            'category_id' => 'required|exists:categories,id',
-            'sub_category_id' => 'nullable|exists:categories,id',
+            'category_id' => 'required|exists:categories,id', 
             'short_description' => 'nullable|string|max:500',
             'description' => 'nullable|string',
-            'keyword' => 'nullable|string|max:500',
-            'podcast_url' => 'nullable|url',
-            'sort_url' => 'nullable|url',
+            'keyword' => 'nullable|string', 
             'status' => 'nullable|boolean',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
@@ -73,6 +70,7 @@ class BlogController extends Controller
         if ($request->filled('tags') && is_array($request->tags)) {
             foreach ($request->tags as $tagId) {
                 $tagSync[$tagId] = [
+                    'user_id' => Auth::id(),
                     'category_id' => $blog->category_id,
                     'sub_category_id' => $blog->sub_category_id,
                 ];
@@ -102,13 +100,10 @@ class BlogController extends Controller
     {
         $data = $request->validate([
             'title' => 'required|min:1|max:255|unique:blogs,title,' . $blog->id,
-            'category_id' => 'required|exists:categories,id',
-            'sub_category_id' => 'nullable|exists:categories,id',
+            'category_id' => 'required|exists:categories,id', 
             'short_description' => 'nullable|string|max:500',
             'description' => 'nullable|string',
-            'keyword' => 'nullable|string|max:500',
-            'podcast_url' => 'nullable|url',
-            'sort_url' => 'nullable|url',
+            'keyword' => 'nullable|string', 
             'status' => 'nullable|boolean',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
@@ -139,6 +134,7 @@ class BlogController extends Controller
         if ($request->filled('tags') && is_array($request->tags)) {
             foreach ($request->tags as $tagId) {
                 $tagSync[$tagId] = [
+                    'user_id' => Auth::id(),
                     'category_id' => $blog->category_id,
                     'sub_category_id' => $blog->sub_category_id,
                 ];

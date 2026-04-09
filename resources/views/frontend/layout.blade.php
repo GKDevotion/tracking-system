@@ -14,7 +14,7 @@
     <title>Wealthora - Growing your Future</title>
     
     <!-- Favicon Icon -->
-    <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ url('public/frontend/images/favicon.png') }}" type="image/x-icon">
     
     <!-- Google Fonts Css-->
     <link rel="preconnect" href="https://fonts.googleapis.com/">

@@ -100,7 +100,7 @@
             <ul class="navbar-nav mx-auto text-uppercase">
                 <li class="nav-item"><a class="nav-link active" href="#">FOREX SIGNALS</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">RESULTS</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">NEWS ANALYSIS</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('news.analysis') }}">NEWS ANALYSIS</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">FAQ</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">EDUCATION</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">ABOUT US</a></li>

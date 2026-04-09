@@ -105,7 +105,7 @@
                             <div class="col-8">
                                 <div class="qr-container text-center animate__animated animate__zoomIn" id="qrSection">
                                     <h5 id="networkTitle" class="fw-bold">USDT - TRC20 - Tron Network</h5>
-                                    <img id="qrCodeImg" src="images/QR-Code-usdt-tron-trc20-address-gdp.png" alt="QR" class="my-3">
+                                    <img id="qrCodeImg" src="public/frontend/images/QR-Code-usdt-tron-trc20-address-gdp.png" alt="QR" class="my-3">
                                     <p class="text-primary fw-bold text-break" id="walletAddr">TGJmQJMEKkLeo2Ri9zFf1dvuqFeYhQya8A</p>
                                 </div>
                             </div>
@@ -132,8 +132,8 @@
     <script>
         // Data Configuration
         const paymentData = {
-            'trc20': { title: 'USDT - TRC20 - Tron Network', addr: 'TGJmQJMEKkLeo2Ri9zFf1dvuqFeYhQya8A', qr: 'images/QR-Code-usdt-tron-trc20-address-gdp.png' },
-            'bep20': { title: 'USDT - BEP20 - BNB - BCS Network', addr: '0xb65Ec1860d11Ce558132B083A80018F8015d9A73', qr: 'images/QR-Code-usdt-bep20-bnb-bsc-network-gdp.png' }
+            'trc20': { title: 'USDT - TRC20 - Tron Network', addr: 'TGJmQJMEKkLeo2Ri9zFf1dvuqFeYhQya8A', qr: 'public/frontend/images/QR-Code-usdt-tron-trc20-address-gdp.png' },
+            'bep20': { title: 'USDT - BEP20 - BNB - BCS Network', addr: '0xb65Ec1860d11Ce558132B083A80018F8015d9A73', qr: 'public/frontend/images/QR-Code-usdt-bep20-bnb-bsc-network-gdp.png' }
         };
 
         // 1. Toggle Telegram/WhatsApp Logic
