@@ -55,6 +55,7 @@ Route::middleware('auth')->group(function () {
             ->names([
                 'index' => 'web.menus.index',
                 'create' => 'web.menus.create',
+                'store' => 'web.menus.store',
                 'edit' => 'web.menus.edit',
                 'update' => 'web.menus.update',
             ]);
@@ -94,4 +95,54 @@ Route::middleware('auth')->group(function () {
             ]);
     Route::get('/tracking/{tracking}/edit', [TrackingController::class, 'edit'])->name('web.tracking.edit');
     Route::put('/tracking/{tracking}', [TrackingController::class, 'update'])->name('web.tracking.update');
+
+    // Business mail Category
+    Route::resource('bm-category', UserController::class)
+            ->names([
+                'index' => 'web.bm-category.index',
+                'create' => 'web.bm-category.create',
+                'edit' => 'web.bm-category.edit',
+                'update' => 'web.bm-category.update',
+                'show' => 'web.bm-category.show',
+            ]);
+
+    // Business mail Template
+    Route::resource('bm-mail-template', UserController::class)
+            ->names([
+                'index' => 'web.bm-mail-template.index',
+                'create' => 'web.bm-mail-template.create',
+                'edit' => 'web.bm-mail-template.edit',
+                'update' => 'web.bm-mail-template.update',
+                'show' => 'web.bm-mail-template.show',
+            ]);
+
+    // Business mail Client
+    Route::resource('bm-client', UserController::class)
+            ->names([
+                'index' => 'web.bm-client.index',
+                'create' => 'web.bm-client.create',
+                'edit' => 'web.bm-client.edit',
+                'update' => 'web.bm-client.update',
+                'show' => 'web.bm-client.show',
+            ]);
+
+    // Business mail Logs
+    Route::resource('bm-mail-logs', UserController::class)
+            ->names([
+                'index' => 'web.bm-mail-logs.index',
+                'create' => 'web.bm-mail-logs.create',
+                'edit' => 'web.bm-mail-logs.edit',
+                'update' => 'web.bm-mail-logs.update',
+                'show' => 'web.bm-mail-logs.show',
+            ]);
+
+    // Sales Person
+    Route::resource('sales', UserController::class)
+            ->names([
+                'index' => 'web.sales.index',
+                'create' => 'web.sales.create',
+                'edit' => 'web.sales.edit',
+                'update' => 'web.sales.update',
+                'show' => 'web.sales.show',
+            ]);
 });

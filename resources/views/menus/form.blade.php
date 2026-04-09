@@ -11,7 +11,7 @@
                 <strong>{{ $menu->exists ? 'Edit Menu' : 'New Menu' }}</strong>
             </div>
             <div class="card-body p-4">
-                <form method="POST" action="{{ $menu->exists ? route('web.menus.update', $menu) : route('menus.store') }}">
+                <form method="POST" action="{{ $menu->exists ? route('web.menus.update', $menu) : route('web.menus.store') }}">
                     @csrf
                     @if($menu->exists) @method('PUT') @endif
 
