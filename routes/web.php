@@ -1,6 +1,10 @@
 <?php
 
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\Web\BmCategoryController;
+use App\Http\Controllers\Web\BmClientController;
+use App\Http\Controllers\Web\BmMailLogController;
+use App\Http\Controllers\Web\BmMailTemplateController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\BlogsController;
 use App\Http\Controllers\CheckoutController;
@@ -22,12 +26,15 @@ use App\Http\Controllers\Web\TagController;
 use App\Http\Controllers\Web\TrackingController;
 use App\Http\Controllers\Web\UserController;
 use App\Http\Controllers\Web\ConfigurationController;
+use App\Http\Controllers\Web\PlanController;
+use App\Http\Controllers\Web\PricingPlanCheckoutController;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 // ─── Guest Routes ──────────────────────────────────────────────────────────────
 Route::middleware('guest')->group(function () {
     Route::get('/login', [AuthController::class, 'loginForm'])->name('login');
-    Route::post('/login', [AuthController::class, 'login'])->name('login.post'); 
+    Route::post('/login', [AuthController::class, 'login'])->name('login.post');
 
     Route::get('/forgot-password', [AuthController::class, 'forgotForm'])->name('forgot.password');
     Route::post('/forgot-password', [AuthController::class, 'sendOtp'])->name('otp.send');
@@ -58,6 +65,7 @@ Route::middleware('auth')->group(function () {
             ->names([
                 'index' => 'web.roles.index',
                 'create' => 'web.roles.create',
+                'store' => 'web.roles.store',
                 'edit' => 'web.roles.edit',
                 'update' => 'web.roles.update',
             ]);
@@ -69,6 +77,7 @@ Route::middleware('auth')->group(function () {
             ->names([
                 'index' => 'web.menus.index',
                 'create' => 'web.menus.create',
+                'store' => 'web.menus.store',
                 'edit' => 'web.menus.edit',
                 'update' => 'web.menus.update',
             ]);
@@ -110,7 +119,7 @@ Route::middleware('auth')->group(function () {
             ]);
 
     // Pricing Plan Checkout
-    Route::resource('pricing-plan-checkout', \App\Http\Controllers\Web\PricingPlanCheckoutController::class)
+    Route::resource('pricing-plan-checkout', PricingPlanCheckoutController::class)
             ->names([
                 'index' => 'web.pricing-plan-checkout.index',
                 'edit' => 'web.pricing-plan-checkout.edit',
@@ -119,7 +128,7 @@ Route::middleware('auth')->group(function () {
             ]);
 
     // Plans
-    Route::resource('plans', \App\Http\Controllers\Web\PlanController::class)
+    Route::resource('plans', PlanController::class)
             ->names([
                 'index' => 'web.plans.index',
                 'create' => 'web.plans.create',
@@ -139,7 +148,7 @@ Route::middleware('auth')->group(function () {
                 'show' => 'web.blogs.show',
                 'destroy' => 'web.blogs.destroy',
             ]);
-            
+
     Route::get('/admin/blog/{blog}/edit', [BlogController::class, 'edit'])->name('web.blogs.edit');
     Route::put('/admin/blog/{blog}', [BlogController::class, 'update'])->name('web.blogs.update');
     Route::delete('/admin/blog/{blog}', [BlogController::class, 'destroy'])->name('web.blogs.destroy');
@@ -153,7 +162,7 @@ Route::middleware('auth')->group(function () {
                 'store' => 'web.tracking.store',
                 'show' => 'web.tracking.show',
             ]);
-            
+
     Route::get('/tracking/{tracking}/edit', [TrackingController::class, 'edit'])->name('web.tracking.edit');
     Route::put('/tracking/{tracking}', [TrackingController::class, 'update'])->name('web.tracking.update');
 
@@ -166,7 +175,7 @@ Route::middleware('auth')->group(function () {
                 'show' => 'web.category.show',
                 'destroy' => 'web.category.destroy',
             ]);
-            
+
     Route::get('/category/{category}/edit', [CategoryController::class, 'edit'])->name('web.category.edit');
     Route::put('/category/{category}', [CategoryController::class, 'update'])->name('web.category.update');
     Route::delete('/category/{category}', [CategoryController::class, 'destroy'])->name('web.category.destroy');
@@ -180,10 +189,72 @@ Route::middleware('auth')->group(function () {
                 'show' => 'web.tag.show',
                 'destroy' => 'web.tag.destroy',
             ]);
-            
+
     Route::get('/tag/{tag}/edit', [TagController::class, 'edit'])->name('web.tag.edit');
     Route::put('/tag/{tag}', [TagController::class, 'update'])->name('web.tag.update');
     Route::delete('/tag/{tag}', [TagController::class, 'destroy'])->name('web.tag.destroy');
+
+    // ── Categories ────────────────────────────────────────
+    Route::resource('bm-category', BmCategoryController::class)
+            ->only(['index', 'store', 'update', 'destroy'])
+            ->names('web.bm-category');
+
+    // Business mail Template
+    Route::resource('bm-mail-template', BmMailTemplateController::class)
+            ->names([
+                'index' => 'web.bm-mail-template.index',
+                'create' => 'web.bm-mail-template.create',
+                'edit' => 'web.bm-mail-template.edit',
+                'update' => 'web.bm-mail-template.update',
+                'show' => 'web.bm-mail-template.show',
+                'destroy' => 'web.bm-mail-template.destroy',
+            ]);
+    Route::post('templates/send-to-client', [BmMailTemplateController::class, 'sendToClient'])
+             ->name('web.bm-mail-template.sendToClient');
+
+    // Business mail Client
+    Route::resource('bm-client', BmClientController::class)
+            ->names([
+                'index' => 'web.bm-client.index',
+                'create' => 'web.bm-client.create',
+                'edit' => 'web.bm-client.edit',
+                'update' => 'web.bm-client.update',
+                'show' => 'web.bm-client.show',
+                'destroy' => 'web.bm-client.destroy',
+            ]);
+
+    // AJAX single send (called via fetch from modal)
+    Route::post('clients/bulk-send', [BmClientController::class, 'bulkSend'])
+             ->name('clients.bulkSend');
+
+
+    // Business mail Logs
+    Route::get('bm-mail-logs/export', [BmMailLogController::class, 'export'])->name('web.bm-logs.export');
+    Route::get('bm-mail-logs',        [BmMailLogController::class, 'index']) ->name('web.bm-mail-logs.index');
+
+    // Sales Person
+    Route::resource('sales', UserController::class)
+            ->names([
+                'index' => 'web.sales.index',
+                'create' => 'web.sales.create',
+                'edit' => 'web.sales.edit',
+                'update' => 'web.sales.update',
+                'show' => 'web.sales.show',
+            ]);
+});
+
+
+Route::get('/test-mail', function () {
+    try {
+        Mail::raw('This is a test email from Laravel!', function ($message) {
+            $message->to('gk@devotiontech.io')
+                    ->subject('Test Email');
+        });
+
+        return '✅ Mail sent successfully!';
+    } catch (\Exception $e) {
+        return "❌ Mail Failed: " . $e->getMessage();
+    }
 });
 
 Route::get('/', [HomeController::class, 'index'])->name('index');
@@ -202,4 +273,4 @@ Route::get('/cookie-policy', [CookieController::class, 'index'])->name('cookie')
 Route::get('/risk-disclosure', [RiskDisclosureController::class, 'index'])->name('risk-disclosure');
 Route::get('/disclaimer', [DisclaimerController::class, 'index'])->name('disclaimer');
 
- 
+

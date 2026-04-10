@@ -38,7 +38,7 @@ class MenuController extends Controller
             'is_active'  => 'boolean',
         ]);
 
-        $data['slug'] = Str::slug($data['name'] . '-' . uniqid());
+        $data['slug'] = Str::slug($data['name']);
 
         Menu::create($data);
 

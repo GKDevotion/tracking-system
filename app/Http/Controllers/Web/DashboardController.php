@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
+use App\Models\BmClient;
+use App\Models\BmMailLog;
 use App\Models\Tracking;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -13,15 +15,32 @@ class DashboardController extends Controller
     {
         $filter  = $request->get('filter', 'daily');
         $chartData = $this->getChartData($filter);
-        $latest10  = Tracking::with('user')->latest()->take(10)->get();
+        $latestRecords  = Tracking::with('user')->latest()->take(10)->get();
 
         $totalTrackings = Tracking::count();
         $todayTrackings = Tracking::whereDate('date', today())->count();
         $totalUsers     = \App\Models\User::count();
         $totalVendors   = Tracking::distinct('vendor')->count('vendor');
 
-        return view('backend.pages.dashboard.index', compact(
-            'filter', 'chartData', 'latest10',
+        $totalSent   = BmMailLog::where('status', 'sent')->count();
+        $totalFailed = BmMailLog::where('status', 'failed')->count();
+        $total       = $totalSent + $totalFailed;
+
+        $stats = [
+            'total_clients'     => BmClient::count(),
+            'clients_this_month'=> BmClient::whereMonth('created_at', now()->month)->count(),
+            'total_sent'        => $totalSent,
+            'total_failed'      => $totalFailed,
+            'failure_rate'      => $total > 0 ? round($totalFailed / $total * 100, 1) : 0,
+            'bulk_campaigns'    => BmMailLog::where('is_bulk', true)->distinct('campaign_id')->count('campaign_id'),
+            'today_sent'        => BmMailLog::where('status', 'sent')->whereDate('sent_at', today())->count(),
+            'unsent_clients'    => BmClient::where('sent', 0)->where('status', 1)->count(),
+        ];
+
+        $recentLogs = BmMailLog::with('client:id,name,company_name', 'template:id,name')->latest('sent_at')->limit(8)->get();
+
+        return view('dashboard.index', compact(
+            'filter', 'chartData', 'latestRecords', 'stats', 'recentLogs',
             'totalTrackings', 'todayTrackings', 'totalUsers', 'totalVendors'
         ));
     }

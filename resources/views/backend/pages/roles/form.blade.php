@@ -11,7 +11,7 @@
                 <strong>{{ $role->exists ? 'Edit Role' : 'New Role' }}</strong>
             </div>
             <div class="card-body p-4">
-                <form method="POST" action="{{ $role->exists ? route('roles.update', $role) : route('roles.store') }}">
+                <form method="POST" action="{{ $role->exists ? route('web.roles.update', $role) : route('web.roles.store') }}">
                     @csrf
                     @if($role->exists) @method('PUT') @endif
 
