@@ -86,8 +86,8 @@
                                     <i class="bi bi-send"></i>
                                 </button>
                                 {{-- View --}}
-                                <a href="{{ route('web.bm-mail-template.show', $tmpl) }}" class="btn btn-sm btn-light"
-                                    title="View"><i class="bi bi-eye"></i></a>
+                                {{-- <a href="{{ route('web.bm-mail-template.show', $tmpl) }}" class="btn btn-sm btn-light"
+                                    title="View"><i class="bi bi-eye"></i></a> --}}
                                 {{-- Edit --}}
                                 <a href="{{ route('web.bm-mail-template.edit', $tmpl) }}" class="btn btn-sm btn-light"
                                     title="Edit"><i class="bi bi-pencil"></i></a>

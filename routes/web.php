@@ -125,9 +125,10 @@ Route::middleware('auth')->group(function () {
                 'edit' => 'web.bm-mail-template.edit',
                 'update' => 'web.bm-mail-template.update',
                 'show' => 'web.bm-mail-template.show',
+                'destroy' => 'web.bm-mail-template.destroy',
             ]);
     Route::post('templates/send-to-client', [BmMailTemplateController::class, 'sendToClient'])
-             ->name('templates.sendToClient');
+             ->name('web.bm-mail-template.sendToClient');
 
     // Business mail Client
     Route::resource('bm-client', BmClientController::class)
@@ -146,16 +147,16 @@ Route::middleware('auth')->group(function () {
 
 
     // Business mail Logs
-    Route::resource('bm-mail-logs', UserController::class)
-            ->names([
-                'index' => 'web.bm-mail-logs.index',
-                'create' => 'web.bm-mail-logs.create',
-                'edit' => 'web.bm-mail-logs.edit',
-                'update' => 'web.bm-mail-logs.update',
-                'show' => 'web.bm-mail-logs.show',
-            ]);
-    Route::get('logs/export', [BmMailLogController::class, 'export'])->name('logs.export');
-    Route::get('logs',        [BmMailLogController::class, 'index']) ->name('web.bm-logs.index');
+    // Route::resource('bm-mail-logs', UserController::class)
+    //         ->names([
+    //             'index' => 'web.bm-mail-logs.index',
+    //             'create' => 'web.bm-mail-logs.create',
+    //             'edit' => 'web.bm-mail-logs.edit',
+    //             'update' => 'web.bm-mail-logs.update',
+    //             'show' => 'web.bm-mail-logs.show',
+    //         ]);
+    Route::get('bm-mail-logs/export', [BmMailLogController::class, 'export'])->name('web.bm-logs.export');
+    Route::get('bm-mail-logs',        [BmMailLogController::class, 'index']) ->name('web.bm-mail-logs.index');
 
     // Sales Person
     Route::resource('sales', UserController::class)

@@ -67,8 +67,10 @@ class BmMailTemplateController extends Controller
         return view('business-mail.template.show', ['template' => $mailTemplate->load('category')]);
     }
 
-    public function edit(BmMailTemplate $mailTemplate)
+    public function edit(Request $request, $id=null)
     {
+        $mailTemplate = BmMailTemplate::find( $id );
+
         $categories = BmCategory::where('status', 1)->orderBy('name')->get();
         return view('business-mail.template.form', [
             'template'   => $mailTemplate,

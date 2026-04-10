@@ -1,6 +1,5 @@
-{{-- resources/views/business-mail/template/form.blade.php --}}
 {{-- Used for both create and edit --}}
-@extends('layouts.admin')
+@extends('layouts.app')
 
 @section('title', isset($template) ? 'Edit Template' : 'Add Template')
 @section('page-title', isset($template) ? 'Edit Template' : 'Add Template')
@@ -83,7 +82,7 @@
                             <input type="text" name="subject"
                                    class="form-control @error('subject') is-invalid @enderror"
                                    value="{{ old('subject', $template->subject ?? '') }}"
-                                   placeholder="Exclusive offer for {{company}}" required>
+                                   placeholder="Exclusive offer for company" required>
                             @error('subject')<div class="invalid-feedback">{{ $message }}</div>@enderror
                         </div>
 

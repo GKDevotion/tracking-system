@@ -80,7 +80,7 @@
                 <input type="date" name="to_date" class="form-control" value="{{ request('to_date') }}"
                     style="max-width:150px" placeholder="To date">
                 <button type="submit" class="btn btn-sm btn-primary">Filter</button>
-                <a href="{{ route('web.bm-logs.index') }}" class="btn btn-sm btn-light">Reset</a>
+                <a href="{{ route('web.bm-mail-logs.index') }}" class="btn btn-sm btn-light">Reset</a>
             </form>
         </div>
 
