@@ -769,7 +769,7 @@
         });
     </script>
 </section>
-<!-- End Lunch Movement Animation --> 
+<!-- End Lunch Movement Animation -->
 
 <!-- Page Pricing Start -->
 <div class="page-pricing">
@@ -971,9 +971,9 @@
                 <!-- Pricing Benifit List Start -->
                 <div class="pricing-benefit-list wow fadeInUp" data-wow-delay="0.6s">
                     <ul>
-                        <li><img src="images/icon-pricing-benefit-1.svg" alt="">Get 30 day free trial</li>
-                        <li><img src="images/icon-pricing-benefit-2.svg" alt="">No any hidden fee pay</li>
-                        <li><img src="images/icon-pricing-benefit-3.svg" alt="">You can cancel anytime </li>
+                        <li><img src="frontend/images/icon-pricing-benefit-1.svg" alt="">Get 30 day free trial</li>
+                        <li><img src="frontend/images/icon-pricing-benefit-2.svg" alt="">No any hidden fee pay</li>
+                        <li><img src="frontend/images/icon-pricing-benefit-3.svg" alt="">You can cancel anytime </li>
                     </ul>
                 </div>
                 <!-- Pricing Benifit List End -->
