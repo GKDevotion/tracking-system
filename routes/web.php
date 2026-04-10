@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\Web\BmCategoryController;
+use App\Http\Controllers\Web\BmClientController;
+use App\Http\Controllers\Web\BmMailLogController;
+use App\Http\Controllers\Web\BmMailTemplateController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Web\DashboardController;
 use App\Http\Controllers\Web\MenuController;
@@ -97,17 +101,24 @@ Route::middleware('auth')->group(function () {
     Route::put('/tracking/{tracking}', [TrackingController::class, 'update'])->name('web.tracking.update');
 
     // Business mail Category
-    Route::resource('bm-category', UserController::class)
-            ->names([
-                'index' => 'web.bm-category.index',
-                'create' => 'web.bm-category.create',
-                'edit' => 'web.bm-category.edit',
-                'update' => 'web.bm-category.update',
-                'show' => 'web.bm-category.show',
-            ]);
+    // Route::resource('bm-category', BmCategoryController::class)
+    //         ->names([
+    //             'index' => 'web.bm-category.index',
+    //             'create' => 'web.bm-category.create',
+    //             'store' => 'web.bm-category.store',
+    //             'edit' => 'web.bm-category.edit',
+    //             'update' => 'web.bm-category.update',
+    //             'show' => 'web.bm-category.show',
+    //             'destroy' => 'web.bm-category.destroy',
+    //         ]);
+
+    // ── Categories ────────────────────────────────────────
+    Route::resource('bm-category', BmCategoryController::class)
+            ->only(['index', 'store', 'update', 'destroy'])
+            ->names('web.bm-category');
 
     // Business mail Template
-    Route::resource('bm-mail-template', UserController::class)
+    Route::resource('bm-mail-template', BmMailTemplateController::class)
             ->names([
                 'index' => 'web.bm-mail-template.index',
                 'create' => 'web.bm-mail-template.create',
@@ -115,16 +126,24 @@ Route::middleware('auth')->group(function () {
                 'update' => 'web.bm-mail-template.update',
                 'show' => 'web.bm-mail-template.show',
             ]);
+    Route::post('templates/send-to-client', [BmMailTemplateController::class, 'sendToClient'])
+             ->name('templates.sendToClient');
 
     // Business mail Client
-    Route::resource('bm-client', UserController::class)
+    Route::resource('bm-client', BmClientController::class)
             ->names([
                 'index' => 'web.bm-client.index',
                 'create' => 'web.bm-client.create',
                 'edit' => 'web.bm-client.edit',
                 'update' => 'web.bm-client.update',
                 'show' => 'web.bm-client.show',
+                'destroy' => 'web.bm-client.destroy',
             ]);
+
+    // AJAX single send (called via fetch from modal)
+    Route::post('clients/bulk-send', [BmClientController::class, 'bulkSend'])
+             ->name('clients.bulkSend');
+
 
     // Business mail Logs
     Route::resource('bm-mail-logs', UserController::class)
@@ -135,6 +154,8 @@ Route::middleware('auth')->group(function () {
                 'update' => 'web.bm-mail-logs.update',
                 'show' => 'web.bm-mail-logs.show',
             ]);
+    Route::get('logs/export', [BmMailLogController::class, 'export'])->name('logs.export');
+    Route::get('logs',        [BmMailLogController::class, 'index']) ->name('web.bm-logs.index');
 
     // Sales Person
     Route::resource('sales', UserController::class)
