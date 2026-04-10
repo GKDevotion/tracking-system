@@ -11,6 +11,7 @@ use App\Http\Controllers\Web\PermissionController;
 use App\Http\Controllers\Web\RoleController;
 use App\Http\Controllers\Web\TrackingController;
 use App\Http\Controllers\Web\UserController;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 // ─── Guest Routes ──────────────────────────────────────────────────────────────
@@ -167,4 +168,18 @@ Route::middleware('auth')->group(function () {
                 'update' => 'web.sales.update',
                 'show' => 'web.sales.show',
             ]);
+});
+
+
+Route::get('/test-mail', function () {
+    try {
+        Mail::raw('This is a test email from Laravel!', function ($message) {
+            $message->to('gk@devotiontech.io')
+                    ->subject('Test Email');
+        });
+
+        return '✅ Mail sent successfully!';
+    } catch (\Exception $e) {
+        return "❌ Mail Failed: " . $e->getMessage();
+    }
 });
