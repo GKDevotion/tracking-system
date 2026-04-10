@@ -45,17 +45,24 @@
                             <!-- Footer Contact List Start -->
                             <div class="footer-contact-list">
                                 <!-- Footer Contact Item Start -->
+                                
+                                @if (getConfigurationField('CONTACT_PHONE') != '-')
                                 <div class="footer-contact-item">
                                     <p>Phone Number</p>
-                                    <a href="+(123) 654 789">+(123) 654 789</a>
+                                    <a href="tel:{!! getConfigurationField('CONTACT_PHONE') !!}">{!! getConfigurationField('CONTACT_PHONE') !!}</a>
                                 </div>
+                                @endif
+                               
                                 <!-- Footer Contact Item End -->
 
                                 <!-- Footer Contact Item Start -->
+                                 @if (getConfigurationField('CONTACT_EMAIL') != '-')
                                 <div class="footer-contact-item">
                                     <p>Email Address</p>
-                                    <a href="mailto:info@domainname.com">info@domainname.com</a>
+                                    <a href="mailto:{!! getConfigurationField('CONTACT_EMAIL') !!}">{!! getConfigurationField('CONTACT_EMAIL') !!}</a>
                                 </div>
+                                @endif
+
                                 <!-- Footer Contact Item End -->
                             </div>
                             <!-- Footer Contact List End -->
@@ -67,20 +74,38 @@
                         <!-- Footer Links start -->
                         <div class="footer-links">
                             <!-- Footer Location Item start -->
-                            <div class="footer-location-item">
-                                <h3>Our Location</h3>
-                                <p>4517 Washington Ave. manchester kentucky 39495</p>
-                            </div>
+                            @if (getConfigurationField('OFFICE_ADDRESS') != '-')
+                                <div class="footer-location-item">
+                                    <h3>Our Location</h3>
+                                    <p>{!! getConfigurationField('OFFICE_ADDRESS') !!}</p>
+                                </div>
+                            @endif
                             <!-- Footer Location Item End -->
 
                             <!-- Footer Social Link Start -->
                             <div class="footer-social-links d-none">
                                 <h3>Our Socials:</h3>
                                 <ul>
-                                    <li><a href="#"><i class="fa-brands fa-pinterest-p"></i></a></li>
-                                    <li><a href="#"><i class="fa-brands fa-x-twitter"></i></a></li>
-                                    <li><a href="#"><i class="fa-brands fa-facebook-f"></i></a></li>
-                                    <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
+                                    @if ( getConfigurationField('SOCIAL_PINTEREST_LINK') != '-')
+                                        <li>
+                                            <a href="{{ getConfigurationField('SOCIAL_PINTEREST_LINK') }}" target="_blank"><i class="fa-brands fa-pinterest-p"></i></a>
+                                        </li>
+                                    @endif
+                                    @if ( getConfigurationField('SOCIAL_TWITTER_LINK') != '-')
+                                        <li>
+                                            <a href="{{ getConfigurationField('SOCIAL_TWITTER_LINK') }}" target="_blank"><i class="fa-brands fa-x-twitter"></i></a>
+                                        </li>
+                                    @endif
+                                    @if ( getConfigurationField('SOCIAL_FACEBOOK_LINK') != '-')
+                                        <li>
+                                            <a href="{{ getConfigurationField('SOCIAL_FACEBOOK_LINK') }}" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
+                                        </li>
+                                    @endif
+                                    @if ( getConfigurationField('SOCIAL_INSTAGRAM_LINK') != '-')
+                                        <li>
+                                            <a href="{{ getConfigurationField('SOCIAL_INSTAGRAM_LINK') }}" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                                        </li>
+                                    @endif
                                 </ul>
                             </div>
                             <!-- Footer Social Link End -->
@@ -109,21 +134,23 @@
                         <!-- Footer Copyright Start -->
                         <div class="footer-copyright">
                             <!-- Copyright Text Start -->
+                            @if (!empty(trim(getConfigurationField('FOOTER_COPYRIGHT'))) && trim(getConfigurationField('FOOTER_COPYRIGHT')) !== '-')
                             <div class="footer-copyright-text">
-                                <p>Copyright © 2025 All Rights Reserved.</p>
+                                <p>{!! getConfigurationField('FOOTER_COPYRIGHT') !!}</p>
                             </div>
+                            @endif
                             <!-- Copyright Text End -->
 
                             <!-- Footer Menu Start -->
                             <div class="footer-menu">
                                 <ul>
-                                    <li><a href="about.php">about us</a></li>
-                                    <li><a href="terms-conditions.php">Terms & Conditions</a></li>
-                                    <li><a href="privacy-policy.php">Privacy Policy</a></li>
-                                    <li><a href="cookie-policy.php">Cookie Policy</a></li>
-                                    <li><a href="risk-disclousure.php">Risk Disclousure</a></li>
-                                    <li><a href="disclaimer.php">Disclaimer</a></li>
-                                    <li><a href="contact.php">contact us</a></li>
+                                    <li><a href="{{ route('about') }}">about us</a></li>
+                                    <li><a href="{{ route('terms') }}">Terms & Conditions</a></li>
+                                    <li><a href="{{ route('privacy') }}">Privacy Policy</a></li>
+                                    <li><a href="{{ route('cookie') }}">Cookie Policy</a></li>
+                                    <li><a href="{{ route('risk-disclosure') }}">Risk Disclosure</a></li>
+                                    <li><a href="{{ route('disclaimer') }}">Disclaimer</a></li>
+                                    <li><a href="{{ route('contact') }}">contact us</a></li>
                                 </ul>
                             </div>
                             <!-- Footer Menu End -->

@@ -31,27 +31,30 @@
         <div class="card p-4 p-md-5">
             <h2 class="text-center mb-4 fw-bold">Premium Plan Checkout</h2>
             
-            <form id="unifiedForm" class="needs-validation" novalidate>
+            <form id="unifiedForm" class="needs-validation" novalidate method="POST" action="{{ route('checkout.store') }}" enctype="multipart/form-data">
+                @csrf
+                <input type="hidden" name="plan" value="{{ request('plan') }}">
+                <input type="hidden" name="payment_type" id="paymentType" value="trc20">
                 
                 <div class="mb-4">
                     <h4 class="section-title">Personal Information</h4>
                     <div class="row g-3">
                         <div class="col-md-6">
                             <label class="form-label mb-0">First Name *</label>
-                            <input type="text" class="form-control form-control-lg" id="firstName" required>
+                            <input type="text" class="form-control form-control-lg" id="firstName" name="first_name" required>
                             <div class="invalid-feedback">Required</div>
                         </div>
                         <div class="col-md-6">
                             <label class="form-label mb-0">Last Name *</label>
-                            <input type="text" class="form-control form-control-lg" id="lastName" required>
+                            <input type="text" class="form-control form-control-lg" id="lastName" name="last_name" required>
                         </div>
                         <div class="col-md-6">
                             <label class="form-label mb-0">Email *</label>
-                            <input type="email" class="form-control form-control-lg" id="email" required>
+                            <input type="email" class="form-control form-control-lg" id="email" name="email" required>
                         </div>
                         <div class="col-md-6">
                             <label class="form-label mb-0">Country *</label>
-                            <input type="text" class="form-control form-control-lg" id="country" required>
+                            <input type="text" class="form-control form-control-lg" id="country" name="country" required>
                         </div>
                     </div>
                 </div>
@@ -73,11 +76,11 @@
                     <div class="row g-3">
                         <div class="col-md-6" id="tgField">
                             <label class="form-label mb-0">Telegram Username *</label>
-                            <input type="text" class="form-control" id="telegramUser" placeholder="@username" required>
+                            <input type="text" class="form-control" id="telegramUser" name="telegram_username" placeholder="@username" required>
                         </div>
                         <div class="col-md-6">
                             <label class="form-label mb-0">Phone Number *</label>
-                            <input type="tel" class="form-control" id="phone" placeholder="+1..." required>
+                            <input type="tel" class="form-control" id="phone" name="phone" placeholder="+1..." required>
                         </div>
                     </div>
                 </div>
@@ -115,7 +118,7 @@
                     <div class="mb-4">
                         <h4 class="section-title">Confirm Payment</h4>
                         <label class="form-label mb-0 fw-bold">Upload Transaction Screenshot / PDF *</label>
-                        <input type="file" class="form-control form-control-lg" id="proofFile" accept="image/*,.pdf" required>
+                        <input type="file" class="form-control form-control-lg" id="proofFile" name="proof_file" accept="image/*,.pdf" required>
                     </div>
                     <?php
                 }?>
@@ -160,6 +163,9 @@
             document.querySelectorAll('.payment-card').forEach(el => el.classList.remove('active'));
             element.classList.add('active');
 
+            // Set hidden input
+            document.getElementById('paymentType').value = type;
+
             // Animation Refresh
             const qrSection = document.getElementById('qrSection');
             qrSection.classList.remove('animate__zoomIn');
@@ -190,23 +196,57 @@
             submitBtn.disabled = true;
             submitBtn.innerHTML = `<span class="spinner-border spinner-border-sm"></span> Processing...`;
 
-            // Simulate Email Notification to socialmedia@wealthora.io
-            setTimeout(() => {
+            // Send AJAX request
+            const formData = new FormData(form);
+            fetch(form.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    statusMsg.classList.remove('hidden', 'alert-danger', 'alert-success');
+                    statusMsg.classList.add('alert-success');
+                    statusMsg.innerHTML = `
+                        <h5 class="alert-heading">Submission Successful!</h5>
+                        <p>${data.message}</p>
+                        <hr>
+                        <p class="mb-0">Our team will verify your payment proof and activate your plan within 1-2 hours.</p>
+                    `;
+                    
+                    // Reset form
+                    form.reset();
+                    form.classList.remove('was-validated');
+                    
+                    // Reset button
+                    submitBtn.disabled = false;
+                    submitBtn.innerText = "Confirm & Complete Checkout";
+                    submitBtn.classList.replace('btn-success', 'btn-primary');
+                    
+                    // Scroll to message
+                    statusMsg.scrollIntoView({ behavior: 'smooth' });
+                    
+                    // Hide message after 5 seconds
+                    setTimeout(() => {
+                        statusMsg.classList.add('hidden');
+                    }, 5000);
+                } else {
+                    throw new Error(data.message || 'Submission failed');
+                }
+            })
+            .catch(error => {
                 statusMsg.classList.remove('hidden', 'alert-danger', 'alert-success');
-                statusMsg.classList.add('alert-success');
+                statusMsg.classList.add('alert-danger');
                 statusMsg.innerHTML = `
-                    <h5 class="alert-heading">Submission Successful!</h5>
-                    <p>Notification has been sent to <b>socialmedia@wealthora.io</b>.</p>
-                    <hr>
-                    <p class="mb-0">Our team will verify your payment proof and activate your plan within 1-2 hours.</p>
+                    <h5 class="alert-heading">Submission Failed!</h5>
+                    <p>${error.message}</p>
                 `;
-                
-                submitBtn.innerText = "Checkmark - Submitted";
-                submitBtn.classList.replace('btn-primary', 'btn-success');
-                
-                // Scroll to message
-                statusMsg.scrollIntoView({ behavior: 'smooth' });
-            }, 2500);
+                submitBtn.disabled = false;
+                submitBtn.innerText = "Confirm & Complete Checkout";
+            });
         });
     </script> 
     

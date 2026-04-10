@@ -1,5 +1,4 @@
 <style>
-
     /* Hero Section */
     .hero-section {
         min-height: 90vh;
@@ -17,7 +16,8 @@
     }
 
     .nav-container {
-        background: #ef3c2814; /* Semi-transparent pill */
+        background: #ef3c2814;
+        /* Semi-transparent pill */
         backdrop-filter: blur(10px);
         border-radius: 50px;
         padding: 10px 30px;
@@ -30,7 +30,10 @@
         margin: 0 5px;
     }
 
-    .nav-link:hover, .nav-link.active, .sticky-active .nav-link.active, .sticky-active .nav-link:hover{
+    .nav-link:hover,
+    .nav-link.active,
+    .sticky-active .nav-link.active,
+    .sticky-active .nav-link:hover {
         color: #d62828 !important;
     }
 
@@ -38,12 +41,13 @@
     .sticky-active {
         background: #ffffff !important;
         padding: 10px 0;
-        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     }
 
     .sticky-active .nav-container {
         background: transparent;
-        max-width: 100%; /* Full width update */
+        max-width: 100%;
+        /* Full width update */
     }
 
     .sticky-active .nav-link {
@@ -60,6 +64,7 @@
             opacity: 0;
             transform: translateY(30px);
         }
+
         to {
             opacity: 1;
             transform: translateY(0);
@@ -73,14 +78,22 @@
     }
 
     @keyframes float {
-        0%, 100% { transform: translateY(0); }
-        50% { transform: translateY(-20px); }
+
+        0%,
+        100% {
+            transform: translateY(0);
+        }
+
+        50% {
+            transform: translateY(-20px);
+        }
     }
 
     /* Button Hover */
     .hover-btn {
         transition: transform 0.3s ease;
     }
+
     .hover-btn:hover {
         transform: scale(1.05);
         background-color: white;
@@ -98,13 +111,49 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav mx-auto text-uppercase">
-                <li class="nav-item"><a class="nav-link active" href="#">FOREX SIGNALS</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">RESULTS</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ route('news.analysis') }}">NEWS ANALYSIS</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">FAQ</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">EDUCATION</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">ABOUT US</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">CONTACT US</a></li>
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('forex.signals') ? 'active' : '' }}" href="#">
+                        FOREX SIGNALS
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('results') ? 'active' : '' }}" href="#">
+                        RESULTS
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('news.analysis') ? 'active' : '' }}"
+                        href="{{ route('news.analysis') }}">
+                        NEWS ANALYSIS
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('faq') ? 'active' : '' }}" href="#">
+                        FAQ
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('education') ? 'active' : '' }}" href="#">
+                        EDUCATION
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('about') ? 'active' : '' }}" href="{{ route('about') }}">
+                        ABOUT US
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('contact') ? 'active' : '' }}"
+                        href="{{ route('contact') }}">
+                        CONTACT US
+                    </a>
+                </li>
             </ul>
             <div class="d-flex">
                 <a href="#" class="btn btn-light rounded-pill px-4 py-2 fw-bold">Get Started →</a>

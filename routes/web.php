@@ -1,11 +1,19 @@
 <?php
 
+use App\Http\Controllers\AboutController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\BlogsController;
+use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\DisclaimerController;
+use App\Http\Controllers\CookieController;
 use App\Http\Controllers\Web\BlogController;
 use App\Http\Controllers\Web\CategoryController;
-use App\Http\Controllers\HomeController; 
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PrivacyController;
 use App\Http\Controllers\PurchaseController;
+use App\Http\Controllers\RiskDisclosureController;
+use App\Http\Controllers\TermsController;
 use App\Http\Controllers\Web\DashboardController;
 use App\Http\Controllers\Web\MenuController;
 use App\Http\Controllers\Web\PermissionController;
@@ -13,6 +21,7 @@ use App\Http\Controllers\Web\RoleController;
 use App\Http\Controllers\Web\TagController;
 use App\Http\Controllers\Web\TrackingController;
 use App\Http\Controllers\Web\UserController;
+use App\Http\Controllers\Web\ConfigurationController;
 use Illuminate\Support\Facades\Route;
 
 // ─── Guest Routes ──────────────────────────────────────────────────────────────
@@ -88,6 +97,38 @@ Route::middleware('auth')->group(function () {
                 'show' => 'web.users.show',
             ]);
 
+    // Configurations
+    Route::resource('configurations', ConfigurationController::class)
+            ->names([
+                'index' => 'web.configurations.index',
+                'create' => 'web.configurations.create',
+                'store' => 'web.configurations.store',
+                'show' => 'web.configurations.show',
+                'edit' => 'web.configurations.edit',
+                'update' => 'web.configurations.update',
+                'destroy' => 'web.configurations.destroy',
+            ]);
+
+    // Pricing Plan Checkout
+    Route::resource('pricing-plan-checkout', \App\Http\Controllers\Web\PricingPlanCheckoutController::class)
+            ->names([
+                'index' => 'web.pricing-plan-checkout.index',
+                'edit' => 'web.pricing-plan-checkout.edit',
+                'update' => 'web.pricing-plan-checkout.update',
+                'show' => 'web.pricing-plan-checkout.show',
+            ]);
+
+    // Plans
+    Route::resource('plans', \App\Http\Controllers\Web\PlanController::class)
+            ->names([
+                'index' => 'web.plans.index',
+                'create' => 'web.plans.create',
+                'store' => 'web.plans.store',
+                'edit' => 'web.plans.edit',
+                'update' => 'web.plans.update',
+                'destroy' => 'web.plans.destroy',
+            ]);
+
             // Blogs
     Route::resource('admin/blog', BlogController::class)
             ->except(['destroy', 'edit', 'update'])
@@ -148,5 +189,17 @@ Route::middleware('auth')->group(function () {
 Route::get('/', [HomeController::class, 'index'])->name('index');
 Route::get('/purchase', [PurchaseController::class, 'index'])->name('purchase');
 
+Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
+
 Route::get('news-analysis', [BlogsController::class, 'index'])->name('news.analysis');
 Route::get('/blog/{slug}', [BlogsController::class, 'show']) ->name('blog.details');
+
+Route::get('/contact', [ContactController::class, 'index'])->name('contact');
+Route::get('/about', [AboutController::class, 'index'])->name('about');
+Route::get('/terms-and-conditions', [TermsController::class, 'index'])->name('terms');
+Route::get('/privacy-policy', [PrivacyController::class, 'index'])->name('privacy');
+Route::get('/cookie-policy', [CookieController::class, 'index'])->name('cookie');
+Route::get('/risk-disclosure', [RiskDisclosureController::class, 'index'])->name('risk-disclosure');
+Route::get('/disclaimer', [DisclaimerController::class, 'index'])->name('disclaimer');
+
+ 

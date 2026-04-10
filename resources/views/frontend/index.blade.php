@@ -477,7 +477,7 @@
     }
 </style>
 
-<section class="blog-section">
+<section class="blog-section d-none">
     <div class="container">
 
         <!-- Title -->
@@ -555,6 +555,8 @@
 
     </div>
 </section>
+
+ @include('frontend.element.blog')
 
 <!-- Start Analysis report -->
 <div class="our-empact d-none">

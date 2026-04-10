@@ -591,6 +591,7 @@ header.main-header .header-sticky.active{
 	align-items: center;
 }
 
+
 .navbar-brand{
 	margin: 0;
 	background-color: #fff;
@@ -5220,7 +5221,7 @@ header.main-header .header-sticky.active{
 }
 
 .contact-social-list ul li a:hover{
-	background: var(--white-color);
+	background: var(--red-color);
 	color: var(--theme-primary-color);
 }
 
