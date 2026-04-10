@@ -11,8 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('configurations', function (Blueprint $table) {
+        Schema::create('blog_tag_maps', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id');
+            $table->foreignId('category_id');
+            $table->foreignId('sub_category_id');
+            $table->foreignId('blog_id');
+            $table->foreignId('tag_id');
             $table->timestamps();
         });
     }
@@ -22,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('configurations');
+        Schema::dropIfExists('blog_tag_maps');
     }
 };
