@@ -139,24 +139,21 @@ Route::middleware('auth')->group(function () {
             ]);
 
             // Blogs
-    Route::resource('blog', BlogController::class)
-            // ->except(['destroy', 'edit', 'update'])
+    Route::resource('blogs', BlogController::class)
+           
             ->names([
-                'index' => 'web.blog.index',
-                'create' => 'web.blog.create',
-                'store' => 'web.blog.store',
-                'edit' => 'web.blog.edit',
-                'update' => 'web.blog.update',
-                'destroy' => 'web.blog.destroy',
+                'index' => 'web.blogs.index',
+                'create' => 'web.blogs.create',
+                'store' => 'web.blogs.store',
+                'edit' => 'web.blogs.edit',
+                'update' => 'web.blogs.update',
+                'destroy' => 'web.blogs.destroy',
+                'show' => 'web.blogs.show',
             ]);
-
-    // Route::get('/blog/{blog}/edit', [BlogController::class, 'edit'])->name('web.blogs.edit');
-    // Route::put('/blog/{blog}', [BlogController::class, 'update'])->name('web.blogs.update');
-    // Route::delete('/blog/{blog}', [BlogController::class, 'destroy'])->name('web.blogs.destroy');
 
     // Tracking
     Route::resource('tracking', TrackingController::class)
-            ->except(['destroy', 'edit', 'update'])
+          
             ->names([
                 'index' => 'web.tracking.index',
                 'create' => 'web.tracking.create',
@@ -164,36 +161,29 @@ Route::middleware('auth')->group(function () {
                 'show' => 'web.tracking.show',
             ]);
 
-    Route::get('/tracking/{tracking}/edit', [TrackingController::class, 'edit'])->name('web.tracking.edit');
-    Route::put('/tracking/{tracking}', [TrackingController::class, 'update'])->name('web.tracking.update');
-
     Route::resource('category', CategoryController::class)
-            ->except(['destroy', 'edit', 'update'])
+            // ->except(['destroy', 'edit', 'update'])
             ->names([
                 'index' => 'web.category.index',
                 'create' => 'web.category.create',
                 'store' => 'web.category.store',
                 'show' => 'web.category.show',
+                'edit' => 'web.category.edit',
+                'update' => 'web.category.update',
                 'destroy' => 'web.category.destroy',
             ]);
 
-    Route::get('/category/{category}/edit', [CategoryController::class, 'edit'])->name('web.category.edit');
-    Route::put('/category/{category}', [CategoryController::class, 'update'])->name('web.category.update');
-    Route::delete('/category/{category}', [CategoryController::class, 'destroy'])->name('web.category.destroy');
-
     Route::resource('tag', TagController::class)
-            ->except(['destroy', 'edit', 'update'])
+            // ->except(['destroy', 'edit', 'update'])
             ->names([
                 'index' => 'web.tag.index',
                 'create' => 'web.tag.create',
                 'store' => 'web.tag.store',
                 'show' => 'web.tag.show',
+                'edit' => 'web.tag.edit',
+                'update' => 'web.tag.update',
                 'destroy' => 'web.tag.destroy',
-            ]);
-
-    Route::get('/tag/{tag}/edit', [TagController::class, 'edit'])->name('web.tag.edit');
-    Route::put('/tag/{tag}', [TagController::class, 'update'])->name('web.tag.update');
-    Route::delete('/tag/{tag}', [TagController::class, 'destroy'])->name('web.tag.destroy');
+            ]); 
 
     // ── Categories ────────────────────────────────────────
     Route::resource('bm-category', BmCategoryController::class)
@@ -258,6 +248,11 @@ Route::get('/test-mail', function () {
     }
 });
 
+
+
+// frontend routes
+
+
 Route::get('/', [HomeController::class, 'index'])->name('index');
 Route::get('/purchase', [PurchaseController::class, 'index'])->name('purchase');
 
@@ -265,7 +260,6 @@ Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.s
 
 Route::get('news-analysis', [BlogsController::class, 'index'])->name('news.analysis');
 Route::get('/blog/{slug}', [BlogsController::class, 'show']) ->name('blog.details');
-
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 Route::get('/about', [AboutController::class, 'index'])->name('about');
 Route::get('/terms-and-conditions', [TermsController::class, 'index'])->name('terms');
