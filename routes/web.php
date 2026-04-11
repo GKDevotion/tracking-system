@@ -139,8 +139,8 @@ Route::middleware('auth')->group(function () {
             ]);
 
             // Blogs
-    Route::resource('admin/blog', BlogController::class)
-            ->except(['destroy', 'edit', 'update'])
+    Route::resource('blog', BlogController::class)
+            // ->except(['destroy', 'edit', 'update'])
             ->names([
                 'index' => 'web.blogs.index',
                 'create' => 'web.blogs.create',
@@ -149,9 +149,9 @@ Route::middleware('auth')->group(function () {
                 'destroy' => 'web.blogs.destroy',
             ]);
 
-    Route::get('/admin/blog/{blog}/edit', [BlogController::class, 'edit'])->name('web.blogs.edit');
-    Route::put('/admin/blog/{blog}', [BlogController::class, 'update'])->name('web.blogs.update');
-    Route::delete('/admin/blog/{blog}', [BlogController::class, 'destroy'])->name('web.blogs.destroy');
+    // Route::get('/admin/blog/{blog}/edit', [BlogController::class, 'edit'])->name('web.blogs.edit');
+    // Route::put('/admin/blog/{blog}', [BlogController::class, 'update'])->name('web.blogs.update');
+    // Route::delete('/admin/blog/{blog}', [BlogController::class, 'destroy'])->name('web.blogs.destroy');
 
     // Tracking
     Route::resource('tracking', TrackingController::class)
