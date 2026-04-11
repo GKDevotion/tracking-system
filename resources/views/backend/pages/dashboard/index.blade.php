@@ -166,7 +166,7 @@
             <div class="bm-table">
                 <div class="d-flex align-items-center justify-content-between px-3 py-2 border-bottom">
                     <h6 class="mb-0 fw-semibold">Recent mail activity</h6>
-                    <a href="{{ route('web.bm-logs.index') }}" class="btn btn-sm btn-light">View all</a>
+                    <a href="{{ route('web.bm-mail-logs.index') }}" class="btn btn-sm btn-light">View all</a>
                 </div>
                 <table class="table table-hover">
                     <thead>
@@ -219,7 +219,7 @@
                     <a href="{{ route('web.bm-mail-template.create') }}" class="btn btn-light btn-sm">
                         <i class="bi bi-plus me-1"></i> Add mail template
                     </a>
-                    <a href="{{ route('web.bm-logs.index') }}" class="btn btn-light btn-sm">
+                    <a href="{{ route('web.bm-mail-logs.index') }}" class="btn btn-light btn-sm">
                         <i class="bi bi-journal-text me-1"></i> View mail logs
                     </a>
                 </div>

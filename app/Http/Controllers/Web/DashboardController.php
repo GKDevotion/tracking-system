@@ -39,7 +39,7 @@ class DashboardController extends Controller
 
         $recentLogs = BmMailLog::with('client:id,name,company_name', 'template:id,name')->latest('sent_at')->limit(8)->get();
 
-        return view('dashboard.index', compact(
+        return view('backend.pages.dashboard.index', compact(
             'filter', 'chartData', 'latestRecords', 'stats', 'recentLogs',
             'totalTrackings', 'todayTrackings', 'totalUsers', 'totalVendors'
         ));
