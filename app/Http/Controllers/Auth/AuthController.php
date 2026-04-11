@@ -39,7 +39,7 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials, $request->boolean('remember'))) {
             $request->session()->regenerate();
-            return redirect()->intended(route('web.dashboard'));
+            return redirect()->intended(route('web.dashboard.index'));
         }
 
         return back()->withErrors(['login' => 'Invalid credentials.'])->withInput();

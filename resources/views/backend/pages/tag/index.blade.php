@@ -20,12 +20,12 @@
                        class="form-control form-control-sm" style="width:145px">
                 <button class="btn btn-sm btn-outline-secondary"><i class="bi bi-search"></i></button>
                 @if(request()->hasAny(['search','created_at','updated_at']))
-                    <a href="{{ route('web.tag.index') }}" class="btn btn-sm btn-outline-danger">
+                    <a href="{{ route('web.blog-tag.index') }}" class="btn btn-sm btn-outline-danger">
                         <i class="bi bi-x"></i>
                     </a>
                 @endif
             </form>
-            <a href="{{ route('web.tag.create') }}" class="btn btn-sm btn-primary">
+            <a href="{{ route('web.blog-tag.create') }}" class="btn btn-sm btn-primary">
                 <i class="bi bi-plus-lg me-1"></i>Add Tag
             </a>
         </div>
@@ -56,13 +56,13 @@
                             </td>
                             <td>{{ \Carbon\Carbon::parse($tag->created_at)->format('d M Y') }}</td>
                             <td>
-                                <a href="{{ route('web.tag.show', $tag) }}" class="btn btn-sm btn-outline-info">
+                                <a href="{{ route('web.blog-tag.show', $tag) }}" class="btn btn-sm btn-outline-info">
                                     <i class="bi bi-eye"></i>
                                 </a>
-                                <a href="{{ route('web.tag.edit', $tag) }}" class="btn btn-sm btn-outline-warning">
+                                <a href="{{ route('web.blog-tag.edit', $tag) }}" class="btn btn-sm btn-outline-warning">
                                     <i class="bi bi-pencil"></i>
                                 </a>
-                                <form action="{{ route('web.tag.destroy', $tag) }}" method="POST" class="d-inline-block" onsubmit="return confirm('Are you sure you want to delete this tag?');">
+                                <form action="{{ route('web.blog-tag.destroy', $tag) }}" method="POST" class="d-inline-block" onsubmit="return confirm('Are you sure you want to delete this tag?');">
                                     @csrf
                                     @method('DELETE')
                                     <button class="btn btn-sm btn-outline-danger">

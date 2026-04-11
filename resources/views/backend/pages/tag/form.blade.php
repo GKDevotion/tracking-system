@@ -13,7 +13,7 @@
                 </div>
                 <div class="card-body p-4">
                     <form method="POST"
-                        action="{{ isset($tag) ? route('web.tag.update', $tag) : route('web.tag.store') }}">
+                        action="{{ isset($tag) ? route('web.blog-tag.update', $tag) : route('web.blog-tag.store') }}">
                         @csrf
                         @if (isset($tag))
                             @method('PUT')
@@ -52,7 +52,7 @@
                                 <button type="submit" class="btn btn-primary">
                                     <i class="bi bi-check-lg me-1"></i>{{ isset($tag) ? 'Update' : 'Create' }} Tag
                                 </button>
-                                <a href="{{ route('web.tag.index') }}" class="btn btn-secondary ms-2">
+                                <a href="{{ route('web.blog-tag.index') }}" class="btn btn-secondary ms-2">
                                     <i class="bi bi-arrow-left me-1"></i>Cancel
                                 </a>
                             </div>

@@ -380,8 +380,8 @@
 
 <!-- ─── Sidebar ─────────────────────────────────────────────── -->
 <nav id="sidebar">
-    <a href="{{ route('web.dashboard') }}" class="sidebar-brand">
-      
+    <a href="{{ route('web.dashboard.index') }}" class="sidebar-brand">
+
         <div class="brand-text"><img src="{{ url('public/frontend/images/footer-logo.png') }}" alt="TrackingApp Logo" style="height: 40px;"></div>
     </a>
 

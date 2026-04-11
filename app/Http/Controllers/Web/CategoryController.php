@@ -61,7 +61,7 @@ class CategoryController extends Controller
         $category->sort_order = $request->sort_order ?? 0;
         // $category->ip = $ip;
 
-        // 🌍 Location Logic (same as yours) 
+        // 🌍 Location Logic (same as yours)
 
         if ($request->hasFile('image')) {
 
@@ -103,7 +103,7 @@ class CategoryController extends Controller
 
         // category::create($data);
 
-        return redirect()->route('web.category.index')->with('success', 'Category entry created successfully.');
+        return redirect()->route('web.blog-category.index')->with('success', 'Category entry created successfully.');
     }
 
     public function show(Categories $category)
@@ -134,11 +134,11 @@ class CategoryController extends Controller
         $category->fill($data);
         $category->slug = Str::slug($request->title);
         $category->parent_id = $request->parent_id ?? 0;
-        $category->status = $request->status ?? 1; 
+        $category->status = $request->status ?? 1;
         $category->sort_order = $request->sort_order ?? 0;
         $category->short_description = $request->short_description ?? null;
 
-         // 
+         //
 
         if ($request->hasFile('image')) {
             if ($category->image && Storage::disk('public')->exists($category->image)) {
@@ -151,7 +151,7 @@ class CategoryController extends Controller
 
         $category->save();
 
-        return redirect()->route('web.category.index')->with('success', 'Category entry updated successfully.');
+        return redirect()->route('web.blog-category.index')->with('success', 'Category entry updated successfully.');
     }
 
         public function destroy(Categories $category)

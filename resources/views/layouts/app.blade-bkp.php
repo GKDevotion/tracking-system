@@ -395,7 +395,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ route('web.users.index') }}"
+                <a href="{{ route('web.sales-user.index') }}"
                    class="nav-link {{ request()->routeIs('users*') ? 'active' : '' }}">
                     <i class="bi bi-people"></i> Users
                 </a>

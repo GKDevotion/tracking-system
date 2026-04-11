@@ -24,7 +24,7 @@
                 </select>
                 <button class="btn btn-sm btn-outline-secondary"><i class="bi bi-search"></i></button>
             </form>
-            <a href="{{ route('web.users.create') }}" class="btn btn-sm btn-primary">
+            <a href="{{ route('web.sales-user.create') }}" class="btn btn-sm btn-primary">
                 <i class="bi bi-plus-lg me-1"></i>Add User
             </a>
         </div>
@@ -68,10 +68,10 @@
                             </td>
                             <td>{{ $user->created_at->format('d M Y') }}</td>
                             <td>
-                                <a href="{{ route('web.users.show', $user) }}" class="btn btn-sm btn-outline-info">
+                                <a href="{{ route('web.sales-user.show', $user) }}" class="btn btn-sm btn-outline-info">
                                     <i class="bi bi-eye"></i>
                                 </a>
-                                <a href="{{ route('web.users.edit', $user) }}" class="btn btn-sm btn-outline-warning">
+                                <a href="{{ route('web.sales-user.edit', $user) }}" class="btn btn-sm btn-outline-warning">
                                     <i class="bi bi-pencil"></i>
                                 </a>
                                 @if($user->id !== auth()->id())

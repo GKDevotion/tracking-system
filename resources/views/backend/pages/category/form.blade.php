@@ -13,7 +13,7 @@
                 </div>
                 <div class="card-body p-4">
                     <form method="POST" enctype="multipart/form-data"
-                        action="{{ isset($category) ? route('web.category.update', $category) : route('web.category.store') }}">
+                        action="{{ isset($category) ? route('web.blog-category.update', $category) : route('web.blog-category.store') }}">
                         @csrf
                         @if (isset($category))
                             @method('PUT')
@@ -114,7 +114,7 @@
                             <button type="submit" class="btn btn-primary">
                                 <i class="bi bi-check-lg me-1"></i>{{ isset($category) ? 'Update' : 'Save' }} Entry
                             </button>
-                            <a href="{{ route('web.category.index') }}" class="btn btn-outline-secondary">Cancel</a>
+                            <a href="{{ route('web.blog-category.index') }}" class="btn btn-outline-secondary">Cancel</a>
                         </div>
                     </form>
                 </div>

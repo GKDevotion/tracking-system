@@ -42,7 +42,7 @@ class TagController extends Controller
         $tag->status = $request->status ?? 1;
         $tag->save();
 
-        return redirect()->route('web.tag.index')->with('success', 'Tag created successfully.');
+        return redirect()->route('web.blog-tag.index')->with('success', 'Tag created successfully.');
     }
 
     public function show(Tag $tag)
@@ -68,7 +68,7 @@ class TagController extends Controller
         $tag->status = $request->status ?? 1;
         $tag->save();
 
-        return redirect()->route('web.tag.index')->with('success', 'Tag updated successfully.');
+        return redirect()->route('web.blog-tag.index')->with('success', 'Tag updated successfully.');
     }
 
     public function destroy(Tag $tag)

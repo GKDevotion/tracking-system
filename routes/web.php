@@ -18,6 +18,7 @@ use App\Http\Controllers\PrivacyController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\RiskDisclosureController;
 use App\Http\Controllers\TermsController;
+use App\Http\Controllers\Web\AdminUserController;
 use App\Http\Controllers\Web\DashboardController;
 use App\Http\Controllers\Web\MenuController;
 use App\Http\Controllers\Web\PermissionController;
@@ -26,8 +27,10 @@ use App\Http\Controllers\Web\TagController;
 use App\Http\Controllers\Web\TrackingController;
 use App\Http\Controllers\Web\UserController;
 use App\Http\Controllers\Web\ConfigurationController;
+use App\Http\Controllers\Web\ManagerUserController;
 use App\Http\Controllers\Web\PlanController;
 use App\Http\Controllers\Web\PricingPlanCheckoutController;
+use App\Http\Controllers\Web\SalesUserController;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
@@ -51,15 +54,14 @@ Route::middleware('auth')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
     // Dashboard
-    Route::get('/web/dashboard', [DashboardController::class, 'index'])->name('web.dashboard');
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
+    // Route::get('/dashboard', [DashboardController::class, 'index'])->name('web.dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('web.dashboard.index');
 
     // Change Password
     Route::get('/change-password', [AuthController::class, 'changePasswordForm'])->name('web.change.password.form');
     Route::post('/change-password', [AuthController::class, 'changePassword'])->name('web.change.password');
 
     // Roles
-    // Route::resource('roles', RoleController::class)->except(['show']);
     Route::resource('roles', RoleController::class)
             ->except(['show'])
             ->names([
@@ -71,7 +73,6 @@ Route::middleware('auth')->group(function () {
             ]);
 
     // Menus
-    // Route::resource('menus', MenuController::class)->except(['show']);
     Route::resource('menus', MenuController::class)
             ->except(['show'])
             ->names([
@@ -83,7 +84,7 @@ Route::middleware('auth')->group(function () {
             ]);
 
     // Permissions
-    // Route::get('/permissions', [PermissionController::class, 'index'])->name('permissions.index');
+
     Route::get('/permissions/{role}', [PermissionController::class, 'show'])->name('web.permissions.show');
     Route::post('/permissions/{role}', [PermissionController::class, 'update'])->name('web.permissions.update');
 
@@ -96,14 +97,34 @@ Route::middleware('auth')->group(function () {
                 // 'update' => 'web.permissions.update',
             ]);
 
-    // Users
-    Route::resource('users', UserController::class)
+    // Sales User
+    Route::resource('sales-user', SalesUserController::class)
             ->names([
-                'index' => 'web.users.index',
-                'create' => 'web.users.create',
-                'edit' => 'web.users.edit',
-                'update' => 'web.users.update',
-                'show' => 'web.users.show',
+                'index' => 'web.sales-user.index',
+                'create' => 'web.sales-user.create',
+                'edit' => 'web.sales-user.edit',
+                'update' => 'web.sales-user.update',
+                'show' => 'web.sales-user.show',
+            ]);
+
+    // Manager User
+    Route::resource('manager-user', ManagerUserController::class)
+            ->names([
+                'index' => 'web.manager-user.index',
+                'create' => 'web.manager-user.create',
+                'edit' => 'web.manager-user.edit',
+                'update' => 'web.manager-user.update',
+                'show' => 'web.manager-user.show',
+            ]);
+
+    // Admin User
+    Route::resource('admin-user', AdminUserController::class)
+            ->names([
+                'index' => 'web.admin-user.index',
+                'create' => 'web.admin-user.create',
+                'edit' => 'web.admin-user.edit',
+                'update' => 'web.admin-user.update',
+                'show' => 'web.admin-user.show',
             ]);
 
     // Configurations
@@ -140,7 +161,6 @@ Route::middleware('auth')->group(function () {
 
             // Blogs
     Route::resource('blogs', BlogController::class)
-           
             ->names([
                 'index' => 'web.blogs.index',
                 'create' => 'web.blogs.create',
@@ -153,7 +173,6 @@ Route::middleware('auth')->group(function () {
 
     // Tracking
     Route::resource('tracking', TrackingController::class)
-          
             ->names([
                 'index' => 'web.tracking.index',
                 'create' => 'web.tracking.create',
@@ -161,29 +180,29 @@ Route::middleware('auth')->group(function () {
                 'show' => 'web.tracking.show',
             ]);
 
-    Route::resource('category', CategoryController::class)
+    Route::resource('blog-category', CategoryController::class)
             // ->except(['destroy', 'edit', 'update'])
             ->names([
-                'index' => 'web.category.index',
-                'create' => 'web.category.create',
-                'store' => 'web.category.store',
-                'show' => 'web.category.show',
-                'edit' => 'web.category.edit',
-                'update' => 'web.category.update',
-                'destroy' => 'web.category.destroy',
+                'index' => 'web.blog-category.index',
+                'create' => 'web.blog-category.create',
+                'store' => 'web.blog-category.store',
+                'show' => 'web.blog-category.show',
+                'edit' => 'web.blog-category.edit',
+                'update' => 'web.blog-category.update',
+                'destroy' => 'web.blog-category.destroy',
             ]);
 
-    Route::resource('tag', TagController::class)
+    Route::resource('blog-tag', TagController::class)
             // ->except(['destroy', 'edit', 'update'])
             ->names([
-                'index' => 'web.tag.index',
-                'create' => 'web.tag.create',
-                'store' => 'web.tag.store',
-                'show' => 'web.tag.show',
-                'edit' => 'web.tag.edit',
-                'update' => 'web.tag.update',
-                'destroy' => 'web.tag.destroy',
-            ]); 
+                'index' => 'web.blog-tag.index',
+                'create' => 'web.blog-tag.create',
+                'store' => 'web.blog-tag.store',
+                'show' => 'web.blog-tag.show',
+                'edit' => 'web.blog-tag.edit',
+                'update' => 'web.blog-tag.update',
+                'destroy' => 'web.blog-tag.destroy',
+            ]);
 
     // ── Categories ────────────────────────────────────────
     Route::resource('bm-category', BmCategoryController::class)
@@ -248,10 +267,7 @@ Route::get('/test-mail', function () {
     }
 });
 
-
-
 // frontend routes
-
 
 Route::get('/', [HomeController::class, 'index'])->name('index');
 Route::get('/purchase', [PurchaseController::class, 'index'])->name('purchase');

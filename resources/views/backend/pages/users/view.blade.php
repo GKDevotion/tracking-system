@@ -36,10 +36,10 @@
             </div>
 
             <div class="d-flex gap-2 mt-3">
-                <a href="{{ route('web.users.edit', $user) }}" class="btn btn-primary btn-sm flex-fill">
+                <a href="{{ route('web.sales-user.edit', $user) }}" class="btn btn-primary btn-sm flex-fill">
                     <i class="bi bi-pencil me-1"></i>Edit
                 </a>
-                <a href="{{ route('web.users.index') }}" class="btn btn-outline-secondary btn-sm flex-fill">Back</a>
+                <a href="{{ route('web.sales-user.index') }}" class="btn btn-outline-secondary btn-sm flex-fill">Back</a>
             </div>
         </div>
     </div>

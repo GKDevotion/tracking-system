@@ -26,7 +26,7 @@
                         <td class="text-muted fw-semibold">Short Description</td>
                         <td><strong>{{ $category->short_description }}</strong></td>
                     </tr>
-                      
+
                     <tr>
                         <td class="text-muted fw-semibold">Slug</td>
                         <td>{{ $category->slug }}</td>
@@ -81,10 +81,10 @@
         @endif
 
         <div class="d-flex gap-2">
-            <a href="{{ route('web.category.edit', $category) }}" class="btn btn-primary btn-sm">
+            <a href="{{ route('web.blog-category.edit', $category) }}" class="btn btn-primary btn-sm">
                 <i class="bi bi-pencil me-1"></i>Edit
             </a>
-            <a href="{{ route('web.category.index') }}" class="btn btn-outline-secondary btn-sm">
+            <a href="{{ route('web.blog-category.index') }}" class="btn btn-outline-secondary btn-sm">
                 <i class="bi bi-arrow-left me-1"></i>Back to List
             </a>
         </div>

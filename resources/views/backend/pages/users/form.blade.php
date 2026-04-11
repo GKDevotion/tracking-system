@@ -11,7 +11,7 @@
                 <strong>{{ $user->exists ? 'Edit User' : 'New User' }}</strong>
             </div>
             <div class="card-body p-4">
-                <form method="POST" action="{{ $user->exists ? route('web.users.update', $user) : route('users.store') }}">
+                <form method="POST" action="{{ $user->exists ? route('web.sales-user.update', $user) : route('users.store') }}">
                     @csrf
                     @if($user->exists) @method('PUT') @endif
 
@@ -95,7 +95,7 @@
                         <button type="submit" class="btn btn-primary">
                             <i class="bi bi-check-lg me-1"></i>{{ $user->exists ? 'Update' : 'Create' }} User
                         </button>
-                        <a href="{{ route('web.users.index') }}" class="btn btn-outline-secondary">Cancel</a>
+                        <a href="{{ route('web.sales-user.index') }}" class="btn btn-outline-secondary">Cancel</a>
                     </div>
                 </form>
             </div>

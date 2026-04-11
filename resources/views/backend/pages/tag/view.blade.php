@@ -13,10 +13,10 @@
                         <strong>Tag Details</strong>
                     </div>
                     <div>
-                        <a href="{{ route('web.tag.edit', $tag) }}" class="btn btn-sm btn-outline-warning">
+                        <a href="{{ route('web.blog-tag.edit', $tag) }}" class="btn btn-sm btn-outline-warning">
                             <i class="bi bi-pencil"></i> Edit
                         </a>
-                        <a href="{{ route('web.tag.index') }}" class="btn btn-sm btn-outline-secondary">
+                        <a href="{{ route('web.blog-tag.index') }}" class="btn btn-sm btn-outline-secondary">
                             <i class="bi bi-arrow-left"></i> Back to List
                         </a>
                     </div>

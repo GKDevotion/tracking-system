@@ -97,7 +97,7 @@
         </div>
         <div class="btn-group btn-group-sm" role="group">
             @foreach(['daily','weekly','monthly','yearly'] as $f)
-                <a href="{{ route('web.dashboard', ['filter' => $f]) }}"
+                <a href="{{ route('web.dashboard.index', ['filter' => $f]) }}"
                    class="btn {{ $filter === $f ? 'btn-primary' : 'btn-outline-secondary' }}">
                     {{ ucfirst($f) }}
                 </a>

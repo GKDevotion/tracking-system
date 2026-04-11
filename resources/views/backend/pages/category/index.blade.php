@@ -20,12 +20,12 @@
                        class="form-control form-control-sm" style="width:145px">
                 <button class="btn btn-sm btn-outline-secondary"><i class="bi bi-search"></i></button>
                 @if(request()->hasAny(['search','date_from','date_to']))
-                    <a href="{{ route('web.category.index') }}" class="btn btn-sm btn-outline-danger">
+                    <a href="{{ route('web.blog-category.index') }}" class="btn btn-sm btn-outline-danger">
                         <i class="bi bi-x"></i>
                     </a>
                 @endif
             </form>
-            <a href="{{ route('web.category.create') }}" class="btn btn-sm btn-primary">
+            <a href="{{ route('web.blog-category.create') }}" class="btn btn-sm btn-primary">
                 <i class="bi bi-plus-lg me-1"></i>Add Entry
             </a>
         </div>
@@ -41,7 +41,7 @@
                         <th>Parent</th>
                         <th>Slug</th>
                         <th>Status</th>
-                        <th>Updated At</th> 
+                        <th>Updated At</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -59,8 +59,8 @@
                                 </span>
                             </td>
                             <td>{{ \Carbon\Carbon::parse($category->updated_at)->format('d M Y') }}</td>
-                          
-                           
+
+
                             {{-- <td>
                                 @if($category->short_description)
                                     <span data-bs-toggle="tooltip" title="{{ $category->short_description }}">
@@ -72,13 +72,13 @@
                             </td> --}}
 
                             <td>
-                                <a href="{{ route('web.category.show', $category) }}" class="btn btn-sm btn-outline-info">
+                                <a href="{{ route('web.blog-category.show', $category) }}" class="btn btn-sm btn-outline-info">
                                     <i class="bi bi-eye"></i>
                                 </a>
-                                <a href="{{ route('web.category.edit', $category) }}" class="btn btn-sm btn-outline-warning">
+                                <a href="{{ route('web.blog-category.edit', $category) }}" class="btn btn-sm btn-outline-warning">
                                     <i class="bi bi-pencil"></i>
                                 </a>
-                                <form action="{{ route('web.category.destroy', $category) }}" method="POST" class="d-inline-block" onsubmit="return confirm('Are you sure you want to delete this entry?');">
+                                <form action="{{ route('web.blog-category.destroy', $category) }}" method="POST" class="d-inline-block" onsubmit="return confirm('Are you sure you want to delete this entry?');">
                                     @csrf
                                     @method('DELETE')
                                     <button class="btn btn-sm btn-outline-danger">
