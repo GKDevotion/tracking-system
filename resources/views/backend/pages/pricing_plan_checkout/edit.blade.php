@@ -45,7 +45,7 @@
 
                         <div class="col-md-6">
                             <label class="form-label">Country <span class="text-danger">*</span></label>
-                            <input type="text" name="country" value="{{ old('country', $pricingPlanCheckout->country) }}"
+                            <input type="text" name="country" value="{{ old('country', $pricingPlanCheckout->countryData->name) }}"
                                    class="form-control @error('country') is-invalid @enderror" required>
                             @error('country')<div class="invalid-feedback">{{ $message }}</div>@enderror
                         </div>

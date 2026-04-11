@@ -86,8 +86,13 @@ class PlanController extends Controller
             'sort_order' => 'integer',
         ]);
 
-        $data['features'] = array_map('trim', explode("\n", $data['features']));
+        if( !isset( $request->is_highlighted ) && $request->is_highlighted !=1 ){
+            $data['is_highlighted'] = 0;
+        }
 
+        $data['features'] = array_map('trim', explode("\n", $data['features']));
+        // dd($data);
+    
         $plan->update($data);
 
         return redirect()->route('web.plans.index')->with('success', 'Plan updated successfully.');

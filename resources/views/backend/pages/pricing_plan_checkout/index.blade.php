@@ -33,6 +33,7 @@
                         <th>Full Name</th>
                         <th>Email</th>
                         <th>Plan</th>
+                        <th>Country</th>
                         <th>Trade Signals</th>
                         <th>Payment Option</th>
                         <th>Created Date</th>
@@ -60,6 +61,7 @@
                                     @endif
                                 </span>
                             </td>
+                            <td>{{ $checkout->countryData->name }}</td>
                             <td>
                                 <span class="badge {{ $checkout->trade_signals == 0 ? 'bg-success' : 'bg-primary' }}">
                                     {{ $checkout->trade_signals == 0 ? 'Telegram' : 'WhatsApp' }}

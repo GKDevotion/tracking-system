@@ -335,7 +335,7 @@
         <script src="{{ url('public/frontend/js/ScrollTrigger.min.js') }}"></script>
         
         <!-- SmoothScroll -->
-        <script src="{{ url('public/frontend/js/SmoothScroll.js') }}"></script>
+        {{-- <script src="{{ url('public/frontend/js/SmoothScroll.js') }}"></script> --}}
         
         <!-- YTPlayer js File -->
         <script src="{{ url('public/frontend/js/jquery.mb.YTPlayer.min.js') }}"></script>

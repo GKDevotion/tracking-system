@@ -27,6 +27,7 @@ use App\Http\Controllers\Web\TagController;
 use App\Http\Controllers\Web\TrackingController;
 use App\Http\Controllers\Web\UserController;
 use App\Http\Controllers\Web\ConfigurationController;
+use App\Http\Controllers\Web\CountryController;
 use App\Http\Controllers\Web\ManagerUserController;
 use App\Http\Controllers\Web\PlanController;
 use App\Http\Controllers\Web\PricingPlanCheckoutController;
@@ -171,6 +172,18 @@ Route::middleware('auth')->group(function () {
                 'show' => 'web.blogs.show',
             ]);
 
+    // Country
+    Route::resource('country', CountryController::class)
+            ->names([
+                'index' => 'web.country.index',
+                'create' => 'web.country.create',
+                'store' => 'web.country.store',
+                'edit' => 'web.country.edit',
+                'update' => 'web.country.update',
+                'destroy' => 'web.country.destroy',
+                'show' => 'web.country.show',
+            ]);
+
     // Tracking
     Route::resource('tracking', TrackingController::class)
             ->names([
@@ -178,6 +191,8 @@ Route::middleware('auth')->group(function () {
                 'create' => 'web.tracking.create',
                 'store' => 'web.tracking.store',
                 'show' => 'web.tracking.show',
+                'update' =>  'web.tracking.update',
+                'destroy'   =>  'web.tracking.destroy'
             ]);
 
     Route::resource('blog-category', CategoryController::class)

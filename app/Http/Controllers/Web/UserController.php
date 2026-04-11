@@ -50,7 +50,7 @@ class UserController extends Controller
 
         User::create($data);
 
-        return redirect()->route('web.users.index')->with('success', 'User created successfully.');
+        return redirect()->route('web.admin-user.index')->with('success', 'User created successfully.');
     }
 
     public function show(User $user)
@@ -85,7 +85,7 @@ class UserController extends Controller
 
         $user->update($data);
 
-        return redirect()->route('web.users.index')->with('success', 'User updated successfully.');
+        return redirect()->route('web.admin-user.index')->with('success', 'User updated successfully.');
     }
 
     public function destroy(User $user)

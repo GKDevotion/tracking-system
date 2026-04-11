@@ -27,4 +27,9 @@ class PricingPlanCheckout extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function countryData()
+    {
+        return $this->belongsTo(Country::class, 'country');
+    }
 }
