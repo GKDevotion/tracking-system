@@ -11,6 +11,7 @@ use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DisclaimerController;
 use App\Http\Controllers\CookieController;
+use App\Http\Controllers\EducationController;
 use App\Http\Controllers\Web\BlogController;
 use App\Http\Controllers\Web\CategoryController;
 use App\Http\Controllers\HomeController;
@@ -19,6 +20,7 @@ use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\RiskDisclosureController;
 use App\Http\Controllers\TermsController;
 use App\Http\Controllers\Web\AdminUserController;
+use App\Http\Controllers\Web\BannersController;
 use App\Http\Controllers\Web\DashboardController;
 use App\Http\Controllers\Web\MenuController;
 use App\Http\Controllers\Web\PermissionController;
@@ -160,7 +162,7 @@ Route::middleware('auth')->group(function () {
                 'destroy' => 'web.plans.destroy',
             ]);
 
-            // Blogs
+    // Blogs
     Route::resource('blogs', BlogController::class)
             ->names([
                 'index' => 'web.blogs.index',
@@ -170,6 +172,18 @@ Route::middleware('auth')->group(function () {
                 'update' => 'web.blogs.update',
                 'destroy' => 'web.blogs.destroy',
                 'show' => 'web.blogs.show',
+            ]);
+
+    // Banner
+    Route::resource('banners', BannersController::class)
+            ->names([
+                'index' => 'web.banners.index',
+                'create' => 'web.banners.create',
+                'store' => 'web.banners.store',
+                'edit' => 'web.banners.edit',
+                'update' => 'web.banners.update',
+                'destroy' => 'web.banners.destroy',
+                'show' => 'web.banners.show',
             ]);
 
     // Country
@@ -194,9 +208,8 @@ Route::middleware('auth')->group(function () {
                 'update' =>  'web.tracking.update',
                 'destroy'   =>  'web.tracking.destroy'
             ]);
-
+     // Blog Category
     Route::resource('blog-category', CategoryController::class)
-            // ->except(['destroy', 'edit', 'update'])
             ->names([
                 'index' => 'web.blog-category.index',
                 'create' => 'web.blog-category.create',
@@ -206,9 +219,8 @@ Route::middleware('auth')->group(function () {
                 'update' => 'web.blog-category.update',
                 'destroy' => 'web.blog-category.destroy',
             ]);
-
+    // Blog Tag
     Route::resource('blog-tag', TagController::class)
-            // ->except(['destroy', 'edit', 'update'])
             ->names([
                 'index' => 'web.blog-tag.index',
                 'create' => 'web.blog-tag.create',
@@ -299,4 +311,4 @@ Route::get('/cookie-policy', [CookieController::class, 'index'])->name('cookie')
 Route::get('/risk-disclosure', [RiskDisclosureController::class, 'index'])->name('risk-disclosure');
 Route::get('/disclaimer', [DisclaimerController::class, 'index'])->name('disclaimer');
 
-
+Route::get('/education', [EducationController::class, 'index'])->name('education');

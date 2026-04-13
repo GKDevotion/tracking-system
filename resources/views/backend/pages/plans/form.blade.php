@@ -56,7 +56,9 @@
                                 <textarea name="features" id="features" rows="5" class="form-control @error('features') is-invalid @enderror"
                                     placeholder="Enter each feature on a new line">{{ old('features', $plan->features ? implode("\n", $plan->features) : '') }}</textarea>
 
-                                <small class="form-text text-muted">Enter each feature on a separate line.</small>
+                                <small class="form-text text-muted">
+                                    Use <b>&lt;b&gt;text&lt;/b&gt;</b> to make text bold.
+                                </small>
 
                                 @error('features')
                                     <div class="invalid-feedback">{{ $message }}</div>
