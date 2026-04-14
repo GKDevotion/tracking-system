@@ -20,8 +20,8 @@
                         <div class="col-md-12">
                             <label class="form-label">Key <span class="text-danger">*</span></label>
                             <input type="text" name="key" value="{{ old('key', $configuration->key) }}"
-                                   class="form-control @error('key') is-invalid @enderror"
-                                   placeholder="configuration_key" required>
+                                   class="form-control @error('key') is-invalid @enderror "
+                                   placeholder="configuration_key" disabled required>
                             @error('key')<div class="invalid-feedback">{{ $message }}</div>@enderror
                         </div>
 
