@@ -423,6 +423,7 @@
                         </div>
                         <script>
                             if( count == 0 ){
+                                console.log( "#parent_menu_{{$menu->id}}" );
                                 $("#parent_menu_{{$menu->id}}").addClass('d-none');
                             }
                         </script>
