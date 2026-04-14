@@ -30,6 +30,7 @@ use App\Http\Controllers\Web\TagController;
 use App\Http\Controllers\Web\TrackingController;
 use App\Http\Controllers\Web\UserController;
 use App\Http\Controllers\Web\ConfigurationController;
+use App\Http\Controllers\Web\ContactsController;
 use App\Http\Controllers\Web\CountryController;
 use App\Http\Controllers\Web\FaqController;
 use App\Http\Controllers\Web\ManagerUserController;
@@ -242,6 +243,18 @@ Route::middleware('auth')->group(function () {
                 'edit' => 'web.blog-tag.edit',
                 'update' => 'web.blog-tag.update',
                 'destroy' => 'web.blog-tag.destroy',
+            ]);
+
+            // Blog Tag
+    Route::resource('contact-us',ContactsController::class)
+            ->names([
+                'index' => 'web.contact-us.index',
+                'create' => 'web.contact-us.create',
+                'store' => 'web.contact-us.store',
+                'show' => 'web.contact-us.show',
+                'edit' => 'web.contact-us.edit',
+                'update' => 'web.contact-us.update',
+                'destroy' => 'web.contact-us.destroy',
             ]);
 
     // ── Categories ────────────────────────────────────────

@@ -191,50 +191,50 @@
             </div>
         </div>
     </div>
-    
+
     <script>
-       function submitForm() {
+        function submitForm() {
 
-    let $form = $("#contactForm");
-    let $btn = $("#submitBtn"); // your submit button
+            let $form = $("#contactForm");
+            let $btn = $("#submitBtn"); // your submit button
 
-    // prevent multiple clicks
-    $btn.prop("disabled", true).text("Submitting...");
+            // prevent multiple clicks
+            $btn.prop("disabled", true).text("Submitting...");
 
-    $.ajax({
-        type: "POST",
-        url: $form.attr("action"),
-        data: $form.serialize(),
+            $.ajax({
+                type: "POST",
+                url: $form.attr("action"),
+                data: $form.serialize(),
 
-        success: function (response) {
+                success: function(response) {
 
-            Swal.fire({
-                title: "Success!",
-                text: response.message,
-                icon: "success",
-                confirmButtonText: "OK",
-                confirmButtonColor: "#f73b20"
+                    Swal.fire({
+                        title: "Success!",
+                        text: response.message,
+                        icon: "success",
+                        confirmButtonText: "OK",
+                        confirmButtonColor: "#f73b20"
+                    });
+
+                    $form[0].reset();
+
+                },
+
+                error: function() {
+                    Swal.fire({
+                        title: "Error!",
+                        text: "Something went wrong",
+                        icon: "error",
+                        confirmButtonColor: "#f73b20"
+                    });
+                },
+
+                complete: function() {
+                    // re-enable button after request finishes
+                    $btn.prop("disabled", false).text("Submit");
+                }
             });
-
-            $form[0].reset();
-
-        },
-
-        error: function () {
-            Swal.fire({
-                title: "Error!",
-                text: "Something went wrong",
-                icon: "error",
-                confirmButtonColor: "#f73b20"
-            });
-        },
-
-        complete: function () {
-            // re-enable button after request finishes
-            $btn.prop("disabled", false).text("Submit");
         }
-    });
-}
     </script>
     <!-- Page Contact Us End -->
 @endsection
