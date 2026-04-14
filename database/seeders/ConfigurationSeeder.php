@@ -10,9 +10,9 @@ class ConfigurationSeeder extends Seeder
     public function run(): void
     {
         $configurations = [
-            ['key' => 'CONTACT_EMAIL',   'value' => 'support@wealthora.io',    'display_name' => 'Contact Email'], 
-            ['key' => 'CONTACT_PHONE',   'value' => '-',     'display_name' => 'Contact Phone'], 
-            ['key' => 'CONTACT_ADDRESS', 'value' => '-', 'display_name' => 'Contact Address'],
+            ['key' => 'CONTACT_EMAIL', 'value' => 'support@wealthora.io', 'display_name' => 'Contact Email'],
+            ['key' => 'CONTACT_PHONE', 'value' => '-', 'display_name' => 'Contact Phone'],
+            ['key' => 'OFFICE_ADDRESS', 'value' => '-', 'display_name' => 'Office Address'],
             ['key' => 'SOCIAL_FACEBOOK_LINK', 'value' => '-', 'display_name' => 'Facebook'],
             ['key' => 'SOCIAL_TWITTER_LINK', 'value' => '-', 'display_name' => 'Twitter'],
             ['key' => 'SOCIAL_LINKEDIN_LINK', 'value' => '-', 'display_name' => 'LinkedIn'],
@@ -20,6 +20,8 @@ class ConfigurationSeeder extends Seeder
             ['key' => 'SOCIAL_PINTEREST_LINK', 'value' => '-', 'display_name' => 'Pinterest'],
             ['key' => 'SOCIAL_YOUTUBE_LINK', 'value' => '-', 'display_name' => 'YouTube'],
             ['key' => 'SOCIAL_WHATSAPP_LINK', 'value' => '-', 'display_name' => 'WhatsApp'],
+            ['key' => 'SOCIAL_TELEGRAM_LINK', 'value' => '-', 'display_name' => 'Telegram'],
+            ['key' => 'SOCIAL_TIKTOK_LINK', 'value' => '-', 'display_name' => 'Tiktok'],
             ['key' => 'FOOTER_COPYRIGHT', 'value' => '-', 'display_name' => 'Footer Copyright']
 
         ];
