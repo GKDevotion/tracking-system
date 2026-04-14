@@ -745,6 +745,12 @@
                         <i class="fab fa-tiktok"></i>
                     </a>
                     @endif
+
+                    @if ( getConfigurationField('SOCIAL_INSTAGRAM_LINK') != '-')
+                    <a href="{{ getConfigurationField('SOCIAL_INSTAGRAM_LINK') }}" target="_blank">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    @endif
                 </div>
             </div>
 
