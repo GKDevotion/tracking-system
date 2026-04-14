@@ -698,13 +698,53 @@
             <div class="social-icons d-flex flex-wrap justify-content-center mb-5">
                 <div class="icon-track">
                     <!-- First Set -->
-                    <a href="#"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#"><i class="fab fa-youtube"></i></a>
-                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="#"><i class="fas fa-globe"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-tiktok"></i></a>
-                    <a href="#"><i class="fab fa-x-twitter"></i></a>
+                    @if ( getConfigurationField('SOCIAL_FACEBOOK_LINK') != '-')
+                    <a href="{{ getConfigurationField('SOCIAL_FACEBOOK_LINK') }}" target="_blank">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    @endif
+
+                     @if ( getConfigurationField('SOCIAL_TWITTER_LINK') != '-')
+                    <a href="{{ getConfigurationField('SOCIAL_TWITTER_LINK') }}">
+                        <i class="fab fa-x-twitter"></i>
+                    </a>
+                    @endif
+
+                     @if ( getConfigurationField('SOCIAL_LINKEDIN_LINK') != '-')
+                    <a href="{{ getConfigurationField('SOCIAL_LINKEDIN_LINK') }}" target="_blank">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    @endif
+
+                     @if ( getConfigurationField('SOCIAL_PINTEREST_LINK') != '-')
+                    <a href="{{ getConfigurationField('SOCIAL_PINTEREST_LINK') }}" target="_blank">
+                        <i class="fas fa-pinterest"></i>
+                    </a>
+                    @endif
+
+                     @if ( getConfigurationField('SOCIAL_YOUTUBE_LINK') != '-')
+                    <a href="{{ getConfigurationField('SOCIAL_YOUTUBE_LINK') }}" target="_blank">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                    @endif
+
+                     @if ( getConfigurationField('SOCIAL_WHATSAPP_LINK') != '-')
+                    <a href="{{ getConfigurationField('SOCIAL_WHATSAPP_LINK') }}" target="_blank">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                    @endif
+
+                    @if ( getConfigurationField('SOCIAL_TELEGRAM_LINK') != '-')
+                    <a href="{{ getConfigurationField('SOCIAL_TELEGRAM_LINK') }}" target="_blank">
+                        <i class="fab fa-telegram"></i>
+                    </a>
+                    @endif
+
+                    @if ( getConfigurationField('SOCIAL_TIKTOK_LINK') != '-')
+                    <a href="{{ getConfigurationField('SOCIAL_TIKTOK_LINK') }}" target="_blank">
+                        <i class="fab fa-tiktok"></i>
+                    </a>
+                    @endif
                 </div>
             </div>
 
