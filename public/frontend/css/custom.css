@@ -5071,7 +5071,8 @@ header.main-header .header-sticky.active{
 }
 
 .contact-info-box{
-    background: linear-gradient(90deg, var(--theme-secondary-color) 0%, var(--theme-primary-color) 100%);
+    /* background: linear-gradient(90deg, var(--theme-secondary-color) 0%, var(--theme-primary-color) 100%); */
+	background-color: var(--theme-secondary-color);
     border-radius: 20px;
     padding: 40px;
 	margin-left: 15px;
