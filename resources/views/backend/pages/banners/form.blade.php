@@ -107,6 +107,7 @@
                         <div class="col-12">
                             <label class="form-label">Status</label>
                             <div class="form-check form-switch">
+                                 <input type="hidden" name="status" value="0">
                                 <input type="checkbox" name="status" value="1"
                                        class="form-check-input"
                                        {{ old('status', $banner->status ?? 1) ? 'checked' : '' }}>
