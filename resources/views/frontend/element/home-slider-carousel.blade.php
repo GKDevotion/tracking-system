@@ -85,7 +85,7 @@
     <!-- Dot indicators -->
     <div class="carousel-indicators">
         <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="0" class="active"></button>
-        <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="1"></button>
+        {{-- <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="1"></button> --}}
     </div>
 
     <!-- Slides -->
@@ -93,10 +93,6 @@
 
         <div class="carousel-item active">
             <!-- Replace src with your actual image path -->
-            <img src="{{url('storage/app/public/home-slider/website-07.jpg')}}" alt="Our Signals are Money Making Machine" />
-        </div>
-
-        <div class="carousel-item">
             <img src="{{url('storage/app/public/home-slider/website-07.jpg')}}" alt="Our Signals are Money Making Machine" />
         </div>
     </div>
