@@ -58,10 +58,10 @@ class BannersController extends Controller
         return redirect()->route('web.banners.index')->with('success', 'Blog created successfully.');
     }
 
-    public function show()
+    public function show(Banners $banner)
     {
 
-        return view('backend.pages.banners.view');
+        return view('backend.pages.banners.view', compact('banner'));
     }
 
     public function edit(Banners $banner)

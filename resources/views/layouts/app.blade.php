@@ -423,11 +423,7 @@
                 @endif
             @endforeach
         </ul>
-        <span class="nav-section-label">Account</span>
-        <ul class="nav flex-column">
-            <li class="nav-item"><a href="{{ route('web.change.password.form') }}" class="nav-link {{ request()->routeIs('web.change.password*')?'active':'' }}"><i class="bi bi-lock"></i> Change Password</a></li>
-        </ul>
-
+        
         <ul class="nav flex-column mt-1">
             <li class="nav-item">
                 <form action="{{ route('logout') }}" method="POST" id="logoutForm">@csrf

@@ -49,7 +49,7 @@
                     <div class="small mb-2" style="font-size: large;">
                         <a href="{{ url('/') }}" class="text-decoration-none text-dark">Home</a>
                         <span class="mx-1 fs-4">›</span>
-                        <a href="{{ route('blog.details', $blog->slug) }}" class="text-decoration-none text-dark">
+                        <a href="{{ route('news.analysis') }}" class="text-decoration-none text-dark">
                             Blog
                         </a>
                     </div>
@@ -95,7 +95,7 @@
 
                         @foreach ($blog->tags as $tag)
                             <span class="btn tag-btn btn-sm rounded-pill"
-                                style="border: 1px solid #f73b20">{{ $tag->name }}</span>
+                                style="border: 1px solid black">{{ $tag->name }}</span>
                         @endforeach
                     </div>
 
@@ -147,7 +147,7 @@
                         <div class="d-flex flex-wrap gap-2">
                             @foreach ($popularTags as $tag)
                                 <a href="{{ route('news.analysis', ['tag' => $tag->name]) }}"
-                                    class="btn  btn-sm rounded-pill tag-btn" style="border: 1px solid #f73b20; ">
+                                    class="btn  btn-sm rounded-pill tag-btn" style="border: 1px solid black; ">
                                     {{ $tag->name }}
                                 </a>
                             @endforeach

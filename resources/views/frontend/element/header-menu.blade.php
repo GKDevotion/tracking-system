@@ -131,7 +131,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->routeIs('faq') ? 'active' : '' }}" href="#">
+                    <a class="nav-link {{ request()->routeIs('faq') ? 'active' : '' }}" href="{{ route('faqs') }}">
                         FAQ
                     </a>
                 </li>

@@ -12,6 +12,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DisclaimerController;
 use App\Http\Controllers\CookieController;
 use App\Http\Controllers\EducationController;
+use App\Http\Controllers\FaqsController;
 use App\Http\Controllers\Web\BlogController;
 use App\Http\Controllers\Web\CategoryController;
 use App\Http\Controllers\HomeController;
@@ -30,6 +31,7 @@ use App\Http\Controllers\Web\TrackingController;
 use App\Http\Controllers\Web\UserController;
 use App\Http\Controllers\Web\ConfigurationController;
 use App\Http\Controllers\Web\CountryController;
+use App\Http\Controllers\Web\FaqController;
 use App\Http\Controllers\Web\ManagerUserController;
 use App\Http\Controllers\Web\PlanController;
 use App\Http\Controllers\Web\PricingPlanCheckoutController;
@@ -186,6 +188,17 @@ Route::middleware('auth')->group(function () {
                 'show' => 'web.banners.show',
             ]);
 
+    Route::resource('faq', FaqController::class)
+            ->names([
+                'index' => 'web.faq.index',
+                'create' => 'web.faq.create',
+                'store' => 'web.faq.store',
+                'edit' => 'web.faq.edit',
+                'update' => 'web.faq.update',
+                'destroy' => 'web.faq.destroy',
+                'show' => 'web.faq.show',
+                ]);
+
     // Country
     Route::resource('country', CountryController::class)
             ->names([
@@ -312,3 +325,5 @@ Route::get('/risk-disclosure', [RiskDisclosureController::class, 'index'])->name
 Route::get('/disclaimer', [DisclaimerController::class, 'index'])->name('disclaimer');
 
 Route::get('/education', [EducationController::class, 'index'])->name('education');
+
+Route::get('/faqs', [FaqsController::class, 'index'])->name('faqs');
