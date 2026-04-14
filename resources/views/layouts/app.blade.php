@@ -19,6 +19,10 @@
     <!-- Leaflet -->
     <link href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" rel="stylesheet">
 
+    <!-- 1. Load jQuery library first -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
     <style>
         :root {
             --sidebar-width: 260px;
