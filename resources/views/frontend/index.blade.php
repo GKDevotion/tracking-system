@@ -658,7 +658,7 @@
             display: inline-flex;
             gap: 0px;
             /* animation: scrollLeft 20s linear infinite; */
-            z-index: -1;
+            z-index: 0;
         }
 
         .icon-track a {

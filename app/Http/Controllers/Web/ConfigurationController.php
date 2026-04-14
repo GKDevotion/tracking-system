@@ -65,7 +65,6 @@ class ConfigurationController extends Controller
     public function update(Request $request, Configuration $configuration): RedirectResponse
     {
         $request->validate([ 
-            'key' => 'required|string|max:50',
             'value' => 'nullable', 
         ]);
 
