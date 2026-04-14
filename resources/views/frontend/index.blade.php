@@ -4,6 +4,58 @@
 
     @include('frontend.element.home-slider-carousel')
 
+    <!-- Lunch Movement Animation -->
+    <section class="section-cta pt-5">
+        <div class="container">
+            <div class="row text-center">
+                <h2 class="wow fadeInUp text-black" style="font-size: 3rem;">Thousands Joined. <span
+                        style="color: #46e546; font-size: 4rem; text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);">PROFIT</span>
+                    Started</h2>
+            </div>
+        </div>
+
+        <link href="{{ url('public/frontend/css/lottie.css') }}" rel="stylesheet" />
+        <script src="{{ url('public/frontend/js/lottie.min.js') }}"></script>
+        <div class="cta-background-wrap is-relative" style="margin-top: -70px;">
+
+            <a href="#" target="_blank" class="main-button is-centered w-inline-block">
+                <div class="button-text-wrap" style="display: block;">
+                    <div class="btn-text text-white " style="font-weight: 800;">Today Signals</div>
+                </div>
+            </a>
+
+            <!-- Desktop Animation -->
+            <div id="lottie-desktop" class="lottie-animation"></div>
+
+            <div class="overlay-left"></div>
+            <div class="overlay-right"></div>
+
+            <!-- Mobile Animation -->
+            <div id="lottie-mobile" class="lottie-animation is-mobile"></div>
+
+        </div>
+        <script>
+            // Desktop Lottie
+            lottie.loadAnimation({
+                container: document.getElementById('lottie-desktop'),
+                renderer: 'svg',
+                loop: true,
+                autoplay: true,
+                path: 'public/frontend/json/Landing_Page_Animation_Merge_Without_Text.json'
+            });
+
+            // Mobile Lottie
+            lottie.loadAnimation({
+                container: document.getElementById('lottie-mobile'),
+                renderer: 'svg',
+                loop: true,
+                autoplay: true,
+                path: 'public/frontend/json/Landing_Page_Animation_Merge_Without_Text.json'
+            });
+        </script>
+    </section>
+    <!-- End Lunch Movement Animation -->
+
     <div class="">
         <img src="{{url('storage/app/public/home-slider/website-08.jpg')}}" alt="Our Signals are Money Making Machine" class="img-fluid w-100" />
     </div>
@@ -170,58 +222,6 @@
         </div>
     </div>
     <!-- End Analysis Report -->
-
-    <!-- Lunch Movement Animation -->
-    <section class="section-cta pt-5">
-        <div class="container">
-            <div class="row text-center">
-                <h2 class="wow fadeInUp text-black" style="font-size: 3rem;">Thousands Joined. <span
-                        style="color: #46e546; font-size: 4rem; text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);">PROFIT</span>
-                    Started</h2>
-            </div>
-        </div>
-
-        <link href="{{ url('public/frontend/css/lottie.css') }}" rel="stylesheet" />
-        <script src="{{ url('public/frontend/js/lottie.min.js') }}"></script>
-        <div class="cta-background-wrap is-relative" style="margin-top: -70px;">
-
-            <a href="#" target="_blank" class="main-button is-centered w-inline-block">
-                <div class="button-text-wrap" style="display: block;">
-                    <div class="btn-text text-white " style="font-weight: 800;">Today Signals</div>
-                </div>
-            </a>
-
-            <!-- Desktop Animation -->
-            <div id="lottie-desktop" class="lottie-animation"></div>
-
-            <div class="overlay-left"></div>
-            <div class="overlay-right"></div>
-
-            <!-- Mobile Animation -->
-            <div id="lottie-mobile" class="lottie-animation is-mobile"></div>
-
-        </div>
-        <script>
-            // Desktop Lottie
-            lottie.loadAnimation({
-                container: document.getElementById('lottie-desktop'),
-                renderer: 'svg',
-                loop: true,
-                autoplay: true,
-                path: 'public/frontend/json/Landing_Page_Animation_Merge_Without_Text.json'
-            });
-
-            // Mobile Lottie
-            lottie.loadAnimation({
-                container: document.getElementById('lottie-mobile'),
-                renderer: 'svg',
-                loop: true,
-                autoplay: true,
-                path: 'public/frontend/json/Landing_Page_Animation_Merge_Without_Text.json'
-            });
-        </script>
-    </section>
-    <!-- End Lunch Movement Animation -->
 
     <!-- Page Pricing Start -->
     <div class="page-pricing">

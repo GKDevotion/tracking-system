@@ -376,14 +376,14 @@
 
         <script>
             // Sticky Header Logic
-            window.onscroll = function() {
-                var nav = document.getElementById('mainNav');
-                if (window.pageYOffset > 50) {
-                    nav.classList.add('sticky-active');
-                } else {
-                    nav.classList.remove('sticky-active');
-                }
-            };
+            // window.onscroll = function() {
+            //     var nav = document.getElementById('mainNav');
+            //     if (window.pageYOffset > 50) {
+            //         nav.classList.add('sticky-active');
+            //     } else {
+            //         nav.classList.remove('sticky-active');
+            //     }
+            // };
         </script>
 
         <script>

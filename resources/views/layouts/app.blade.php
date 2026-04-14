@@ -391,9 +391,15 @@
         @endphp
         <span class="nav-section-label">Navigation</span>
         <ul class="nav flex-column">
+            <script>
+                var count = 0;
+            </script>
             @foreach($sidebarMenus as $menu)
                 @if($menu->children->isNotEmpty())
-                    <li class="nav-item">
+                    <script>
+                        count = 0;
+                    </script>
+                    <li class="nav-item" id="parent_menu_{{$menu->id}}">
                         <a href="#sm-{{ $menu->id }}" class="nav-link" data-bs-toggle="collapse" aria-expanded="false">
                             <i class="{{ $menu->icon ?? 'bi bi-circle' }}"></i> {{ $menu->name }}
                             <i class="bi bi-chevron-right chevron"></i>
@@ -402,16 +408,24 @@
                             <ul class="nav flex-column">
                                 @foreach($menu->children as $child)
                                     @if($authUser->hasPermission($child->slug,'can_view'))
-                                    <li class="nav-item">
-                                        <a href="{{ $child->route ? route( 'web.'.$child->route ) : 'javascript:void(0)' }}"
-                                            class="nav-link {{$child->route}} {{ $child->route && request()->routeIs( 'web.'.$child->route.'*' ) ? 'active' : '' }}">
-                                            <i class="{{ $child->icon ?? 'bi bi-dot' }}"></i> {{ $child->name }}
-                                        </a>
-                                    </li>
+                                        <li class="nav-item">
+                                            <a href="{{ $child->route ? route( 'web.'.$child->route ) : 'javascript:void(0)' }}"
+                                                class="nav-link {{$child->route}} {{ $child->route && request()->routeIs( 'web.'.$child->route.'*' ) ? 'active' : '' }}">
+                                                <i class="{{ $child->icon ?? 'bi bi-dot' }}"></i> {{ $child->name }}
+                                            </a>
+                                        </li>
+                                        <script>
+                                            count++;
+                                        </script>
                                     @endif
                                 @endforeach
                             </ul>
                         </div>
+                        <script>
+                            if( count == 0 ){
+                                $("#parent_menu_{{$menu->id}}").hide();
+                            }
+                        </script>
                     </li>
                 @elseif($authUser->hasPermission($menu->slug,'can_view'))
                     <li class="nav-item">
@@ -423,7 +437,7 @@
                 @endif
             @endforeach
         </ul>
-        
+
         <ul class="nav flex-column mt-1">
             <li class="nav-item">
                 <form action="{{ route('logout') }}" method="POST" id="logoutForm">@csrf
