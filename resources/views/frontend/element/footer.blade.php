@@ -7,7 +7,8 @@
                         <div class="footer-header">
                             <!-- Section Title Start -->
                             <div class="section-title d-none">
-                                <h2 class="wow fadeInUp text-white" data-cursor="-opaque">Partner with us and let your story be told in the voice it deserves.</h2>
+                                <h2 class="wow fadeInUp text-white" data-cursor="-opaque">Partner with us and let your
+                                    story be told in the voice it deserves.</h2>
                             </div>
                             <!-- Section Title End -->
 
@@ -31,7 +32,8 @@
 
                             <!-- About Footer Content Start -->
                             <div class="about-footer-content">
-                                <p>Perfect for beginners or casual users who want to explore. Perfect for beginners or casual users.</p>
+                                <p>Perfect for beginners or casual users who want to explore. Perfect for beginners or
+                                    casual users.</p>
                             </div>
                             <!-- About Footer Content End -->
                         </div>
@@ -45,22 +47,22 @@
                             <!-- Footer Contact List Start -->
                             <div class="footer-contact-list">
                                 <!-- Footer Contact Item Start -->
-                                
+
                                 @if (getConfigurationField('CONTACT_PHONE') != '-')
-                                <div class="footer-contact-item">
-                                    <p>Phone Number</p>
-                                    <a href="tel:{!! getConfigurationField('CONTACT_PHONE') !!}">{!! getConfigurationField('CONTACT_PHONE') !!}</a>
-                                </div>
+                                    <div class="footer-contact-item">
+                                        <p>Phone Number</p>
+                                        <a href="tel:{!! getConfigurationField('CONTACT_PHONE') !!}">{!! getConfigurationField('CONTACT_PHONE') !!}</a>
+                                    </div>
                                 @endif
-                               
+
                                 <!-- Footer Contact Item End -->
 
                                 <!-- Footer Contact Item Start -->
-                                 @if (getConfigurationField('CONTACT_EMAIL') != '-')
-                                <div class="footer-contact-item">
-                                    <p>Email Address</p>
-                                    <a href="mailto:{!! getConfigurationField('CONTACT_EMAIL') !!}">{!! getConfigurationField('CONTACT_EMAIL') !!}</a>
-                                </div>
+                                @if (getConfigurationField('CONTACT_EMAIL') != '-')
+                                    <div class="footer-contact-item">
+                                        <p>Email Address</p>
+                                        <a href="mailto:{!! getConfigurationField('CONTACT_EMAIL') !!}">{!! getConfigurationField('CONTACT_EMAIL') !!}</a>
+                                    </div>
                                 @endif
 
                                 <!-- Footer Contact Item End -->
@@ -86,24 +88,28 @@
                             <div class="footer-social-links d-none">
                                 <h3>Our Socials:</h3>
                                 <ul>
-                                    @if ( getConfigurationField('SOCIAL_PINTEREST_LINK') != '-')
+                                    @if (getConfigurationField('SOCIAL_PINTEREST_LINK') != '-')
                                         <li>
-                                            <a href="{{ getConfigurationField('SOCIAL_PINTEREST_LINK') }}" target="_blank"><i class="fa-brands fa-pinterest-p"></i></a>
+                                            <a href="{{ getConfigurationField('SOCIAL_PINTEREST_LINK') }}"
+                                                target="_blank"><i class="fa-brands fa-pinterest-p"></i></a>
                                         </li>
                                     @endif
-                                    @if ( getConfigurationField('SOCIAL_TWITTER_LINK') != '-')
+                                    @if (getConfigurationField('SOCIAL_TWITTER_LINK') != '-')
                                         <li>
-                                            <a href="{{ getConfigurationField('SOCIAL_TWITTER_LINK') }}" target="_blank"><i class="fa-brands fa-x-twitter"></i></a>
+                                            <a href="{{ getConfigurationField('SOCIAL_TWITTER_LINK') }}"
+                                                target="_blank"><i class="fa-brands fa-x-twitter"></i></a>
                                         </li>
                                     @endif
-                                    @if ( getConfigurationField('SOCIAL_FACEBOOK_LINK') != '-')
+                                    @if (getConfigurationField('SOCIAL_FACEBOOK_LINK') != '-')
                                         <li>
-                                            <a href="{{ getConfigurationField('SOCIAL_FACEBOOK_LINK') }}" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
+                                            <a href="{{ getConfigurationField('SOCIAL_FACEBOOK_LINK') }}"
+                                                target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
                                         </li>
                                     @endif
-                                    @if ( getConfigurationField('SOCIAL_INSTAGRAM_LINK') != '-')
+                                    @if (getConfigurationField('SOCIAL_INSTAGRAM_LINK') != '-')
                                         <li>
-                                            <a href="{{ getConfigurationField('SOCIAL_INSTAGRAM_LINK') }}" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                                            <a href="{{ getConfigurationField('SOCIAL_INSTAGRAM_LINK') }}"
+                                                target="_blank"><i class="fa-brands fa-instagram"></i></a>
                                         </li>
                                     @endif
                                 </ul>
@@ -120,8 +126,11 @@
 
                             <form id="newslettersForm" action="#" method="POST">
                                 <div class="form-group">
-                                    <input type="email" name="mail" class="form-control" id="mail" placeholder="Email Address*" required>
-                                    <button type="submit" class="newsletter-btn"><img src="{{ url('public/frontend/images/arrow-white.svg') }}" alt=""></button>
+                                    <input type="email" name="mail" class="form-control" id="mail"
+                                        placeholder="Email Address*" required>
+                                    <button type="submit" class="newsletter-btn"><img
+                                            src="{{ url('public/frontend/images/arrow-white.svg') }}"
+                                            alt=""></button>
                                 </div>
                             </form>
 
@@ -135,9 +144,9 @@
                         <div class="footer-copyright">
                             <!-- Copyright Text Start -->
                             @if (!empty(trim(getConfigurationField('FOOTER_COPYRIGHT'))) && trim(getConfigurationField('FOOTER_COPYRIGHT')) !== '-')
-                            <div class="footer-copyright-text">
-                                <p>{!! getConfigurationField('FOOTER_COPYRIGHT') !!}</p>
-                            </div>
+                                <div class="footer-copyright-text">
+                                    <p>{!! getConfigurationField('FOOTER_COPYRIGHT') !!}</p>
+                                </div>
                             @endif
                             <!-- Copyright Text End -->
 
@@ -181,7 +190,7 @@
                 backdrop-filter: blur(10px);
                 border-radius: 12px;
                 padding: 12px 15px;
-                box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
                 border-left: 4px solid #f73b20;
                 max-width: 380px;
             }
@@ -262,18 +271,19 @@
                     transform: translateX(-100%);
                     opacity: 0;
                 }
+
                 to {
                     transform: translateX(0);
                     opacity: 1;
                 }
             }
         </style>
-        
+
         <!-- Offer Popup -->
         <div class="offer-popup" id="offerPopup">
-            
+
             <div class="offer-content">
-                
+
                 <!-- Close -->
                 <span class="offer-close" onclick="closeOffer()">×</span>
 
@@ -302,52 +312,53 @@
             </div>
         </div>
 
+        <!-- SweetAlert -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <!-- Jquery Library File -->
         <script src="{{ url('public/frontend/js/jquery-3.7.1.min.js') }}"></script>
 
         <script src="{{ url('public/frontend/js/jquery-3.7.1.min.js') }}"></script>
 
-        <!-- Bootstrap js file --> 
+        <!-- Bootstrap js file -->
         <script src="{{ url('public/frontend/js/bootstrap.min.js') }}"></script>
-        
+
         <!-- Validator js file -->
         <script src="{{ url('public/frontend/js/validator.min.js') }}"></script>
-        <script src="{{ url('public/frontend/js/jquery.slicknav.js') }}"></script> 
-        <!-- Swiper js file --> 
+        <script src="{{ url('public/frontend/js/jquery.slicknav.js') }}"></script>
+        <!-- Swiper js file -->
         <script src="{{ url('public/frontend/js/swiper-bundle.min.js') }}"></script>
-        
-        <!-- Counter js file --> 
+
+        <!-- Counter js file -->
         <script src="{{ url('public/frontend/js/jquery.waypoints.min.js') }}"></script>
         <script src="{{ url('public/frontend/js/jquery.counterup.min.js') }}"></script>
-        
+
         <!-- Magnific js file -->
         <script src="{{ url('public/frontend/js/jquery.magnific-popup.min.js') }}"></script>
-        
+
         <!-- Parallax js -->
         <script src="{{ url('public/frontend/js/parallaxie.js') }}"></script>
-        
+
         <!-- MagicCursor js file -->
         {{-- <!-- <script src="{{ url('public/frontend/js/gsap.min.js') }}"></script> -->
         <!-- <script src="{{ url('public/frontend/js/magiccursor.js') }}"></script> --> --}}
-        
+
         <!-- Text Effect js file -->
         <script src="{{ url('public/frontend/js/SplitText.js') }}"></script>
         <script src="{{ url('public/frontend/js/ScrollTrigger.min.js') }}"></script>
-        
+
         <!-- SmoothScroll -->
         {{-- <script src="{{ url('public/frontend/js/SmoothScroll.js') }}"></script> --}}
-        
+
         <!-- YTPlayer js File -->
         <script src="{{ url('public/frontend/js/jquery.mb.YTPlayer.min.js') }}"></script>
-        
+
         <!-- Wow js file -->
         <script src="{{ url('public/frontend/js/wow.min.js') }}"></script>
-        
+
         <!-- Main Custom js file -->
         <script src="{{ url('public/frontend/js/function.js') }}"></script>
 
         <script>
-
             const fadeElements = document.querySelectorAll('.fade-in');
 
             function checkFade() {
@@ -361,7 +372,6 @@
 
             window.addEventListener('scroll', checkFade);
             checkFade();
-
         </script>
 
         <script>
@@ -408,4 +418,3 @@
                 document.getElementById("offerPopup").style.display = "none";
             }
         </script>
-    

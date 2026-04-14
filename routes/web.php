@@ -317,6 +317,7 @@ Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.s
 Route::get('news-analysis', [BlogsController::class, 'index'])->name('news.analysis');
 Route::get('/blog/{slug}', [BlogsController::class, 'show']) ->name('blog.details');
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
+Route::post('/contact/store', [ContactController::class, 'store'])->name('contact.submit');
 Route::get('/about', [AboutController::class, 'index'])->name('about');
 Route::get('/terms-and-conditions', [TermsController::class, 'index'])->name('terms');
 Route::get('/privacy-policy', [PrivacyController::class, 'index'])->name('privacy');
