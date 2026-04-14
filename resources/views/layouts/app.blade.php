@@ -423,7 +423,7 @@
                         </div>
                         <script>
                             if( count == 0 ){
-                                $("#parent_menu_{{$menu->id}}").hide();
+                                $("#parent_menu_{{$menu->id}}").addClass('d-none');
                             }
                         </script>
                     </li>
