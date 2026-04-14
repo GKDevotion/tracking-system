@@ -11,23 +11,29 @@ use Illuminate\Http\Request;
 class HomeController extends Controller
 {
 
-    public function index( Request $request)
+    public function index(Request $request)
     {
         $plans = Plan::where('is_active', true)->orderBy('sort_order')->get();
 
         $planArr = [];
         foreach ($plans as $plan) {
+
+            // Check link condition
+            $finalLink = ($plan->link === '-' || empty($plan->link))
+                ? 'free'
+                : $plan->link;
+
             $planArr[$plan->name] = [
                 'price_item_class' => $plan->is_highlighted ? 'highlighted-box box-bg-shape' : '',
                 'price' => $plan->price,
                 'value' => $plan->description,
                 'feature' => $plan->features,
                 'cta' => $plan->cta,
-                'link' => $plan->link,
+                'link' => $finalLink,
             ];
         }
 
-          $blogs = Blog::where('status', 1)
+        $blogs = Blog::where('status', 1)
             ->when($request->tag, function ($query) use ($request) {
                 $query->whereHas('tags', function ($q) use ($request) {
                     $q->where('name', 'LIKE', '%' . $request->tag . '%');
