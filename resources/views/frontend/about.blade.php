@@ -3,7 +3,7 @@
 @section('content')
 
     <!-- Page Header Start -->
-    <div class="page-header bg-section parallaxie">
+    <div class="page-header" style="background: url('{{url( 'public/frontend/images/about-us.jpg') }}')">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -180,7 +180,7 @@
                                 </div>
                             </div>
                             <!-- Risk Management End -->
-                            
+
                         </div>
                         <!-- Benefit Body End -->
                     </div>
@@ -327,10 +327,10 @@
                         <div class="section-title">
                             <h3 class="wow fadeInUp">Our approach</h3>
                             <h2 class="wow fadeInUp" data-wow-delay="0.2s" data-cursor="-opaque">
-                                
+
                             </h2>
                             <p class="wow fadeInUp" data-wow-delay="0.4s">
-                                
+
                             </p>
                         </div>
                         <!-- Section Title End -->
