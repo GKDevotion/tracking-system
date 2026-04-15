@@ -3093,9 +3093,9 @@ header.main-header .header-sticky.active{
 
 .page-header{
 	position: relative;
-	background: url('../images/page-header-bg.jpg') no-repeat center center;
+	background: url('../images/about-us.jpg') no-repeat center center;
 	background-size: cover;
-	padding: 150px 0;
+	padding: 250px 0;
 	overflow: hidden;
 }
 
