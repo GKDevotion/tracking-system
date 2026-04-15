@@ -112,7 +112,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav mx-auto text-uppercase">
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->routeIs('forex.signals') ? 'active' : '' }}" href="#">
+                    <a class="nav-link {{ request()->routeIs('forex.signals') ? 'active' : '' }}" href="{{ route('forex.signal') }}">
                         FOREX SIGNALS
                     </a>
                 </li>

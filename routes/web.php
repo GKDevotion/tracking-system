@@ -13,6 +13,7 @@ use App\Http\Controllers\DisclaimerController;
 use App\Http\Controllers\CookieController;
 use App\Http\Controllers\EducationController;
 use App\Http\Controllers\FaqsController;
+use App\Http\Controllers\ForexController;
 use App\Http\Controllers\Web\BlogController;
 use App\Http\Controllers\Web\CategoryController;
 use App\Http\Controllers\HomeController;
@@ -339,5 +340,7 @@ Route::get('/risk-disclosure', [RiskDisclosureController::class, 'index'])->name
 Route::get('/disclaimer', [DisclaimerController::class, 'index'])->name('disclaimer');
 
 Route::get('/education', [EducationController::class, 'index'])->name('education');
+
+Route::get('/forex-signal', [ForexController::class, 'index'])->name('forex.signal');
 
 Route::get('/faqs', [FaqsController::class, 'index'])->name('faqs');
