@@ -9,7 +9,7 @@
                     <!-- Page Header Box Start -->
                     <div class="page-header-box">
                         <h1 class="wow fadeInUp" data-cursor="-opaque">Contact US</h1>
-                        <nav class="wow fadeInUp" data-wow-delay="0.2s">
+                        <nav class="wow fadeInUp d-none" data-wow-delay="0.2s">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="index.php">home</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">contact us</li>

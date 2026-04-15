@@ -3093,16 +3093,12 @@ header.main-header .header-sticky.active{
 
 .page-header{
 	position: relative;
-	background-size: cover;
+	background-size: cover !important;
 	margin-top: 80px;
 	overflow: hidden;
     padding: 130px 0; /* Adjust padding as needed */
-    background-position: center;
+    background-position: center !important;
     background-repeat: no-repeat;
-    /* min-height: 75vh; */
-    display: flex;
-    align-items: center;   /* Vertical center */
-    justify-content: center; /* Horizontal center */
 }
 
 .page-header:after{
@@ -3112,7 +3108,7 @@ header.main-header .header-sticky.active{
     left: 0;
     right: 0;
     bottom: 0;
-    background: var(--primary-color);
+    background: #89898b87;
 	opacity: 55%;
     height: 100%;
     width: 100%;

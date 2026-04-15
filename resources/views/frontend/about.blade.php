@@ -3,14 +3,14 @@
 @section('content')
 
     <!-- Page Header Start -->
-    <div class="page-header" style="background: url('{{url( 'public/frontend/images/about-us.jpg') }}')">
+    <div class="page-header" style="background: url('{{url( 'public/frontend/images/about-us.jpg?v=0.001') }}')">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
                     <!-- Page Header Box Start -->
                     <div class="page-header-box">
                         <h1 class="wow fadeInUp" data-cursor="-opaque">About US</h1>
-                        <nav class="wow fadeInUp" data-wow-delay="0.2s">
+                        <nav class="wow fadeInUp d-none" data-wow-delay="0.2s">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="index.php">home</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">about us</li>
