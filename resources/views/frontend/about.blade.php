@@ -9,7 +9,7 @@
                 <div class="col-lg-12">
                     <!-- Page Header Box Start -->
                     <div class="page-header-box">
-                        <h1 class="wow fadeInUp" data-cursor="-opaque">About <span>us</span></h1>
+                        <h1 class="wow fadeInUp" data-cursor="-opaque">About US</h1>
                         <nav class="wow fadeInUp" data-wow-delay="0.2s">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="index.php">home</a></li>
