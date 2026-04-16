@@ -158,8 +158,9 @@
     }
 
     .main-button.is-centered {
-        inset: auto auto 38%;
-        translate: 0
+        inset: auto auto 30%;
+        translate: 0;
+        height: 50px;
     }
 
     .button-text-wrap {

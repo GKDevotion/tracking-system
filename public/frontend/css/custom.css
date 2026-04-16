@@ -501,7 +501,7 @@ body{
 }
 
 .section-title h2{
-    font-size: 50px;
+    font-size: 40px;
 	letter-spacing: -0.02em;
 	margin-bottom: 0;
 	/* cursor: none; */
@@ -606,6 +606,11 @@ header.main-header .header-sticky.active{
     height: 70px;
     position: relative;
 }
+
+.navbar-toggler{
+    display: contents;
+}
+
 .main-menu .nav-menu-wrapper{
 	flex: 1;
 	text-align: center;
@@ -1040,7 +1045,7 @@ header.main-header .header-sticky.active{
 /************************************/
 
 .about-us{
-	padding: 160px 0;
+	padding: 80px 10px;
 }
 
 .year-experience-circle{
@@ -3163,7 +3168,7 @@ header.main-header .header-sticky.active{
 }
 
 .our-benefits{
-	padding: 160px 0;
+	padding: 80px 0;
 }
 
 .our-benefit-image{
@@ -3296,7 +3301,7 @@ header.main-header .header-sticky.active{
 }
 
 .our-approach{
-	padding: 160px 0;
+	padding: 80px 0;
 }
 
 .approach-image{
@@ -5046,7 +5051,7 @@ header.main-header .header-sticky.active{
 /************************************/
 
 .page-contact-us{
-	padding: 160px 0;
+	padding: 80px 10px;
 }
 
 .contact-us-form label{
@@ -5346,6 +5351,9 @@ header.main-header .header-sticky.active{
 		padding: 20px 0;
 	}
 
+    .carousel-inner {
+        margin-top: 100px;
+    }
 	.slicknav_nav li,
 	.slicknav_nav ul{
         display: block;
@@ -5438,8 +5446,18 @@ header.main-header .header-sticky.active{
 		margin-top: 0;
 	}
 
+    .offer-popup {
+        bottom: 15px !important;
+        right: 10px !important;
+    }
+
+    .edu-nav {
+        display: grid;
+        margin-top: 20px;
+    }
+
 	.about-us{
-	    padding: 80px 0;
+	    padding: 50px 10px;
 	}
 
 	.about-us-info .section-title{
@@ -6546,8 +6564,8 @@ header.main-header .header-sticky.active{
 		max-width: 24px;
 	}
 
-	.page-pricing{
-		padding: 80px 0;
+	.blog-section, .page-pricing{
+		padding: 50px 0 !important;
 	}
 
 	.page-testimonials{
@@ -6571,7 +6589,7 @@ header.main-header .header-sticky.active{
 	}
 
 	.page-contact-us{
-		padding: 80px 0;
+		padding: 50px 10px;
 	}
 
 	.contact-us-content{
@@ -7317,12 +7335,18 @@ header.main-header .header-sticky.active{
 	.team-member-info-counters{
         margin-top: 20px;
         padding-top: 20px;
+        text-align: center;
     }
 
 	.member-info-counter-item{
         width: calc(50% - 10px);
+        margin-bottom: 20px;
     }
 
+    .follow-us h1{
+        font-size: 5rem !important;
+        font-weight: 700 !important;
+    }
 	.member-info-counter-item h2{
         font-size: 26px;
     }

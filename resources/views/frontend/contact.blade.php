@@ -65,7 +65,7 @@
                                         <div class="help-block with-errors"></div>
                                     </div>
 
-                                    <div class="col-md-12">
+                                    <div class="col-md-12 text-center">
                                         <button type="submit" class="btn-default"><span>send message</span></button>
                                         <div id="msgSubmit" class="h3 hidden"></div>
                                     </div>
