@@ -4,23 +4,68 @@
 
     @include('frontend.element.home-slider-carousel')
 
+    <style>
+        .join-section .profit-text{
+            font-size: 3rem;
+        }
+
+        .join-section .profit-text span
+        {
+            color: #46e546;
+            font-size: 3rem;
+            text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .cta-background-wrap{
+            margin-top: -70px;
+        }
+
+        .cta-background-wrap .signal-btn{
+            font-weight: 800;
+        }
+
+        @media only screen and (max-width: 991px){
+            .join-section .profit-text{
+                font-size: 2rem;
+            }
+
+            .join-section .profit-text span
+            {
+                font-size: 2.5rem;
+            }
+
+            .main-button.is-centered{
+                height: 0;
+            }
+
+            .cta-background-wrap{
+                margin-top: 0px;
+            }
+
+            .cta-background-wrap .signal-btn{
+                font-weight: 600;
+            }
+        }
+    </style>
     <!-- Lunch Movement Animation -->
-    <section class="section-cta pt-5">
+    <section class="join-section section-cta pt-5">
         <div class="container">
             <div class="row text-center">
-                <h2 class="wow fadeInUp text-black" style="font-size: 3rem;">Thousands Joined. <span
-                        style="color: #46e546; font-size: 4rem; text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);">PROFIT</span>
-                    Started</h2>
+                <h2 class="wow fadeInUp text-black profit-text">
+                    Thousands Joined.
+                    <span >PROFIT</span>
+                    Started
+                </h2>
             </div>
         </div>
 
         <link href="{{ url('public/frontend/css/lottie.css') }}" rel="stylesheet" />
         <script src="{{ url('public/frontend/js/lottie.min.js') }}"></script>
-        <div class="cta-background-wrap is-relative" style="margin-top: -70px;">
+        <div class="cta-background-wrap is-relative" >
 
             <a href="#" target="_blank" class="main-button is-centered w-inline-block">
                 <div class="button-text-wrap" style="display: block;">
-                    <div class="btn-text text-white " style="font-weight: 800;">Today Signals</div>
+                    <div class="btn-text text-white signal-btn">Today Signals</div>
                 </div>
             </a>
 
@@ -442,13 +487,13 @@
     <!-- Page Pricing End -->
 
     <!-- Page Team Single Start -->
-    <div class="page-team-single pt-0 mt-5">
+    <div class="page-team-single pt-0 mt-0 mt-md-5">
         <div class="container">
             <div class="row">
                 <!-- Team Single Content Start -->
                 <div class="team-single-content">
                     <!-- Team Member Info Start -->
-                    <div class="team-member-info pb-5">
+                    <div class="team-member-info pb-0 pb-md-5">
 
                         <!-- Section Title Start -->
                         <div class="section-title pt-5">
@@ -579,7 +624,7 @@
     <style>
         .follow-us {
             text-align: center;
-            padding: 80px;
+            padding: 80px 0;
             align-items: center;
             justify-content: center;
             background-image: url('public/frontend/images/background/follow-up-background.jpg');
@@ -754,7 +799,7 @@
                 </div>
             </div>
 
-            <div class="newsletter">
+            <div class="newsletter px-2">
                 <h3>BE IN THE KNOW</h3>
                 <p>Sign up to our newsletter and receive a monthly selection right in your inbox</p>
                 <button class="btn btn-primary">Subscribe to our newsletter</button>

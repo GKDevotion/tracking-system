@@ -6564,8 +6564,8 @@ header.main-header .header-sticky.active{
 		max-width: 24px;
 	}
 
-	.page-pricing{
-		padding: 80px 0;
+	.blog-section, .page-pricing{
+		padding: 50px 0 !important;
 	}
 
 	.page-testimonials{
@@ -7335,12 +7335,18 @@ header.main-header .header-sticky.active{
 	.team-member-info-counters{
         margin-top: 20px;
         padding-top: 20px;
+        text-align: center;
     }
 
 	.member-info-counter-item{
         width: calc(50% - 10px);
+        margin-bottom: 20px;
     }
 
+    .follow-us h1{
+        font-size: 5rem !important;
+        font-weight: 700 !important;
+    }
 	.member-info-counter-item h2{
         font-size: 26px;
     }
