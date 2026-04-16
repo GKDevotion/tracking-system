@@ -718,7 +718,7 @@
 
                      @if ( getConfigurationField('SOCIAL_PINTEREST_LINK') != '-')
                     <a href="{{ getConfigurationField('SOCIAL_PINTEREST_LINK') }}" target="_blank">
-                        <i class="fas fa-pinterest"></i>
+                        <i class="fab fa-pinterest"></i>
                     </a>
                     @endif
 
