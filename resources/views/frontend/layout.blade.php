@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
-    
+
     <!-- Bootstrap Css -->
     <link rel="stylesheet" href="{{ url('public/frontend/css/bootstrap.min.css') }}" media="screen">
 
@@ -46,9 +46,9 @@
     <!-- <link rel="stylesheet" href="{{ url('public/frontend/css/mousecursor.css') }}"> -->
 
     <!-- Main Custom Css -->
-    <link rel="stylesheet" href="{{ url('public/frontend/css/custom.css') }}" media="screen">
+    <link rel="stylesheet" href="{{ url('public/frontend/css/custom.css?v=0.001') }}" media="screen">
 
-   
+
 </head>
 
 <body>

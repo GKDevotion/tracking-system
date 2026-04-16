@@ -2,15 +2,13 @@
 
 @section('content')
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;600&display=swap');
 
         .faqs {
-            padding: 100px;
+            padding: 100px 0 0 0;
         }
 
         .faq-title {
-            font-family: 'Caveat', cursive;
-            font-size: 3rem;
+            font-size: 2rem;
             font-weight: 600;
             color: #222;
         }
@@ -73,7 +71,7 @@
     </style>
 
     <section class="faqs">
-        <div class="container py-5">
+        <div class="container py-5 pb-0">
             <div class="text-center mb-5">
                 <h1 class="faq-title">Frequently Asked Questions</h1>
                 <p class="faq-subtitle mt-2">If you can't find an answer that you're looking for, feel free to drop us a

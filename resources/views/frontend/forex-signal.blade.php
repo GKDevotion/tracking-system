@@ -3,7 +3,7 @@
 @section('content')
     <style>
         .forex-signal {
-            padding: 100px;
+            padding: 100px 0 0 0;
         }
     </style>
     <section class="forex-signal">
@@ -73,7 +73,7 @@
                                         <!-- Pricing Box End -->
                                     </div>
 
-                                    <div class="col-lg-4 col-md-6">
+                                    <div class="col-lg-4 col-md-6 p-3">
                                         <!-- Pricing Box Start -->
                                         <div class="pricing-item highlighted-box box-bg-shape">
                                             <!-- Pricing Header Start -->
