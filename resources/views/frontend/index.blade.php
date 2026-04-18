@@ -63,7 +63,7 @@
         <script src="{{ url('public/frontend/js/lottie.min.js') }}"></script>
         <div class="cta-background-wrap is-relative" >
 
-            <a href="#" target="_blank" class="main-button is-centered w-inline-block">
+            <a href="{{ getConfigurationField('SOCIAL_TELEGRAM_LINK') }}" target="_blank" class="main-button is-centered w-inline-block">
                 <div class="button-text-wrap" style="display: block;">
                     <div class="btn-text text-white signal-btn">Telegram Link</div>
                 </div>
