@@ -155,8 +155,8 @@
                     </a>
                 </li>
             </ul>
-            <div class="d-flex">
-                <a href="#" class="btn btn-logo rounded-pill px-4 py-2 fw-bold">Get Started →</a>
+            <div class="d-flex" style="padding: 0 50px 0 0;">
+                <a href="{{url('forex-signal')}}" class="btn btn-logo rounded-pill px-4 py-2 fw-bold">Get Started →</a>
             </div>
         </div>
     </div>
