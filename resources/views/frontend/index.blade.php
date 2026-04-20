@@ -65,7 +65,7 @@
 
             <a href="{{ getConfigurationField('SOCIAL_TELEGRAM_LINK') }}" target="_blank" class="main-button is-centered w-inline-block">
                 <div class="button-text-wrap" style="display: block;">
-                    <div class="btn-text text-white signal-btn">Telegram Link</div>
+                    <div class="btn-text text-white signal-btn">TODAY SIGNALS</div>
                 </div>
             </a>
 
