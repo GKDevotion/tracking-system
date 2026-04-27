@@ -71,7 +71,7 @@
              font-size: 1.1rem;
              transition: 0.3s;
          }
-      
+
      </style>
 
      <div class="container checkout-container animate__animated animate__fadeIn py-5">
@@ -176,7 +176,7 @@
                                  <img id="qrCodeImg" src="public/frontend/images/QR-Code-usdt-tron-trc20-address-gdp.png"
                                      alt="QR" class="my-3">
                                  <p class="text-primary fw-bold text-break" id="walletAddr">
-                                     TGJmQJMEKkLeo2Ri9zFf1dvuqFeYhQya8A</p>
+                                     TGjYaSW5StCyejzv8KebpkjsjDaxtxnBdh</p>
                              </div>
                          </div>
                      </div>
@@ -214,7 +214,7 @@ window.intlTelInput(input, {
          const paymentData = {
              'trc20': {
                  title: 'USDT - TRC20 - Tron Network',
-                 addr: 'TGJmQJMEKkLeo2Ri9zFf1dvuqFeYhQya8A',
+                 addr: 'TGjYaSW5StCyejzv8KebpkjsjDaxtxnBdh',
                  qr: 'public/frontend/images/QR-Code-usdt-tron-trc20-address-gdp.png'
              },
              'bep20': {

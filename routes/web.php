@@ -218,6 +218,7 @@ Route::middleware('auth')->group(function () {
             ->names([
                 'index' => 'web.tracking.index',
                 'create' => 'web.tracking.create',
+                'edit' => 'web.tracking.edit',
                 'store' => 'web.tracking.store',
                 'show' => 'web.tracking.show',
                 'update' =>  'web.tracking.update',
