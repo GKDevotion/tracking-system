@@ -254,7 +254,7 @@
                     </div>
                 </div>
                 <div class="col-lg-4">
-                    <div class="verified-badge mb-4">
+                    <div class="verified-badge my-3">
                         <span class="check-icon">
                             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
                                 <polyline points="20 6 9 17 4 12"></polyline>
