@@ -101,9 +101,465 @@
     </section>
     <!-- End Lunch Movement Animation -->
 
-    <div class="">
-        <img src="{{url('storage/app/public/home-slider/website-08.jpg')}}" alt="Our Signals are Money Making Machine" class="img-fluid w-100" />
-    </div>
+    <!-- Start Real numbers. Real trades. -->
+    <style>
+        .glass-card {
+            position: relative;
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(14px);
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.3);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.4);
+            padding: 20px;
+        }
+
+        .toggle-btn {
+            background: rgba(0,0,0,0.2);
+            border-radius: 50px;
+            padding: 5px;
+            display: inline-flex;
+        }
+
+        .toggle-btn button {
+            border: none;
+            background: transparent;
+            padding: 8px 16px;
+            border-radius: 50px;
+        }
+
+        .toggle-btn .active {
+            background: #111;
+            color: #fff;
+        }
+
+        h2 { margin: 0; }
+
+        /* Recent Trades Styling */
+        .panel-card {
+            height: 100%;
+        }
+
+        .panel-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .panel-card-title {
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .panel-card-meta {
+            font-size: 12px;
+            color: #888;
+        }
+
+        .trades-list {
+            max-height: 350px;
+            overflow-y: auto;
+            padding-right: 5px;
+        }
+
+        .trade-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 5px;
+        }
+
+        .trade-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .trade-icon.up {
+            background: rgba(0, 200, 120, 0.15);
+            color: #00a86b;
+        }
+
+        .trade-icon.down {
+            background: rgba(255, 80, 80, 0.15);
+            color: #ff4d4f;
+        }
+
+        .trade-info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .trade-pair {
+            font-weight: 600;
+        }
+
+        .trade-meta {
+            font-size: 12px;
+            color: #888;
+        }
+
+        .trade-pnl {
+            font-weight: 600;
+        }
+
+        .trade-pnl.profit {
+            color: #00a86b;
+        }
+
+        .trade-pnl.loss {
+            color: #ff4d4f;
+        }
+
+        .verified-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 18px;
+            background: rgba(255, 255, 255, 1);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(0, 0, 0, 0.7);
+            border-radius: 14px;
+            font-size: 13px;
+            font-weight: 500;
+            color: #4a5568;
+            box-shadow: 0 1px 2px rgba(10, 14, 26, 0.04), 0 0 0 1px rgba(255, 255, 255, 0.5) inset;
+        }
+    </style>
+
+    <section class="join-section section-cta pt-5">
+        <div class="container">
+            <div class="row text-center">
+                <h2 class="wow fadeInUp text-black profit-text">
+                    <span>LIVE</span> Verified Performance
+                </h2>
+            </div>
+        </div>
+        <div class="container py-3">
+            <div class="row g-4">
+                <div class="col-lg-8">
+                    <div class="py-3">
+                        <div class="d-flex flex-column justify-content-center gap-2">
+                            <div class="py-1">✔ Connected directly to live trading account</div>
+                            <div class="py-1">✔ Auto-updated results</div>
+                            <div class="py-1">✔ Verified by third-party system</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="verified-badge mb-4">
+                        <span class="check-icon">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                        </span>
+                        MyFXBook Verified · Updated daily
+                    </div>
+
+                    <div class="verified-badge">
+                        <span class="check-icon">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                        </span>
+                        MyFXBook Verified · Updated daily
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="toggle-btn mb-4">
+                <button class="active" data-type="daily">Daily</button>
+                <button data-type="weekly">Weekly</button>
+                <button data-type="monthly">Monthly</button>
+            </div>
+
+            <style>
+                .kpi-header {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-bottom: 18px;
+                }
+
+                .kpi-icon {
+                    width: 42px;
+                    height: 42px;
+                    border-radius: 12px;
+                    background: #d1fae5;
+                    color: #0066ff;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    border: 1px solid rgba(0, 102, 255, 0.15);
+                }
+
+                .kpi-trend {
+                    font-size: 12px;
+                    font-weight: 700;
+                    color: #10b981;
+                    background: #d1fae5;
+                    padding: 4px 10px;
+                    border-radius: 100px;
+                    display: flex;
+                    align-items: center;
+                    gap: 4px;
+                    font-family: var(--font-mono);
+                    border: 1px solid rgba(16, 185, 129, 0.15);
+                }
+
+                .glass-card small{
+                    vertical-align: sub;
+                    font-size: 16px;
+                }
+            </style>
+            <div class="row g-4 mb-4">
+                <div class="col-md-3">
+                    <div class="glass-card">
+                        <div class="kpi-header">
+                            <div class="kpi-icon">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                            </div>
+                            <span class="kpi-trend">
+                                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="18 15 12 9 6 15"></polyline></svg>
+                                +4.2%
+                            </span>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <h2 id="winRate">68%</h2>
+                            </div>
+                            <div class="col-6 text-end">
+                                <small>
+                                    Win Rate
+                                </small>
+                            </div>
+                            <div class="col-12 text-center py-3">
+                                vs 70.8% prior week
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="glass-card">
+                        <div class="kpi-header">
+                            <div class="kpi-icon">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline><polyline points="16 7 22 7 22 13"></polyline></svg>
+                            </div>
+                            <span class="kpi-trend">
+                                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="18 15 12 9 6 15"></polyline></svg>
+                                +18%
+                            </span>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <h2 id="pips">+320</h2>
+                            </div>
+                            <div class="col-6 text-end">
+                                <small>Net Pips</small>
+                            </div>
+                            <div class="col-12 text-center py-3">
+                                7-day rolling total
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="glass-card">
+                        <div class="kpi-header">
+                            <div class="kpi-icon">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"></path><path d="M7 14l4-4 4 4 5-5"></path></svg>
+                            </div>
+                            <span class="kpi-trend">+6</span>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <h2 id="trades">8</h2>
+                            </div>
+                            <div class="col-6 text-end">
+                                <small>Trades</small>
+                            </div>
+                            <div class="col-12 text-center py-3">
+                                21 wins · 7 losses
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="glass-card">
+                        <div class="kpi-header">
+                            <div class="kpi-icon">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+                            </div>
+                            <span class="kpi-trend">stable</span>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <h2 id="rr">1:1.8</h2>
+                            </div>
+                            <div class="col-6 text-end">
+                                <small>R:R</small>
+                            </div>
+                            <div class="col-12 text-center py-3">
+                                across all closed trades
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-lg-8">
+                    <div class="glass-card">
+                        <canvas id="chart"></canvas>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="glass-card">
+                        <div class="panel-card">
+                            <div class="panel-card-header">
+                                <div class="panel-card-title">Recent Trades</div>
+                                <div class="panel-card-meta">Last 6 closed</div>
+                            </div>
+                            <div class="trades-list">
+                                <div class="trade-row">
+                                    <div class="trade-icon down">↓</div>
+                                    <div class="trade-info">
+                                        <span class="trade-pair">XAU/USD</span>
+                                        <span class="trade-meta">SELL · 27 Apr 14:30</span>
+                                    </div>
+                                    <div class="trade-pnl profit">+38</div>
+                                </div>
+                                <div class="trade-row">
+                                    <div class="trade-icon up">↑</div>
+                                    <div class="trade-info">
+                                        <span class="trade-pair">EUR/USD</span>
+                                        <span class="trade-meta">BUY · 27 Apr 11:15</span>
+                                    </div>
+                                    <div class="trade-pnl profit">+22</div>
+                                </div>
+
+                                <div class="trade-row">
+                                    <div class="trade-icon down">↓</div>
+                                    <div class="trade-info">
+                                        <span class="trade-pair">GBP/USD</span>
+                                        <span class="trade-meta">SELL · 26 Apr 16:08</span>
+                                    </div>
+                                    <div class="trade-pnl loss">−12</div>
+                                </div>
+
+                                <div class="trade-row">
+                                    <div class="trade-icon up">↑</div>
+                                    <div class="trade-info">
+                                        <span class="trade-pair">USD/JPY</span>
+                                        <span class="trade-meta">BUY · 26 Apr 09:55</span>
+                                    </div>
+                                    <div class="trade-pnl profit">+44</div>
+                                </div>
+                                <div class="trade-row">
+                                    <div class="trade-icon up">↑</div>
+                                    <div class="trade-info">
+                                        <span class="trade-pair">XAU/USD</span>
+                                        <span class="trade-meta">BUY · 25 Apr 15:10</span>
+                                    </div>
+                                    <div class="trade-pnl profit">+118</div>
+                                </div>
+                                <div class="trade-row">
+                                    <div class="trade-icon down">↓</div>
+                                    <div class="trade-info">
+                                        <span class="trade-pair">EUR/USD</span>
+                                        <span class="trade-meta">SELL · 25 Apr 11:30</span>
+                                        </div>
+                                    <div class="trade-pnl loss">−9</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const dashboardData = {
+            daily: {
+                winRate: "68%",
+                pips: "+320",
+                trades: "8",
+                rr: "1:1.8",
+                chart: [50, 80, 60, 90, 120]
+            },
+            weekly: {
+                winRate: "75%",
+                pips: "+1247",
+                trades: "28",
+                rr: "1:2.4",
+                chart: [100, 300, 500, 800, 1200]
+            },
+            monthly: {
+                winRate: "82%",
+                pips: "+4820",
+                trades: "96",
+                rr: "1:2.9",
+                chart: [500, 1200, 2000, 3500, 4800]
+            }
+        };
+
+        const ctx = document.getElementById('chart').getContext('2d');
+
+        const gradient = ctx.createLinearGradient(0,0,0,300);
+        gradient.addColorStop(0, 'rgba(0,123,255,0.5)');
+        gradient.addColorStop(1, 'rgba(0,123,255,0)');
+
+        let chart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Mon','Tue','Wed','Thu','Fri'],
+                datasets: [{
+                    data: dashboardData.daily.chart,
+                    borderWidth: 2,
+                    tension: 0.4,
+                    fill: true,
+                    backgroundColor: gradient
+                }]
+            },
+            options: {
+                plugins: { legend: { display: false } },
+                scales: { y: { beginAtZero: true } }
+            }
+        });
+
+        document.querySelectorAll('.toggle-btn button').forEach(btn => {
+            btn.addEventListener('click', function () {
+
+                document.querySelectorAll('.toggle-btn button')
+                    .forEach(b => b.classList.remove('active'));
+
+                this.classList.add('active');
+
+                const type = this.getAttribute('data-type');
+                const data = dashboardData[type];
+
+                document.getElementById('winRate').innerText = data.winRate;
+                document.getElementById('pips').innerText = data.pips;
+                document.getElementById('trades').innerText = data.trades;
+                document.getElementById('rr').innerText = data.rr;
+
+                chart.data.datasets[0].data = data.chart;
+                chart.update();
+            });
+        });
+    </script>
+    <!-- End Real numbers. Real trades. -->
 
     @include('frontend.element.blog')
 

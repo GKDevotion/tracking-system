@@ -199,141 +199,141 @@
              <div id="statusMessage" class="mt-4 alert hidden animate__animated animate__fadeIn"></div>
          </div>
      </div>
+
 <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18/build/js/intlTelInput.min.js"></script>
 <script>
     const input = document.querySelector("#phone");
 
-window.intlTelInput(input, {
-    initialCountry: "in", // default India
-    separateDialCode: true,
-    preferredCountries: ["in", "us", "gb"],
-});
-</script>
-     <script>
-         // Data Configuration
-         const paymentData = {
-             'trc20': {
-                 title: 'USDT - TRC20 - Tron Network',
-                 addr: 'TGjYaSW5StCyejzv8KebpkjsjDaxtxnBdh',
-                 qr: 'public/frontend/images/QR-Code-usdt-tron-trc20-address-gdp.png'
-             },
-             'bep20': {
-                 title: 'USDT - BEP20 - BNB - BCS Network',
-                 addr: '0xb65Ec1860d11Ce558132B083A80018F8015d9A73',
-                 qr: 'public/frontend/images/QR-Code-usdt-bep20-bnb-bsc-network-gdp.png'
-             }
-         };
+    window.intlTelInput(input, {
+        initialCountry: "in", // default India
+        separateDialCode: true,
+        preferredCountries: ["in", "us", "gb"],
+    });
 
-         // 1. Toggle Telegram/WhatsApp Logic
-         const tgRadio = document.getElementById('optTelegram');
-         const waRadio = document.getElementById('optWhatsApp');
-         const tgField = document.getElementById('tgField');
-         const tgInput = document.getElementById('telegramUser');
+    // Data Configuration
+    const paymentData = {
+        'trc20': {
+            title: 'USDT - TRC20 - Tron Network',
+            addr: 'TGjYaSW5StCyejzv8KebpkjsjDaxtxnBdh',
+            qr: 'public/frontend/images/QR-Code-usdt-tron-trc20-address-gdp.png'
+        },
+        'bep20': {
+            title: 'USDT - BEP20 - BNB - BCS Network',
+            addr: '0xb65Ec1860d11Ce558132B083A80018F8015d9A73',
+            qr: 'public/frontend/images/QR-Code-usdt-bep20-bnb-bsc-network-gdp.png'
+        }
+    };
 
-         function toggleComm() {
-             if (tgRadio.checked) {
-                 tgField.classList.remove('hidden');
-                 tgInput.setAttribute('required', '');
-             } else {
-                 tgField.classList.add('hidden');
-                 tgInput.removeAttribute('required');
-             }
-         }
-         tgRadio.addEventListener('change', toggleComm);
-         waRadio.addEventListener('change', toggleComm);
+    // 1. Toggle Telegram/WhatsApp Logic
+    const tgRadio = document.getElementById('optTelegram');
+    const waRadio = document.getElementById('optWhatsApp');
+    const tgField = document.getElementById('tgField');
+    const tgInput = document.getElementById('telegramUser');
 
-         // 2. Dynamic Payment & QR Logic
-         function selectPayment(type, element) {
-             // Active states
-             document.querySelectorAll('.payment-card').forEach(el => el.classList.remove('active'));
-             element.classList.add('active');
+    function toggleComm() {
+        if (tgRadio.checked) {
+            tgField.classList.remove('hidden');
+            tgInput.setAttribute('required', '');
+        } else {
+            tgField.classList.add('hidden');
+            tgInput.removeAttribute('required');
+        }
+    }
+    tgRadio.addEventListener('change', toggleComm);
+    waRadio.addEventListener('change', toggleComm);
 
-             // Set hidden input
-             document.getElementById('paymentType').value = type;
+    // 2. Dynamic Payment & QR Logic
+    function selectPayment(type, element) {
+        // Active states
+        document.querySelectorAll('.payment-card').forEach(el => el.classList.remove('active'));
+        element.classList.add('active');
 
-             // Animation Refresh
-             const qrSection = document.getElementById('qrSection');
-             qrSection.classList.remove('animate__zoomIn');
-             void qrSection.offsetWidth; // Trigger reflow
-             qrSection.classList.add('animate__zoomIn');
+        // Set hidden input
+        document.getElementById('paymentType').value = type;
 
-             // Update Content
-             document.getElementById('networkTitle').innerText = paymentData[type].title;
-             document.getElementById('walletAddr').innerText = paymentData[type].addr;
-             document.getElementById('qrCodeImg').src = `${paymentData[type].qr}`;
-         }
+        // Animation Refresh
+        const qrSection = document.getElementById('qrSection');
+        qrSection.classList.remove('animate__zoomIn');
+        void qrSection.offsetWidth; // Trigger reflow
+        qrSection.classList.add('animate__zoomIn');
 
-         // 3. Form Submission & Mail Notification Simulation
-         const form = document.getElementById('unifiedForm');
-         const statusMsg = document.getElementById('statusMessage');
-         const submitBtn = document.getElementById('submitBtn');
+        // Update Content
+        document.getElementById('networkTitle').innerText = paymentData[type].title;
+        document.getElementById('walletAddr').innerText = paymentData[type].addr;
+        document.getElementById('qrCodeImg').src = `${paymentData[type].qr}`;
+    }
 
-         form.addEventListener('submit', function(e) {
-             e.preventDefault();
+    // 3. Form Submission & Mail Notification Simulation
+    const form = document.getElementById('unifiedForm');
+    const statusMsg = document.getElementById('statusMessage');
+    const submitBtn = document.getElementById('submitBtn');
 
-             if (!form.checkValidity()) {
-                 e.stopPropagation();
-                 form.classList.add('was-validated');
-                 return;
-             }
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
 
-             // Visual Feedback
-             submitBtn.disabled = true;
-             submitBtn.innerHTML = `<span class="spinner-border spinner-border-sm"></span> Processing...`;
+        if (!form.checkValidity()) {
+            e.stopPropagation();
+            form.classList.add('was-validated');
+            return;
+        }
 
-             // Send AJAX request
-             const formData = new FormData(form);
-             fetch(form.action, {
-                     method: 'POST',
-                     body: formData,
-                     headers: {
-                         'X-Requested-With': 'XMLHttpRequest'
-                     }
-                 })
-                 .then(response => response.json())
-                 .then(data => {
-                     if (data.success) {
-                         statusMsg.classList.remove('hidden', 'alert-danger', 'alert-success');
-                         statusMsg.classList.add('alert-success');
-                         statusMsg.innerHTML = `
-                        <h5 class="alert-heading">Submission Successful!</h5>
-                        <p>${data.message}</p>
-                        <hr>
-                        <p class="mb-0">Our team will verify your payment proof and activate your plan within 1-2 hours.</p>
-                    `;
+        // Visual Feedback
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = `<span class="spinner-border spinner-border-sm"></span> Processing...`;
 
-                         // Reset form
-                         form.reset();
-                         form.classList.remove('was-validated');
+        // Send AJAX request
+        const formData = new FormData(form);
+        fetch(form.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    statusMsg.classList.remove('hidden', 'alert-danger', 'alert-success');
+                    statusMsg.classList.add('alert-success');
+                    statusMsg.innerHTML = `
+                <h5 class="alert-heading">Submission Successful!</h5>
+                <p>${data.message}</p>
+                <hr>
+                <p class="mb-0">Our team will verify your payment proof and activate your plan within 1-2 hours.</p>
+            `;
 
-                         // Reset button
-                         submitBtn.disabled = false;
-                         submitBtn.innerText = "Confirm & Complete Checkout";
-                         submitBtn.classList.replace('btn-success', 'btn-primary');
+                    // Reset form
+                    form.reset();
+                    form.classList.remove('was-validated');
 
-                         // Scroll to message
-                         statusMsg.scrollIntoView({
-                             behavior: 'smooth'
-                         });
+                    // Reset button
+                    submitBtn.disabled = false;
+                    submitBtn.innerText = "Confirm & Complete Checkout";
+                    submitBtn.classList.replace('btn-success', 'btn-primary');
 
-                         // Hide message after 5 seconds
-                         setTimeout(() => {
-                             statusMsg.classList.add('hidden');
-                         }, 5000);
-                     } else {
-                         throw new Error(data.message || 'Submission failed');
-                     }
-                 })
-                 .catch(error => {
-                     statusMsg.classList.remove('hidden', 'alert-danger', 'alert-success');
-                     statusMsg.classList.add('alert-danger');
-                     statusMsg.innerHTML = `
-                    <h5 class="alert-heading">Submission Failed!</h5>
-                    <p>${error.message}</p>
-                `;
-                     submitBtn.disabled = false;
-                     submitBtn.innerText = "Confirm & Complete Checkout";
-                 });
-         });
-     </script>
+                    // Scroll to message
+                    statusMsg.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+
+                    // Hide message after 5 seconds
+                    setTimeout(() => {
+                        statusMsg.classList.add('hidden');
+                    }, 5000);
+                } else {
+                    throw new Error(data.message || 'Submission failed');
+                }
+            })
+            .catch(error => {
+                statusMsg.classList.remove('hidden', 'alert-danger', 'alert-success');
+                statusMsg.classList.add('alert-danger');
+                statusMsg.innerHTML = `
+            <h5 class="alert-heading">Submission Failed!</h5>
+            <p>${error.message}</p>
+        `;
+                submitBtn.disabled = false;
+                submitBtn.innerText = "Confirm & Complete Checkout";
+            });
+        });
+    </script>
  @endsection
