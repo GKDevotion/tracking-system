@@ -9,12 +9,12 @@
             font-size: 3rem;
         }
 
-        .join-section .profit-text span
+        /* .join-section .profit-text span
         {
             color: #46e546;
             font-size: 3rem;
             text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
-        }
+        } */
 
         .cta-background-wrap{
             margin-top: -70px;
@@ -232,13 +232,89 @@
             color: #4a5568;
             box-shadow: 0 1px 2px rgba(10, 14, 26, 0.04), 0 0 0 1px rgba(255, 255, 255, 0.5) inset;
         }
+
+        .live-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0px 12px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, rgba(231,76,60,0.15), rgba(231,76,60,0.05));
+            border: 1px solid rgba(231,76,60,0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Shine effect */
+        .live-badge::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -75%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(120deg, transparent, rgba(255,255,255,0.4), transparent);
+            transform: skewX(-20deg);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% { left: -75%; }
+            100% { left: 125%; }
+        }
+
+        /* Live dot with ripple */
+        .live-dot {
+            width: 10px;
+            height: 10px;
+            background: #ff4d4f;
+            border-radius: 50%;
+            position: relative;
+        }
+
+        .live-dot::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            background: rgba(255,77,79,0.5);
+            animation: ripple 1.5s infinite;
+        }
+
+        @keyframes ripple {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(2.5); opacity: 0; }
+        }
+
+        /* Animated gradient text */
+        .live-text {
+            font-weight: 700;
+            background: linear-gradient(90deg, #46e546, #62f36282, #46e546);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradientMove 2s linear infinite;
+            text-shadow: 0px 4px 4px rgba(98, 243, 98, 0.5);
+            font-size: 3rem;
+        }
+
+        @keyframes gradientMove {
+            0% { background-position: 0% center; }
+            100% { background-position: 200% center; }
+        }
     </style>
 
     <section class="join-section section-cta pt-5">
         <div class="container">
             <div class="row text-center">
                 <h2 class="wow fadeInUp text-black profit-text">
-                    <span>LIVE</span> Verified Performance
+                    <span class="live-badge">
+                        <span class="live-dot"></span>
+                        <span class="live-text">LIVE</span>
+                    </span>
+                    <p class="live-simple-text pt-2">
+                        Verified Performance
+                    </p>
                 </h2>
             </div>
         </div>
