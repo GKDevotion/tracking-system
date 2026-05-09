@@ -1,3 +1,283 @@
+        <!-- Footer Section Start -->
+        <footer class="main-footer bg-section dark-section d-none">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 d-none">
+                        <!-- Footer Header Start -->
+                        <div class="footer-header">
+                            <!-- Section Title Start -->
+                            <div class="section-title d-none">
+                                <h2 class="wow fadeInUp text-white" data-cursor="-opaque">Partner with us and let your
+                                    story be told in the voice it deserves.</h2>
+                            </div>
+                            <!-- Section Title End -->
+
+                            <!-- Contact Us Circle Start -->
+                            <div class="contact-us-circle d-none">
+                                <a href="contact.php"><img src="images/contact-us-circle.svg" alt=""></a>
+                            </div>
+                            <!-- Contact Us Circle End -->
+                        </div>
+                        <!-- Footer Header End -->
+                    </div>
+
+                    <div class="col-lg-3 col-md-6">
+                        <!-- About Footer Start -->
+                        <div class="about-footer">
+                            <!-- Footer Logo Start -->
+                            <div class="footer-logo d-none">
+                                <img src="{{ url('public/frontend/images/footer-logo.png') }}" alt="">
+                            </div>
+                            <!-- Footer Logo End -->
+
+                            <!-- About Footer Content Start -->
+                            <div class="about-footer-content">
+                                <p>Perfect for beginners or casual users who want to explore. Perfect for beginners or
+                                    casual users.</p>
+                            </div>
+                            <!-- About Footer Content End -->
+                        </div>
+                        <!-- About Footer End -->
+                    </div>
+
+                    <div class="col-lg-3 col-md-6">
+                        <!-- Footer Links start -->
+                        <div class="footer-links">
+                            <h3>Contact Information</h3>
+                            <!-- Footer Contact List Start -->
+                            <div class="footer-contact-list">
+                                <!-- Footer Contact Item Start -->
+
+                                @if (getConfigurationField('CONTACT_PHONE') != '-')
+                                    <div class="footer-contact-item">
+                                        <p>Phone Number</p>
+                                        <a href="tel:{!! getConfigurationField('CONTACT_PHONE') !!}">{!! getConfigurationField('CONTACT_PHONE') !!}</a>
+                                    </div>
+                                @endif
+
+                                <!-- Footer Contact Item End -->
+
+                                <!-- Footer Contact Item Start -->
+                                @if (getConfigurationField('CONTACT_EMAIL') != '-')
+                                    <div class="footer-contact-item">
+                                        <p>Email Address</p>
+                                        <a href="mailto:{!! getConfigurationField('CONTACT_EMAIL') !!}">{!! getConfigurationField('CONTACT_EMAIL') !!}</a>
+                                    </div>
+                                @endif
+
+                                <!-- Footer Contact Item End -->
+                            </div>
+                            <!-- Footer Contact List End -->
+                        </div>
+                        <!-- Footer Links end -->
+                    </div>
+
+                    <div class="col-lg-3 col-md-6">
+                        <!-- Footer Links start -->
+                        <div class="footer-links">
+                            <!-- Footer Location Item start -->
+                            @if (getConfigurationField('OFFICE_ADDRESS') != '-')
+                                <div class="footer-location-item">
+                                    <h3>Our Location</h3>
+                                    <p>{!! getConfigurationField('OFFICE_ADDRESS') !!}</p>
+                                </div>
+                            @endif
+                            <!-- Footer Location Item End -->
+
+                            <!-- Footer Social Link Start -->
+                            <div class="footer-social-links d-none">
+                                <h3>Our Socials:</h3>
+                                <ul>
+                                    @if (getConfigurationField('SOCIAL_PINTEREST_LINK') != '-')
+                                        <li>
+                                            <a href="{{ getConfigurationField('SOCIAL_PINTEREST_LINK') }}"
+                                                target="_blank"><i class="fa-brands fa-pinterest-p"></i></a>
+                                        </li>
+                                    @endif
+                                    @if (getConfigurationField('SOCIAL_TWITTER_LINK') != '-')
+                                        <li>
+                                            <a href="{{ getConfigurationField('SOCIAL_TWITTER_LINK') }}"
+                                                target="_blank"><i class="fa-brands fa-x-twitter"></i></a>
+                                        </li>
+                                    @endif
+                                    @if (getConfigurationField('SOCIAL_FACEBOOK_LINK') != '-')
+                                        <li>
+                                            <a href="{{ getConfigurationField('SOCIAL_FACEBOOK_LINK') }}"
+                                                target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
+                                        </li>
+                                    @endif
+                                    @if (getConfigurationField('SOCIAL_INSTAGRAM_LINK') != '-')
+                                        <li>
+                                            <a href="{{ getConfigurationField('SOCIAL_INSTAGRAM_LINK') }}"
+                                                target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                                        </li>
+                                    @endif
+                                </ul>
+                            </div>
+                            <!-- Footer Social Link End -->
+                        </div>
+                        <!-- Footer Links end -->
+                    </div>
+
+                    <div class="col-lg-3 col-md-6">
+                        <!-- Footer Links Start -->
+                        <div class="footer-links footer-newsletter-form">
+                            <h3>Subscribe Our Newsletter</h3>
+
+                            <form id="newslettersForm" action="#" method="POST">
+                                <div class="form-group">
+                                    <input type="email" name="mail" class="form-control" id="mail"
+                                        placeholder="Email Address*" required>
+                                    <button type="submit" class="newsletter-btn"><img
+                                            src="{{ url('public/frontend/images/arrow-white.svg') }}"
+                                            alt=""></button>
+                                </div>
+                            </form>
+
+                            <p>* Get the latest voiceover tips, trends, and offers.</p>
+                        </div>
+                        <!-- Footer Links End -->
+                    </div>
+
+                    <div class="col-lg-12">
+                        <!-- Footer Copyright Start -->
+                        <div class="footer-copyright">
+                            <!-- Copyright Text Start -->
+                            @if (!empty(trim(getConfigurationField('FOOTER_COPYRIGHT'))) && trim(getConfigurationField('FOOTER_COPYRIGHT')) !== '-')
+                                <div class="footer-copyright-text">
+                                    <p>{!! getConfigurationField('FOOTER_COPYRIGHT') !!}</p>
+                                </div>
+                            @endif
+                            <!-- Copyright Text End -->
+
+                            <!-- Footer Menu Start -->
+                            <div class="footer-menu">
+                                <ul>
+                                    <li><a href="{{ route('about') }}">about us</a></li>
+                                    <li><a href="{{ route('terms') }}">Terms & Conditions</a></li>
+                                    <li><a href="{{ route('privacy') }}">Privacy Policy</a></li>
+                                    <li><a href="{{ route('cookie') }}">Cookie Policy</a></li>
+                                    <li><a href="{{ route('risk-disclosure') }}">Risk Disclosure</a></li>
+                                    <li><a href="{{ route('disclaimer') }}">Disclaimer</a></li>
+                                    <li><a href="{{ route('contact') }}">contact us</a></li>
+                                </ul>
+                            </div>
+                            <!-- Footer Menu End -->
+                        </div>
+                        <!-- Footer Copyright End -->
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <style>
+            /* Popup Container */
+            .offer-popup {
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                z-index: 9999;
+                animation: slideIn 0.6s ease;
+            }
+
+            /* Glass Card */
+            .offer-content {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                background: rgba(25, 27, 54, 0.95);
+                backdrop-filter: blur(10px);
+                border-radius: 12px;
+                padding: 12px 15px;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+                border-left: 4px solid #f73b20;
+                max-width: 380px;
+            }
+
+            /* Icon */
+            .offer-icon {
+                font-size: 60px;
+                color: #f73b20;
+                position: absolute;
+            }
+
+            /* Text */
+            .offer-text h6 {
+                font-size: 14px;
+                margin: 0;
+                color: #fff;
+                font-weight: 600;
+            }
+
+            .offer-text p {
+                font-size: 11px;
+                margin: 0;
+                color: #ccc;
+            }
+
+            .offer-text {
+                margin-left: 90px;
+            }
+
+            /* Timer */
+            .offer-timer {
+                display: flex;
+                gap: 6px;
+                margin-top: 5px;
+            }
+
+            .offer-timer span {
+                background: #fff;
+                color: #000;
+                font-size: 15px;
+                padding: 10px;
+                border-radius: 4px;
+                text-align: center;
+            }
+
+            /* Button */
+            .offer-btn {
+                background: linear-gradient(45deg, #f73b20, #ff6a00);
+                color: #fff;
+                padding: 6px 12px;
+                border-radius: 20px;
+                font-size: 12px;
+                text-decoration: none;
+                white-space: nowrap;
+                transition: 0.3s;
+                margin-top: -50px;
+                margin-left: -65px;
+                margin-right: 10px;
+            }
+
+            .offer-btn:hover {
+                transform: scale(1.05);
+            }
+
+            /* Close */
+            .offer-close {
+                position: absolute;
+                top: 5px;
+                right: 8px;
+                color: #fff;
+                cursor: pointer;
+                font-size: 14px;
+            }
+
+            /* Animation */
+            @keyframes slideIn {
+                from {
+                    transform: translateX(-100%);
+                    opacity: 0;
+                }
+
+                to {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+            }
+        </style>
+        <!-- Footer Section End -->
 
         <footer>
             <div class="footer-top">
