@@ -304,7 +304,7 @@
         }
     </style>
 
-    <section class="join-section section-cta pt-5">
+    <section class="join-section section-cta">
         <div class="container">
             <div class="row text-center">
                 <h2 class="wow fadeInUp text-black profit-text">
@@ -312,13 +312,14 @@
                         <span class="live-dot"></span>
                         <span class="live-text">LIVE</span>
                     </span>
-                    <p class="live-simple-text pt-2">
+                    <p class="live-simple-text pt-2 d-none">
                         Verified Performance
                     </p>
                 </h2>
             </div>
         </div>
-        <div class="container py-3">
+
+        {{-- <div class="container py-3">
             <div class="row g-4">
                 <div class="col-lg-8">
                     <div class="py-3">
@@ -347,6 +348,290 @@
                         </span>
                         MyFXBook Verified · Updated daily
                     </div>
+                </div>
+            </div>
+        </div> --}}
+
+        <style>
+
+            .hero-card {
+                /* background: linear-gradient(135deg, #ffffff 0%, #f0f7ff 100%);
+                border-radius: 24px;
+                border: 1px solid #e0e6ed;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.05); */
+                overflow: hidden;
+                position: relative;
+            }
+
+            /* Subtle chart background effect */
+            .hero-card::before {
+                content: "";
+                position: absolute;
+                top: 0; right: 0; bottom: 0; left: 0;
+                background-image: url('https://www.transparenttextures.com/patterns/graphy.png'); /* Mocking the chart lines */
+                opacity: 0.05;
+                pointer-events: none;
+            }
+
+            .headline {
+                color: #102a43;
+                font-weight: 800;
+                font-size: 3rem;
+                line-height: 1.1;
+            }
+
+            .headline span {
+                background: linear-gradient(90deg, #007bff, #00d2ff);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+
+            .check-item {
+                display: flex;
+                align-items: center;
+                padding: 12px 0;
+                border-bottom: 1px solid #e0e6ed;
+                font-size: 1.1rem;
+                color: #334e68;
+            }
+
+            .check-icon {
+                width: 24px;
+                height: 24px;
+                background-color: #00bcd4;
+                color: white;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 0.8rem;
+                margin-right: 15px;
+                flex-shrink: 0;
+            }
+
+            .shield-container {
+                position: relative;
+                z-index: 2;
+            }
+
+            .shield-img {
+                max-width: 100%;
+                height: auto;
+                filter: drop-shadow(0 20px 40px rgba(0, 188, 212, 0.2));
+            }
+
+            .verification-badge {
+                background: white;
+                border-radius: 12px;
+                padding: 12px 20px;
+                box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+                display: flex;
+                align-items: center;
+                margin-bottom: 15px;
+                border: 1px solid #f0f4f8;
+            }
+
+            .badge-text {
+                font-size: 0.9rem;
+                font-weight: 600;
+                color: #102a43;
+            }
+
+            .badge-subtext {
+                font-size: 0.75rem;
+                color: #627d98;
+                font-weight: 400;
+            }
+
+            /* Round Animated Tick Badge */
+            .badge-check{
+                width: 25px;
+                height: 25px;
+                border-radius: 50%;
+                background: linear-gradient(135deg,#00c853,#00e676);
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                position: relative;
+                overflow: hidden;
+                box-shadow:
+                    0 0 0 0 rgba(0, 200, 83, 0.6),
+                    0 8px 20px rgba(0, 200, 83, 0.35);
+
+                animation: pulseRing 2s infinite;
+                color: #fff;
+                margin-right: 15px;
+            }
+
+            /* Tick Animation */
+            .check-icon{
+                color: #fff;
+                font-size: 20px;
+                font-weight: bold;
+                transform: scale(0);
+                animation: tickPop .6s ease forwards;
+            }
+
+            /* Outer Glow Pulse */
+            .badge-check::before{
+                content: "";
+                position: absolute;
+                inset: 0;
+                border-radius: 50%;
+                border: 2px solid rgba(255,255,255,0.5);
+                animation: ripple 2s infinite;
+            }
+
+            /* Tick Pop */
+            @keyframes tickPop{
+                0%{
+                    transform: scale(0) rotate(-20deg);
+                    opacity: 0;
+                }
+                60%{
+                    transform: scale(1.25) rotate(10deg);
+                    opacity: 1;
+                }
+                100%{
+                    transform: scale(1);
+                    opacity: 1;
+                }
+            }
+
+            /* Ripple Animation */
+            @keyframes ripple{
+                0%{
+                    transform: scale(1);
+                    opacity: 0.8;
+                }
+                100%{
+                    transform: scale(1.8);
+                    opacity: 0;
+                }
+            }
+
+            /* Soft Pulse */
+            @keyframes pulseRing{
+                0%{
+                    box-shadow:
+                        0 0 0 0 rgba(0, 200, 83, 0.5),
+                        0 8px 20px rgba(0, 200, 83, 0.35);
+                }
+                70%{
+                    box-shadow:
+                        0 0 0 15px rgba(0, 200, 83, 0),
+                        0 8px 20px rgba(0, 200, 83, 0.35);
+                }
+                100%{
+                    box-shadow:
+                        0 0 0 0 rgba(0, 200, 83, 0),
+                        0 8px 20px rgba(0, 200, 83, 0.35);
+                }
+            }
+            .accent-line {
+                width: 80px;
+                height: 4px;
+                background-color: #00bcd4;
+                border-radius: 2px;
+                margin-top: 10px;
+            }
+
+            @media (max-width: 991px) {
+                .headline { font-size: 2.2rem; }
+                .hero-card { margin: 20px; }
+            }
+        </style>
+
+        <div class="container">
+            <div class="hero-card p-4">
+                <div class="row align-items-center g-5">
+
+                    <div class="col-lg-6">
+                        <h1 class="headline mb-4">
+                            Trade with<br>
+                            <span>Verified Results</span>
+                        </h1>
+
+                        <div class="check-list">
+                            <div class="check-item">
+                                <div class="check-icon">✓</div>
+                                Connected directly to live trading account
+                            </div>
+                            <div class="check-item">
+                                <div class="check-icon">✓</div>
+                                Auto-updated results
+                            </div>
+                            <div class="check-item border-0">
+                                <div class="check-icon">✓</div>
+                                Verified by third-party system
+                            </div>
+                            <div class="accent-line"></div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 text-center text-lg-start">
+                        <div class="row align-items-center">
+                            <div class="col-md-6 mb-4 mb-md-0">
+                                {{-- <div class="shield-container">
+                                    <img src="https://cdn-icons-png.flaticon.com/512/3513/3513725.png" alt="Shield" class="shield-img" style="width: 250px;">
+                                </div> --}}
+                                <!-- 3D Trusted Shield -->
+                                <style>
+                                    /* ============================= */
+                                    /* 3D TRUSTED SHIELD ICON */
+                                    /* ============================= */
+
+                                    .trusted-shield{
+                                        position: relative;
+                                        width: 170px;
+                                        height: auto;
+                                        margin: auto;
+                                        animation: floating 8s ease-in-out infinite;
+                                        transform-style: preserve-3d;
+                                    }
+
+                                    /* FLOATING EFFECT */
+                                    @keyframes floating{
+                                        0%,100%{
+                                            transform: translateY(0px);
+                                        }
+                                        50%{
+                                            transform: translateY(-12px);
+                                        }
+                                    }
+
+                                    /* MOBILE */
+                                    @media(max-width:768px){
+
+                                        .trusted-shield{
+                                            width: 100px;
+                                            height: auto;
+                                        }
+                                    }
+                                </style>
+                                <div class="trusted-shield">
+                                    <img src="{{url('public/frontend/images/Trusted-Sheild.png')}}">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="verification-badge">
+                                    <span class="badge-check">✔</span>
+                                    <div>
+                                        <div class="badge-text">MyFXBook Verified</div>
+                                        <div class="badge-subtext">Updated daily</div>
+                                    </div>
+                                </div>
+                                <div class="verification-badge">
+                                    <span class="badge-check">✔</span>
+                                    <div>
+                                        <div class="badge-text">MyFXBook Verified</div>
+                                        <div class="badge-subtext">Updated daily</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
