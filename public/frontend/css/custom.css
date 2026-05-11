@@ -603,7 +603,7 @@ header.main-header .header-sticky.active{
 
 .navbar-brand img{
 	/* max-width: 200px; */
-    height: 70px;
+    height: 60px;
     position: relative;
 }
 
@@ -2409,6 +2409,7 @@ header.main-header .header-sticky.active{
 	border-radius: 100px;
 	margin-bottom: 30px;
 	transition: all 0.4s ease-in-out;
+    box-shadow: rgba(149, 157, 165, 0.5) 0px 0px 20px;
 }
 
 .pricing-item:hover .pricing-header h3{

@@ -44,6 +44,8 @@
     .blog-img img {
         width: 100%;
         transition: transform 0.5s ease;
+        min-height: 300px;
+        max-height: 300px;
     }
 
     .blog-card:hover img {
@@ -135,7 +137,7 @@
 
               @forelse ($blogs as $blog)
             <!-- Card 1 -->
-            <div class="col-lg-4 col-md-6"> 
+            <div class="col-lg-4 col-md-6">
                 <div class="blog-card">
                     <div class="blog-img">
                         <img src="{{ asset('storage/app/public/' . $blog->image) }}" alt="Bitcoin Under Pressure">
@@ -150,7 +152,7 @@
                         <a href="{{ route('blog.details', $blog->slug) }}" class="read-more">READ MORE</a>
                     </div>
                 </div>
-                
+
             </div>
             @empty
             <div class="col-12">

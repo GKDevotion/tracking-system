@@ -283,28 +283,28 @@
             <div class="footer-top">
                 <div class="container">
                 <div class="row g-4 row-stretch">
-            
+
                     <!-- Brand Column -->
                     <div class="col-12 col-md-4 col-lg-3">
-                    <style> 
+                    <style>
                         .navbar-brand-footer {
-                                margin: 0; 
+                                margin: 0;
                             }
 
                         .navbar-brand-footer img{
                             width: 80%;
                             height: auto;
                         }
-    
+
                     </style>
                         <a class="navbar-brand-footer" href="{{ url('/') }}">
                         <img src="{{ url('public/frontend/images/logo.png') }}" alt="Wealthora" height="40">
-                    </a> 
+                    </a>
                     <p class="footer-desc">
                         Professional forex trading signals with clear entries, stop loss, and take profit levels. Built for traders who value discipline, transparency, and results.
                     </p>
                     </div>
-            
+
                     <!-- Product Column -->
                     <div class="col-6 col-md col-divider">
                         <h6 class="footer-col-title">Product</h6>
@@ -316,7 +316,7 @@
                             <li><a href="{{ url('faqs') }}">FAQ</a></li>
                         </ul>
                     </div>
-            
+
                     <!-- Service Column -->
                     <div class="col-6 col-md col-divider">
                         <h6 class="footer-col-title">Service</h6>
@@ -328,7 +328,7 @@
                             <li><a href="#">Risk Management</a></li>
                         </ul>
                     </div>
-            
+
                     <!-- Company Column -->
                     <div class="col-6 col-md col-divider">
                         <h6 class="footer-col-title">Company</h6>
@@ -337,7 +337,7 @@
                             <li><a href="{{ url('contact') }}">Contact Us</a></li>
                         </ul>
                     </div>
-            
+
                     <!-- Get Started Column -->
                     <div class="col-6 col-md col-divider">
                         <h6 class="get-started-title">Get Started</h6>
@@ -345,11 +345,11 @@
                             Get Started <span class="arrow">→</span>
                         </a>
                     </div>
-            
+
                 </div>
                 </div>
             </div>
-            
+
             <!-- Footer Bottom -->
             <div class="footer-bottom">
                 <div class="container">
@@ -363,32 +363,32 @@
                 </ul>
                 </div>
             </div>
-        </footer>   
+        </footer>
 
         <style>
             footer {
-                background-color: #EBEBEB;;
+                background-color: var(--secondary-color);
             }
-        
+
             .footer-top {
                 padding: 100px 100px;
             }
-        
+
             .footer-logo-text {
                 font-size: 1.5rem;
                 font-weight: 800;
                 letter-spacing: 2px;
-                color: #E84025;
+                color: var(--logo-color);
                 text-transform: uppercase;
             }
-        
+
             .logo-icon {
                 width: 44px;
                 height: 38px;
                 margin-right: 8px;
                 vertical-align: middle;
             }
-        
+
             .footer-desc {
                 font-size: 0.92rem;
                 color: #000;
@@ -396,24 +396,24 @@
                 margin-top: 18px;
                 max-width: 290px;
             }
-        
+
             .footer-col-title {
                 font-size: 1rem;
                 font-weight: 700;
                 color: #000;
                 margin-bottom: 20px;
             }
-        
+
             .footer-links {
                 list-style: none;
                 padding: 0;
                 margin: 0;
             }
-        
+
             .footer-links li {
                 margin-bottom: 14px;
             }
-        
+
             .footer-links a {
                 text-decoration: none;
                 color: #000;
@@ -421,18 +421,18 @@
                 font-weight: 400;
                 transition: color 0.2s ease;
                 }
-        
+
             .footer-links a:hover {
                 color: #E84025;
             }
-        
+
             .get-started-title {
                 font-size: 1rem;
                 font-weight: 700;
                 color: #000;
                 margin-bottom: 20px;
             }
-        
+
             .btn-get-started {
                 background-color: #E84025;
                 color: #fff;
@@ -448,27 +448,27 @@
                 transition: background-color 0.2s ease, transform 0.15s ease;
                 white-space: nowrap;
             }
-        
+
             .btn-get-started:hover {
                 background-color: #c93520;
                 color: #fff;
                 transform: translateY(-1px);
             }
-        
+
             .btn-get-started .arrow {
                 font-size: 1.1rem;
             }
-        
+
             /* Vertical dividers — full height using stretch row */
             .row-stretch {
                 align-items: stretch;
             }
-        
+
             .col-divider {
                 border-left: 1.5px solid #ccc;
                 padding-left: 30px;
             }
-        
+
             .footer-bottom {
                 padding: 22px 0;
                 text-align: center;
@@ -484,13 +484,13 @@
                 height: 1.5px;
                 background-color: #ccc;
             }
-                    
+
             .footer-bottom p {
                 font-size: 0.975rem;
                 color: #000;
                 margin-bottom: 20px;
             }
-        
+
             .footer-bottom-links {
                 list-style: none;
                 padding: 0;
@@ -500,12 +500,12 @@
                 flex-wrap: wrap;
                 gap: 0;
             }
-        
+
             .footer-bottom-links li {
                 display: flex;
                 align-items: center;
             }
-        
+
             .footer-bottom-links li a {
                 text-decoration: none;
                 color: #000;
@@ -514,18 +514,18 @@
                 margin-bottom: 40px;
                 transition: color 0.2s;
             }
-        
+
             .footer-bottom-links li a:hover {
                 color: #E84025;
             }
-        
+
             .footer-bottom-links li + li::before {
                 content: "|";
                 color: #ccc;
                 margin-bottom: 40px;
                 font-size: 0.875rem;
             }
-        
+
             @media (max-width: 767.98px) {
                 .col-divider {
                     border-left: none;
@@ -534,19 +534,19 @@
                     padding-top: 28px;
                     margin-top: 10px;
                 }
-            
+
                 .footer-desc {
                     max-width: 100%;
                 }
-            
+
                 .footer-bottom-links li a {
                     padding: 0 8px;
                 }
             }
         </style>
- 
+
         <!-- Offer Popup -->
-        <div class="offer-popup" id="offerPopup">
+        <div class="offer-popup d-none" id="offerPopup">
 
             <div class="offer-content">
 

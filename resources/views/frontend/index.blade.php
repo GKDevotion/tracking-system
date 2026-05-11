@@ -111,10 +111,30 @@
             border: 1px solid rgba(255,255,255,0.3);
             box-shadow: 0 8px 32px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.4);
             padding: 20px;
+            transition: all 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+         /* Smooth hover top move */
+        .glass-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 18px 35px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Optional premium glow effect */
+        .glass-card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .glass-card:hover::before {
+            opacity: 1;
         }
 
         .toggle-btn {
-            background: rgba(0,0,0,0.2);
+            background: var(--secondary-color);
             border-radius: 50px;
             padding: 5px;
             display: inline-flex;
@@ -123,7 +143,7 @@
         .toggle-btn button {
             border: none;
             background: transparent;
-            padding: 8px 16px;
+            padding: 12px 24px;
             border-radius: 50px;
         }
 
@@ -157,7 +177,7 @@
         }
 
         .trades-list {
-            max-height: 350px;
+            max-height: 375px;
             overflow-y: auto;
             padding-right: 5px;
         }
@@ -166,7 +186,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 10px 5px;
+            padding: 12.5px 5px;
         }
 
         .trade-icon {
@@ -381,7 +401,7 @@
             }
 
             .headline span {
-                background: linear-gradient(90deg, #007bff, #00d2ff);
+                background: linear-gradient(90deg, var(--logo-color), var(--logo-color-hover));
                 -webkit-background-clip: text;
                 -webkit-text-fill-color: transparent;
             }
@@ -398,7 +418,7 @@
             .check-icon {
                 width: 24px;
                 height: 24px;
-                background-color: #00bcd4;
+                background-color: var(--logo-color);
                 color: white;
                 border-radius: 50%;
                 display: flex;
@@ -531,7 +551,7 @@
             .accent-line {
                 width: 80px;
                 height: 4px;
-                background-color: #00bcd4;
+                background-color: var(--logo-color);
                 border-radius: 2px;
                 margin-top: 10px;
             }
@@ -702,7 +722,7 @@
                                     Win Rate
                                 </small>
                             </div>
-                            <div class="col-12 text-center py-3">
+                            <div class="col-12 py-3">
                                 vs 70.8% prior week
                             </div>
                         </div>
@@ -726,7 +746,7 @@
                             <div class="col-6 text-end">
                                 <small>Net Pips</small>
                             </div>
-                            <div class="col-12 text-center py-3">
+                            <div class="col-12 py-3">
                                 7-day rolling total
                             </div>
                         </div>
@@ -747,7 +767,7 @@
                             <div class="col-6 text-end">
                                 <small>Trades</small>
                             </div>
-                            <div class="col-12 text-center py-3">
+                            <div class="col-12 py-3">
                                 21 wins · 7 losses
                             </div>
                         </div>
@@ -768,7 +788,7 @@
                             <div class="col-6 text-end">
                                 <small>R:R</small>
                             </div>
-                            <div class="col-12 text-center py-3">
+                            <div class="col-12 py-3">
                                 across all closed trades
                             </div>
                         </div>
@@ -788,6 +808,60 @@
                             <div class="panel-card-header">
                                 <div class="panel-card-title">Recent Trades</div>
                                 <div class="panel-card-meta">Last 6 closed</div>
+                                <style>
+                                    .live-status{
+                                        display:flex;
+                                        align-items:center;
+                                        gap:4px;
+                                        font-size:25px;
+                                        font-weight:600;
+                                        color:var(--logo-color-hover);
+                                    }
+
+                                    .dots{
+                                        display:flex;
+                                        gap:5px;
+                                    }
+
+                                    .dot{
+                                        width:5px;
+                                        height:5px;
+                                        background:var(--logo-color);
+                                        border-radius:50%;
+                                        animation:blink 1s infinite;
+                                    }
+
+                                    .dot:nth-child(2){
+                                        animation-delay:0.5s;
+                                    }
+
+                                    .dot:nth-child(3){
+                                        animation-delay:0.8s;
+                                    }
+
+                                    @keyframes blink{
+                                        0%,100%{
+                                            opacity:0.2;
+                                            transform:scale(0.8);
+                                        }
+                                        70%{
+                                            opacity:1;
+                                            transform:scale(1.2);
+                                        }
+                                        35%{
+                                            opacity:1;
+                                            transform:scale(1.5);
+                                        }
+                                    }
+                                </style>
+                                <div class="live-status">
+                                    LIVE
+                                    <div class="dots">
+                                        <span class="dot"></span>
+                                        <span class="dot"></span>
+                                        <span class="dot"></span>
+                                    </div>
+                                </div>
                             </div>
                             <div class="trades-list">
                                 <div class="trade-row">
@@ -921,8 +995,6 @@
         });
     </script>
     <!-- End Real numbers. Real trades. -->
-
-    @include('frontend.element.blog')
 
     <!-- Start Analysis report -->
     <div class="our-empact d-none">
@@ -1250,9 +1322,17 @@
                                         </div>
                                         <!-- Pricing Item Content End -->
 
+                                        <!-- Pricing Button Start -->
+                                        <div class="pricing-btn">
+                                            <a href="<?= url('purchase?plan=' . $val['link']) ?>" class="btn-default">
+                                                Get Started Now
+                                            </a>
+                                        </div>
+                                        <!-- Pricing Button End -->
+
                                         <!-- Pricing body Start -->
                                         <div class="pricing-body">
-                                            <h3>What's Included:</h3>
+                                            <h3 class="d-none">What's Included:</h3>
                                             <ul>
                                                 <?php
                                                     foreach( $val['feature'] as $f ){
@@ -1265,14 +1345,6 @@
                                             </ul>
                                         </div>
                                         <!-- Pricing body End -->
-
-                                        <!-- Pricing Button Start -->
-                                        <div class="pricing-btn">
-                                            <a href="<?= url('purchase?plan=' . $val['link']) ?>" class="btn-default">
-                                                Get Started Now
-                                            </a>
-                                        </div>
-                                        <!-- Pricing Button End -->
                                     </div>
                                     <!-- Pricing Box End -->
                                 </div>
@@ -1302,6 +1374,8 @@
         </div>
     </div>
     <!-- Page Pricing End -->
+
+    @include('frontend.element.blog')
 
     <!-- Page Team Single Start -->
     <div class="page-team-single pt-0 mt-0 mt-md-5">
