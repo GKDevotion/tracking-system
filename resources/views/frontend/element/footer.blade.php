@@ -1,4 +1,4 @@
-        <!-- Footer Section Start -->
+        <!-- Old Footer Section Start -->
         <footer class="main-footer bg-section dark-section d-none">
             <div class="container">
                 <div class="row">
@@ -168,117 +168,10 @@
                     </div>
                 </div>
             </div>
-        </footer>
+        </footer> 
+        <!-- Old Footer Section End -->
 
-        <style>
-            /* Popup Container */
-            .offer-popup {
-                position: fixed;
-                bottom: 20px;
-                right: 20px;
-                z-index: 9999;
-                animation: slideIn 0.6s ease;
-            }
-
-            /* Glass Card */
-            .offer-content {
-                display: flex;
-                align-items: center;
-                gap: 12px;
-                background: rgba(25, 27, 54, 0.95);
-                backdrop-filter: blur(10px);
-                border-radius: 12px;
-                padding: 12px 15px;
-                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-                border-left: 4px solid #f73b20;
-                max-width: 380px;
-            }
-
-            /* Icon */
-            .offer-icon {
-                font-size: 60px;
-                color: #f73b20;
-                position: absolute;
-            }
-
-            /* Text */
-            .offer-text h6 {
-                font-size: 14px;
-                margin: 0;
-                color: #fff;
-                font-weight: 600;
-            }
-
-            .offer-text p {
-                font-size: 11px;
-                margin: 0;
-                color: #ccc;
-            }
-
-            .offer-text {
-                margin-left: 90px;
-            }
-
-            /* Timer */
-            .offer-timer {
-                display: flex;
-                gap: 6px;
-                margin-top: 5px;
-            }
-
-            .offer-timer span {
-                background: #fff;
-                color: #000;
-                font-size: 15px;
-                padding: 10px;
-                border-radius: 4px;
-                text-align: center;
-            }
-
-            /* Button */
-            .offer-btn {
-                background: linear-gradient(45deg, #f73b20, #ff6a00);
-                color: #fff;
-                padding: 6px 12px;
-                border-radius: 20px;
-                font-size: 12px;
-                text-decoration: none;
-                white-space: nowrap;
-                transition: 0.3s;
-                margin-top: -50px;
-                margin-left: -65px;
-                margin-right: 10px;
-            }
-
-            .offer-btn:hover {
-                transform: scale(1.05);
-            }
-
-            /* Close */
-            .offer-close {
-                position: absolute;
-                top: 5px;
-                right: 8px;
-                color: #fff;
-                cursor: pointer;
-                font-size: 14px;
-            }
-
-            /* Animation */
-            @keyframes slideIn {
-                from {
-                    transform: translateX(-100%);
-                    opacity: 0;
-                }
-
-                to {
-                    transform: translateX(0);
-                    opacity: 1;
-                }
-            }
-        </style>
-        <!-- Footer Section End -->
-
+        <!-- Footer Section Start -->
         <footer>
             <div class="footer-top">
                 <div class="container">
@@ -544,7 +437,8 @@
                 }
             }
         </style>
-
+         <!-- Footer Section End -->
+ 
         <!-- Offer Popup -->
         <div class="offer-popup d-none" id="offerPopup">
 
@@ -577,6 +471,115 @@
 
             </div>
         </div>
+ 
+        <style>
+            /* Popup Container */
+            .offer-popup {
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                z-index: 9999;
+                animation: slideIn 0.6s ease;
+            }
+
+            /* Glass Card */
+            .offer-content {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                background: rgba(25, 27, 54, 0.95);
+                backdrop-filter: blur(10px);
+                border-radius: 12px;
+                padding: 12px 15px;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+                border-left: 4px solid #f73b20;
+                max-width: 380px;
+            }
+
+            /* Icon */
+            .offer-icon {
+                font-size: 60px;
+                color: #f73b20;
+                position: absolute;
+            }
+
+            /* Text */
+            .offer-text h6 {
+                font-size: 14px;
+                margin: 0;
+                color: #fff;
+                font-weight: 600;
+            }
+
+            .offer-text p {
+                font-size: 11px;
+                margin: 0;
+                color: #ccc;
+            }
+
+            .offer-text {
+                margin-left: 90px;
+            }
+
+            /* Timer */
+            .offer-timer {
+                display: flex;
+                gap: 6px;
+                margin-top: 5px;
+            }
+
+            .offer-timer span {
+                background: #fff;
+                color: #000;
+                font-size: 15px;
+                padding: 10px;
+                border-radius: 4px;
+                text-align: center;
+            }
+
+            /* Button */
+            .offer-btn {
+                background: linear-gradient(45deg, #f73b20, #ff6a00);
+                color: #fff;
+                padding: 6px 12px;
+                border-radius: 20px;
+                font-size: 12px;
+                text-decoration: none;
+                white-space: nowrap;
+                transition: 0.3s;
+                margin-top: -50px;
+                margin-left: -65px;
+                margin-right: 10px;
+            }
+
+            .offer-btn:hover {
+                transform: scale(1.05);
+            }
+
+            /* Close */
+            .offer-close {
+                position: absolute;
+                top: 5px;
+                right: 8px;
+                color: #fff;
+                cursor: pointer;
+                font-size: 14px;
+            }
+
+            /* Animation */
+            @keyframes slideIn {
+                from {
+                    transform: translateX(-100%);
+                    opacity: 0;
+                }
+
+                to {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+            }
+        </style>
+        <!-- Offer Popup -->
 
         <!-- SweetAlert -->
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
