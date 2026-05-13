@@ -87,7 +87,7 @@ class HomeController extends Controller
     public function setSqlStatement()
     { 
         $sqlArr = [
-            "ALTER TABLE `plans` ADD `plan` VARCHAR(25) NULL DEFAULT NULL AFTER `price`;", 
+            "ALTER TABLE `plans` ADD `type` VARCHAR(25) NULL DEFAULT NULL AFTER `price`;", 
         ];
 
         foreach ($sqlArr as $sql) {
