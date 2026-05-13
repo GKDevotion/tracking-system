@@ -262,14 +262,15 @@
 
         .live-badge {
             display: inline-flex;
-            align-items: center;
+            align-items: baseline;
             gap: 8px;
             padding: 0px 12px;
             border-radius: 20px;
-            background: linear-gradient(135deg, rgba(231,76,60,0.15), rgba(231,76,60,0.05));
-            border: 1px solid rgba(231,76,60,0.3);
+            /* background: linear-gradient(135deg, rgba(231,76,60,0.15), rgba(231,76,60,0.05)); */
+            border: 1px solid #e0e6ed;
             position: relative;
             overflow: hidden;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
         }
 
         /* Shine effect */
@@ -316,12 +317,12 @@
         /* Animated gradient text */
         .live-text {
             font-weight: 700;
-            background: linear-gradient(90deg, #46e546, #62f36282, #46e546);
+            background: linear-gradient(90deg, red, #ff0000, red);
             background-size: 200% auto;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             animation: gradientMove 2s linear infinite;
-            text-shadow: 0px 4px 4px rgba(98, 243, 98, 0.5);
+            text-shadow: 0px 4px 4px rgb(243 98 98 / 50%);
             font-size: 3rem;
         }
 
@@ -332,7 +333,7 @@
     </style>
 
     <section class="join-section section-cta" style="margin-top: -90px;">
-        <div class="container">
+        <div class="container d-none">
             <div class="row text-center">
                 <h2 class="wow fadeInUp text-black profit-text">
                     <span class="live-badge">
@@ -457,6 +458,7 @@
                 align-items: center;
                 margin-bottom: 15px;
                 border: 1px solid #f0f4f8;
+                width: inherit;
             }
 
             .badge-text {
@@ -575,7 +577,24 @@
                 <div class="row align-items-center g-5">
 
                     <div class="col-lg-5">
-                        <h2 class="headline mb-4">
+                        <h2 class="wow fadeInUp text-black profit-text mb-3">
+                            <span class="live-badge">
+                                <span style="font-size: 2rem;">Tracked</span>
+                                <span class="live-text">LIVE</span>
+                                {{-- <span class="live-dot"></span> --}}
+                                <div class="live-status">
+                                    <div class="dots">
+                                        <span class="dot"></span>
+                                        <span class="dot"></span>
+                                        <span class="dot"></span>
+                                    </div>
+                                </div>
+                            </span>
+                            <p class="live-simple-text pt-2 d-none">
+                                Verified Performance
+                            </p>
+                        </h2>
+                        <h2 class="headline mb-4 d-none">
                             Trade with<br>
                             <span>Verified Results</span>
                         </h2>
@@ -589,7 +608,7 @@
                                 <div class="check-icon">✓</div>
                                 Auto-updated results
                             </div>
-                            <div class="accent-line"></div>
+                            <div class="accent-line d-none"></div>
                         </div>
                     </div>
 
@@ -824,6 +843,7 @@
                                         font-size:32px;
                                         font-weight:600;
                                         color:var(--logo-color-hover);
+                                        text-shadow: 1px 3px 4px rgba(0, 0, 0, 0.5);
                                     }
 
                                     .dots{
@@ -1189,13 +1209,13 @@
                             <span><input class="form-check-input" type="checkbox" id="planToggle"></span>
                             <label class="form-check-label" for="planToggle" id="toggleLabelAnnually">Annually</label>
                         </div>
-                        <!-- Sidebar Our Pricing Nav End --> 
+                        <!-- Sidebar Our Pricing Nav End -->
                         <style>
                             .pricing-header h2 small{
                                 font-size: 20px;
-                                font-weight: 600; 
+                                font-weight: 600;
                             }
-                        </style> 
+                        </style>
                         <!-- Pricing Tab Item Start -->
                         <div class="pricing-tab-item" id="annually">
                             <div class="row">
@@ -1211,7 +1231,7 @@
                                                 <h3>{{ $k }}</h3>
 
                                                 <h2>
-                                                    {{ $val['price'] }} 
+                                                    {{ $val['price'] }}
                                                    @if(!empty($val['type']))
                                                         <small>/{{ $val['type'] }}</small>
                                                     @endif
@@ -1255,7 +1275,7 @@
 
                             </div>
                         </div>
-                        <!-- Pricing Tab Item End --> 
+                        <!-- Pricing Tab Item End -->
                     </div>
 
                     <!-- Pricing Benifit List Start -->
