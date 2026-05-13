@@ -1593,9 +1593,9 @@
             </div>
 
             <div class="newsletter px-2">
-                <h3>BE IN THE KNOW</h3>
-                <p>Sign up to our newsletter and receive a monthly selection right in your inbox</p>
-                <button class="btn btn-primary">Subscribe to our newsletter</button>
+                <h3>NEVER MISS A SIGNAL</h3>
+                <p>Get live forex & gold trade setups delivered instantly.</p>
+                <button class="btn btn-primary">Profit Starts Here</button>
             </div>
         </div>
     </section>
