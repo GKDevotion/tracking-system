@@ -687,3 +687,12 @@
                 document.getElementById("offerPopup").style.display = "none";
             }
         </script>
+ 
+        <script>
+            function closeAnnouncementBar() {
+                const bar = document.getElementById('announcement-bar');
+                bar.classList.add('hidden');
+                // Slide nav back up
+                document.getElementById('mainNav').style.top = '0px';
+            }
+        </script>

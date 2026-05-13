@@ -100,8 +100,8 @@
         color: #d62828 !important;
     }
 </style>
-
-<nav class="navbar navbar-expand-lg fixed-top custom-nav sticky-active" id="mainNav">
+ 
+<nav class="navbar navbar-expand-lg fixed-top custom-nav sticky-active" id="mainNav" style="white-space: nowrap;">
     <div class="container nav-container">
         <a class="navbar-brand" href="{{ url('/') }}">
             <img src="{{ url('public/frontend/images/logo.png') }}" alt="Wealthora" height="40">
@@ -288,3 +288,158 @@
         </div>
     </div>
 </nav>
+
+
+<!-- Announcement Bar -->
+<style>
+    #announcement-bar {
+        background: #1a9e72;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 32px;
+        height: 48px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1100;
+        font-size: 15px;
+        font-weight: 500;
+        letter-spacing: 0.01em;
+        transition: height 0.3s ease, opacity 0.3s ease;
+        overflow: hidden;
+    }
+
+    /* Push nav below the announcement bar */
+    #mainNav {
+        top: 44px; /* matches announcement bar height */
+        transition: top 0.3s ease, padding 0.4s ease-in-out;
+    }
+
+    #announcement-bar.hidden {
+        height: 0;
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    .bar-left {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .vip-icon {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-weight: 700;
+        font-size: 15px;
+        letter-spacing: 0.05em;
+    }
+
+    .vip-icon svg {
+        width: 18px;
+        height: 18px;
+        fill: #FFD700;
+        animation: vip-pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes vip-pulse {
+        0%, 80%, 100% { transform: rotate(0deg); }
+        40%            { transform: rotate(20deg); }
+    }
+
+    .badge-off {
+        background: rgba(255, 255, 255, 0.22);
+        color: #fff;
+        font-weight: 700;
+        font-size: 15px;
+        padding: 2px 10px;
+        border-radius: 20px;
+        letter-spacing: 0.04em;
+    }
+
+    .code-text {
+        font-size: 15px;
+        opacity: 0.9;
+    }
+
+    .code-text span {
+        font-weight: 700;
+        background: rgba(255, 255, 255, 0.18);
+        padding: 1px 8px;
+        border-radius: 6px;
+        font-family: monospace;
+        font-size: 15px;
+        letter-spacing: 0.1em;
+    }
+
+    .bar-right {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+    }
+
+    .bar-tagline {
+        font-size: 17px;
+        opacity: 0.92;
+        font-weight: 400;
+    }
+
+    .bar-cta {
+        background: #fff;
+        color: #1a9e72;
+        border: none;
+        border-radius: 22px;
+        padding: 8px 30px;
+        font-size: 15px;
+        font-weight: 700;
+        cursor: pointer;
+        letter-spacing: 0.02em;
+        transition: background 0.2s, transform 0.15s;
+        text-decoration: none;
+        display: inline-block;
+    }
+
+    .bar-cta:hover {
+        background: #e6fff6;
+        transform: scale(1.04);
+    }
+
+    .bar-close {
+        background: none;
+        border: none;
+        color: rgba(255, 255, 255, 0.75);
+        font-size: 18px;
+        cursor: pointer;
+        padding: 0 2px;
+        line-height: 1;
+        transition: color 0.2s;
+        display: flex;
+        align-items: center;
+    }
+
+    .bar-close:hover {
+        color: #fff;
+    }
+</style>
+
+<div id="announcement-bar">
+    <div class="bar-left">
+        <div class="vip-icon">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/>
+            </svg>
+            VIP SALE
+        </div>
+        <span class="badge-off">50% OFF</span>
+        <span class="code-text">Code: <span>LIFETIME499</span></span>
+    </div>
+    <div class="bar-right">
+        <span class="bar-tagline">Start your trading journey right</span>
+        <a href="{{ url('forex-signal') }}" class="bar-cta">Get Started</a>
+        <button class="bar-close" onclick="closeAnnouncementBar()" title="Close">&#x2715;</button>
+    </div>
+</div>
