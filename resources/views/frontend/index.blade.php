@@ -1493,7 +1493,7 @@
         }
 
         .newsletter .btn:hover {
-            background-color: var(--orange-hover-color);
+            background-color: var(--primary-color);
         }
 
         /* Gradient edges */
@@ -1613,9 +1613,9 @@
             </div>
 
             <div class="newsletter px-2">
-                <h3>NEVER MISS A SIGNAL</h3>
+                <h3 class="mb-3">NEVER MISS A SIGNAL</h3>
                 <p>Get live forex & gold trade setups delivered instantly.</p>
-                <button class="btn btn-primary">Profit Starts Here</button>
+                <button class="btn btn-primary mt-2">Profit Starts Here</button>
             </div>
         </div>
     </section>
