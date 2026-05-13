@@ -93,7 +93,7 @@
 
         <div class="carousel-item active">
             <!-- Replace src with your actual image path -->
-            <img src="{{url('storage/app/public/home-slider/website-07.jpg')}}" alt="Our Signals are Money Making Machine" />
+            <img src="{{url('storage/app/public/home-slider/website-07.png')}}" alt="Our Signals are Money Making Machine" />
         </div>
     </div>
 

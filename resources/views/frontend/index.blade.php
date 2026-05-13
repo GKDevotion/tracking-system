@@ -7,7 +7,6 @@
     <style>
         .join-section .profit-text{
             font-size: 3rem;
-            margin-top: -90px
         }
 
         /* .join-section .profit-text span
@@ -25,12 +24,18 @@
             font-weight: 800;
         }
 
+        .join-section .profit-text span.color-change{
+            color: #46e546;
+            font-size: 3rem;
+            text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
+        }
+
         @media only screen and (max-width: 991px){
             .join-section .profit-text{
                 font-size: 2rem;
             }
 
-            .join-section .profit-text span
+            .join-section .profit-text span.color-change
             {
                 font-size: 2.5rem;
             }
@@ -54,7 +59,7 @@
             <div class="row text-center">
                 <h2 class="wow fadeInUp text-black profit-text">
                     Thousands Joined.
-                    <span >PROFIT</span>
+                    <span class="color-change">PROFIT</span>
                     Started
                 </h2>
             </div>
@@ -326,7 +331,7 @@
         }
     </style>
 
-    <section class="join-section section-cta">
+    <section class="join-section section-cta" style="margin-top: -90px;">
         <div class="container">
             <div class="row text-center">
                 <h2 class="wow fadeInUp text-black profit-text">
