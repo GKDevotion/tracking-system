@@ -26,6 +26,7 @@ class HomeController extends Controller
             $planArr[$plan->name] = [
                 'price_item_class' => $plan->is_highlighted ? 'highlighted-box box-bg-shape' : '',
                 'price' => $plan->price,
+                'type' => $plan->type,
                 'value' => $plan->description,
                 'feature' => $plan->features,
                 'cta' => $plan->cta,

@@ -32,14 +32,24 @@
                             <div class="col-md-6">
                                 <label class="form-label">Price <span class="text-danger">*</span></label>
                                 <input type="text" name="price" value="{{ old('price', $plan->price) }}"
-                                    class="form-control @error('price') is-invalid @enderror" placeholder="$29 / Month"
+                                    class="form-control @error('price') is-invalid @enderror" placeholder="$29"
                                     required>
                                 @error('price')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
 
-                            <div class="col-12">
+                            <div class="col-md-6">
+                                <label class="form-label">Type <span class="text-danger">*</span></label>
+                                <input type="text" name="type" value="{{ old('type', $plan->type) }}"
+                                    class="form-control @error('type') is-invalid @enderror" placeholder="Enter Type ( Month, only, etc)"
+                                    required>
+                                @error('type')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div class="col-6">
                                 <label class="form-label">Description <span class="text-danger">*</span></label>
                                 <input type = "text" name="description"
                                     value="{{ old('description', $plan->description) }}"

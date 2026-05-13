@@ -37,6 +37,7 @@ class PlanController extends Controller
         $data = $request->validate([
             'name' => 'required|string|max:255',
             'price' => 'required|string|max:255',
+            'type' => 'required|string|max:255',
             'description' => 'required|string',
             'features' => 'required|string',
             'cta' => 'required|string|max:255',
@@ -77,6 +78,7 @@ class PlanController extends Controller
         $data = $request->validate([
             'name' => 'required|string|max:255',
             'price' => 'required|string|max:255',
+            'type' => 'required|string|max:255',
             'description' => 'required|string',
             'features' => 'required|string',
             'cta' => 'required|string|max:255',

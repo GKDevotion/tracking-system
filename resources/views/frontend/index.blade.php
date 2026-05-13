@@ -1189,179 +1189,73 @@
                             <span><input class="form-check-input" type="checkbox" id="planToggle"></span>
                             <label class="form-check-label" for="planToggle" id="toggleLabelAnnually">Annually</label>
                         </div>
-                        <!-- Sidebar Our Pricing Nav End -->
-
-                        <!-- Pricing Tab Item Start -->
-                        <div class="pricing-tab-item d-none" id="monthly">
-                            <div class="row">
-                                <div class="col-lg-4 col-md-6">
-                                    <!-- Pricing Box Start -->
-                                    <div class="pricing-item">
-                                        <!-- Pricing Header Start -->
-                                        <div class="pricing-header">
-                                            <h3>Starter Plan</h3>
-                                            <h2>$39.00<sub>/Monthly</sub></h2>
-                                        </div>
-                                        <!-- Pricing Header End -->
-
-                                        <!-- Pricing Item Content Start -->
-                                        <div class="pricing-item-content">
-                                            <p>Perfect for short videos, ads, or social media content.</p>
-                                        </div>
-                                        <!-- Pricing Item Content End -->
-
-                                        <!-- Pricing body Start -->
-                                        <div class="pricing-body">
-                                            <h3>What's Included:</h3>
-                                            <ul>
-                                                <li>1 free revision</li>
-                                                <li>Up to 150 words</li>
-                                                <li>1 voice talent option</li>
-                                            </ul>
-                                        </div>
-                                        <!-- Pricing body End -->
-
-                                        <!-- Pricing Button Start -->
-                                        <div class="pricing-btn">
-                                            <a href="purchase?plan=free" class="btn-default btn-default-red">get started
-                                                now</a>
-                                        </div>
-                                        <!-- Pricing Button End -->
-                                    </div>
-                                    <!-- Pricing Box End -->
-                                </div>
-
-                                <div class="col-lg-4 col-md-6">
-                                    <!-- Pricing Box Start -->
-                                    <div class="pricing-item highlighted-box box-bg-shape">
-                                        <!-- Pricing Header Start -->
-                                        <div class="pricing-header">
-                                            <h3>Growth Plan</h3>
-                                            <h2>$59.00<sub>/Monthly</sub></h2>
-                                        </div>
-                                        <!-- Pricing Header End -->
-
-                                        <!-- Pricing Item Content Start -->
-                                        <div class="pricing-item-content">
-                                            <p>Great for product videos, presentations, or training content.</p>
-                                        </div>
-                                        <!-- Pricing Item Content End -->
-
-                                        <!-- Pricing body Start -->
-                                        <div class="pricing-body">
-                                            <h3>What's Included:</h3>
-                                            <ul>
-                                                <li>Up to 500 words</li>
-                                                <li>Unlimited revisions</li>
-                                                <li>1 premium voice talent option</li>
-                                            </ul>
-                                        </div>
-                                        <!-- Pricing body End -->
-
-                                        <!-- Pricing Button Start -->
-                                        <div class="pricing-btn">
-                                            <a href="contact.php" class="btn-default">get started now</a>
-                                        </div>
-                                        <!-- Pricing Button End -->
-                                    </div>
-                                    <!-- Pricing Box End -->
-                                </div>
-
-                                <div class="col-lg-4 col-md-6">
-                                    <!-- Pricing Box Start -->
-                                    <div class="pricing-item">
-                                        <!-- Pricing Header Start -->
-                                        <div class="pricing-header">
-                                            <h3>Enterprise Plan</h3>
-                                            <h2>$99.00<sub>/Monthly</sub></h2>
-                                        </div>
-                                        <!-- Pricing Header End -->
-
-                                        <!-- Pricing Item Content Start -->
-                                        <div class="pricing-item-content">
-                                            <p>For ongoing, multi-language, or large-scale projects.</p>
-                                        </div>
-                                        <!-- Pricing Item Content End -->
-
-                                        <!-- Pricing body Start -->
-                                        <div class="pricing-body">
-                                            <h3>What's Included:</h3>
-                                            <ul>
-                                                <li>Unlimited word count</li>
-                                                <li>Dedicated project manager</li>
-                                                <li>Multiple voice talent options</li>
-                                            </ul>
-                                        </div>
-                                        <!-- Pricing body End -->
-
-                                        <!-- Pricing Button Start -->
-                                        <div class="pricing-btn">
-                                            <a href="contact.php" class="btn-default btn-default-red">get started now</a>
-                                        </div>
-                                        <!-- Pricing Button End -->
-                                    </div>
-                                    <!-- Pricing Box End -->
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Pricing Tab Item End -->
-
+                        <!-- Sidebar Our Pricing Nav End --> 
+                        <style>
+                            .pricing-header h2 small{
+                                font-size: 20px;
+                                font-weight: 600; 
+                            }
+                        </style> 
                         <!-- Pricing Tab Item Start -->
                         <div class="pricing-tab-item" id="annually">
                             <div class="row">
-                                <?php
-                                foreach( $planArr as $k=>$val ){
-                                    ?>
-                                <div class="col-lg-4 col-md-6">
-                                    <!-- Pricing Box Start -->
-                                    <div class="pricing-item <?= $val['price_item_class'] ?>">
-                                        <!-- Pricing Header Start -->
-                                        <div class="pricing-header">
-                                            <h3><?= $k ?></h3>
-                                            <h2><?= $val['price'] ?></h2>
-                                        </div>
-                                        <!-- Pricing Header End -->
 
-                                        <!-- Pricing Item Content Start -->
-                                        <div class="pricing-item-content">
-                                            <p>
-                                                <?= $val['value'] ?>
-                                            </p>
-                                        </div>
-                                        <!-- Pricing Item Content End -->
+                                @foreach($planArr as $k => $val)
 
-                                        <!-- Pricing Button Start -->
-                                        <div class="pricing-btn">
-                                            <a href="<?= url('purchase?plan=' . $val['link']) ?>" class="btn-default">
-                                                Get Started Now
-                                            </a>
-                                        </div>
-                                        <!-- Pricing Button End -->
+                                    <div class="col-lg-4 col-md-6">
+                                        <!-- Pricing Box Start -->
+                                        <div class="pricing-item {{ $val['price_item_class'] }}">
 
-                                        <!-- Pricing body Start -->
-                                        <div class="pricing-body">
-                                            <h3 class="d-none">What's Included:</h3>
-                                            <ul>
-                                                <?php
-                                                    foreach( $val['feature'] as $f ){
-                                                        ?>
-                                                <li>
-                                                    <?= $f ?>
-                                                </li>
-                                                <?php
-                                                    }?>
-                                            </ul>
+                                            <!-- Pricing Header Start -->
+                                            <div class="pricing-header">
+                                                <h3>{{ $k }}</h3>
+
+                                                <h2>
+                                                    {{ $val['price'] }} 
+                                                   @if(!empty($val['type']))
+                                                        <small>/{{ strtolower($val['type']) }}</small>
+                                                    @endif
+                                                </h2>
+                                            </div>
+                                            <!-- Pricing Header End -->
+
+                                            <!-- Pricing Item Content Start -->
+                                            <div class="pricing-item-content">
+                                                <p>
+                                                    {{ $val['value'] }}
+                                                </p>
+                                            </div>
+                                            <!-- Pricing Item Content End -->
+
+                                            <!-- Pricing Button Start -->
+                                            <div class="pricing-btn">
+                                                <a href="{{ url('purchase?plan=' . $val['link']) }}" class="btn-default">
+                                                    Get Started Now
+                                                </a>
+                                            </div>
+                                            <!-- Pricing Button End -->
+
+                                            <!-- Pricing body Start -->
+                                            <div class="pricing-body">
+                                                <h3 class="d-none">What's Included:</h3>
+
+                                                <ul>
+                                                    @foreach($val['feature'] as $f)
+                                                        <li>{{ $f }}</li>
+                                                    @endforeach
+                                                </ul>
+                                            </div>
+                                            <!-- Pricing body End -->
+
                                         </div>
-                                        <!-- Pricing body End -->
+                                        <!-- Pricing Box End -->
                                     </div>
-                                    <!-- Pricing Box End -->
-                                </div>
-                                <?php
-                                }?>
+
+                                @endforeach
 
                             </div>
                         </div>
-                        <!-- Pricing Tab Item End -->
+                        <!-- Pricing Tab Item End --> 
                     </div>
 
                     <!-- Pricing Benifit List Start -->
