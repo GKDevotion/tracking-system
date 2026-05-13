@@ -7,6 +7,7 @@
     <style>
         .join-section .profit-text{
             font-size: 3rem;
+            margin-top: -90px
         }
 
         /* .join-section .profit-text span
