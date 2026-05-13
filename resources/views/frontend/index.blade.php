@@ -332,12 +332,13 @@
     </style>
 
     <section class="join-section section-cta" style="margin-top: -90px;">
-        <div class="container">
+        <div class="container d-none">
             <div class="row text-center">
                 <h2 class="wow fadeInUp text-black profit-text">
                     <span class="live-badge">
                         <span style="font-size: 2rem;">Tracked</span>
                         <span class="live-text">LIVE</span>
+                        <span style="font-size: 2rem;">Result</span>
                         <span class="live-dot"></span>
                     </span>
                     <p class="live-simple-text pt-2 d-none">
@@ -575,7 +576,20 @@
                 <div class="row align-items-center g-5">
 
                     <div class="col-lg-5">
-                        <h2 class="headline mb-4">
+                        <h2 class="wow fadeInUp text-black profit-text mb-4">
+                            <span class="live-badge">
+                                <span style="font-size: 2rem;">Tracked</span>
+                                <span class="live-text">LIVE</span>
+                                <span style="font-size: 2rem;">Result</span>
+                                {{-- <span class="live-dot"></span> --}}
+                                <div class="dots">
+                                    <span class="dot"></span>
+                                    <span class="dot"></span>
+                                    <span class="dot"></span>
+                                </div>
+                            </span>
+                        </h2>
+                        <h2 class="headline mb-4 d-none">
                             Trade with<br>
                             <span>Verified Results</span>
                         </h2>
