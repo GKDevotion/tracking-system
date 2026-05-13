@@ -227,6 +227,7 @@
 
         .trade-pnl {
             font-weight: 600;
+            font-size: 1.3rem;
         }
 
         .trade-pnl.profit {
@@ -329,8 +330,9 @@
             <div class="row text-center">
                 <h2 class="wow fadeInUp text-black profit-text">
                     <span class="live-badge">
-                        <span class="live-dot"></span>
+                        <span style="font-size: 2rem;">Tracked</span>
                         <span class="live-text">LIVE</span>
+                        <span class="live-dot"></span>
                     </span>
                     <p class="live-simple-text pt-2 d-none">
                         Verified Performance
@@ -444,7 +446,7 @@
                 background: white;
                 border-radius: 12px;
                 padding: 12px 20px;
-                box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+                box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
                 display: flex;
                 align-items: center;
                 margin-bottom: 15px;
@@ -566,11 +568,11 @@
             <div class="hero-card p-4">
                 <div class="row align-items-center g-5">
 
-                    <div class="col-lg-6">
-                        <h1 class="headline mb-4">
+                    <div class="col-lg-5">
+                        <h2 class="headline mb-4">
                             Trade with<br>
                             <span>Verified Results</span>
-                        </h1>
+                        </h2>
 
                         <div class="check-list">
                             <div class="check-item">
@@ -581,17 +583,14 @@
                                 <div class="check-icon">✓</div>
                                 Auto-updated results
                             </div>
-                            <div class="check-item border-0">
-                                <div class="check-icon">✓</div>
-                                Verified by third-party system
-                            </div>
                             <div class="accent-line"></div>
                         </div>
                     </div>
 
-                    <div class="col-lg-6 text-center text-lg-start">
+                    <div class="col-lg-7 text-center text-lg-start">
+
                         <div class="row align-items-center">
-                            <div class="col-md-6 mb-4 mb-md-0">
+                            <div class="col-md-4 mb-4 mb-md-0">
                                 {{-- <div class="shield-container">
                                     <img src="https://cdn-icons-png.flaticon.com/512/3513/3513725.png" alt="Shield" class="shield-img" style="width: 250px;">
                                 </div> --}}
@@ -606,7 +605,7 @@
                                         width: 170px;
                                         height: auto;
                                         margin: auto;
-                                        animation: floating 8s ease-in-out infinite;
+                                        animation: floating 2s ease-in-out infinite;
                                         transform-style: preserve-3d;
                                     }
 
@@ -633,7 +632,10 @@
                                     <img src="{{url('public/frontend/images/Trusted-Sheild.png')}}">
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-8">
+                                <h2 class="mb-4">
+                                    <b>Verified by third-party</b>
+                                </h2>
                                 <div class="verification-badge">
                                     <span class="badge-check">✔</span>
                                     <div>
@@ -644,7 +646,7 @@
                                 <div class="verification-badge">
                                     <span class="badge-check">✔</span>
                                     <div>
-                                        <div class="badge-text">MyFXBook Verified</div>
+                                        <div class="badge-text">BlueFX Verified</div>
                                         <div class="badge-subtext">Updated daily</div>
                                     </div>
                                 </div>
@@ -698,7 +700,7 @@
 
                 .glass-card small{
                     vertical-align: sub;
-                    font-size: 16px;
+                    font-size: 20px;
                 }
             </style>
             <div class="row g-4 mb-4">
@@ -811,9 +813,9 @@
                                 <style>
                                     .live-status{
                                         display:flex;
-                                        align-items:center;
+                                        align-items:baseline;
                                         gap:4px;
-                                        font-size:25px;
+                                        font-size:32px;
                                         font-weight:600;
                                         color:var(--logo-color-hover);
                                     }
@@ -828,7 +830,7 @@
                                         height:5px;
                                         background:var(--logo-color);
                                         border-radius:50%;
-                                        animation:blink 1s infinite;
+                                        animation:blink 2s infinite;
                                     }
 
                                     .dot:nth-child(2){

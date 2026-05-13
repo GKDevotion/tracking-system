@@ -100,7 +100,7 @@
         color: #d62828 !important;
     }
 </style>
- 
+
 <nav class="navbar navbar-expand-lg fixed-top custom-nav sticky-active" id="mainNav" style="white-space: nowrap;">
     <div class="container nav-container">
         <a class="navbar-brand" href="{{ url('/') }}">
@@ -293,15 +293,15 @@
 <!-- Announcement Bar -->
 <style>
     #announcement-bar {
-        background: #1a9e72;
-        color: #fff;
+        background: var(--primary-color);
+        color: var(--bg-color);
         display: flex;
         align-items: center;
         justify-content: space-between;
         padding: 0 32px;
         height: 48px;
         position: fixed;
-        top: 0;
+        top: 80px;
         left: 0;
         right: 0;
         z-index: 1100;
@@ -314,7 +314,7 @@
 
     /* Push nav below the announcement bar */
     #mainNav {
-        top: 44px; /* matches announcement bar height */
+        top: 0; /* matches announcement bar height */
         transition: top 0.3s ease, padding 0.4s ease-in-out;
     }
 
@@ -352,8 +352,8 @@
     }
 
     .badge-off {
-        background: rgba(255, 255, 255, 0.22);
-        color: #fff;
+        background: #fff;
+        color: #1a9e72;
         font-weight: 700;
         font-size: 15px;
         padding: 2px 10px;
