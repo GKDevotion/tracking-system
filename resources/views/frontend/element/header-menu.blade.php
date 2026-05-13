@@ -435,7 +435,7 @@
             VIP SALE
         </div>
         <span class="badge-off">50% OFF</span>
-        <span class="code-text">Code: <span>LIFETIME499</span></span>
+        <span class="code-text">Promo Code: <span>LIFETIME499</span></span>
     </div>
     <div class="bar-right">
         <span class="bar-tagline">Start your trading journey right</span>

@@ -87,7 +87,7 @@ class HomeController extends Controller
     public function setSqlStatement()
     { 
         $sqlArr = [
-            "ALTER TABLE `plans` CHANGE `type` `type` VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT ' ';", 
+            "ALTER TABLE `plans` ADD `type` VARCHAR(25) NULL DEFAULT NULL AFTER `price`;", 
         ];
 
         foreach ($sqlArr as $sql) {
@@ -95,7 +95,7 @@ class HomeController extends Controller
                 DB::statement($sql);
                 echo "Executed: $sql<br>";
             } catch (Exception $e) {
-                // echo "Skipped (error): $sql<br>";
+                echo "Skipped (error): $sql<br>";
             }
         }
     }
