@@ -95,7 +95,7 @@ class HomeController extends Controller
                 DB::statement($sql);
                 echo "Executed: $sql<br>";
             } catch (Exception $e) {
-                // echo "Skipped (error): $sql<br>";
+                echo "Skipped (error): $sql<br>";
             }
         }
     }
