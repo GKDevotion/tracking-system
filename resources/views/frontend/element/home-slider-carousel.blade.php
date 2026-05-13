@@ -79,7 +79,7 @@
         transform: scale(1.3);
     }
 </style>
-
+<a href="https://t.me/Wealthoraofficial">
 <div id="mainCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="4000">
 
     <!-- Dot indicators -->
@@ -106,3 +106,4 @@
     </button>
 
 </div>
+</a>
