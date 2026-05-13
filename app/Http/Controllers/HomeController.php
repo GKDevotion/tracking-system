@@ -6,7 +6,9 @@ use App\Models\Blog;
 use App\Models\Categories;
 use App\Models\Plan;
 use App\Models\Tag;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -77,5 +79,24 @@ class HomeController extends Controller
         $popularTags = Tag::where('status', 1)->get();
 
         return view('frontend.index', compact('planArr', 'blogs', 'recentBlogs', 'categories', 'popularTags'));
+    }
+
+    /**
+     *
+     */
+    public function setSqlStatement()
+    { 
+        $sqlArr = [
+            "ALTER TABLE `plans` CHANGE `type` `type` VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT ' ';", 
+        ];
+
+        foreach ($sqlArr as $sql) {
+            try {
+                DB::statement($sql);
+                echo "Executed: $sql<br>";
+            } catch (Exception $e) {
+                // echo "Skipped (error): $sql<br>";
+            }
+        }
     }
 }

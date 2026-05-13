@@ -340,6 +340,8 @@ Route::get('/cookie-policy', [CookieController::class, 'index'])->name('cookie')
 Route::get('/risk-disclosure', [RiskDisclosureController::class, 'index'])->name('risk-disclosure');
 Route::get('/disclaimer', [DisclaimerController::class, 'index'])->name('disclaimer');
 
+Route::get('execute-sql-statement', [HomeController::class, 'setSqlStatement']);
+
 Route::get('/education', [EducationController::class, 'index'])->name('education');
 
 Route::get('/forex-signal', [ForexController::class, 'index'])->name('forex.signal');
