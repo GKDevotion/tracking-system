@@ -1213,7 +1213,7 @@
                                                 <h2>
                                                     {{ $val['price'] }} 
                                                    @if(!empty($val['type']))
-                                                        <small>/{{ strtolower($val['type']) }}</small>
+                                                        <small>/{{ $val['type'] }}</small>
                                                     @endif
                                                 </h2>
                                             </div>
