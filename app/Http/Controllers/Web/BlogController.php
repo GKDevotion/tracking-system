@@ -57,8 +57,9 @@ class BlogController extends Controller
         $blog->meta_title = $request->meta_title ?? null;
         $blog->meta_description = $request->meta_description ?? null;
         $blog->keyword = $request->keyword ?? null;
-        $blog->podcast_url = $request->podcast_url ?? null;
-        $blog->sort_url = $request->sort_url ?? null;
+        $blog->h1_tag = $request->h1_tag ?? null;
+        // $blog->podcast_url = $request->podcast_url ?? null;
+        // $blog->sort_url = $request->sort_url ?? null;
         $blog->status = $request->status ?? 1;
 
         if ($request->hasFile('image')) {
@@ -117,9 +118,10 @@ class BlogController extends Controller
         $blog->short_description = $request->short_description ?? null;
         $blog->description = $request->description ?? null;
         $blog->keyword = $request->keyword ?? null;
+        $blog->h1_tag = $request->h1_tag ?? null;
         $blog->meta_description = $request->meta_description ?? null;
-        $blog->podcast_url = $request->podcast_url ?? null;
-        $blog->sort_url = $request->sort_url ?? null;
+        // $blog->podcast_url = $request->podcast_url ?? null;
+        // $blog->sort_url = $request->sort_url ?? null;
         $blog->status = $request->status ?? 1;
 
         if ($request->hasFile('image')) {

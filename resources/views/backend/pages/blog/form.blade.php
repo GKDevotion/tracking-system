@@ -97,15 +97,27 @@
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
- 
-                            <div class="col-12">
-                                <label class="form-label">Meta Title</label>
-                                <input type="text" name="meta_title" value="{{ old('meta_title', $blog->meta_title ?? '') }}"
-                                    class="form-control @error('meta_title') is-invalid @enderror"
-                                    placeholder="Enter Meta Title">
-                                @error('meta_title')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
+
+                            <div class="row mt-3">
+                                <div class="col-6">
+                                    <label class="form-label">H1 Tag</label>
+                                    <input type="text" name="h1_tag" value="{{ old('h1_tag', $blog->h1_tag ?? '') }}"
+                                        class="form-control @error('h1_tag') is-invalid @enderror"
+                                        placeholder="Enter H1 Tag">
+                                    @error('h1_tag')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+    
+                                <div class="col-6">
+                                    <label class="form-label">Meta Title</label>
+                                    <input type="text" name="meta_title" value="{{ old('meta_title', $blog->meta_title ?? '') }}"
+                                        class="form-control @error('meta_title') is-invalid @enderror"
+                                        placeholder="Enter Meta Title">
+                                    @error('meta_title')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
                             </div>
 
                             <div class="col-12">
@@ -129,7 +141,7 @@
                             </div>
 
                             {{-- Podcast URL --}}
-                            <div class="col-md-6">
+                            <div class="col-md-6 d-none">
                                 <label class="form-label">Podcast URL</label>
                                 <input type="url" name="podcast_url"
                                     value="{{ old('podcast_url', $blog->podcast_url ?? '') }}"
@@ -141,7 +153,7 @@
                             </div>
 
                             {{-- Sort URL --}}
-                            <div class="col-md-6">
+                            <div class="col-md-6 d-none">
                                 <label class="form-label">Sort URL</label>
                                 <input type="url" name="sort_url" value="{{ old('sort_url', $blog->sort_url ?? '') }}"
                                     class="form-control @error('sort_url') is-invalid @enderror"

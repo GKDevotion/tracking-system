@@ -46,7 +46,7 @@ class HomeController extends Controller
                 $q->where('category_id', $request->category);
             })
             ->orderBy('created_at', 'desc')
-            ->paginate(8);
+            ->paginate(getConfigurationField('SEE_MORE_BLOGS'));
 
         $recentBlogs = Blog::select('id', 'title', 'slug', 'image', 'created_at')
             ->where('status', 1)
