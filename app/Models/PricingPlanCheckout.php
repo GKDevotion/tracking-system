@@ -19,6 +19,7 @@ class PricingPlanCheckout extends Model
         'trade_signals',
         'tele_username',
         'mobile_number',
+        'payment_type',
         'payment_option',
         'confirm_payment',
     ];

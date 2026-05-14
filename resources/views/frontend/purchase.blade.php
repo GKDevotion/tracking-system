@@ -78,124 +78,447 @@
          <div class="card p-4 p-md-5">
              <h2 class="text-center mb-4 fw-bold">Premium Plan Checkout</h2>
 
-             <form id="unifiedForm" class="needs-validation" novalidate method="POST" action="{{ route('checkout.store') }}"
-                 enctype="multipart/form-data">
-                 @csrf
-                 <input type="hidden" name="plan" value="{{ request('plan') }}">
-                 <input type="hidden" name="payment_type" id="paymentType" value="trc20">
+          <form id="unifiedForm" class="needs-validation" novalidate method="POST"
+    action="{{ route('checkout.store') }}" enctype="multipart/form-data">
 
-                 <div class="mb-4">
-                     <h4 class="section-title">Personal Information</h4>
-                     <div class="row g-3">
-                         <div class="col-md-6">
-                             <label class="form-label mb-0">First Name *</label>
-                             <input type="text" class="form-control form-control-lg" id="firstName" name="first_name"
-                                 required>
-                             <div class="invalid-feedback">Required</div>
-                         </div>
-                         <div class="col-md-6">
-                             <label class="form-label mb-0">Last Name *</label>
-                             <input type="text" class="form-control form-control-lg" id="lastName" name="last_name"
-                                 required>
-                         </div>
-                         <div class="col-md-6">
-                             <label class="form-label mb-0">Email *</label>
-                             <input type="email" class="form-control form-control-lg" id="email" name="email"
-                                 required>
-                         </div>
-                         <div class="col-md-6">
-                             <label class="form-label mb-0">Country *</label>
-                             <select class="form-select " name="country" required>
-                                 <option value="">Select Country</option>
-                                 @foreach ($countries as $country)
-                                     <option value="{{ $country->id }}"
-                                         {{ old('country') == $country->id ? 'selected' : '' }}>
-                                         {{ $country->name }}
-                                     </option>
-                                 @endforeach
-                             </select>
-                         </div>
-                     </div>
-                 </div>
+    @csrf
 
-                 <div class="mb-4 animate__animated animate__fadeInUp">
-                     <h4 class="section-title">Receiving Signals</h4>
-                     <p class="text-muted small">Where should we send your trading signals?</p>
-                     <div class="d-flex gap-4 mb-3">
-                         <div class="form-check">
-                             <input class="form-check-input" type="radio" name="platform" id="optTelegram"
-                                 value="telegram" checked>
-                             <label class="form-check-label" for="optTelegram">Telegram</label>
-                         </div>
-                         <div class="form-check">
-                             <input class="form-check-input" type="radio" name="platform" id="optWhatsApp"
-                                 value="whatsapp">
-                             <label class="form-check-label" for="optWhatsApp">WhatsApp</label>
-                         </div>
-                     </div>
+    <input type="hidden" name="plan" value="{{ request('plan') }}">
+    <input type="hidden" name="payment_type" id="paymentType" value="crypto">
+    <input type="hidden" name="crypto_network" id="cryptoNetwork" value="trc20">
 
-                     <div class="row g-3">
-                         <div class="col-md-6" id="tgField">
-                             <label class="form-label mb-0">Telegram Username *</label>
-                             <input type="text" class="form-control" id="telegramUser" name="telegram_username"
-                                 placeholder="@username" required>
-                         </div>
-                         <div class="col-md-6">
-                             <label class="form-label mb-0">Phone Number *</label>
-                             <input  type="tel" class="form-control" id="phone" name="phone" placeholder="Enter Your Mobile Number"
-                                 required style="width: 570px;">
-                         </div>
-                     </div>
-                 </div>
+    {{-- PERSONAL INFORMATION --}}
+    <div class="mb-4">
+        <h4 class="section-title">Personal Information</h4>
 
-                 <?php
-                if( isset( $_GET['plan'] ) && $_GET['plan'] != "free" ){
-                    ?>
-                 <div class="mb-4 animate__animated animate__fadeInUp">
-                     <h4 class="section-title">Payment Option</h4>
-                     <div class="row g-3 mb-4">
-                         <div class="col-4">
-                             <div class="row">
-                                 <div class="col-md-12 mb-2">
-                                     <div class="payment-card active" onclick="selectPayment('trc20', this)">
-                                         <img src="https://www.forexgdp.com/wp-content/uploads/2024/12/USDT-tether-trc-20-token-logo.png"
-                                             width="150" class="mb-2">
-                                     </div>
-                                 </div>
-                                 <div class="col-md-12">
-                                     <div class="payment-card" onclick="selectPayment('bep20', this)">
-                                         <img src="https://www.forexgdp.com/wp-content/uploads/2024/12/usdt-bep20-address.png"
-                                             width="150" class="mb-2">
-                                     </div>
-                                 </div>
-                             </div>
-                         </div>
-                         <div class="col-8">
-                             <div class="qr-container text-center animate__animated animate__zoomIn" id="qrSection">
-                                 <h5 id="networkTitle" class="fw-bold">USDT - TRC20 - Tron Network</h5>
-                                 <img id="qrCodeImg" src="public/frontend/images/QR-Code-usdt-tron-trc20-address-gdp.png"
-                                     alt="QR" class="my-3">
-                                 <p class="text-primary fw-bold text-break" id="walletAddr">
-                                     TGjYaSW5StCyejzv8KebpkjsjDaxtxnBdh</p>
-                             </div>
-                         </div>
-                     </div>
-                 </div>
+        <div class="row g-3">
 
-                 <div class="mb-4">
-                     <h4 class="section-title">Confirm Payment</h4>
-                     <label class="form-label mb-0 fw-bold">Upload Transaction Screenshot / PDF *</label>
-                     <input type="file" class="form-control form-control-lg" id="proofFile" name="proof_file"
-                         accept="image/*,.pdf" required>
-                 </div>
-                 <?php
-                }?>
+            <div class="col-md-6">
+                <label class="form-label mb-0">First Name *</label>
 
-                 <button type="submit" class="btn btn-primary btn-lg w-100 btn-submit shadow" id="submitBtn">
-                     Confirm & Complete Checkout
-                 </button>
-             </form>
+                <input type="text"
+                    class="form-control form-control-lg"
+                    id="firstName"
+                    name="first_name"
+                    required>
 
+                <div class="invalid-feedback">Required</div>
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label mb-0">Last Name *</label>
+
+                <input type="text"
+                    class="form-control form-control-lg"
+                    id="lastName"
+                    name="last_name"
+                    required>
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label mb-0">Email *</label>
+
+                <input type="email"
+                    class="form-control form-control-lg"
+                    id="email"
+                    name="email"
+                    required>
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label mb-0">Country *</label>
+
+                <select class="form-select" name="country" required>
+
+                    <option value="">Select Country</option>
+
+                    @foreach ($countries as $country)
+                        <option value="{{ $country->id }}"
+                            {{ old('country') == $country->id ? 'selected' : '' }}>
+                            {{ $country->name }}
+                        </option>
+                    @endforeach
+
+                </select>
+            </div>
+
+        </div>
+    </div>
+
+    {{-- RECEIVING SIGNALS --}}
+    <div class="mb-4 animate__animated animate__fadeInUp">
+
+        <h4 class="section-title">Receiving Signals</h4>
+
+        <p class="text-muted small">
+            Where should we send your trading signals?
+        </p>
+
+        <div class="d-flex gap-4 mb-3">
+
+            <div class="form-check">
+                <input class="form-check-input"
+                    type="radio"
+                    name="platform"
+                    id="optTelegram"
+                    value="telegram"
+                    checked>
+
+                <label class="form-check-label" for="optTelegram">
+                    Telegram
+                </label>
+            </div>
+
+            <div class="form-check">
+                <input class="form-check-input"
+                    type="radio"
+                    name="platform"
+                    id="optWhatsApp"
+                    value="whatsapp">
+
+                <label class="form-check-label" for="optWhatsApp">
+                    WhatsApp
+                </label>
+            </div>
+
+        </div>
+
+        <div class="row g-3">
+
+            <div class="col-md-6" id="tgField">
+
+                <label class="form-label mb-0">
+                    Telegram Username *
+                </label>
+
+                <input type="text"
+                    class="form-control"
+                    id="telegramUser"
+                    name="telegram_username"
+                    placeholder="@username"
+                    required>
+
+            </div>
+
+            <div class="col-md-6">
+
+                <label class="form-label mb-0">
+                    Phone Number *
+                </label>
+
+                <input type="tel"
+                    class="form-control"
+                    id="phone"
+                    name="phone"
+                    placeholder="Enter Your Mobile Number"
+                    required>
+
+            </div>
+
+        </div>
+    </div>
+
+    @if(isset($_GET['plan']) && $_GET['plan'] != "free")
+
+        {{-- PAYMENT TYPE --}}
+        <div class="mb-4 animate__animated animate__fadeInUp">
+
+            <h4 class="section-title">Payment Type</h4>
+
+            <p class="text-muted small">
+                Choose your preferred payment method
+            </p>
+
+            <div class="d-flex gap-4 mb-4">
+
+                <div class="form-check">
+                    <input class="form-check-input"
+                        type="radio"
+                        name="payment_method"
+                        id="paymentCrypto"
+                        value="crypto"
+                        checked>
+
+                    <label class="form-check-label" for="paymentCrypto">
+                        Crypto
+                    </label>
+                </div>
+
+                <div class="form-check">
+                    <input class="form-check-input"
+                        type="radio"
+                        name="payment_method"
+                        id="paymentBank"
+                        value="bank">
+
+                    <label class="form-check-label" for="paymentBank">
+                        Bank Transfer
+                    </label>
+                </div>
+
+            </div>
+
+            {{-- CRYPTO SECTION --}}
+            <div id="cryptoSection">
+
+                <h4 class="section-title">Payment Option</h4>
+
+                <div class="row g-3 mb-4">
+
+                    <div class="col-md-4">
+
+                        <div class="row">
+
+                            <div class="col-md-12 mb-3">
+
+                                <div class="payment-card active"
+                                    onclick="selectPayment('trc20', this)">
+
+                                    <img src="https://www.forexgdp.com/wp-content/uploads/2024/12/USDT-tether-trc-20-token-logo.png"
+                                        width="150"
+                                        class="mb-2">
+
+                                </div>
+
+                            </div>
+
+                            <div class="col-md-12">
+
+                                <div class="payment-card"
+                                    onclick="selectPayment('bep20', this)">
+
+                                    <img src="https://www.forexgdp.com/wp-content/uploads/2024/12/usdt-bep20-address.png"
+                                        width="150"
+                                        class="mb-2">
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-8">
+
+                        <div class="qr-container text-center animate__animated animate__zoomIn"
+                            id="qrSection">
+
+                            <h5 id="networkTitle" class="fw-bold">
+                                USDT - TRC20 - Tron Network
+                            </h5>
+
+                            <img id="qrCodeImg"
+                                src="{{ url('public/frontend/images/QR-Code-usdt-bep20-bnb-bsc-network-gdp.png') }}"
+                                alt="QR"
+                                class="my-3 img-fluid">
+
+                            <p class="text-primary fw-bold text-break"
+                                id="walletAddr">
+
+                                TGjYaSW5StCyejzv8KebpkjsjDaxtxnBdh
+
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            {{-- BANK SECTION --}}
+      
+            <div id="bankSection" style="display: none;">
+
+                <div class="bank-box p-4 rounded shadow-sm border">
+
+                    <h5 class="fw-bold mb-4">
+                        Bank Account Details
+                    </h5>
+
+                    <div class="row g-3">
+
+                        <div class="col-md-6">
+
+                            <label class="fw-bold d-block">
+                                Bank Name
+                            </label>
+
+                            <p class="mb-0">
+                                Mashreq Bank PSC
+                            </p> 
+
+                        </div>
+
+                        <div class="col-md-6">
+
+                            <label class="fw-bold d-block">
+                                Account Holder Name
+                            </label>
+
+                            <p class="mb-0">
+                                WEALTHORA INTERNATIONAL FZE
+                            </p> 
+                        </div>
+
+                        <div class="col-md-6">
+
+                            <label class="fw-bold d-block">
+                                Account Number
+                            </label>
+
+                            <p class="mb-0">
+                                9102096844
+                            </p> 
+                        </div>
+
+                        <div class="col-md-6">
+
+                            <label class="fw-bold d-block">
+                                IBAN
+                            </label>
+
+                            <p class="mb-0">
+                                AE17033000019102096844
+                            </p> 
+
+                        </div>
+            
+
+                    
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {{-- PAYMENT PROOF --}}
+        <div class="mb-4">
+
+            <h4 class="section-title">
+                Confirm Payment
+            </h4>
+
+            <label class="form-label mb-0 fw-bold">
+                Upload Transaction Screenshot / PDF *
+            </label>
+
+            <input type="file"
+                class="form-control form-control-lg"
+                id="proofFile"
+                name="proof_file"
+                accept="image/*,.pdf"
+                required>
+
+        </div>
+
+    @endif
+
+    <button type="submit"
+        class="btn btn-primary btn-lg w-100 btn-submit shadow"
+        id="submitBtn">
+
+        Confirm & Complete Checkout
+
+    </button>
+
+</form>
+
+{{-- SCRIPT --}}
+<script>
+
+    // PAYMENT TYPE SWITCH
+    document.querySelectorAll('input[name="payment_method"]').forEach((radio) => {
+
+        radio.addEventListener('change', function () {
+
+            let paymentType = this.value;
+
+            document.getElementById('paymentType').value = paymentType;
+
+            if (paymentType === 'crypto') {
+
+                document.getElementById('cryptoSection').style.display = 'block';
+                document.getElementById('bankSection').style.display = 'none';
+
+            } else {
+
+                document.getElementById('cryptoSection').style.display = 'none';
+                document.getElementById('bankSection').style.display = 'block';
+
+            }
+
+        });
+
+    });
+
+    // CRYPTO NETWORK SWITCH
+    function selectPayment(network, element) {
+
+        document.querySelectorAll('.payment-card').forEach(card => {
+            card.classList.remove('active');
+        });
+
+        element.classList.add('active');
+
+        document.getElementById('cryptoNetwork').value = network;
+
+        if (network === 'trc20') {
+
+            document.getElementById('networkTitle').innerText =
+                'USDT - TRC20 - Tron Network';
+
+            document.getElementById('walletAddr').innerText =
+                'TGjYaSW5StCyejzv8KebpkjsjDaxtxnBdh';
+
+            document.getElementById('qrCodeImg').src =
+                "{{ asset('public/frontend/images/QR-Code-usdt-tron-trc20-address-gdp.png') }}";
+
+        } else {
+
+            document.getElementById('networkTitle').innerText =
+                'USDT - BEP20 - Binance Smart Chain';
+
+            document.getElementById('walletAddr').innerText =
+                '0x1234567890abcdef1234567890abcdef12345678';
+
+            document.getElementById('qrCodeImg').src =
+                "{{ asset('public/frontend/images/usdt-bep20-qr.png') }}";
+
+        }
+
+    }
+
+</script>
+
+{{-- OPTIONAL CSS --}}
+<style>
+
+    .payment-card {
+        border: 2px solid #e5e5e5;
+        border-radius: 12px;
+        padding: 15px;
+        cursor: pointer;
+        text-align: center;
+        transition: 0.3s;
+        background: #fff;
+    }
+
+    .payment-card.active {
+        border-color: #0d6efd;
+        box-shadow: 0 0 15px rgba(13, 110, 253, 0.15);
+    }
+
+    .bank-box {
+        background: #f8f9fa;
+    }
+
+</style>
              <div id="statusMessage" class="mt-4 alert hidden animate__animated animate__fadeIn"></div>
          </div>
      </div>
@@ -243,25 +566,61 @@
     waRadio.addEventListener('change', toggleComm);
 
     // 2. Dynamic Payment & QR Logic
-    function selectPayment(type, element) {
-        // Active states
-        document.querySelectorAll('.payment-card').forEach(el => el.classList.remove('active'));
-        element.classList.add('active');
+    // function selectPayment(type, element) {
+    //     // Active states
+    //     document.querySelectorAll('.payment-card').forEach(el => el.classList.remove('active'));
+    //     element.classList.add('active');
 
-        // Set hidden input
-        document.getElementById('paymentType').value = type;
+    //     // Set hidden input
+    //     document.getElementById('paymentType').value = type;
 
-        // Animation Refresh
-        const qrSection = document.getElementById('qrSection');
-        qrSection.classList.remove('animate__zoomIn');
-        void qrSection.offsetWidth; // Trigger reflow
-        qrSection.classList.add('animate__zoomIn');
+    //     // Animation Refresh
+    //     const qrSection = document.getElementById('qrSection');
+    //     qrSection.classList.remove('animate__zoomIn');
+    //     void qrSection.offsetWidth; // Trigger reflow
+    //     qrSection.classList.add('animate__zoomIn');
 
-        // Update Content
-        document.getElementById('networkTitle').innerText = paymentData[type].title;
-        document.getElementById('walletAddr').innerText = paymentData[type].addr;
-        document.getElementById('qrCodeImg').src = `${paymentData[type].qr}`;
+    //     // Update Content
+    //     document.getElementById('networkTitle').innerText = paymentData[type].title;
+    //     document.getElementById('walletAddr').innerText = paymentData[type].addr;
+    //     document.getElementById('qrCodeImg').src = `${paymentData[type].qr}`;
+    // }
+
+    function selectPayment(network, element) {
+
+    document.querySelectorAll('.payment-card').forEach(card => {
+        card.classList.remove('active');
+    });
+
+    element.classList.add('active');
+
+    document.getElementById('cryptoNetwork').value = network;
+
+    if (network === 'trc20') {
+
+        document.getElementById('networkTitle').innerText =
+            'USDT - TRC20 - Tron Network';
+
+        document.getElementById('walletAddr').innerText =
+            'TGjYaSW5StCyejzv8KebpkjsjDaxtxnBdh';
+
+        document.getElementById('qrCodeImg').src =
+            "{{ url('public/frontend/images/QR-Code-usdt-tron-trc20-address-gdp.png') }}";
+
+    } else {
+
+        document.getElementById('networkTitle').innerText =
+            'USDT - BEP20 - Binance Smart Chain';
+
+        document.getElementById('walletAddr').innerText =
+            '0x1234567890abcdef1234567890abcdef12345678';
+
+        document.getElementById('qrCodeImg').src =
+            "{{ url('public/frontend/images/QR-Code-usdt-bep20-bnb-bsc-network-gdp.png') }}";
+
     }
+
+}
 
     // 3. Form Submission & Mail Notification Simulation
     const form = document.getElementById('unifiedForm');
