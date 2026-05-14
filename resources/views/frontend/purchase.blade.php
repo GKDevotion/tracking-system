@@ -329,7 +329,7 @@
             </div>
 
             {{-- BANK SECTION --}}
-      
+
             <div id="bankSection" style="display: none;">
 
                 <div class="bank-box p-4 rounded shadow-sm border">
@@ -348,7 +348,7 @@
 
                             <p class="mb-0">
                                 Mashreq Bank PSC
-                            </p> 
+                            </p>
 
                         </div>
 
@@ -360,7 +360,7 @@
 
                             <p class="mb-0">
                                 WEALTHORA INTERNATIONAL FZE
-                            </p> 
+                            </p>
                         </div>
 
                         <div class="col-md-6">
@@ -370,8 +370,8 @@
                             </label>
 
                             <p class="mb-0">
-                                9102096844
-                            </p> 
+                                019102096844
+                            </p>
                         </div>
 
                         <div class="col-md-6">
@@ -382,12 +382,12 @@
 
                             <p class="mb-0">
                                 AE17033000019102096844
-                            </p> 
+                            </p>
 
                         </div>
-            
 
-                    
+
+
 
                     </div>
 
