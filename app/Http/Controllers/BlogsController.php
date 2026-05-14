@@ -28,11 +28,13 @@ class BlogsController extends Controller
                 $q->where('category_id', $request->category);
             })
             ->orderBy('created_at', 'desc')
-            ->paginate(8);
+            ->paginate(getConfigurationField('BLOG_PAGINATION'));
 
         $recentBlogs = Blog::select('id', 'title', 'slug', 'image', 'created_at')
             ->where('status', 1)
             ->whereNotNull('slug')
+            ->orderBy('created_at', 'desc')
+            ->limit(6)
             ->where('slug', '!=', '')
             ->latest()
             ->get();

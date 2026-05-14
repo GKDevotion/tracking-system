@@ -4,7 +4,7 @@
     <style>
         /* Section */
         .news-analysis-section {
-            padding: 150px 0;
+            padding: 150px 0 50px 0px;
         }
 
         /* Section */
@@ -176,38 +176,97 @@
                     <div class="row g-4">
 
                         @forelse ($blogs as $blog)
-                            <!-- Card 1 -->
+
                             <div class="col-lg-4 col-md-6">
                                 <div class="blog-card">
+
                                     <div class="blog-img">
                                         <img src="{{ asset('storage/app/public/' . $blog->image) }}"
-                                            alt="Bitcoin Under Pressure">
+                                            alt="{{ $blog->title }}">
                                     </div>
+
                                     <div class="blog-content">
+
                                         <h5>
-                                            <a href="{{ route('blog.details', $blog->slug) }}">{{ $blog->title }}</a>
+                                            <a href="{{ route('blog.details', $blog->slug) }}">
+                                                {{ $blog->title }}
+                                            </a>
                                         </h5>
+
                                         <p>
                                             {{ $blog->short_description }}
                                         </p>
-                                        <a href="{{ route('blog.details', $blog->slug) }}" class="read-more">READ MORE</a>
-                                    </div>
-                                </div>
 
+                                        <a href="{{ route('blog.details', $blog->slug) }}"
+                                            class="read-more">
+                                            READ MORE
+                                        </a>
+
+                                    </div>
+
+                                </div>
                             </div>
+
                         @empty
+
                             <div class="col-12">
                                 <p class="text-center">No blogs available.</p>
                             </div>
+
                         @endforelse
 
                     </div>
 
-                    <!-- Button -->
-                    <div class="text-center mt-5">
-                        <a href="javascript:void(0)" class="see-more-btn">SEE MORE</a>
+                    <!-- Pagination -->
+                    <div class="d-flex justify-content-center mt-5">
+                        {{ $blogs->links() }}
                     </div>
+                    <style>
+                        /* Pagination Container */
+                                .pagination {
+                                    display: flex;
+                                    justify-content: center;
+                                    align-items: center;
+                                    gap: 0;
+                                    margin-top: 30px;
+                                }
 
+                                /* Pagination Items */
+                                .pagination .page-item .page-link {
+                                    width: 45px;
+                                    height: 45px;
+                                    border: 1px solid #ddd;
+                                    border-radius: 0;
+                                    color: #333;
+                                    font-weight: 600;
+                                    font-size: 16px;
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: center;
+                                    background: #fff;
+                                    transition: all 0.3s ease;
+                                    box-shadow: none;
+                                }
+
+                                /* Active Page */
+                                .pagination .page-item.active .page-link {
+                                    background-color: #f73b20;
+                                    border-color: #f73b20;
+                                    color: #fff;
+                                }
+
+                                /* Hover Effect */
+                                .pagination .page-item .page-link:hover {
+                                    background-color: #f73b20;
+                                    border-color: #f73b20;
+                                    color: #fff;
+                                }
+
+                                /* Remove Focus Shadow */
+                                .pagination .page-link:focus {
+                                    box-shadow: none;
+                                }
+                    </style>
                 </div>
 
                 <div class="col-12 col-md-3">

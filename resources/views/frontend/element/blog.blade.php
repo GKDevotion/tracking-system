@@ -133,38 +133,43 @@
         </div>
 
         <!-- Blog Grid -->
-        <div class="row g-4">
+        <div class="row g-4"> 
+           <!-- Show Only 3 Blogs -->
+            @foreach ($blogs->take(3) as $blog)
 
-              @forelse ($blogs as $blog)
-            <!-- Card 1 -->
-            <div class="col-lg-4 col-md-6">
-                <div class="blog-card">
-                    <div class="blog-img">
-                        <img src="{{ asset('storage/app/public/' . $blog->image) }}" alt="Bitcoin Under Pressure">
-                    </div>
-                    <div class="blog-content">
-                        <h5>
-                            {{ $blog->title }}
-                        </h5>
-                        <p>
-                           {{ $blog->short_description }}
-                        </p>
-                        <a href="{{ route('blog.details', $blog->slug) }}" class="read-more">READ MORE</a>
+                <div class="col-lg-4 col-md-6">
+                    <div class="blog-card">
+
+                        <div class="blog-img">
+                            <img src="{{ asset('storage/app/public/' . $blog->image) }}" 
+                                alt="{{ $blog->title }}">
+                        </div>
+
+                        <div class="blog-content">
+                            <h5>
+                                {{ $blog->title }}
+                            </h5>
+
+                            <p>
+                                {{ $blog->short_description }}
+                            </p>
+
+                            <a href="{{ route('blog.details', $blog->slug) }}" class="read-more">
+                                READ MORE
+                            </a>
+                        </div>
+
                     </div>
                 </div>
 
-            </div>
-            @empty
-            <div class="col-12">
-                <p class="text-center">No blogs available.</p>
-            </div>
-            @endforelse
-
+            @endforeach 
         </div>
 
-        <!-- Button -->
+        <!-- Button -->  
         <div class="text-center mt-5">
-            <a href="javascript:void(0)" class="see-more-btn">SEE MORE</a>
+            <a href="{{ route('news.analysis') }}" class="see-more-btn">
+                SEE MORE
+            </a>
         </div>
 
     </div>

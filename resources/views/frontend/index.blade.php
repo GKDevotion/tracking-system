@@ -105,7 +105,6 @@
             });
         </script>
     </section>
-    <!-- End Lunch Movement Animation -->
 
     <!-- Start Real numbers. Real trades. -->
     <style>
