@@ -1,4 +1,10 @@
 @extends('frontend.layout')
+@section('meta_title', $blog->meta_title ?? $blog->title) 
+@section('meta_description', $blog->meta_description)
+@section('keyword', $blog->keyword) 
+@section('h1_tag', $blog->h1_tag) 
+
+
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 @section('content')
     <style>
@@ -39,7 +45,7 @@
     </style>
 
     <!-- BLOG CONTENT -->
-    <section class="" style="padding-top: 7rem">
+    <section class="" style="padding-top: 10rem">
         <div class="container">
             <div class="row g-4">
 
@@ -54,9 +60,9 @@
                         </a>
                     </div>
 
-                    <h2 class="fw-bold text-dark mt-4">
+                    <h1 class="fw-bold text-dark mt-4">
                         {{ $blog->title }}
-                    </h2>
+                    </h1>
 
                     <div class="d-flex gap-3 text-muted small mt-3 mb-3 fs-6">
                         <span>

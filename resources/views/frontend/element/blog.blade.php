@@ -143,9 +143,11 @@
                         <img src="{{ asset('storage/app/public/' . $blog->image) }}" alt="Bitcoin Under Pressure">
                     </div>
                     <div class="blog-content">
-                        <h5>
-                            {{ $blog->title }}
-                        </h5>
+                        <a href="{{ route('blog.details', $blog->slug) }}">
+                            <h5>
+                                {{ $blog->title }}
+                            </h5>
+                        </a>
                         <p>
                            {{ $blog->short_description }}
                         </p>
