@@ -77,6 +77,20 @@
                             </div>
                         @endif
 
+                        @if($blog->meta_title)
+                            <div class="col-12">
+                                <label class="form-label fw-bold">Meta Title</label>
+                                <p class="mb-0">{{ $blog->meta_title }}</p>
+                            </div>
+                        @endif
+
+                        @if($blog->meta_description)
+                            <div class="col-12">
+                                <label class="form-label fw-bold">Meta Description</label>
+                                <p class="mb-0">{{ $blog->meta_description }}</p>
+                            </div>
+                        @endif
+
                         @if($blog->keyword)
                             <div class="col-12">
                                 <label class="form-label fw-bold">Keywords</label>

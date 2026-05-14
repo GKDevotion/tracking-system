@@ -97,8 +97,27 @@
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
+ 
+                            <div class="col-12">
+                                <label class="form-label">Meta Title</label>
+                                <input type="text" name="meta_title" value="{{ old('meta_title', $blog->meta_title ?? '') }}"
+                                    class="form-control @error('meta_title') is-invalid @enderror"
+                                    placeholder="Enter Meta Title">
+                                @error('meta_title')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
 
-                            {{-- Keywords --}}
+                            <div class="col-12">
+                                <label class="form-label">Meta Description</label>
+                                <textarea id="meta_description" name="meta_description" rows="5"
+                                    class="form-control @error('meta_description') is-invalid @enderror" placeholder="Enter full description">{{ old('meta_description', $blog->meta_description ?? '') }}</textarea>
+
+                                @error('meta_description')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            
                             <div class="col-12">
                                 <label class="form-label">Keywords (SEO)</label>
                                 <input type="text" name="keyword" value="{{ old('keyword', $blog->keyword ?? '') }}"

@@ -54,6 +54,8 @@ class BlogController extends Controller
         $blog->sub_category_id = $request->sub_category_id ?? null;
         $blog->short_description = $request->short_description ?? null;
         $blog->description = $request->description ?? null;
+        $blog->meta_title = $request->meta_title ?? null;
+        $blog->meta_description = $request->meta_description ?? null;
         $blog->keyword = $request->keyword ?? null;
         $blog->podcast_url = $request->podcast_url ?? null;
         $blog->sort_url = $request->sort_url ?? null;
@@ -115,6 +117,7 @@ class BlogController extends Controller
         $blog->short_description = $request->short_description ?? null;
         $blog->description = $request->description ?? null;
         $blog->keyword = $request->keyword ?? null;
+        $blog->meta_description = $request->meta_description ?? null;
         $blog->podcast_url = $request->podcast_url ?? null;
         $blog->sort_url = $request->sort_url ?? null;
         $blog->status = $request->status ?? 1;
