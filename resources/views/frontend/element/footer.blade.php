@@ -229,15 +229,18 @@
                             <li><a href="{{ url('about') }}">About Us</a></li>
                             <li><a href="{{ url('contact') }}">Contact Us</a></li>
                         </ul>
-                    </div>
-
-                    <!-- Get Started Column -->
-                    <div class="col-6 col-md col-divider">
-                        <h6 class="get-started-title">Get Started</h6>
                         <a href="{{ url('forex-signal') }}" class="btn-get-started">
                             Get Started <span class="arrow">→</span>
                         </a>
                     </div>
+
+                    <!-- Get Started Column -->
+                    {{-- <div class="col-6 col-md col-divider">
+                        <h6 class="get-started-title">Get Started</h6>
+                        <a href="{{ url('forex-signal') }}" class="btn-get-started">
+                            Get Started <span class="arrow">→</span>
+                        </a>
+                    </div> --}}
 
                 </div>
                 </div>
@@ -358,7 +361,7 @@
             }
 
             .col-divider {
-                border-left: 1.5px solid #ccc;
+                /* border-left: 1.5px solid #ccc; */
                 padding-left: 30px;
             }
 
