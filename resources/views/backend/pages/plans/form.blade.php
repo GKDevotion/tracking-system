@@ -87,8 +87,11 @@
                             <div class="col-md-6">
                                 <label class="form-label">Link ( Plan Name ) <span class="text-danger">*</span></label>
                                 <input type="text" name="link" value="{{ old('link', $plan->link) }}"
-                                    class="form-control @error('link') is-invalid @enderror"
-                                    placeholder="advanced" required>
+                                class="form-control @error('link') is-invalid @enderror"
+                                placeholder="advanced" required>
+                                <small class="form-text text-muted">
+                                    Use plan name like <b> free </b>, <b>premium </b>, <b> advance </b>, .... etc.
+                                </small>
                                 @error('link')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
