@@ -12,6 +12,7 @@ class ForexUpdate extends Model
             'order_type',
             'entry_price',
             'pair',
+            'live_btn_url',
             'stop_loss',
             'take_profit',
             'profit',

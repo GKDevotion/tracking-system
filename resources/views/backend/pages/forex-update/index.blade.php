@@ -33,7 +33,8 @@
                         <th>Entry Price</th>
                         <th>Stop Loss</th>
                         <th>Take Profit</th>
-                        <th>Profit</th> 
+                        <th>Profit</th>
+                        <th>Live Proof URL</th>  
                         <th>Status</th>
                         <th>Sort Order</th>
                         <th>Action</th>
@@ -50,6 +51,7 @@
                             <td>{{ $plan->stop_loss }}</td>
                             <td>{{ $plan->take_profit }}</td>
                             <td>{{ $plan->profit }}</td>
+                            <td>{{ $plan->live_btn_url }}</td>
                             <td>{{ $plan->status == 1 ? 'Active' : 'Inactive' }}</td>
                             <td>{{ $plan->sort_order }}</td>
                             <td>

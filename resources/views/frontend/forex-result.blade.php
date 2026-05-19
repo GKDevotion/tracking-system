@@ -240,7 +240,7 @@
                                         {{-- Live Proof Button --}}
                                         <td>
                                             <button class="btn-live">
-                                                <a href="https://t.me/Wealthoraofficial" style="color: #fff; text-decoration: none">LIVE PROOF</a>
+                                                <a href="{{ $signal->live_btn_url }}" style="color: #fff; text-decoration: none">LIVE PROOF</a>
                                             </button>
                                         </td>
 

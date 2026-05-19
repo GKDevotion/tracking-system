@@ -36,7 +36,8 @@ class ForexUpdateController extends Controller
     {
         $data = $request->validate([
             'signal_date' => 'required',
-            'pair' => 'required', 
+            'pair' => 'required',
+            'live_btn_url' => 'required', 
             'order_type' => 'required|integer', 
             'entry_price' => 'required|numeric',
             'stop_loss' => 'required|numeric',
@@ -80,6 +81,7 @@ class ForexUpdateController extends Controller
         $data = $request->validate([
             'signal_date' => 'required',
             'pair' => 'required',
+            'live_btn_url' => 'required',
             'order_type' => 'required',
             'entry_price' => 'required|numeric',
             'stop_loss' => 'required|numeric',

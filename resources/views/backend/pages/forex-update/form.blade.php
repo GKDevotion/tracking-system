@@ -113,6 +113,16 @@
                                 @enderror
                             </div>
 
+                            <div class="col-md-6">
+                                <label class="form-label">Live Proof Url <span class="text-danger">*</span></label>
+                                <input type="text" name="live_btn_url" value="{{ old('live_btn_url', $plan->live_btn_url) }}"
+                                    class="form-control @error('live_btn_url') is-invalid @enderror" placeholder="Enter Live Proof Btn Url"
+                                    required>
+                                @error('live_btn_url')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+
                             {{-- Status --}}
                             <div class="col-md-6">
                                 <label class="form-label">Status</label> 
@@ -121,8 +131,7 @@
                                     <option value="0" {{ old('status', $plan->status ?? 1) == 0 ? 'selected' : '' }}> Inactive </option>
                                 </select> 
                                 @error('status')<div class="invalid-feedback">{{ $message }}</div>@enderror
-                            </div>
-    
+                            </div> 
 
                         </div>
 
