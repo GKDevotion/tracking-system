@@ -14,6 +14,7 @@ use App\Http\Controllers\CookieController;
 use App\Http\Controllers\EducationController;
 use App\Http\Controllers\FaqsController;
 use App\Http\Controllers\ForexController;
+use App\Http\Controllers\ForexResultController;
 use App\Http\Controllers\Web\BlogController;
 use App\Http\Controllers\Web\CategoryController;
 use App\Http\Controllers\HomeController;
@@ -34,10 +35,12 @@ use App\Http\Controllers\Web\ConfigurationController;
 use App\Http\Controllers\Web\ContactsController;
 use App\Http\Controllers\Web\CountryController;
 use App\Http\Controllers\Web\FaqController;
+use App\Http\Controllers\Web\ForexUpdateController;
 use App\Http\Controllers\Web\ManagerUserController;
 use App\Http\Controllers\Web\PlanController;
 use App\Http\Controllers\Web\PricingPlanCheckoutController;
 use App\Http\Controllers\Web\SalesUserController;
+use App\Http\Controllers\Web\SeoDataController;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
@@ -164,6 +167,27 @@ Route::middleware('auth')->group(function () {
                 'edit' => 'web.plans.edit',
                 'update' => 'web.plans.update',
                 'destroy' => 'web.plans.destroy',
+            ]);
+
+    Route::resource('seo-data', SeoDataController::class)
+            ->names([
+                'index' => 'web.seo-data.index',
+                'create' => 'web.seo-data.create',
+                'store' => 'web.seo-data.store',
+                'edit' => 'web.seo-data.edit',
+                'update' => 'web.seo-data.update',
+                'destroy' => 'web.seo-data.destroy',
+            ]);
+
+    // Forex Update
+    Route::resource('forex-update', ForexUpdateController::class)
+            ->names([
+                'index' => 'web.forex-update.index',
+                'create' => 'web.forex-update.create',
+                'store' => 'web.forex-update.store',
+                'edit' => 'web.forex-update.edit',
+                'update' => 'web.forex-update.update',
+                'destroy' => 'web.forex-update.destroy',
             ]);
 
     // Blogs
@@ -345,5 +369,7 @@ Route::get('execute-sql-statement', [HomeController::class, 'setSqlStatement']);
 Route::get('/education', [EducationController::class, 'index'])->name('education');
 
 Route::get('/forex-signal', [ForexController::class, 'index'])->name('forex.signal');
+
+Route::get('/forex-result', [ForexResultController::class, 'index'])->name('forex.result');
 
 Route::get('/faqs', [FaqsController::class, 'index'])->name('faqs');

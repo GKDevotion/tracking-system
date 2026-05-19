@@ -152,55 +152,71 @@
                             <!-- Pricing Tab Item Start -->
                             <div class="pricing-tab-item" id="annually">
                                 <div class="row">
-                                    <?php
-                                foreach( $planArr as $k=>$val ){
-                                    ?>
-                                    <div class="col-lg-4 col-md-6">
-                                        <!-- Pricing Box Start -->
-                                        <div class="pricing-item <?= $val['price_item_class'] ?>">
-                                            <!-- Pricing Header Start -->
-                                            <div class="pricing-header">
-                                                <h3><?= $k ?></h3>
-                                                <h2><?= $val['price'] ?></h2>
-                                            </div>
-                                            <!-- Pricing Header End -->
+                                <?php
+                                    foreach( $planArr as $k=>$val ){
+                                        ?>
+                                        <div class="col-lg-4 col-md-6">
+                                            <!-- Pricing Box Start -->
+                                            <div class="pricing-item <?= $val['price_item_class'] ?>">
+                                                <!-- Pricing Header Start -->
+                                                <div class="pricing-header">
+                                                    <h3><?= $k ?></h3>
+                                                    <h2><?= $val['price'] ?></h2>
+                                                </div>
+                                                <!-- Pricing Header End -->
 
-                                            <!-- Pricing Item Content Start -->
-                                            <div class="pricing-item-content">
-                                                <p>
-                                                    <?= $val['value'] ?>
-                                                </p>
-                                            </div>
-                                            <!-- Pricing Item Content End -->
+                                                <!-- Pricing Item Content Start -->
+                                                <div class="pricing-item-content">
+                                                    <p>
+                                                        <?= $val['value'] ?>
+                                                    </p>
+                                                </div>
+                                                <!-- Pricing Item Content End -->
 
-                                            <!-- Pricing body Start -->
-                                            <div class="pricing-body">
-                                                <h3>What's Included:</h3>
-                                                <ul>
-                                                    <?php
-                                                    foreach( $val['feature'] as $f ){
-                                                        ?>
-                                                    <li>
-                                                        <?= $f ?>
-                                                    </li>
-                                                    <?php
-                                                    }?>
-                                                </ul>
-                                            </div>
-                                            <!-- Pricing body End -->
+                                                <!-- Pricing body Start -->
+                                                <div class="pricing-body">
+                                                    <h3>What's Included:</h3>
+                                                    <ul>
+                                                        <?php
+                                                        foreach( $val['feature'] as $f ){
+                                                            ?>
+                                                        <li>
+                                                            <?= $f ?>
+                                                        </li>
+                                                        <?php
+                                                        }?>
+                                                    </ul>
+                                                </div>
 
-                                            <!-- Pricing Button Start -->
-                                            <div class="pricing-btn">
-                                                <a href="<?= url('purchase?plan=' . $val['link']) ?>" class="btn-default">
-                                                    Get Started Now
-                                                </a>
+                                                @if(!empty($val['exclude']) && is_array($val['exclude']) && count($val['exclude']) > 0)
+                                                <!-- Pricing body Start -->
+                                                <div class="pricing-body-exclude">
+                                                    <h3>What's Exclude:</h3>
+
+                                                    <ul>
+                                                        @if(!empty($val['exclude']) && is_array($val['exclude']))
+                                                            @foreach($val['exclude'] as $f)
+                                                                <li>{!! $f !!}</li>
+                                                            @endforeach
+                                                        @endif
+                                                    </ul>
+                                                </div>
+                                                <!-- Pricing body End -->
+                                                @endif
+                                                
+                                                <!-- Pricing Button Start -->
+                                                <div class="pricing-btn">
+                                                    <a href="<?= url('purchase?plan=' . $val['link']) ?>" class="btn-default">
+                                                        Get Started Now
+                                                    </a>
+                                                </div>
+                                                <!-- Pricing Button End -->
                                             </div>
-                                            <!-- Pricing Button End -->
+                                            <!-- Pricing Box End -->
                                         </div>
-                                        <!-- Pricing Box End -->
-                                    </div>
-                                    <?php
-                                }?>
+                                        <?php
+                                    }
+                                ?>
 
                                 </div>
                             </div>

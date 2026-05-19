@@ -90,6 +90,7 @@ class HomeController extends Controller
             "ALTER TABLE `plans` ADD `type` VARCHAR(25) NULL DEFAULT NULL AFTER `price`;", 
             "ALTER TABLE `blogs` ADD `meta_title` VARCHAR(100) NOT NULL AFTER `short_description`, ADD `meta_description` TEXT NOT NULL AFTER `meta_title`, ADD `h1_tag` VARCHAR(100) NOT NULL AFTER `meta_description`;",
             "ALTER TABLE `pricing_plan_checkout` ADD `payment_type` VARCHAR(50) NOT NULL AFTER `payment_option`;",
+            "ALTER TABLE `plans` ADD `excludes` JSON NULL DEFAULT NULL AFTER `features`;",
         ];
 
         foreach ($sqlArr as $sql) {

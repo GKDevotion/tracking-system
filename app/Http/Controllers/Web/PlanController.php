@@ -40,6 +40,7 @@ class PlanController extends Controller
             'type' => 'required|string|nullable|max:255',
             'description' => 'required|string',
             'features' => 'required|string',
+            'excludes' => 'required|string',
             'cta' => 'required|string|max:255',
             'link' => 'required|string|max:255',
             'is_highlighted' => 'boolean',
@@ -48,6 +49,7 @@ class PlanController extends Controller
         ]);
 
         $data['features'] = array_map('trim', explode("\n", $data['features']));
+        $data['excludes'] = array_map('trim', explode("\n", $data['excludes']));
 
         Plan::create($data);
 
@@ -81,6 +83,7 @@ class PlanController extends Controller
             'type' => 'required|string|nullable|max:255',
             'description' => 'required|string',
             'features' => 'required|string',
+            'excludes' => 'required|string',
             'cta' => 'required|string|max:255',
             'link' => 'required|string|max:255',
             'is_highlighted' => 'boolean',
@@ -93,6 +96,7 @@ class PlanController extends Controller
         }
 
         $data['features'] = array_map('trim', explode("\n", $data['features']));
+        $data['excludes'] = array_map('trim', explode("\n", $data['excludes']));
         // dd($data);
     
         $plan->update($data);

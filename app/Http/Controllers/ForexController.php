@@ -24,9 +24,11 @@ class ForexController extends Controller
                 'price' => $plan->price,
                 'value' => $plan->description,
                 'feature' => $plan->features,
+                'exclude' => $plan->excludes,
                 'cta' => $plan->cta,
                 'link' => $finalLink,
             ];
+            
         }
 
         return view('frontend.forex-signal',compact('planArr'));

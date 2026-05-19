@@ -2469,7 +2469,7 @@ header.main-header .header-sticky.active{
 }
 
 .pricing-body ul li::before{
-	content: '\f058';
+	content: '\f057';
 	position: absolute;
 	font-family: 'FontAwesome';
 	font-weight: 900;
@@ -2477,6 +2477,45 @@ header.main-header .header-sticky.active{
 	top: 0;
 	font-size: 18px;
 	color: var(--gray-color);
+}
+
+.pricing-body-exclude,
+.pricing-btn{
+	margin-top: 40px;
+}
+
+.pricing-body-exclude h3{
+	font-size: 20px;
+	margin-bottom: 20px;
+	font-weight: 100;
+}
+
+.pricing-body-exclude ul{
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.pricing-body-exclude ul li{
+	position: relative;
+	line-height: 1.5em;
+	margin-bottom: 5px;
+	padding-left: 30px;
+}
+
+.pricing-body-exclude ul li:last-child{
+	margin-bottom: 0;
+}
+
+.pricing-body-exclude ul li::before{
+	content: '\f057';
+	position: absolute;
+	font-family: 'FontAwesome';
+	font-weight: 900;
+	left: 0;
+	top: 0;
+	font-size: 18px;
+	color: gray;
 }
 
 .pricing-btn .btn-default{

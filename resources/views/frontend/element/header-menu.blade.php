@@ -118,7 +118,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->routeIs('results') ? 'active' : '' }}" href="#">
+                    <a class="nav-link {{ request()->routeIs('results') ? 'active' : '' }}" href="{{ route('forex.result') }}">
                         RESULTS
                     </a>
                 </li>

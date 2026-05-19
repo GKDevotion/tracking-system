@@ -60,16 +60,32 @@
                             </div>
 
                             <div class="col-12">
-                                <label class="form-label">Features <span class="text-danger">*</span></label>
+                                <label class="form-label">Whats Included ( Features)  <span class="text-danger">*</span></label>
 
                                 <textarea name="features" id="features" rows="5" class="form-control @error('features') is-invalid @enderror"
-                                    placeholder="Enter each feature on a new line">{{ old('features', $plan->features ? implode("\n", $plan->features) : '') }}</textarea>
+                                    placeholder="Enter each feature on a new line">{{ old('features', $plan->features ? implode("\n", $plan->features) : '') }}
+                                </textarea>
 
                                 <small class="form-text text-muted">
                                     Use <b>&lt;b&gt;text&lt;/b&gt;</b> to make text bold.
                                 </small>
 
                                 @error('features')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div class="col-12">
+                                <label class="form-label">Whats Excluded ( Features )  <span class="text-danger">*</span></label>
+
+                                <textarea name="excludes" id="excludes" rows="5" class="form-control @error('excludes') is-invalid @enderror"
+                                    placeholder="Enter each exclude feature on a new line">{{ old('excludes', $plan->excludes ? implode("\n", $plan->excludes) : '') }}</textarea>
+
+                                <small class="form-text text-muted">
+                                    Use <b>&lt;b&gt;text&lt;/b&gt;</b> to make text bold.
+                                </small>
+
+                                @error('excludes')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>

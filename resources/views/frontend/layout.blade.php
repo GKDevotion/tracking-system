@@ -3,13 +3,33 @@
 
 <head>
     <!-- Meta -->
+    
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-    <meta property="og:title" content="@yield('meta_title', config('app.name'))">
-    <meta property="og:description" content="@yield('meta_description')">
-    <meta name="keywords" content="@yield('keyword')">
-    <meta name="H1 Tag" content="@yield('h1_tag')">
+    {{-- Dynamic SEO Meta Tags --}}
+    @php
+        $seo = \App\Models\SeoData::where('page_slug', request()->path())
+                    ->where('status', 1)
+                    ->first();
+    @endphp
+
+    <title>{{ $seo->meta_title ?? config('app.name') }}</title>
+
+    <meta name="description" content="{{ $seo->meta_description ?? '' }}">
+    <meta name="keywords" content="{{ $seo->keywords ?? '' }}">
+    <meta name="robots" content="{{ $seo->robots ?? 'index,follow' }}">
+    <link rel="canonical" href="{{ $seo->canonical_url ?? url()->current() }}">
+
+    {{-- Open Graph --}}
+    <meta property="og:title" content="{{ $seo->og_title ?? $seo->meta_title ?? config('app.name') }}">
+    <meta property="og:description" content="{{ $seo->og_description ?? $seo->meta_description ?? '' }}">
+    <meta property="og:image" content="{{ $seo->og_image ?? asset('default-og.jpg') }}">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:type" content="website">
+
+    {{-- Optional H1 Tag --}}
+    <meta name="h1_tag" content="{{ $seo->h1_tag ?? '' }}">
     <meta name="author" content="ZCapital">
 
     <!-- Page Title -->
