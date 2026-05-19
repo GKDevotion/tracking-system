@@ -203,7 +203,7 @@
                         <h6 class="footer-col-title">Product</h6>
                         <ul class="footer-links">
                             <li><a href="{{ url('forex-signal') }}">Forex Signals</a></li>
-                            <li><a href="#">Results</a></li>
+                            <li><a href="{{ url('forex.result') }}">Results</a></li>
                             <li><a href="{{ url('news-analysis') }}">News Analysis</a></li>
                             <li><a href="{{ url('education') }}">Education</a></li>
                             <li><a href="{{ url('faqs') }}">FAQ</a></li>
