@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::table('plans', function (Blueprint $table) {
             //
-              $table->json('excludes')->nullable()->after('features');
+              $table->json('remove')->nullable()->after('features');
 
         });
     }
@@ -25,7 +25,7 @@ return new class extends Migration
     {
         Schema::table('plans', function (Blueprint $table) {
             //
-             $table->dropColumn('excludes');
+             $table->dropColumn('remove');
         });
     }
 };

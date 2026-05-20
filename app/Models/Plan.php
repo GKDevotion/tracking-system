@@ -14,7 +14,7 @@ class Plan extends Model
         'features',
         'cta',
         'link',
-        'excludes',
+        'remove',
         'is_highlighted',
         'is_active',
         'sort_order',
@@ -23,7 +23,7 @@ class Plan extends Model
 
     protected $casts = [
         'features' => 'array',
-        'excludes' => 'array',
+        'remove' => 'array',
         'is_highlighted' => 'boolean',
         'is_active' => 'boolean',
     ];

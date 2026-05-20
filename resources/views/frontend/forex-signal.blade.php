@@ -188,21 +188,21 @@
                                                     </ul>
                                                 </div>
 
-                                                {{-- @if($val['exclude']) --}}
+                                                @if(!empty($val['remove']) && is_array($val['remove']) && count($val['remove']) > 0)
                                                 <!-- Pricing body Start -->
                                                 <div class="pricing-body-exclude">
                                                     <h3>What's Exclude:</h3>
 
                                                     <ul>
-                                                        @if(!empty($val['exclude']) && is_array($val['exclude']))
-                                                            @foreach($val['exclude'] as $f)
+                                                        @if(!empty($val['remove']) && is_array($val['remove']))
+                                                            @foreach($val['remove'] as $f)
                                                                 <li>{!! $f !!}</li>
                                                             @endforeach
                                                         @endif
                                                     </ul>
                                                 </div>
                                                 <!-- Pricing body End -->
-                                                {{-- @endif --}}
+                                                @endif
                                                 
                                                 <!-- Pricing Button Start -->
                                                 <div class="pricing-btn">
