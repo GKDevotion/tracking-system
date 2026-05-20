@@ -1257,7 +1257,7 @@
 
                                             <!-- Pricing body Start -->
                                             <div class="pricing-body">
-                                                <h3>What's Included:</h3>
+                                                <h3 class="d-none">What's Included:</h3>
 
                                                 <ul>
                                                     @foreach($val['feature'] as $f)
@@ -1269,8 +1269,8 @@
 
                                              @if(!empty($val['remove']) && is_array($val['remove']) && count($val['remove']) > 0)
                                                 <!-- Pricing body Start -->
-                                                <div class="pricing-body-exclude">
-                                                    <h3>What's Exclude:</h3>
+                                                <div class="pricing-body-exclude mt-1">
+                                                    <h3 class="d-none">What's Exclude:</h3>
 
                                                     <ul>
                                                         @if(!empty($val['remove']) && is_array($val['remove']))
