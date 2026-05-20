@@ -46,7 +46,7 @@
                             <td>{{ $plans->firstItem() + $i }}</td>
                             <td>{{ $plan->signal_date }}</td>
                             <td>{{ $plan->pair }}</td>
-                            <td>{{ $plan->order_type ? 'Buy' : 'Sell' }}</td>
+                            <td>{{ $plan->order_type ? 'Sell' : 'Buy' }}</td>
                             <td>{{ $plan->entry_price }}</td> 
                             <td>{{ $plan->stop_loss }}</td>
                             <td>{{ $plan->take_profit }}</td>

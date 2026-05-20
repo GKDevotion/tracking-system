@@ -49,11 +49,11 @@
                                 <select name="order_type"class="form-control @error('order_type') is-invalid @enderror"required>
                                     <option value="">Select Order Type</option>
                                     <option value="0"
-                                    {{ old('order_type', $plan->order_type ?? '') == '0' ? 'selected' : '' }}>BUY
+                                    {{ old('order_type', $plan->order_type ?? '') == '0' ? 'selected' : '' }}>Buy
                                     </option>
 
                                     <option value="1"
-                                        {{ old('order_type', $plan->order_type ?? '') == '1' ? 'selected' : '' }}>SELL
+                                        {{ old('order_type', $plan->order_type ?? '') == '1' ? 'selected' : '' }}>Sell
                                     </option>
                                 </select> 
                                 @error('order_type')
