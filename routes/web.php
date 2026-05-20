@@ -43,6 +43,7 @@ use App\Http\Controllers\Web\SalesUserController;
 use App\Http\Controllers\Web\SeoDataController;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Artisan;
 
 // ─── Guest Routes ──────────────────────────────────────────────────────────────
 Route::middleware('guest')->group(function () {
@@ -80,7 +81,7 @@ Route::middleware('auth')->group(function () {
                 'store' => 'web.roles.store',
                 'edit' => 'web.roles.edit',
                 'update' => 'web.roles.update',
-            ]);
+    ]);
 
     // Menus
     Route::resource('menus', MenuController::class)
@@ -91,7 +92,7 @@ Route::middleware('auth')->group(function () {
                 'store' => 'web.menus.store',
                 'edit' => 'web.menus.edit',
                 'update' => 'web.menus.update',
-            ]);
+    ]);
 
     // Permissions
 
@@ -105,7 +106,7 @@ Route::middleware('auth')->group(function () {
                 'create' => 'web.permissions.create',
                 'edit' => 'web.permissions.edit',
                 // 'update' => 'web.permissions.update',
-            ]);
+    ]);
 
     // Sales User
     Route::resource('sales-user', SalesUserController::class)
@@ -115,7 +116,7 @@ Route::middleware('auth')->group(function () {
                 'edit' => 'web.sales-user.edit',
                 'update' => 'web.sales-user.update',
                 'show' => 'web.sales-user.show',
-            ]);
+    ]);
 
     // Manager User
     Route::resource('manager-user', ManagerUserController::class)
@@ -125,7 +126,7 @@ Route::middleware('auth')->group(function () {
                 'edit' => 'web.manager-user.edit',
                 'update' => 'web.manager-user.update',
                 'show' => 'web.manager-user.show',
-            ]);
+    ]);
 
     // Admin User
     Route::resource('admin-user', AdminUserController::class)
@@ -135,7 +136,7 @@ Route::middleware('auth')->group(function () {
                 'edit' => 'web.admin-user.edit',
                 'update' => 'web.admin-user.update',
                 'show' => 'web.admin-user.show',
-            ]);
+    ]);
 
     // Configurations
     Route::resource('configurations', ConfigurationController::class)
@@ -147,7 +148,7 @@ Route::middleware('auth')->group(function () {
                 'edit' => 'web.configurations.edit',
                 'update' => 'web.configurations.update',
                 'destroy' => 'web.configurations.destroy',
-            ]);
+    ]);
 
     // Pricing Plan Checkout
     Route::resource('pricing-plan-checkout', PricingPlanCheckoutController::class)
@@ -156,7 +157,7 @@ Route::middleware('auth')->group(function () {
                 'edit' => 'web.pricing-plan-checkout.edit',
                 'update' => 'web.pricing-plan-checkout.update',
                 'show' => 'web.pricing-plan-checkout.show',
-            ]);
+    ]);
 
     // Plans
     Route::resource('plans', PlanController::class)
@@ -167,7 +168,7 @@ Route::middleware('auth')->group(function () {
                 'edit' => 'web.plans.edit',
                 'update' => 'web.plans.update',
                 'destroy' => 'web.plans.destroy',
-            ]);
+    ]);
 
     Route::resource('seo-data', SeoDataController::class)
             ->names([
@@ -177,7 +178,7 @@ Route::middleware('auth')->group(function () {
                 'edit' => 'web.seo-data.edit',
                 'update' => 'web.seo-data.update',
                 'destroy' => 'web.seo-data.destroy',
-            ]);
+    ]);
 
     // Forex Update
     Route::resource('forex-update', ForexUpdateController::class)
@@ -188,7 +189,7 @@ Route::middleware('auth')->group(function () {
                 'edit' => 'web.forex-update.edit',
                 'update' => 'web.forex-update.update',
                 'destroy' => 'web.forex-update.destroy',
-            ]);
+    ]);
 
     // Blogs
     Route::resource('blogs', BlogController::class)
@@ -200,7 +201,7 @@ Route::middleware('auth')->group(function () {
                 'update' => 'web.blogs.update',
                 'destroy' => 'web.blogs.destroy',
                 'show' => 'web.blogs.show',
-            ]);
+    ]);
 
     // Banner
     Route::resource('banners', BannersController::class)
@@ -212,7 +213,7 @@ Route::middleware('auth')->group(function () {
                 'update' => 'web.banners.update',
                 'destroy' => 'web.banners.destroy',
                 'show' => 'web.banners.show',
-            ]);
+    ]);
 
     Route::resource('faq', FaqController::class)
             ->names([
@@ -223,7 +224,7 @@ Route::middleware('auth')->group(function () {
                 'update' => 'web.faq.update',
                 'destroy' => 'web.faq.destroy',
                 'show' => 'web.faq.show',
-                ]);
+    ]);
 
     // Country
     Route::resource('country', CountryController::class)
@@ -235,7 +236,7 @@ Route::middleware('auth')->group(function () {
                 'update' => 'web.country.update',
                 'destroy' => 'web.country.destroy',
                 'show' => 'web.country.show',
-            ]);
+    ]);
 
     // Tracking
     Route::resource('tracking', TrackingController::class)
@@ -247,7 +248,9 @@ Route::middleware('auth')->group(function () {
                 'show' => 'web.tracking.show',
                 'update' =>  'web.tracking.update',
                 'destroy'   =>  'web.tracking.destroy'
-            ]);
+    
+    ]);
+
      // Blog Category
     Route::resource('blog-category', CategoryController::class)
             ->names([
@@ -258,7 +261,8 @@ Route::middleware('auth')->group(function () {
                 'edit' => 'web.blog-category.edit',
                 'update' => 'web.blog-category.update',
                 'destroy' => 'web.blog-category.destroy',
-            ]);
+    ]);
+
     // Blog Tag
     Route::resource('blog-tag', TagController::class)
             ->names([
@@ -269,7 +273,7 @@ Route::middleware('auth')->group(function () {
                 'edit' => 'web.blog-tag.edit',
                 'update' => 'web.blog-tag.update',
                 'destroy' => 'web.blog-tag.destroy',
-            ]);
+    ]);
 
             // Blog Tag
     Route::resource('contact-us',ContactsController::class)
@@ -281,7 +285,7 @@ Route::middleware('auth')->group(function () {
                 'edit' => 'web.contact-us.edit',
                 'update' => 'web.contact-us.update',
                 'destroy' => 'web.contact-us.destroy',
-            ]);
+    ]);
 
     // ── Categories ────────────────────────────────────────
     Route::resource('bm-category', BmCategoryController::class)
@@ -297,7 +301,8 @@ Route::middleware('auth')->group(function () {
                 'update' => 'web.bm-mail-template.update',
                 'show' => 'web.bm-mail-template.show',
                 'destroy' => 'web.bm-mail-template.destroy',
-            ]);
+    ]);
+
     Route::post('templates/send-to-client', [BmMailTemplateController::class, 'sendToClient'])
              ->name('web.bm-mail-template.sendToClient');
 
@@ -310,7 +315,7 @@ Route::middleware('auth')->group(function () {
                 'update' => 'web.bm-client.update',
                 'show' => 'web.bm-client.show',
                 'destroy' => 'web.bm-client.destroy',
-            ]);
+    ]);
 
     // AJAX single send (called via fetch from modal)
     Route::post('clients/bulk-send', [BmClientController::class, 'bulkSend'])
@@ -329,7 +334,7 @@ Route::middleware('auth')->group(function () {
                 'edit' => 'web.sales.edit',
                 'update' => 'web.sales.update',
                 'show' => 'web.sales.show',
-            ]);
+    ]);
 });
 
 
@@ -373,3 +378,14 @@ Route::get('/forex-signal', [ForexController::class, 'index'])->name('forex.sign
 Route::get('/forex-result', [ForexResultController::class, 'index'])->name('forex.result');
 
 Route::get('/faqs', [FaqsController::class, 'index'])->name('faqs');
+
+Route::get('/clear', function () {
+    try {
+        Artisan::call('cache:clear');
+        Artisan::call('config:clear');
+        Artisan::call('view:clear');
+        return 'Cache cleared successfully!';
+    } catch (\Exception $e) {
+        return '❌ Clear Failed: ' . $e->getMessage();
+    }
+});
