@@ -2469,6 +2469,17 @@ header.main-header .header-sticky.active{
 }
 
 .pricing-body ul li::before{
+	content: '\f058';
+	position: absolute;
+	font-family: 'FontAwesome';
+	font-weight: 900;
+	left: 0;
+	top: 0;
+	font-size: 18px;
+	color: var(--gray-color);
+}
+
+.pricing-body-exclude ul li::before{
 	content: '\f057';
 	position: absolute;
 	font-family: 'FontAwesome';

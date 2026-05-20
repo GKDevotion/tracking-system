@@ -188,7 +188,7 @@
                                                     </ul>
                                                 </div>
 
-                                                @if(!empty($val['exclude']) && is_array($val['exclude']) && count($val['exclude']) > 0)
+                                                {{-- @if($val['exclude']) --}}
                                                 <!-- Pricing body Start -->
                                                 <div class="pricing-body-exclude">
                                                     <h3>What's Exclude:</h3>
@@ -202,7 +202,7 @@
                                                     </ul>
                                                 </div>
                                                 <!-- Pricing body End -->
-                                                @endif
+                                                {{-- @endif --}}
                                                 
                                                 <!-- Pricing Button Start -->
                                                 <div class="pricing-btn">
