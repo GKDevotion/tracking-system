@@ -2512,6 +2512,7 @@ header.main-header .header-sticky.active{
 	line-height: 1.5em;
 	margin-bottom: 5px;
 	padding-left: 30px;
+    opacity: 0.7;
 }
 
 .pricing-body-exclude ul li:last-child{
