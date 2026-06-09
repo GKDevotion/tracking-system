@@ -34,7 +34,7 @@
                             <!-- Sidebar Our Pricing Nav End -->
 
                             <!-- Pricing Tab Item Start -->
-                            <div class="pricing-tab-item d-none" id="monthly">
+                            {{-- <div class="pricing-tab-item d-none" id="monthly">
                                 <div class="row">
                                     <div class="col-lg-4 col-md-6">
                                         <!-- Pricing Box Start -->
@@ -146,7 +146,7 @@
                                         <!-- Pricing Box End -->
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                             <!-- Pricing Tab Item End -->
 
                             <!-- Pricing Tab Item Start -->
@@ -175,7 +175,7 @@
 
                                                 <!-- Pricing body Start -->
                                                 <div class="pricing-body">
-                                                    <h3>What's Included:</h3>
+                                                    <h3 class="d-none">What's Included:</h3>
                                                     <ul>
                                                         <?php
                                                         foreach( $val['feature'] as $f ){
@@ -190,8 +190,8 @@
 
                                                 @if(!empty($val['remove']) && is_array($val['remove']) && count($val['remove']) > 0)
                                                 <!-- Pricing body Start -->
-                                                <div class="pricing-body-exclude">
-                                                    <h3>What's Exclude:</h3>
+                                                <div class="pricing-body-exclude mt-1">
+                                                    <h3 class="d-none">What's Exclude:</h3>
 
                                                     <ul>
                                                         @if(!empty($val['remove']) && is_array($val['remove']))

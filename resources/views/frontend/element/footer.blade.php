@@ -1,5 +1,5 @@
         <!-- Old Footer Section Start -->
-        <footer class="main-footer bg-section dark-section d-none">
+        {{-- <footer class="main-footer bg-section dark-section d-none">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12 d-none">
@@ -168,7 +168,7 @@
                     </div>
                 </div>
             </div>
-        </footer> 
+        </footer>  --}}
         <!-- Old Footer Section End -->
 
         <!-- Footer Section Start -->

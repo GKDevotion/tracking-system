@@ -1025,7 +1025,7 @@
     <!-- End Real numbers. Real trades. -->
 
     <!-- Start Analysis report -->
-    <div class="our-empact d-none">
+    {{-- <div class="our-empact d-none">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-5">
@@ -1182,7 +1182,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <!-- End Analysis Report -->
 
     <!-- Page Pricing Start -->
@@ -1299,7 +1299,7 @@
                         <ul>
                             <li><img src="frontend/images/icon-pricing-benefit-1.svg" alt="">Get 30 day free trial
                             </li>
-                            <li><img src="frontend/images/icon-pricing-benefit-2.svg" alt="">No any hidden fee pay
+                            <li><img src="frontend/images/icon-pricing-benefit-2.svg" alt="">No Hidden Fees
                             </li>
                             <li><img src="frontend/images/icon-pricing-benefit-3.svg" alt="">You can cancel
                                 anytime </li>
@@ -1382,7 +1382,7 @@
                             <!-- Skill Item Start -->
                             <div class="skillbar" data-percent="95%">
                                 <div class="skill-data">
-                                    <div class="skill-title">AI + Hunam hybride analysis</div>
+                                    <div class="skill-title">AI + Human hybride analysis</div>
                                     <div class="skill-no">95%</div>
                                 </div>
                                 <div class="skill-progress">
@@ -1414,7 +1414,7 @@
                             <!-- Skill Item Start -->
                             <div class="skillbar" data-percent="92%">
                                 <div class="skill-data">
-                                    <div class="skill-title">Risk Managements</div>
+                                    <div class="skill-title">Risk Management</div>
                                     <div class="skill-no">92%</div>
                                 </div>
                                 <div class="skill-progress">

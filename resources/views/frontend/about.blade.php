@@ -263,7 +263,7 @@
     <!-- Our Mission -->
 
     <!-- Our Approach Section Start -->
-    <div class="our-approach d-none">
+    {{-- <div class="our-approach d-none">
         <div class="container">
             <div class="row">
                 <div class="col-lg-4">
@@ -383,11 +383,11 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <!-- Our Approach Section End -->
 
     <!-- How It Work Section Start -->
-    <div class="how-it-work bg-section d-none">
+    {{-- <div class="how-it-work bg-section d-none">
         <div class="container">
             <div class="row section-row">
                 <div class="col-lg-12">
@@ -484,11 +484,11 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <!-- How It Work Section End -->
 
     <!-- Our Impact Section Start -->
-    <div class="our-empact d-none">
+    {{-- <div class="our-empact d-none">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-5">
@@ -554,11 +554,11 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <!-- Our Impact Section End -->
 
     <!-- Our Team Section Start -->
-    <div class="our-team bg-section d-none">
+    {{-- <div class="our-team bg-section d-none">
         <div class="container">
             <div class="row section-row">
                 <div class="col-lg-12">
@@ -697,11 +697,11 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <!-- Our Team Section End -->
 
     <!-- What We Do Section Start -->
-    <div class="what-we-do d-none">
+    {{-- <div class="what-we-do d-none">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-6">
@@ -908,11 +908,11 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <!-- What We Do Section End -->
 
     <!-- Our Faqs Section Start -->
-    <div class="our-faqs bg-section d-none">
+    {{-- <div class="our-faqs bg-section d-none">
         <div class="container">
             <div class="row">
                 <div class="col-lg-5">
@@ -1115,11 +1115,11 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <!-- Our Faqs Section End -->
 
     <!-- Our Testimonials Section Start -->
-    <div class="our-testimonials about-our-testimonials d-none">
+    {{-- <div class="our-testimonials about-our-testimonials d-none">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6">
@@ -1218,6 +1218,6 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <!-- Our Testimonials Section End -->
 @endsection
