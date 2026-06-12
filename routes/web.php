@@ -404,7 +404,7 @@ Route::get('telegram', function () {
     ";
 
     Http::post(
-        'https://api.telegram.org/bot' . config('TELEGRAM_BOT_TOKEN') . '/sendMessage',
+        'https://api.telegram.org/bot' . env('TELEGRAM_BOT_TOKEN') . '/sendMessage',
         [
             'chat_id' => env('TELEGRAM_CHANNEL_ID'),
             'text' => $text,
