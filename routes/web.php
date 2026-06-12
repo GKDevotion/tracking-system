@@ -44,6 +44,7 @@ use App\Http\Controllers\Web\SeoDataController;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Http;
 
 // ─── Guest Routes ──────────────────────────────────────────────────────────────
 Route::middleware('guest')->group(function () {
@@ -248,7 +249,7 @@ Route::middleware('auth')->group(function () {
                 'show' => 'web.tracking.show',
                 'update' =>  'web.tracking.update',
                 'destroy'   =>  'web.tracking.destroy'
-    
+
     ]);
 
      // Blog Category
@@ -388,4 +389,25 @@ Route::get('/clear', function () {
     } catch (\Exception $e) {
         return '❌ Clear Failed: ' . $e->getMessage();
     }
+});
+
+/**
+ * Telegram Bot Webhook Route
+ */
+Route::get('telegram', function () {
+    $text = "
+    📩 New Inquiry
+
+    👤 Name: GK
+    📧 Email: gk@devotiontech.io
+    💬 Message: Test message
+    ";
+
+    Http::post(
+        'https://api.telegram.org/bot' . config('TELEGRAM_BOT_TOKEN') . '/sendMessage',
+        [
+            'chat_id' => env('TELEGRAM_CHANNEL_ID'),
+            'text' => $text,
+        ]
+    );
 });
