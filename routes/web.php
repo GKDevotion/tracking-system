@@ -398,11 +398,11 @@ Route::get('/clear', function () {
 Route::get('telegram', function () {
     try {
             $text = "
-        📩 New Inquiry
+        📩 Demo Inquiry
 
         👤 Name: GK
         📧 Email: gk@devotiontech.io
-        💬 Message: Test message
+        💬 Message: Team Checking
         ";
 
             $response = Http::timeout(30)
