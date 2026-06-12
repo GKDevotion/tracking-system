@@ -45,6 +45,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 
 // ─── Guest Routes ──────────────────────────────────────────────────────────────
 Route::middleware('guest')->group(function () {
@@ -395,19 +396,65 @@ Route::get('/clear', function () {
  * Telegram Bot Webhook Route
  */
 Route::get('telegram', function () {
-    $text = "
-    📩 New Inquiry
+    try {
+            $text = "
+        📩 New Inquiry
 
-    👤 Name: GK
-    📧 Email: gk@devotiontech.io
-    💬 Message: Test message
-    ";
+        👤 Name: GK
+        📧 Email: gk@devotiontech.io
+        💬 Message: Test message
+        ";
 
-    Http::post(
-        'https://api.telegram.org/bot' . env('TELEGRAM_BOT_TOKEN') . '/sendMessage',
-        [
-            'chat_id' => env('TELEGRAM_CHANNEL_ID'),
-            'text' => $text,
-        ]
-    );
+            $response = Http::timeout(30)
+                ->post(
+                    'https://api.telegram.org/bot' . env('TELEGRAM_BOT_TOKEN') . '/sendMessage',
+                    [
+                        'chat_id' => env('TELEGRAM_CHANNEL_ID'),
+                        'text'    => $text,
+                    ]
+                );
+
+            if ($response->successful()) {
+                return response()->json([
+                    'status'  => true,
+                    'message' => 'Telegram message sent successfully.',
+                    'data'    => $response->json(),
+                ]);
+            }
+
+            // Telegram API returned an error
+            Log::error('Telegram API Error', [
+                'response' => $response->json(),
+            ]);
+
+            return response()->json([
+                'status'  => false,
+                'message' => 'Failed to send Telegram message.',
+                'error'   => $response->json()['description'] ?? 'Unknown Telegram error.',
+            ], 500);
+
+        } catch (\Illuminate\Http\Client\ConnectionException $e) {
+
+            Log::error('Telegram Connection Error', [
+                'message' => $e->getMessage(),
+            ]);
+
+            return response()->json([
+                'status'  => false,
+                'message' => 'Unable to connect to Telegram.',
+                'error'   => $e->getMessage(),
+            ], 500);
+
+        } catch (\Exception $e) {
+
+            Log::error('Telegram Exception', [
+                'message' => $e->getMessage(),
+            ]);
+
+            return response()->json([
+                'status'  => false,
+                'message' => 'Something went wrong while sending Telegram notification.',
+                'error'   => $e->getMessage(),
+            ], 500);
+        }
 });
