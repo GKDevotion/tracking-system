@@ -11,6 +11,9 @@ use App\Http\Controllers\API\PermissionController;
 use App\Http\Controllers\API\RoleController;
 use App\Http\Controllers\API\TrackingController;
 use App\Http\Controllers\API\UserController;
+use App\Http\Controllers\API\SignalController;
+use App\Http\Controllers\API\SignalResultController;
+use App\Http\Controllers\TelegramWebhookController;
 use Illuminate\Support\Facades\Route;
 
 // ─── Public Auth Routes ────────────────────────────────────────────────────────
@@ -81,4 +84,11 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('logs/stats', [MailLogController::class, 'stats'])->name('logs.stats');
     });
 
+    Route::apiResource('signals', SignalController::class);
+    Route::post('signals/{signal}/submit', [SignalController::class, 'submit']);
+
+    Route::apiResource('signals.results', SignalResultController::class)->shallow();
+    Route::post('results/{result}/submit', [SignalResultController::class, 'submit']);
 });
+
+Route::post('/telegram/webhook', [TelegramWebhookController::class, 'handle']);

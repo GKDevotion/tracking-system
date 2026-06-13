@@ -123,4 +123,8 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
+    'telegram_approval_group_id' => env('TELEGRAM_APPROVAL_GROUP_ID'),
+    'telegram_public_channel_id' => env('TELEGRAM_PUBLIC_CHANNEL_ID'),
+    'telegram_vip_channel_id'    => env('TELEGRAM_VIP_CHANNEL_ID'),
+    'telegram_admin_ids'         => env('TELEGRAM_ADMIN_IDS'),
 ];
