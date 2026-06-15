@@ -7,13 +7,13 @@ use Illuminate\Support\Facades\Log;
 use App\Models\Signal;
 use App\Models\SignalResult;
 use App\Models\AuditLog;
-use App\Services\TelegramHttpService;
+use App\Services\TelegramService;
 use App\Services\MessageFormatterService;
 
 class TelegramWebhookController extends Controller
 {
     public function __construct(
-        private TelegramHttpService     $telegram,
+        private TelegramService     $telegram,
         private MessageFormatterService $formatter
     ) {}
 
@@ -179,6 +179,40 @@ class TelegramWebhookController extends Controller
         }
     }
 
+    // ─── Signal: Reject ───────────────────────────────────────────────────────
+
+    private function rejectSignal(int $id, int $userId, string $name, string $chatId, string $msgId, string $cbId): void
+    {
+        Log::channel('telegram')->info('❌ REJECT SIGNAL START', ['signal_id' => $id]);
+
+        try {
+            $signal = Signal::find($id);
+
+            if (!$signal) {
+                Log::channel('telegram')->error('❌ SIGNAL NOT FOUND', ['signal_id' => $id]);
+                $this->telegram->answerCallback($cbId, '⚠️ Signal not found.', true);
+                return;
+            }
+
+            $signal->update(['status' => 'rejected']);
+            Log::channel('telegram')->info('✅ SIGNAL STATUS → rejected', ['signal_id' => $id]);
+
+            $this->log('rejected_signal', 'signal', $id, $userId, $name);
+            $this->telegram->showRejectedSignal($signal, $chatId, $msgId, $name);
+            $this->telegram->answerCallback($cbId, '❌ Signal rejected.');
+            Log::channel('telegram')->info('✅ REJECT SIGNAL COMPLETE', ['signal_id' => $id]);
+
+        } catch (\Throwable $e) {
+            Log::channel('telegram')->error('💥 REJECT SIGNAL ERROR', [
+                'signal_id' => $id,
+                'error'     => $e->getMessage(),
+                'line'      => $e->getLine(),
+                'file'      => $e->getFile(),
+                'trace'     => $e->getTraceAsString(),
+            ]);
+            $this->telegram->answerCallback($cbId, '💥 Server error. Check logs.', true);
+        }
+    }
     // ─── Edit Signal: Step 1 — Show field menu ────────────────────────────────
 
     private function editSignal(int $id, string $chatId, string $msgId, string $cbId): void
