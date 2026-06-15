@@ -143,29 +143,29 @@ class TelegramService
      * all editable fields as buttons. Admin taps a field → bot
      * sends a prompt asking for the new value.
      */
-    public function showEditMenu(Signal $signal, string $chatId, string $messageId): void
+    public function showEditMenu(Signal $signal, string $chatId, string $messageId): array
     {
         $keyboard = [
             'inline_keyboard' => [
                 [
-                    ['text' => '📍 Entry',    'callback_data' => "edit_field:{$signal->id}:entry"],
-                    ['text' => '🛑 SL',       'callback_data' => "edit_field:{$signal->id}:sl"],
+                    ['text' => '📍 Entry',     'callback_data' => "edit_field:{$signal->id}:entry"],
+                    ['text' => '🛑 SL',        'callback_data' => "edit_field:{$signal->id}:sl"],
                 ],
                 [
-                    ['text' => '🎯 TP1',      'callback_data' => "edit_field:{$signal->id}:tp1"],
-                    ['text' => '🎯 TP2',      'callback_data' => "edit_field:{$signal->id}:tp2"],
-                    ['text' => '🎯 TP3',      'callback_data' => "edit_field:{$signal->id}:tp3"],
+                    ['text' => '🎯 TP1',       'callback_data' => "edit_field:{$signal->id}:tp1"],
+                    ['text' => '🎯 TP2',       'callback_data' => "edit_field:{$signal->id}:tp2"],
+                    ['text' => '🎯 TP3',       'callback_data' => "edit_field:{$signal->id}:tp3"],
                 ],
                 [
-                    ['text' => '🔄 Direction','callback_data' => "edit_field:{$signal->id}:direction"],
-                    ['text' => '💱 Pair',     'callback_data' => "edit_field:{$signal->id}:pair"],
+                    ['text' => '🔄 Direction', 'callback_data' => "edit_field:{$signal->id}:direction"],
+                    ['text' => '💱 Pair',      'callback_data' => "edit_field:{$signal->id}:pair"],
                 ],
                 [
-                    ['text' => '📢 Channel',  'callback_data' => "edit_field:{$signal->id}:channel"],
+                    ['text' => '📢 Channel',   'callback_data' => "edit_field:{$signal->id}:channel"],
                 ],
                 [
                     ['text' => '✅ Done — Approve & Post', 'callback_data' => "approve_signal:{$signal->id}"],
-                    ['text' => '❌ Cancel',                'callback_data' => "reject_signal:{$signal->id}"],
+                    ['text' => '🚫 Cancel',               'callback_data' => "cancel_edit:{$signal->id}"],
                 ],
             ]
         ];
@@ -181,13 +181,14 @@ class TelegramService
             "• Pair: `{$signal->pair}` | Direction: `{$signal->direction}`",
             "• Entry: `{$entry}`",
             "• SL: `{$signal->sl}`",
-            "• TP1: `{$signal->tp1}` | TP2: `{$signal->tp2}` | TP3: `{$signal->tp3}`",
+            "• TP1: `" . ($signal->tp1 ?? '—') . "` | TP2: `" . ($signal->tp2 ?? '—') . "` | TP3: `" . ($signal->tp3 ?? '—') . "`",
             "• Channel: `{$signal->channel}`",
             "",
-            "Tap a field below to update it.",
+            "👇 Tap a field to update it:",
         ]);
 
-        $this->editMessageText([
+        // Return the full Telegram API response for logging
+        return $this->editMessageText([
             'chat_id'      => $chatId,
             'message_id'   => $messageId,
             'text'         => $text,
@@ -200,16 +201,16 @@ class TelegramService
      * Ask admin to type a new value for a specific field.
      * Sends a NEW message with a cancel button.
      */
-    public function askForFieldValue(Signal $signal, string $field, string $chatId): void
+    public function askForFieldValue(Signal $signal, string $field, string $chatId): array
     {
         $labels = [
-            'entry'     => 'Entry price (e.g. `1.2800` or `1.2800-1.2820` for range)',
-            'sl'        => 'Stop Loss price (e.g. `1.2750`)',
-            'tp1'       => 'TP1 price (e.g. `1.2850`)',
-            'tp2'       => 'TP2 price (e.g. `1.2900`)',
-            'tp3'       => 'TP3 price (e.g. `1.2950`)',
+            'entry'     => 'Entry price — single: `1.2800` or range: `1.2800-1.2820`',
+            'sl'        => 'Stop Loss — e.g. `1.2750`',
+            'tp1'       => 'TP1 — e.g. `1.2850`',
+            'tp2'       => 'TP2 — e.g. `1.2900`',
+            'tp3'       => 'TP3 — e.g. `1.2950`',
             'direction' => 'Direction — type `BUY` or `SELL`',
-            'pair'      => 'Pair (e.g. `GBP/USD` or `XAU/USD`)',
+            'pair'      => 'Pair — e.g. `GBP/USD` or `XAU/USD`',
             'channel'   => 'Channel — type `public` or `vip`',
         ];
 
@@ -219,9 +220,16 @@ class TelegramService
             ]]
         ];
 
-        $this->sendMessage([
+        // Return response for logging
+        return $this->sendMessage([
             'chat_id'      => $chatId,
-            'text'         => "✏️ *Signal \#{$signal->id} — Edit {$field}*\n\nReply with the new value for:\n👉 {$labels[$field]}\n\n_Type your value in the next message._",
+            'text'         => implode("\n", [
+                "✏️ *Signal \#{$signal->id} — Editing: {$field}*",
+                "",
+                "👉 " . ($labels[$field] ?? $field),
+                "",
+                "_Just type the new value and send it._",
+            ]),
             'parse_mode'   => 'Markdown',
             'reply_markup' => json_encode($keyboard),
         ]);
