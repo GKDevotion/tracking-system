@@ -2,6 +2,7 @@
 namespace App\Services;
 
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 use App\Models\Signal;
 use App\Models\SignalResult;
 use App\Models\TelegramMessage;
@@ -22,21 +23,33 @@ class TelegramService
         $this->vipChannel    = config('app.telegram_vip_channel_id');
     }
 
-    // ─── Core HTTP Helpers ───────────────────────────────────────────────────
+    // ─── Core HTTP ────────────────────────────────────────────────────────────
 
-    private function sendMessage(array $payload): array
+    public function sendMessage(array $payload): array
     {
-        return Http::post("{$this->baseUrl}/sendMessage", $payload)->json();
+        $res = Http::post("{$this->baseUrl}/sendMessage", $payload)->json();
+        Log::channel('telegram')->info('📤 sendMessage', ['payload' => $payload, 'response' => $res]);
+        return $res;
     }
 
-    private function editMessageText(array $payload): array
+    public function editMessageText(array $payload): array
     {
-        return Http::post("{$this->baseUrl}/editMessageText", $payload)->json();
+        $res = Http::post("{$this->baseUrl}/editMessageText", $payload)->json();
+        Log::channel('telegram')->info('📝 editMessageText', ['payload' => $payload, 'response' => $res]);
+        return $res;
     }
 
-    private function editMessageReplyMarkup(array $payload): array
+    public function deleteMessage(string $chatId, string $messageId): void
     {
-        return Http::post("{$this->baseUrl}/editMessageReplyMarkup", $payload)->json();
+        $res = Http::post("{$this->baseUrl}/deleteMessage", [
+            'chat_id'    => $chatId,
+            'message_id' => $messageId,
+        ])->json();
+        Log::channel('telegram')->info('🗑️ deleteMessage', [
+            'chat_id'    => $chatId,
+            'message_id' => $messageId,
+            'response'   => $res,
+        ]);
     }
 
     public function answerCallback(string $callbackQueryId, string $text, bool $alert = false): void
@@ -48,100 +61,43 @@ class TelegramService
         ]);
     }
 
-    public function deleteMessage(string $chatId, string $messageId): void
-    {
-        Http::post("{$this->baseUrl}/deleteMessage", [
-            'chat_id'    => $chatId,
-            'message_id' => $messageId,
-        ]);
-    }
+    // ─── Signal: Initial Preview ──────────────────────────────────────────────
 
-    // ─── Signal Preview ──────────────────────────────────────────────────────
-
-    public function sendSignalPreview(Signal $signal): void
+    /**
+     * Sends brand new signal preview with Approve / Edit / Reject buttons.
+     * Stores the message_id in DB for future reference.
+     */
+    public function sendSignalPreview(Signal $signal): string
     {
         $keyboard = $this->signalApprovalKeyboard($signal->id);
-        $header   = "📋 *SIGNAL PREVIEW — \#{$signal->id}*\n";
-        $channel  = strtoupper($signal->channel);
-        $footer   = "\n📢 Channel: *{$channel}*";
+        $text     = $this->buildPreviewText($signal);
 
-        $result = $this->sendMessage([
+        $res = $this->sendMessage([
             'chat_id'      => $this->approvalGroup,
-            'text'         => $header . "\n" . $signal->signal_text . $footer,
+            'text'         => $text,
             'parse_mode'   => 'Markdown',
             'reply_markup' => json_encode($keyboard),
         ]);
 
-        if (!empty($result['result']['message_id'])) {
+        $msgId = (string) ($res['result']['message_id'] ?? '');
+
+        if ($msgId) {
             TelegramMessage::create([
                 'entity_type' => 'signal',
                 'entity_id'   => $signal->id,
                 'chat_id'     => $this->approvalGroup,
-                'message_id'  => $result['result']['message_id'],
+                'message_id'  => $msgId,
                 'type'        => 'preview',
             ]);
         }
+
+        return $msgId;
     }
 
-    // ─── Result Preview ──────────────────────────────────────────────────────
-
-    public function sendResultPreview(SignalResult $result): void
-    {
-        $keyboard = $this->resultApprovalKeyboard($result->id);
-        $header   = "📋 *RESULT PREVIEW — Signal \#{$result->signal_id}*\n\n";
-
-        $res = $this->sendMessage([
-            'chat_id'      => $this->approvalGroup,
-            'text'         => $header . $result->result_text,
-            'parse_mode'   => 'Markdown',
-            'reply_markup' => json_encode($keyboard),
-        ]);
-
-        if (!empty($res['result']['message_id'])) {
-            TelegramMessage::create([
-                'entity_type' => 'signal_result',
-                'entity_id'   => $result->id,
-                'chat_id'     => $this->approvalGroup,
-                'message_id'  => $res['result']['message_id'],
-                'type'        => 'preview',
-            ]);
-        }
-    }
-
-    // ─── Post to Channel ─────────────────────────────────────────────────────
-
-    public function postSignalToChannel(Signal $signal): string
-    {
-        $chatId = $signal->channel === 'vip' ? $this->vipChannel : $this->publicChannel;
-
-        $res = $this->sendMessage([
-            'chat_id'    => $chatId,
-            'text'       => $signal->signal_text,
-            'parse_mode' => 'Markdown',
-        ]);
-
-        return $res['result']['message_id'] ?? '';
-    }
-
-    public function postResultToChannel(SignalResult $result): string
-    {
-        $chatId = $result->signal->channel === 'vip' ? $this->vipChannel : $this->publicChannel;
-
-        $res = $this->sendMessage([
-            'chat_id'    => $chatId,
-            'text'       => $result->result_text,
-            'parse_mode' => 'Markdown',
-        ]);
-
-        return $res['result']['message_id'] ?? '';
-    }
-
-    // ─── Edit Flow ───────────────────────────────────────────────────────────
+    // ─── Signal: Edit Menu ────────────────────────────────────────────────────
 
     /**
-     * Replace the preview message with an edit menu showing
-     * all editable fields as buttons. Admin taps a field → bot
-     * sends a prompt asking for the new value.
+     * Replaces the preview message with the field-selector edit menu.
      */
     public function showEditMenu(Signal $signal, string $chatId, string $messageId): array
     {
@@ -164,7 +120,7 @@ class TelegramService
                     ['text' => '📢 Channel',   'callback_data' => "edit_field:{$signal->id}:channel"],
                 ],
                 [
-                    ['text' => '✅ Done — Approve & Post', 'callback_data' => "approve_signal:{$signal->id}"],
+                    ['text' => '✅ Done — Approve & Post', 'callback_data' => "approve_from_edit:{$signal->id}"],
                     ['text' => '🚫 Cancel',               'callback_data' => "cancel_edit:{$signal->id}"],
                 ],
             ]
@@ -187,7 +143,6 @@ class TelegramService
             "👇 Tap a field to update it:",
         ]);
 
-        // Return the full Telegram API response for logging
         return $this->editMessageText([
             'chat_id'      => $chatId,
             'message_id'   => $messageId,
@@ -197,11 +152,13 @@ class TelegramService
         ]);
     }
 
+    // ─── Signal: Ask for Field Value ──────────────────────────────────────────
+
     /**
-     * Ask admin to type a new value for a specific field.
-     * Sends a NEW message with a cancel button.
+     * Sends a NEW message prompting admin to type the new value.
+     * Returns the message_id so caller can store it for later deletion.
      */
-    public function askForFieldValue(Signal $signal, string $field, string $chatId): array
+    public function askForFieldValue(Signal $signal, string $field, string $chatId): string
     {
         $labels = [
             'entry'     => 'Entry price — single: `1.2800` or range: `1.2800-1.2820`',
@@ -220,8 +177,7 @@ class TelegramService
             ]]
         ];
 
-        // Return response for logging
-        return $this->sendMessage([
+        $res = $this->sendMessage([
             'chat_id'      => $chatId,
             'text'         => implode("\n", [
                 "✏️ *Signal \#{$signal->id} — Editing: {$field}*",
@@ -233,23 +189,120 @@ class TelegramService
             'parse_mode'   => 'Markdown',
             'reply_markup' => json_encode($keyboard),
         ]);
+
+        return (string) ($res['result']['message_id'] ?? '');
     }
 
-    // ─── Reject Flow ─────────────────────────────────────────────────────────
+    // ─── Signal: Post to Channel ──────────────────────────────────────────────
+
+    public function postSignalToChannel(Signal $signal): string
+    {
+        $chatId = $signal->channel === 'vip' ? $this->vipChannel : $this->publicChannel;
+
+        $res = $this->sendMessage([
+            'chat_id'    => $chatId,
+            'text'       => $signal->signal_text,
+            'parse_mode' => 'Markdown',
+        ]);
+
+        return (string) ($res['result']['message_id'] ?? '');
+    }
+
+    // ─── Signal: Final Clean Approved Message ─────────────────────────────────
 
     /**
-     * On reject: update the preview message to show rejected status
-     * AND offer a "Re-submit" button so admin can reconsider.
+     * THE KEY FIX:
+     * 1. Delete the edit menu message
+     * 2. Delete all prompt messages (ask-for-value messages)
+     * 3. Post to channel
+     * 4. Send a clean NEW approved confirmation message in group
      */
+    public function postCleanApproved(Signal $signal, string $chatId, string $editMenuMsgId, array $promptMsgIds, string $approvedBy): void
+    {
+        // 1 — Delete edit menu message
+        $this->deleteMessage($chatId, $editMenuMsgId);
+
+        // 2 — Delete all prompt + confirmation messages
+        foreach ($promptMsgIds as $promptMsgId) {
+            if ($promptMsgId) $this->deleteMessage($chatId, $promptMsgId);
+        }
+
+        // 3 — Post to channel
+        $channelMsgId = $this->postSignalToChannel($signal);
+        $signal->update(['telegram_message_id' => $channelMsgId]);
+
+        // 4 — Send clean approved message to approval group
+        $entry = $signal->entry_max
+            ? "{$signal->entry_min} – {$signal->entry_max}"
+            : $signal->entry_min;
+
+        $lines = array_filter([
+            "✅ *Signal \#{$signal->id} — APPROVED & POSTED*",
+            "",
+            "👤 Approved by: *{$approvedBy}*",
+            "",
+            "📊 *{$signal->pair} {$signal->direction}*",
+            "📍 Entry: `{$entry}`",
+            "🛑 SL: `{$signal->sl}`",
+            $signal->tp1 ? "🎯 TP1: `{$signal->tp1}`" : null,
+            $signal->tp2 ? "🎯 TP2: `{$signal->tp2}`" : null,
+            $signal->tp3 ? "🎯 TP3: `{$signal->tp3}`" : null,
+            "",
+            "📢 Channel: *{$signal->channel}*",
+        ]);
+
+        $this->sendMessage([
+            'chat_id'    => $chatId,
+            'text'       => implode("\n", $lines),
+            'parse_mode' => 'Markdown',
+        ]);
+    }
+
+    // ─── Signal: Approved (from normal flow, no edit) ─────────────────────────
+
+    /**
+     * Used when approve is clicked directly WITHOUT going through edit.
+     * Just edits the existing preview message — no deletion needed.
+     */
+    public function showApprovedSignal(Signal $signal, string $chatId, string $messageId, string $approvedBy): void
+    {
+        $entry = $signal->entry_max
+            ? "{$signal->entry_min} – {$signal->entry_max}"
+            : $signal->entry_min;
+
+        $text = implode("\n", array_filter([
+            "✅ *Signal \#{$signal->id} — APPROVED & POSTED*",
+            "",
+            "👤 Approved by: *{$approvedBy}*",
+            "",
+            "📊 *{$signal->pair} {$signal->direction}*",
+            "📍 Entry: `{$entry}`",
+            "🛑 SL: `{$signal->sl}`",
+            $signal->tp1 ? "🎯 TP1: `{$signal->tp1}`" : null,
+            $signal->tp2 ? "🎯 TP2: `{$signal->tp2}`" : null,
+            $signal->tp3 ? "🎯 TP3: `{$signal->tp3}`" : null,
+            "",
+            "📢 Channel: *{$signal->channel}*",
+        ]));
+
+        $this->editMessageText([
+            'chat_id'      => $chatId,
+            'message_id'   => $messageId,
+            'text'         => $text,
+            'parse_mode'   => 'Markdown',
+            'reply_markup' => json_encode(['inline_keyboard' => []]),
+        ]);
+    }
+
+    // ─── Signal: Rejected ─────────────────────────────────────────────────────
+
     public function showRejectedSignal(Signal $signal, string $chatId, string $messageId, string $rejectedBy): void
     {
         $keyboard = [
-            'inline_keyboard' => [
-                [
-                    ['text' => '🔁 Re-submit for Approval', 'callback_data' => "resubmit_signal:{$signal->id}"],
-                    ['text' => '🗑️ Delete',                 'callback_data' => "delete_signal:{$signal->id}"],
-                ]
-            ]
+            'inline_keyboard' => [[
+                ['text' => '🔁 Re-submit', 'callback_data' => "resubmit_signal:{$signal->id}"],
+                ['text' => '🗑️ Delete',   'callback_data' => "delete_signal:{$signal->id}"],
+            ]]
         ];
 
         $entry = $signal->entry_max
@@ -257,16 +310,15 @@ class TelegramService
             : $signal->entry_min;
 
         $text = implode("\n", [
-            "❌ *SIGNAL \#{$signal->id} — REJECTED*",
+            "❌ *Signal \#{$signal->id} — REJECTED*",
             "",
             "Rejected by: *{$rejectedBy}*",
             "",
-            "📊 {$signal->pair} {$signal->direction}",
+            "📊 *{$signal->pair} {$signal->direction}*",
             "📍 Entry: `{$entry}`",
             "🛑 SL: `{$signal->sl}`",
             "",
-            "Use *Re-submit* to send it for approval again,",
-            "or *Delete* to remove it permanently.",
+            "Tap *Re-submit* to send for approval again.",
         ]);
 
         $this->editMessageText([
@@ -278,46 +330,46 @@ class TelegramService
         ]);
     }
 
-    public function showRejectedResult(SignalResult $result, string $chatId, string $messageId, string $rejectedBy): void
+    // ─── Result Methods ───────────────────────────────────────────────────────
+
+    public function sendResultPreview(SignalResult $result): string
     {
-        $keyboard = [
-            'inline_keyboard' => [
-                [
-                    ['text' => '🔁 Re-submit', 'callback_data' => "resubmit_result:{$result->id}"],
-                    ['text' => '🗑️ Delete',    'callback_data' => "delete_result:{$result->id}"],
-                ]
-            ]
-        ];
+        $keyboard = $this->resultApprovalKeyboard($result->id);
+        $header   = "📋 *RESULT PREVIEW — Signal \#{$result->signal_id}*\n\n";
 
-        $text = implode("\n", [
-            "❌ *RESULT \#{$result->id} — REJECTED*",
-            "",
-            "Rejected by: *{$rejectedBy}*",
-            "Signal: \#{$result->signal_id} | Type: *{$result->result_type}*",
-            "",
-            "Use *Re-submit* to send for approval again.",
-        ]);
-
-        $this->editMessageText([
-            'chat_id'      => $chatId,
-            'message_id'   => $messageId,
-            'text'         => $text,
+        $res = $this->sendMessage([
+            'chat_id'      => $this->approvalGroup,
+            'text'         => $header . $result->result_text,
             'parse_mode'   => 'Markdown',
             'reply_markup' => json_encode($keyboard),
         ]);
+
+        $msgId = (string) ($res['result']['message_id'] ?? '');
+
+        if ($msgId) {
+            TelegramMessage::create([
+                'entity_type' => 'signal_result',
+                'entity_id'   => $result->id,
+                'chat_id'     => $this->approvalGroup,
+                'message_id'  => $msgId,
+                'type'        => 'preview',
+            ]);
+        }
+
+        return $msgId;
     }
 
-    // ─── Approved Message ────────────────────────────────────────────────────
-
-    public function showApprovedSignal(Signal $signal, string $chatId, string $messageId, string $approvedBy): void
+    public function postResultToChannel(SignalResult $result): string
     {
-        $this->editMessageText([
-            'chat_id'      => $chatId,
-            'message_id'   => $messageId,
-            'text'         => "✅ *Signal \#{$signal->id} APPROVED & POSTED*\n\nApproved by: *{$approvedBy}*\n📊 {$signal->pair} {$signal->direction}\n📢 Channel: *{$signal->channel}*",
-            'parse_mode'   => 'Markdown',
-            'reply_markup' => json_encode(['inline_keyboard' => []]),
+        $chatId = $result->signal->channel === 'vip' ? $this->vipChannel : $this->publicChannel;
+
+        $res = $this->sendMessage([
+            'chat_id'    => $chatId,
+            'text'       => $result->result_text,
+            'parse_mode' => 'Markdown',
         ]);
+
+        return (string) ($res['result']['message_id'] ?? '');
     }
 
     public function showApprovedResult(SignalResult $result, string $chatId, string $messageId, string $approvedBy): void
@@ -325,40 +377,83 @@ class TelegramService
         $this->editMessageText([
             'chat_id'      => $chatId,
             'message_id'   => $messageId,
-            'text'         => "✅ *Result \#{$result->id} APPROVED & POSTED*\n\nApproved by: *{$approvedBy}*\nSignal: \#{$result->signal_id} | Type: *{$result->result_type}*",
+            'text'         => "✅ *Result \#{$result->id} — APPROVED & POSTED*\n\nApproved by: *{$approvedBy}*\nSignal: \#{$result->signal_id} | Type: *{$result->result_type}*",
             'parse_mode'   => 'Markdown',
             'reply_markup' => json_encode(['inline_keyboard' => []]),
         ]);
     }
 
-    // ─── Keyboard Builders ───────────────────────────────────────────────────
+    public function showRejectedResult(SignalResult $result, string $chatId, string $messageId, string $rejectedBy): void
+    {
+        $keyboard = [
+            'inline_keyboard' => [[
+                ['text' => '🔁 Re-submit', 'callback_data' => "resubmit_result:{$result->id}"],
+                ['text' => '🗑️ Delete',   'callback_data' => "delete_result:{$result->id}"],
+            ]]
+        ];
+
+        $this->editMessageText([
+            'chat_id'      => $chatId,
+            'message_id'   => $messageId,
+            'text'         => implode("\n", [
+                "❌ *Result \#{$result->id} — REJECTED*",
+                "",
+                "Rejected by: *{$rejectedBy}*",
+                "Signal: \#{$result->signal_id} | Type: *{$result->result_type}*",
+                "",
+                "Tap *Re-submit* to send for approval again.",
+            ]),
+            'parse_mode'   => 'Markdown',
+            'reply_markup' => json_encode($keyboard),
+        ]);
+    }
+
+    public function editMessageWithApprovalButtons(Signal $signal, string $chatId, string $messageId): void
+    {
+        $this->editMessageText([
+            'chat_id'      => $chatId,
+            'message_id'   => $messageId,
+            'text'         => $this->buildPreviewText($signal),
+            'parse_mode'   => 'Markdown',
+            'reply_markup' => json_encode($this->signalApprovalKeyboard($signal->id)),
+        ]);
+    }
+
+    public function editResultWithApprovalButtons(SignalResult $result, string $chatId, string $messageId): void
+    {
+        $this->editMessageText([
+            'chat_id'      => $chatId,
+            'message_id'   => $messageId,
+            'text'         => "📋 *RESULT PREVIEW — Signal \#{$result->signal_id}* _(Re-submitted)_\n\n" . $result->result_text,
+            'parse_mode'   => 'Markdown',
+            'reply_markup' => json_encode($this->resultApprovalKeyboard($result->id)),
+        ]);
+    }
+
+    // ─── Keyboard Builders ────────────────────────────────────────────────────
 
     public function signalApprovalKeyboard(int $signalId): array
     {
         return [
-            'inline_keyboard' => [
-                [
-                    ['text' => '✅ Approve & Post', 'callback_data' => "approve_signal:{$signalId}"],
-                    ['text' => '✏️ Edit',           'callback_data' => "edit_signal:{$signalId}"],
-                    ['text' => '❌ Reject',          'callback_data' => "reject_signal:{$signalId}"],
-                ]
-            ]
+            'inline_keyboard' => [[
+                ['text' => '✅ Approve & Post', 'callback_data' => "approve_signal:{$signalId}"],
+                ['text' => '✏️ Edit',           'callback_data' => "edit_signal:{$signalId}"],
+                ['text' => '❌ Reject',          'callback_data' => "reject_signal:{$signalId}"],
+            ]]
         ];
     }
 
     public function resultApprovalKeyboard(int $resultId): array
     {
         return [
-            'inline_keyboard' => [
-                [
-                    ['text' => '✅ Approve & Post', 'callback_data' => "approve_result:{$resultId}"],
-                    ['text' => '❌ Reject',          'callback_data' => "reject_result:{$resultId}"],
-                ]
-            ]
+            'inline_keyboard' => [[
+                ['text' => '✅ Approve & Post', 'callback_data' => "approve_result:{$resultId}"],
+                ['text' => '❌ Reject',          'callback_data' => "reject_result:{$resultId}"],
+            ]]
         ];
     }
 
-    // ─── Misc ────────────────────────────────────────────────────────────────
+    // ─── Helpers ─────────────────────────────────────────────────────────────
 
     public function isAdmin(int $telegramUserId): bool
     {
@@ -371,43 +466,19 @@ class TelegramService
         return Http::post("{$this->baseUrl}/setWebhook", ['url' => $url])->json();
     }
 
-    public function updateApprovalMessage(string $chatId, string $messageId, string $text): void
+    private function buildPreviewText(Signal $signal): string
     {
-        $this->editMessageText([
-            'chat_id'    => $chatId,
-            'message_id' => $messageId,
-            'text'       => $text,
-            'parse_mode' => 'Markdown',
-        ]);
-    }
+        $entry   = $signal->entry_max
+            ? "{$signal->entry_min} – {$signal->entry_max}"
+            : $signal->entry_min;
+        $channel = strtoupper($signal->channel);
 
-    public function editMessageWithApprovalButtons(Signal $signal, string $chatId, string $messageId): void
-    {
-        $keyboard = $this->signalApprovalKeyboard($signal->id);
-        $header   = "📋 *SIGNAL PREVIEW — \#{$signal->id}* _(Re-submitted)_\n\n";
-        $channel  = strtoupper($signal->channel);
-        $footer   = "\n\n📢 Channel: *{$channel}*";
-
-        $this->editMessageText([
-            'chat_id'      => $chatId,
-            'message_id'   => $messageId,
-            'text'         => $header . $signal->signal_text . $footer,
-            'parse_mode'   => 'Markdown',
-            'reply_markup' => json_encode($keyboard),
-        ]);
-    }
-
-    public function editResultWithApprovalButtons(SignalResult $result, string $chatId, string $messageId): void
-    {
-        $keyboard = $this->resultApprovalKeyboard($result->id);
-        $header   = "📋 *RESULT PREVIEW — Signal \#{$result->signal_id}* _(Re-submitted)_\n\n";
-
-        $this->editMessageText([
-            'chat_id'      => $chatId,
-            'message_id'   => $messageId,
-            'text'         => $header . $result->result_text,
-            'parse_mode'   => 'Markdown',
-            'reply_markup' => json_encode($keyboard),
-        ]);
+        return implode("\n", array_filter([
+            "📋 *SIGNAL PREVIEW — \#{$signal->id}*",
+            "",
+            $signal->signal_text,
+            "",
+            "📢 Channel: *{$channel}*",
+        ]));
     }
 }
