@@ -41,6 +41,10 @@ use App\Http\Controllers\Web\PlanController;
 use App\Http\Controllers\Web\PricingPlanCheckoutController;
 use App\Http\Controllers\Web\SalesUserController;
 use App\Http\Controllers\Web\SeoDataController;
+use App\Models\Signal;
+use App\Services\MessageFormatterService;
+use App\Services\TelegramService;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
@@ -391,6 +395,30 @@ Route::get('/clear', function () {
         return '❌ Clear Failed: ' . $e->getMessage();
     }
 });
+
+Route::get( 'signal-creator', function(){
+    return view('frontend.signal-creator');
+} );
+
+Route::post('signals', function( Request $request, MessageFormatterService $formatter, TelegramService $telegram ) {
+    $signal = Signal::create([
+        'pair'      => $request->pair,
+        'direction' => $request->direction,
+        'entry_min' => $request->entry_min,
+        'entry_max' => $request->entry_max ?: null,
+        'sl'        => $request->sl,
+        'tp1'       => $request->tp1 ?: null,
+        'tp2'       => $request->tp2 ?: null,
+        'tp3'       => $request->tp3 ?: null,
+        'channel'   => $request->channel,
+        'status'    => 'draft',
+    ]);
+
+    $signal->update(['signal_text' => $formatter->formatSignal($signal)]);
+    $signal->update(['status' => 'pending_approval']);
+    $telegram->sendSignalPreview($signal);
+});
+
 
 /**
  * Telegram Bot Webhook Route
