@@ -219,19 +219,33 @@ class TelegramService
      */
     public function postCleanApproved(Signal $signal, string $chatId, string $editMenuMsgId, array $promptMsgIds, string $approvedBy): void
     {
-        // 1 — Delete edit menu message
+        Log::channel('telegram')->info('🧹 postCleanApproved CALLED', [
+            'signal_id'       => $signal->id,
+            'tp1'             => $signal->tp1,
+            'tp2'             => $signal->tp2,
+            'tp3'             => $signal->tp3,
+            'signal_text'     => $signal->signal_text,
+            'edit_menu_msg'   => $editMenuMsgId,
+            'prompts_to_del'  => $promptMsgIds,
+        ]);
+
+        // Step 1 — Delete edit menu message
         $this->deleteMessage($chatId, $editMenuMsgId);
 
-        // 2 — Delete all prompt + confirmation messages
+        // Step 2 — Delete all prompt + confirmation messages
         foreach ($promptMsgIds as $promptMsgId) {
-            if ($promptMsgId) $this->deleteMessage($chatId, $promptMsgId);
+            if ($promptMsgId) {
+                $this->deleteMessage($chatId, (string) $promptMsgId);
+            }
         }
 
-        // 3 — Post to channel
+        // Step 3 — Post signal to channel using signal_text already in DB
         $channelMsgId = $this->postSignalToChannel($signal);
         $signal->update(['telegram_message_id' => $channelMsgId]);
 
-        // 4 — Send clean approved message to approval group
+        Log::channel('telegram')->info('📢 POSTED TO CHANNEL', ['channel_msg_id' => $channelMsgId]);
+
+        // Step 4 — Build clean approved confirmation for approval group
         $entry = $signal->entry_max
             ? "{$signal->entry_min} – {$signal->entry_max}"
             : $signal->entry_min;
@@ -256,6 +270,8 @@ class TelegramService
             'text'       => implode("\n", $lines),
             'parse_mode' => 'Markdown',
         ]);
+
+        Log::channel('telegram')->info('✅ CLEAN APPROVED MESSAGE SENT');
     }
 
     // ─── Signal: Approved (from normal flow, no edit) ─────────────────────────

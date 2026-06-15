@@ -132,35 +132,60 @@ class TelegramWebhookController extends Controller
      */
     private function approveFromEdit(int $id, int $userId, string $name, string $chatId, string $msgId, string $cbId): void
     {
-        Log::channel('telegram')->info('✅ APPROVE FROM EDIT START', ['signal_id' => $id, 'edit_menu_msg_id' => $msgId]);
+        Log::channel('telegram')->info('✅ APPROVE FROM EDIT START', ['signal_id' => $id]);
 
         try {
+            // Always fetch fresh from DB — never use cached object
             $signal = Signal::find($id);
+
             if (!$signal) {
                 $this->telegram->answerCallback($cbId, '⚠️ Signal not found.', true);
                 return;
             }
+
             if ($signal->status === 'posted') {
                 $this->telegram->answerCallback($cbId, '⚠️ Already posted!', true);
                 return;
             }
 
-            // Retrieve all prompt message IDs stored during edit session
-            $promptMsgIds = Cache::get("edit_prompts:{$chatId}:{$id}", []);
-            Log::channel('telegram')->info('📋 PROMPT MSG IDS TO DELETE', ['ids' => $promptMsgIds]);
+            Log::channel('telegram')->info('📋 SIGNAL BEFORE APPROVE', [
+                'tp1'         => $signal->tp1,
+                'tp2'         => $signal->tp2,
+                'tp3'         => $signal->tp3,
+                'signal_text' => $signal->signal_text,
+            ]);
 
-            // Clear all edit-related cache
+            // Retrieve prompt message IDs accumulated during edit session
+            $promptMsgIds = Cache::get("edit_prompts:{$chatId}:{$id}", []);
+            Log::channel('telegram')->info('🗑️ PROMPTS TO DELETE', ['ids' => $promptMsgIds]);
+
+            // Clear all edit cache
             Cache::forget("edit_state:{$chatId}");
             Cache::forget("edit_prompts:{$chatId}:{$id}");
             Cache::forget("edit_origin:{$chatId}:{$id}");
 
-            // Update DB
-            $signal->update(['status' => 'approved', 'approved_by' => $userId, 'approved_at' => now()]);
+            // Update status
+            $signal->update([
+                'status'      => 'approved',
+                'approved_by' => $userId,
+                'approved_at' => now(),
+            ]);
 
-            // Delete edit menu + all prompts, post to channel, send clean message
+            // Fresh read before posting — guarantees latest signal_text
+            $signal = Signal::find($id);
+
+            Log::channel('telegram')->info('📋 SIGNAL AFTER STATUS UPDATE', [
+                'tp1'         => $signal->tp1,
+                'tp2'         => $signal->tp2,
+                'tp3'         => $signal->tp3,
+                'signal_text' => $signal->signal_text,
+                'status'      => $signal->status,
+            ]);
+
+            // Delete edit menu + all prompts, post to channel, send clean approved msg
             $this->telegram->postCleanApproved($signal, $chatId, $msgId, $promptMsgIds, $name);
 
-            $channelMsgId = $signal->telegram_message_id; // already set inside postCleanApproved
+            // Mark as posted
             $signal->update(['status' => 'posted']);
 
             $this->log('approved_signal', 'signal', $id, $userId, $name);
@@ -335,7 +360,7 @@ class TelegramWebhookController extends Controller
         Log::channel('telegram')->info('✏️ APPLYING EDIT', ['field' => $field, 'value' => $value]);
 
         $update = match ($field) {
-            'entry' => $this->parseEntry($value),
+            'entry'     => $this->parseEntry($value),
             'sl'        => ['sl'        => (float) $value],
             'tp1'       => ['tp1'       => (float) $value],
             'tp2'       => ['tp2'       => (float) $value],
@@ -356,38 +381,52 @@ class TelegramWebhookController extends Controller
             return;
         }
 
+        // Step 1 — save the field value
         $signal->update($update);
-        $signal->refresh();
 
-        // Regenerate signal text
+        // Step 2 — fresh DB read with all latest values
+        $signal = Signal::find($signal->id);
+
+        Log::channel('telegram')->info('✅ DB AFTER FIELD UPDATE', $signal->toArray());
+
+        // Step 3 — regenerate signal_text from fresh model
+        $newSignalText = $this->formatter->formatSignal($signal);
+
+        // Step 4 — save regenerated text + status
         $signal->update([
-            'signal_text' => $this->formatter->formatSignal($signal),
+            'signal_text' => $newSignalText,
             'status'      => 'pending_approval',
         ]);
-        $signal->refresh();
 
-        Log::channel('telegram')->info('✅ DB UPDATED', ['fields' => $update]);
+        // Step 5 — fresh read again so edit menu shows correct values
+        $signal = Signal::find($signal->id);
 
-        // Store confirmation msg ID for deletion later
-        $confirmRes = $this->telegram->sendMessage([
+        Log::channel('telegram')->info('✅ SIGNAL TEXT REGENERATED', [
+            'signal_text' => $signal->signal_text,
+            'tp1' => $signal->tp1,
+            'tp2' => $signal->tp2,
+            'tp3' => $signal->tp3,
+        ]);
+
+        // Step 6 — send confirmation message (store ID for deletion)
+        $confirmRes   = $this->telegram->sendMessage([
             'chat_id'    => $chatId,
             'text'       => "✅ *{$field}* updated to `{$value}`",
             'parse_mode' => 'Markdown',
         ]);
         $confirmMsgId = (string) ($confirmRes['result']['message_id'] ?? '');
 
-        // Store confirm msg id in prompts list too
         if ($confirmMsgId) {
             $prompts   = Cache::get("edit_prompts:{$chatId}:{$signal->id}", []);
             $prompts[] = $confirmMsgId;
             Cache::put("edit_prompts:{$chatId}:{$signal->id}", $prompts, now()->addMinutes(30));
-            Log::channel('telegram')->info('💾 CONFIRM MSG STORED', ['all_prompts' => $prompts]);
+            Log::channel('telegram')->info('💾 CONFIRM MSG STORED', ['prompts' => $prompts]);
         }
 
-        // Refresh edit menu with updated values
+        // Step 7 — refresh edit menu with latest values
         $this->telegram->showEditMenu($signal, $chatId, $editMenuMsgId);
 
-        Log::channel('telegram')->info('✅ EDIT MENU REFRESHED WITH NEW VALUES');
+        Log::channel('telegram')->info('✅ EDIT MENU REFRESHED');
     }
 
     private function parseEntry(string $value): array
