@@ -490,12 +490,15 @@ Route::get('telegram', function () {
 /**
  * Run Custom Schedule Cron Job
  */
-Route::get('/cron/run-schedule', function (Request $request) {
+Route::get('/cron/run-auto-signal-schedule', function (Request $request) {
 
-    Artisan::call('schedule:run');
+    $exitCode = Artisan::call('wealthora:auto-signal');
+    $output   = Artisan::output(); // captures everything $this->info()/$this->error() printed
 
     return response()->json([
-        'ok'   => true,
-        'time' => now()->toDateTimeString(),
+        'ok'        => $exitCode === 0,
+        'exit_code' => $exitCode,
+        'output'    => trim($output),
+        'time'      => now()->toDateTimeString(),
     ]);
 });
