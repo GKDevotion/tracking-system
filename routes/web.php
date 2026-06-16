@@ -486,3 +486,16 @@ Route::get('telegram', function () {
             ], 500);
         }
 });
+
+/**
+ * Run Custom Schedule Cron Job
+ */
+Route::get('/cron/run-schedule', function (Request $request) {
+
+    Artisan::call('schedule:run');
+
+    return response()->json([
+        'ok'   => true,
+        'time' => now()->toDateTimeString(),
+    ]);
+});
