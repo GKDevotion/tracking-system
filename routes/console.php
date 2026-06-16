@@ -12,3 +12,5 @@ Artisan::command('inspire', function () {
 Schedule::call(function () {
     \App\Models\PasswordResetOtp::where('expires_at', '<', now()->subDay())->delete();
 })->daily();
+
+Schedule::command('wealthora:auto-signal')->hourly();

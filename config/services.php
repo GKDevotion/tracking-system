@@ -35,4 +35,16 @@ return [
         ],
     ],
 
+    'twelvedata' => [
+        'api_key'  => env('TWELVEDATA_API_KEY'),
+        'base_url' => env('TWELVEDATA_BASE_URL', 'https://api.twelvedata.com'),
+    ],
+
+    'auto_signal' => [
+        'enabled'      => env('AUTO_SIGNAL_ENABLED', false),
+        'fire_chance'  => (int) env('AUTO_SIGNAL_FIRE_CHANCE', 50),
+        'risk_reward'  => (float) env('AUTO_SIGNAL_RISK_REWARD', 2),
+        'pairs'        => array_map('trim', explode(',', env('AUTO_SIGNAL_PAIRS', 'GBP/USD'))),
+    ],
+
 ];
