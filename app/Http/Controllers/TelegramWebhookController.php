@@ -9,12 +9,14 @@ use App\Models\SignalResult;
 use App\Models\AuditLog;
 use App\Services\TelegramService;
 use App\Services\MessageFormatterService;
+use App\Services\MT5BridgeService;
 
 class TelegramWebhookController extends Controller
 {
     public function __construct(
         private TelegramService     $telegram,
-        private MessageFormatterService $formatter
+        private MessageFormatterService $formatter,
+        private MT5BridgeService        $mt5
     ) {}
 
     // ─── Entry Point ──────────────────────────────────────────────────────────
@@ -103,6 +105,50 @@ class TelegramWebhookController extends Controller
             $signal->update(['status' => 'approved', 'approved_by' => $userId, 'approved_at' => now()]);
             $channelMsgId = $this->telegram->postSignalToChannel($signal);
             $signal->update(['status' => 'posted', 'telegram_message_id' => $channelMsgId]);
+
+            if (config('services.mt5.enabled')) {
+                $lots   = config('services.mt5.lots', 0.01);
+                $result = $this->mt5->submitSignal($signal, $lots);
+
+                if ($result['ok']) {
+                    Log::channel('telegram')->info('✅ MT5 TRADE SUBMITTED', [
+                        'signal_id' => $signal->id,
+                        'ticket'    => $result['ticket'],
+                    ]);
+
+                    // Notify approval group about MT5 submission
+                    $this->telegram->sendMessage([
+                        'chat_id'    => config('app.telegram_approval_group_id'),
+                        'text'       => implode("\n", [
+                            "🤖 *MT5 Trade Placed*",
+                            "",
+                            "Signal: \#{$signal->id} | {$signal->pair} {$signal->direction}",
+                            "Ticket: `#{$result['ticket']}`",
+                            "Lots: `" . config('services.mt5.lots') . "`",
+                        ]),
+                        'parse_mode' => 'Markdown',
+                    ]);
+                } else {
+                    Log::channel('telegram')->error('❌ MT5 SUBMIT FAILED', [
+                        'signal_id' => $signal->id,
+                        'error'     => $result['error'],
+                    ]);
+
+                    // Notify approval group about MT5 failure
+                    $this->telegram->sendMessage([
+                        'chat_id'    => config('app.telegram_approval_group_id'),
+                        'text'       => implode("\n", [
+                            "⚠️ *MT5 Trade FAILED*",
+                            "",
+                            "Signal: \#{$signal->id} | {$signal->pair} {$signal->direction}",
+                            "Error: `{$result['error']}`",
+                            "",
+                            "_Trade was NOT placed on MT5. Place manually._",
+                        ]),
+                        'parse_mode' => 'Markdown',
+                    ]);
+                }
+            }
 
             $this->log('approved_signal', 'signal', $id, $userId, $name);
 

@@ -47,4 +47,11 @@ return [
         'pairs'        => array_map('trim', explode(',', env('AUTO_SIGNAL_PAIRS', 'GBP/USD'))),
     ],
 
+    'mt5' => [
+        'bridge_url' => env('MT5_BRIDGE_URL'),
+        'secret'     => env('MT5_SECRET'),
+        'lots'       => (float) env('MT5_DEFAULT_LOTS', 0.01),
+        'enabled'    => env('MT5_ENABLED', false),
+    ],
+
 ];
