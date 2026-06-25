@@ -13,7 +13,7 @@
                 </div>
                 <div class="card-body p-4">
                     <form method="POST" enctype="multipart/form-data"
-                        action="{{ isset($category) ? route('web.blog-category.update', $category) : route('web.blog-category.store') }}">
+                        action="{{ isset($category) && $category->id ? route('web.blog-category.update', $category->id) : route('web.blog-category.store') }}"> 
                         @csrf
                         @if (isset($category))
                             @method('PUT')
@@ -25,8 +25,7 @@
                                 <label class="form-label">Title <span class="text-danger">*</span></label>
                                 <input type="text" name="title" id="titleInput"
                                     value="{{ old('title', $category->title ?? '') }}"
-                                    class="form-control @error('title') is-invalid @enderror" placeholder="Enter title"
-                                    required>
+                                    class="form-control @error('title') is-invalid @enderror" placeholder="Enter title" required>
                                 @error('title')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror

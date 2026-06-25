@@ -113,9 +113,10 @@ class CategoryController extends Controller
         return view('backend.pages.category.view', compact('category', 'categories'));
     }
 
-    public function edit(Categories $category)
+    public function edit(Categories $category, $id)
     {
-        $categories = Categories::where('parent_id', 0)->get();
+        $categories = Categories::where('parent_id', 0)->get(); 
+         $category = Categories::findOrFail($id);
         return view('backend.pages.category.form', compact('category', 'categories'));
     }
 
