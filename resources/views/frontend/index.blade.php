@@ -469,6 +469,7 @@
                 margin-bottom: 15px;
                 border: 1px solid #f0f4f8;
                 width: inherit;
+                height: 75px;
             }
 
             .badge-text {
@@ -492,7 +493,7 @@
                 display: inline-flex;
                 align-items: center;
                 justify-content: center;
-                position: relative;
+                position: absolute;
                 overflow: hidden;
                 box-shadow:
                     0 0 0 0 rgba(0, 200, 83, 0.6),
@@ -500,7 +501,7 @@
 
                 animation: pulseRing 2s infinite;
                 color: #fff;
-                margin-right: 15px;
+                margin-left: -60px;
             }
 
             /* Tick Animation */
@@ -637,7 +638,7 @@
 
                                     .trusted-shield{
                                         position: relative;
-                                        width: 170px;
+                                        width: 100px;
                                         height: auto;
                                         margin: auto;
                                         animation: floating 2s ease-in-out infinite;
@@ -671,18 +672,20 @@
                                 <h2 class="mb-4">
                                     <b>Verified by third-party</b>
                                 </h2>
-                                <div class="verification-badge">
+                                <div class="verification-badge" style="background-color: #000;">
                                     <span class="badge-check">✔</span>
                                     <div>
-                                        <div class="badge-text">MyFXBook Verified</div>
-                                        <div class="badge-subtext">Updated daily</div>
+                                        <img src="{{url('public/frontend/images/home/MyFXBook-Verified.webp')}}" title="MyFXBook Verified" />
+                                        {{-- <div class="badge-text">MyFXBook Verified</div>
+                                        <div class="badge-subtext">Updated daily</div> --}}
                                     </div>
                                 </div>
                                 <div class="verification-badge">
                                     <span class="badge-check">✔</span>
                                     <div>
-                                        <div class="badge-text">BlueFX Verified</div>
-                                        <div class="badge-subtext">Updated daily</div>
+                                        <img src="{{url('public/frontend/images/home/BlueFX-Verified.webp')}}" title="BlueFX Verified" />
+                                        {{-- <div class="badge-text">BlueFX Verified</div>
+                                        <div class="badge-subtext">Updated daily</div> --}}
                                     </div>
                                 </div>
                             </div>
@@ -737,29 +740,34 @@
                     vertical-align: sub;
                     font-size: 20px;
                 }
+
+                .high-light-number{
+                    font-size: 3rem;
+                    margin-top: -30px;
+                    margin-left: 15px
+                }
             </style>
             <div class="row g-4 mb-4">
                 <div class="col-md-3">
                     <div class="glass-card">
                         <div class="kpi-header">
-                            <div class="kpi-icon">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                            <div class="kpi-icon" style="opacity: 0">
+
                             </div>
                             <span class="kpi-trend">
-                                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="18 15 12 9 6 15"></polyline></svg>
-                                +4.2%
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
                             </span>
                         </div>
                         <div class="row">
                             <div class="col-6">
-                                <h2 id="winRate">68%</h2>
+                                <h2 id="winRate" class="high-light-number">68%</h2>
                             </div>
                             <div class="col-6 text-end">
                                 <small>
-                                    Win Rate
+                                    <b>Win Rate</b>
                                 </small>
                             </div>
-                            <div class="col-12 py-3">
+                            <div class="col-12 py-3 text-end">
                                 vs 70.8% prior week
                             </div>
                         </div>
@@ -768,22 +776,23 @@
                 <div class="col-md-3">
                     <div class="glass-card">
                         <div class="kpi-header">
-                            <div class="kpi-icon">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline><polyline points="16 7 22 7 22 13"></polyline></svg>
+                            <div class="kpi-icon" style="opacity: 0">
+
                             </div>
                             <span class="kpi-trend">
-                                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="18 15 12 9 6 15"></polyline></svg>
-                                +18%
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline><polyline points="16 7 22 7 22 13"></polyline></svg>
                             </span>
                         </div>
                         <div class="row">
                             <div class="col-6">
-                                <h2 id="pips">+320</h2>
+                                <h2 id="pips" class="high-light-number">+320</h2>
                             </div>
                             <div class="col-6 text-end">
-                                <small>Net Pips</small>
+                                <small>
+                                    <b>Net Pips</b>
+                                </small>
                             </div>
-                            <div class="col-12 py-3">
+                            <div class="col-12 py-3 text-end">
                                 7-day rolling total
                             </div>
                         </div>
@@ -792,19 +801,23 @@
                 <div class="col-md-3">
                     <div class="glass-card">
                         <div class="kpi-header">
-                            <div class="kpi-icon">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"></path><path d="M7 14l4-4 4 4 5-5"></path></svg>
+                            <div class="kpi-icon" style="opacity: 0">
+
                             </div>
-                            <span class="kpi-trend">+6</span>
+                            <span class="kpi-trend">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"></path><path d="M7 14l4-4 4 4 5-5"></path></svg>
+                            </span>
                         </div>
                         <div class="row">
                             <div class="col-6">
-                                <h2 id="trades">8</h2>
+                                <h2 id="trades" class="high-light-number">8</h2>
                             </div>
                             <div class="col-6 text-end">
-                                <small>Trades</small>
+                                <small>
+                                    <b>Trades</b>
+                                </small>
                             </div>
-                            <div class="col-12 py-3">
+                            <div class="col-12 py-3 text-end">
                                 21 wins · 7 losses
                             </div>
                         </div>
@@ -813,19 +826,23 @@
                 <div class="col-md-3">
                     <div class="glass-card">
                         <div class="kpi-header">
-                            <div class="kpi-icon">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+                            <div class="kpi-icon" style="opacity: 0">
+
                             </div>
-                            <span class="kpi-trend">stable</span>
+                            <span class="kpi-trend">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+                            </span>
                         </div>
                         <div class="row">
                             <div class="col-6">
-                                <h2 id="rr">1:1.8</h2>
+                                <h2 id="rr" class="high-light-number">1:1.8</h2>
                             </div>
                             <div class="col-6 text-end">
-                                <small>R:R</small>
+                                <small>
+                                    <b>R:R</b>
+                                </small>
                             </div>
-                            <div class="col-12 py-3">
+                            <div class="col-12 py-3 text-end">
                                 across all closed trades
                             </div>
                         </div>

@@ -426,7 +426,7 @@
     }
 </style>
 
-<div id="announcement-bar">
+<div id="announcement-bar" class="d-none">
     <div class="bar-left">
         <div class="vip-icon">
             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
