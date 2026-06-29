@@ -13,6 +13,7 @@
     .carousel-item{
         height: 95vh;
     }
+
     /* ── Each slide is a banner image ── */
     .carousel-item img {
         width: 100%;
