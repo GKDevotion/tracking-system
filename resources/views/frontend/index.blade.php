@@ -2,7 +2,19 @@
 
 @section('content')
 
-    @include('frontend.element.home-slider-carousel')
+    {{-- @include('frontend.element.home-slider-carousel') --}}
+
+    <div class="carousel-inner" style="height: 100% !important;">
+
+                <div class="carousel-item active h-100 position-relative">
+             
+
+                    <video autoplay muted loop playsinline class="w-100 h-100 object-fit-cover">
+                        <source src="{{ url('public/frontend/videos/final.mp4') }}" type="video/mp4">
+                    </video>
+                </div>
+
+            </div>
 
     <style>
         .join-section .profit-text{
