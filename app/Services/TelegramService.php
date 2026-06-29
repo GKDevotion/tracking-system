@@ -27,21 +27,21 @@ class TelegramService
 
     public function sendMessage(array $payload): array
     {
-        $res = Http::post("{$this->baseUrl}/sendMessage", $payload)->json();
+        $res = $this->http()->post("{$this->baseUrl}/sendMessage", $payload)->json();
         Log::channel('telegram')->info('📤 sendMessage', ['payload' => $payload, 'response' => $res]);
         return $res;
     }
 
     public function editMessageText(array $payload): array
     {
-        $res = Http::post("{$this->baseUrl}/editMessageText", $payload)->json();
+        $res = $this->http()->post("{$this->baseUrl}/editMessageText", $payload)->json();
         Log::channel('telegram')->info('📝 editMessageText', ['payload' => $payload, 'response' => $res]);
         return $res;
     }
 
     public function deleteMessage(string $chatId, string $messageId): void
     {
-        $res = Http::post("{$this->baseUrl}/deleteMessage", [
+        $res = $this->http()->post("{$this->baseUrl}/deleteMessage", [
             'chat_id'    => $chatId,
             'message_id' => $messageId,
         ])->json();
@@ -54,7 +54,7 @@ class TelegramService
 
     public function answerCallback(string $callbackQueryId, string $text, bool $alert = false): void
     {
-        Http::post("{$this->baseUrl}/answerCallbackQuery", [
+        $this->http()->post("{$this->baseUrl}/answerCallbackQuery", [
             'callback_query_id' => $callbackQueryId,
             'text'              => $text,
             'show_alert'        => $alert,
@@ -479,7 +479,7 @@ class TelegramService
 
     public function setWebhook(string $url): array
     {
-        return Http::post("{$this->baseUrl}/setWebhook", ['url' => $url])->json();
+        return $this->http()->post("{$this->baseUrl}/setWebhook", ['url' => $url])->json();
     }
 
     private function buildPreviewText(Signal $signal): string
@@ -496,5 +496,17 @@ class TelegramService
             "",
             "📢 Channel: *{$channel}*",
         ]));
+    }
+
+    private function http(): \Illuminate\Http\Client\PendingRequest
+    {
+        $request = Http::withHeaders(['Content-Type' => 'application/json']);
+
+        // Only disable SSL verification in local/dev — never in production
+        if (app()->environment('local')) {
+            $request = $request->withoutVerifying();
+        }
+
+        return $request;
     }
 }

@@ -80,30 +80,30 @@
     }
 </style>
 <a href="https://t.me/Wealthoraofficial">
-<div id="mainCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="4000">
+    <div id="mainCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="4000">
 
-    <!-- Dot indicators -->
-    <div class="carousel-indicators">
-        <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="0" class="active"></button>
-        {{-- <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="1"></button> --}}
-    </div>
-
-    <!-- Slides -->
-    <div class="carousel-inner">
-
-        <div class="carousel-item active">
-            <!-- Replace src with your actual image path -->
-            <img src="{{url('storage/app/public/home-slider/website-07.png')}}" alt="Our Signals are Money Making Machine" />
+        <!-- Dot indicators -->
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="0" class="active"></button>
+            {{-- <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="1"></button> --}}
         </div>
+
+        <!-- Slides -->
+        <div class="carousel-inner">
+
+            <div class="carousel-item active">
+                <!-- Replace src with your actual image path -->
+                <img src="{{url('storage/app/public/home-slider/website-07.png')}}" alt="Our Signals are Money Making Machine" />
+            </div>
+        </div>
+
+        <!-- Controls -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#mainCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#mainCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </button>
+
     </div>
-
-    <!-- Controls -->
-    <button class="carousel-control-prev" type="button" data-bs-target="#mainCarousel" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon"></span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#mainCarousel" data-bs-slide="next">
-        <span class="carousel-control-next-icon"></span>
-    </button>
-
-</div>
 </a>

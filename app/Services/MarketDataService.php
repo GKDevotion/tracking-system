@@ -18,7 +18,7 @@ class MarketDataService
     /** Get current real-time price for a symbol, e.g. "GBP/USD" or "XAU/USD" */
     public function getPrice(string $symbol): ?float
     {
-        $response = Http::get("{$this->baseUrl}/price", [
+        $response = $this->http()->get("{$this->baseUrl}/price", [
             'symbol' => $symbol,
             'apikey' => $this->apiKey,
         ]);
@@ -41,7 +41,7 @@ class MarketDataService
     /** Get recent OHLC candles — useful later for RSI/MA logic */
     public function getCandles(string $symbol, string $interval = '1h', int $count = 50): array
     {
-        $response = Http::get("{$this->baseUrl}/time_series", [
+        $response = $this->http()->get("{$this->baseUrl}/time_series", [
             'symbol'     => $symbol,
             'interval'   => $interval,
             'outputsize' => $count,
@@ -56,5 +56,14 @@ class MarketDataService
         }
 
         return $data['values']; // newest first
+    }
+
+    private function http(): \Illuminate\Http\Client\PendingRequest
+    {
+        $request = Http::withHeaders(['Content-Type' => 'application/json']);
+        if (app()->environment('local')) {
+            $request = $request->withoutVerifying();
+        }
+        return $request;
     }
 }

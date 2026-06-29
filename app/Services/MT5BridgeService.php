@@ -44,7 +44,7 @@ class MT5BridgeService
         ];
 
         try {
-            $response = Http::timeout(10)->post($this->bridgeUrl, $payload);
+            $response = $this->http()->timeout(10)->post($this->bridgeUrl, $payload);
             $data     = $response->json();
 
             Log::channel('telegram')->info('📡 MT5 BRIDGE RESPONSE', ['data' => $data]);
@@ -83,5 +83,17 @@ class MT5BridgeService
             ]);
             return ['ok' => false, 'error' => $e->getMessage()];
         }
+    }
+
+    private function http(): \Illuminate\Http\Client\PendingRequest
+    {
+        $request = Http::withHeaders(['Content-Type' => 'application/json']);
+
+        // Only disable SSL verification in local/dev — never in production
+        if (app()->environment('local')) {
+            $request = $request->withoutVerifying();
+        }
+
+        return $request;
     }
 }
