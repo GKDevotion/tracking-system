@@ -851,12 +851,12 @@
             </div>
 
             <div class="row g-4">
-                <div class="col-lg-8">
+                <div class="col-lg-8 d-none">
                     <div class="glass-card">
                         <canvas id="chart"></canvas>
                     </div>
                 </div>
-                <div class="col-lg-4">
+                <div class="col-lg-12">
                     <div class="glass-card">
                         <div class="panel-card">
                             <div class="panel-card-header">
