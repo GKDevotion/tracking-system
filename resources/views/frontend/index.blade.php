@@ -463,11 +463,11 @@
                 background: white;
                 border-radius: 12px;
                 padding: 12px 20px;
-                box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
+                box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.6);
                 display: flex;
                 align-items: center;
                 margin-bottom: 15px;
-                border: 1px solid #f0f4f8;
+                border: 0px solid #f0f4f8;
                 width: inherit;
                 height: 75px;
             }
