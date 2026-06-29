@@ -87,7 +87,7 @@
     <div id="mainCarousel"
          class="carousel slide"
          data-bs-ride="carousel"
-         data-bs-interval="10000">
+         data-bs-interval="6000">
 
         <!-- Indicators -->
         <div class="carousel-indicators">
@@ -137,7 +137,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const carouselElement = document.getElementById('mainCarousel');
     const carousel = new bootstrap.Carousel(carouselElement, {
-        interval: 10000,
+        interval: 6000,
         ride: 'carousel'
     });
 
@@ -148,17 +148,15 @@ document.addEventListener("DOMContentLoaded", function () {
         const activeSlide = carouselElement.querySelector('.carousel-item.active');
 
         if (activeSlide.contains(video)) {
-
             carousel.pause();
             video.currentTime = 0;
+            video.playbackRate = 1.5; // 2X Speed
             video.play();
-
         } else {
-
             video.pause();
             video.currentTime = 0;
+            video.playbackRate = 1.0; // Reset (optional)
             carousel.cycle();
-
         }
 
     });
