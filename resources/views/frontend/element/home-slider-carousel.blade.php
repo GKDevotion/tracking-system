@@ -137,7 +137,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const carouselElement = document.getElementById('mainCarousel');
     const carousel = new bootstrap.Carousel(carouselElement, {
-        interval: 4000,
+        interval: 10000,
         ride: 'carousel'
     });
 
