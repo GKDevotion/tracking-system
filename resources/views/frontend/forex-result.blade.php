@@ -41,7 +41,7 @@
                     }
 
                     /* Header */
-                    .sig-table thead tr { background: var(--logo-color); }
+                    .sig-table thead tr { background: #000; }
                     .sig-table thead th {
                         font-weight: 700;
                         font-size: 0.82rem;
@@ -66,12 +66,13 @@
 
                     /* Hover */
                     .sig-table tbody tr:hover {
-                    background: rgba(46,204,143,0.11) !important;
+                    /* background: rgba(46,204,143,0.11) !important; */
                     transform: scaleY(1.015);
                     z-index: 3;
                     }
                     .sig-table tbody tr:hover .btn-live {
-                    background: var(--logo-color);
+                    background: #000;
+                    /* var(--logo-color); */
                     box-shadow: 0 0 16px rgba(46,204,143,0.6);
                     color: #fff;
                     transform: scale(1.06);
@@ -233,7 +234,7 @@
                                         </td>
 
                                         {{-- Profit --}}
-                                        <td class="{{ $signal->profit > 0 ? 'c-profit' : 'c-zero' }}">
+                                        <td class="{{ $signal->profit > 0 ? 'c-profit' : ($signal->profit < 0 ? 'c-loss' : 'c-zero') }}">
                                             {{ $signal->profit }}
                                         </td>
 
