@@ -15,49 +15,50 @@
     </div> --}}
 
     <style>
-        .join-section .profit-text {
+        .join-section .profit-text{
             font-size: 3rem;
         }
 
         /* .join-section .profit-text span
-                {
-                    color: #46e546;
-                    font-size: 3rem;
-                    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
-                } */
+        {
+            color: #46e546;
+            font-size: 3rem;
+            text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
+        } */
 
-        .cta-background-wrap {
+        .cta-background-wrap{
             margin-top: -70px;
         }
 
-        .cta-background-wrap .signal-btn {
+        .cta-background-wrap .signal-btn{
             font-weight: 800;
         }
 
-        .join-section .profit-text span.color-change {
+        .join-section .profit-text span.color-change{
             color: #46e546;
             font-size: 3rem;
             text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
         }
 
-        @media only screen and (max-width: 991px) {
-            .join-section .profit-text {
+        @media only screen and (max-width: 991px){
+            .join-section .profit-text{
                 font-size: 2rem;
             }
 
-            .join-section .profit-text span.color-change {
+            .join-section .profit-text span.color-change
+            {
                 font-size: 2.5rem;
             }
 
-            .main-button.is-centered {
+            .main-button.is-centered{
                 height: 0;
             }
 
-            .cta-background-wrap {
+            .cta-background-wrap{
                 margin-top: 0px;
             }
 
-            .cta-background-wrap .signal-btn {
+            .cta-background-wrap .signal-btn{
                 font-weight: 600;
             }
         }
@@ -76,10 +77,9 @@
 
         <link href="{{ url('public/frontend/css/lottie.css') }}" rel="stylesheet" />
         <script src="{{ url('public/frontend/js/lottie.min.js') }}"></script>
-        <div class="cta-background-wrap is-relative">
+        <div class="cta-background-wrap is-relative" >
 
-            <a href="{{ getConfigurationField('SOCIAL_TELEGRAM_LINK') }}" target="_blank"
-                class="main-button is-centered w-inline-block">
+            <a href="{{ getConfigurationField('SOCIAL_TELEGRAM_LINK') }}" target="_blank" class="main-button is-centered w-inline-block">
                 <div class="button-text-wrap" style="display: block;">
                     <div class="btn-text text-white signal-btn">TODAY SIGNALS</div>
                 </div>
@@ -123,13 +123,13 @@
             background: rgba(255, 255, 255, 0.25);
             backdrop-filter: blur(14px);
             border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+            border: 1px solid rgba(255,255,255,0.3);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.4);
             padding: 20px;
             transition: all 0.45s cubic-bezier(0.22, 1, 0.36, 1);
         }
 
-        /* Smooth hover top move */
+         /* Smooth hover top move */
         .glass-card:hover {
             transform: translateY(-12px);
             box-shadow: 0 18px 35px rgba(0, 0, 0, 0.08);
@@ -167,9 +167,7 @@
             color: #fff;
         }
 
-        h2 {
-            margin: 0;
-        }
+        h2 { margin: 0; }
 
         /* Recent Trades Styling */
         .panel-card {
@@ -292,19 +290,14 @@
             left: -75%;
             width: 50%;
             height: 100%;
-            background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            background: linear-gradient(120deg, transparent, rgba(255,255,255,0.4), transparent);
             transform: skewX(-20deg);
             animation: shine 3s infinite;
         }
 
         @keyframes shine {
-            0% {
-                left: -75%;
-            }
-
-            100% {
-                left: 125%;
-            }
+            0% { left: -75%; }
+            100% { left: 125%; }
         }
 
         /* Live dot with ripple */
@@ -321,20 +314,13 @@
             position: absolute;
             inset: 0;
             border-radius: 50%;
-            background: rgba(255, 77, 79, 0.5);
+            background: rgba(255,77,79,0.5);
             animation: ripple 1.5s infinite;
         }
 
         @keyframes ripple {
-            0% {
-                transform: scale(1);
-                opacity: 1;
-            }
-
-            100% {
-                transform: scale(2.5);
-                opacity: 0;
-            }
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(2.5); opacity: 0; }
         }
 
         /* Animated gradient text */
@@ -350,13 +336,8 @@
         }
 
         @keyframes gradientMove {
-            0% {
-                background-position: 0% center;
-            }
-
-            100% {
-                background-position: 200% center;
-            }
+            0% { background-position: 0% center; }
+            100% { background-position: 200% center; }
         }
     </style>
 
@@ -377,358 +358,628 @@
             </div>
         </div>
 
+        {{-- <div class="container py-3">
+            <div class="row g-4">
+                <div class="col-lg-8">
+                    <div class="py-3">
+                        <div class="d-flex flex-column justify-content-center gap-2">
+                            <div class="py-1">✔ Connected directly to live trading account</div>
+                            <div class="py-1">✔ Auto-updated results</div>
+                            <div class="py-1">✔ Verified by third-party system</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="verified-badge my-3">
+                        <span class="check-icon">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                        </span>
+                        MyFXBook Verified · Updated daily
+                    </div>
+
+                    <div class="verified-badge">
+                        <span class="check-icon">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                        </span>
+                        MyFXBook Verified · Updated daily
+                    </div>
+                </div>
+            </div>
+        </div> --}}
+
         <style>
-            :root {
-                --red: #FF3B30;
-                --red-soft: #FFF0EE;
-                --green: #1FAE5C;
-                --green-soft: #E9FBF1;
-                --ink: #1A1A1A;
-                --muted: #8B8F98;
-                --line: #ECEDF0;
+
+            .hero-card {
+                /* background: linear-gradient(135deg, #ffffff 0%, #f0f7ff 100%);
+                border-radius: 24px;
+                border: 1px solid #e0e6ed;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.05); */
+                overflow: hidden;
+                position: relative;
             }
 
-            .wrap {
-                max-width: 1100px;
-                margin: 0 auto;
-                padding: 48px 16px;
+            /* Subtle chart background effect */
+            .hero-card::before {
+                content: "";
+                position: absolute;
+                top: 0; right: 0; bottom: 0; left: 0;
+                background-image: url('https://www.transparenttextures.com/patterns/graphy.png'); /* Mocking the chart lines */
+                opacity: 0.05;
+                pointer-events: none;
             }
 
-            .divider-heading {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                gap: 14px;
-                margin-bottom: 40px;
-                flex-wrap: wrap;
-            }
-
-            .divider-line {
-                height: 1px;
-                background: var(--line);
-                flex: 1 1 80px;
-                max-width: 140px;
-            }
-
-            .divider-heading .label {
-                display: flex;
-                align-items: center;
-                gap: 8px;
-                color: var(--red);
-                font-weight: 700;
-                font-size: 1.5rem;
-                white-space: nowrap;
-            }
-
-            .badge-card {
-                border-radius: 14px;
-                height: 90px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                background: #fff;
-            }
-
-            /* .badge-card img,
-            .badge-card .logo-text {
-                max-height: 34px;
-            } */
-
-            .myfxbook-pill {
-                background: #111;
-                border-radius: 10px;
-                padding: 10px 18px;
-                display: flex;
-                align-items: center;
-                gap: 10px;
-            }
-
-            .myfxbook-pill span {
+            .headline {
+                color: #102a43;
                 font-weight: 800;
-                font-size: 1.3rem;
-                color: #fff;
-            }
-
-            .myfxbook-pill span em {
-                color: #FF7A3D;
-                font-style: normal;
-            }
-
-            .check-circle {
-                width: 22px;
-                height: 22px;
-                border-radius: 50%;
-                background: var(--green);
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                color: #fff;
-                font-size: .7rem;
-            }
-
-            .fxblue-text {
-                font-weight: 800;
-                font-size: 1.5rem;
-                letter-spacing: 2px;
-            }
-
-            .fxblue-text .blue {
-                color: #2D6CDF;
-            }
-
-            .shield-icon {
-                width: 74px;
-                height: 74px;
-                border-radius: 50%;
-                background: var(--red);
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                color: #fff;
-                font-size: 1.8rem;
-                box-shadow: 0 8px 20px rgba(255, 59, 48, .25);
-            }
-
-            .toggle-group .btn {
-                border-radius: 999px !important;
-                font-weight: 600;
-                padding: 8px 22px;
-                border: 1px solid var(--line);
-                color: var(--ink);
-            }
-
-            .toggle-group .btn.active {
-                background: var(--red);
-                border-color: var(--red);
-                color: #fff;
-            }
-
-            .stat-card {
-                border: 1px solid var(--line);
-                border-radius: 16px;
-                padding: 20px;
-                height: 100%;
-                background: #fff;
-                display: flex;
-                align-items: center;
-                gap: 30px;
-                text-align: left;
-            }
-
-            .stat-icon {
-                width: 46px;
-                height: 46px;
-                border-radius: 12px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-size: 1.2rem;
-                flex: 0 0 auto;
-            }
-
-            .icon-red {
-                background: var(--red-soft);
-                color: var(--red);
-            }
-
-            .icon-green {
-                background: var(--green-soft);
-                color: var(--green);
-            }
-
-            .stat-value {
-                font-size: 1.8rem;
-                font-weight: 800;
+                font-size: 3rem;
                 line-height: 1.1;
             }
 
-            .stat-label {
-                font-weight: 700;
-                font-size: .95rem;
-                margin-top: 2px;
+            .headline span {
+                background: linear-gradient(90deg, var(--logo-color), var(--logo-color-hover));
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
             }
 
-            .stat-sub {
-                color: var(--muted);
-                font-size: .85rem;
-                margin-top: 2px;
+            .check-item {
+                display: flex;
+                align-items: center;
+                padding: 12px 0;
+                border-bottom: 1px solid #e0e6ed;
+                font-size: 1.1rem;
+                color: #334e68;
             }
 
-            @media (max-width:767px) {
-                .stat-value {
-                    font-size: 1.6rem;
-                }
+            .check-icon {
+                width: 24px;
+                height: 24px;
+                background-color: var(--logo-color);
+                color: white;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 0.8rem;
+                margin-right: 15px;
+                flex-shrink: 0;
+            }
 
-                .shield-icon {
-                    width: 60px;
-                    height: 60px;
-                    font-size: 1.4rem;
-                }
+            .shield-container {
+                position: relative;
+                z-index: 2;
+            }
 
-                .divider-line{
-                    display:none;
-                }
+            .shield-img {
+                max-width: 100%;
+                height: auto;
+                filter: drop-shadow(0 20px 40px rgba(0, 188, 212, 0.2));
+            }
 
-                .divider-heading{
-                    margin-top: 40px;
+            .verification-badge {
+                background: white;
+                border-radius: 12px;
+                padding: 12px 20px;
+                box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.6);
+                display: flex;
+                align-items: center;
+                margin-bottom: 15px;
+                border: 0px solid #f0f4f8;
+                width: inherit;
+                height: 75px;
+            }
+
+            .badge-text {
+                font-size: 0.9rem;
+                font-weight: 600;
+                color: #102a43;
+            }
+
+            .badge-subtext {
+                font-size: 0.75rem;
+                color: #627d98;
+                font-weight: 400;
+            }
+
+            /* Round Animated Tick Badge */
+            .badge-check{
+                width: 25px;
+                height: 25px;
+                border-radius: 50%;
+                background: linear-gradient(135deg,#00c853,#00e676);
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                position: absolute;
+                overflow: hidden;
+                box-shadow:
+                    0 0 0 0 rgba(0, 200, 83, 0.6),
+                    0 8px 20px rgba(0, 200, 83, 0.35);
+
+                animation: pulseRing 2s infinite;
+                color: #fff;
+                margin-left: -60px;
+            }
+
+            /* Tick Animation */
+            .check-icon{
+                color: #fff;
+                font-size: 20px;
+                font-weight: bold;
+                transform: scale(0);
+                animation: tickPop .6s ease forwards;
+            }
+
+            /* Outer Glow Pulse */
+            .badge-check::before{
+                content: "";
+                position: absolute;
+                inset: 0;
+                border-radius: 50%;
+                border: 2px solid rgba(255,255,255,0.5);
+                animation: ripple 2s infinite;
+            }
+
+            /* Tick Pop */
+            @keyframes tickPop{
+                0%{
+                    transform: scale(0) rotate(-20deg);
+                    opacity: 0;
                 }
+                60%{
+                    transform: scale(1.25) rotate(10deg);
+                    opacity: 1;
+                }
+                100%{
+                    transform: scale(1);
+                    opacity: 1;
+                }
+            }
+
+            /* Ripple Animation */
+            @keyframes ripple{
+                0%{
+                    transform: scale(1);
+                    opacity: 0.8;
+                }
+                100%{
+                    transform: scale(1.8);
+                    opacity: 0;
+                }
+            }
+
+            /* Soft Pulse */
+            @keyframes pulseRing{
+                0%{
+                    box-shadow:
+                        0 0 0 0 rgba(0, 200, 83, 0.5),
+                        0 8px 20px rgba(0, 200, 83, 0.35);
+                }
+                70%{
+                    box-shadow:
+                        0 0 0 15px rgba(0, 200, 83, 0),
+                        0 8px 20px rgba(0, 200, 83, 0.35);
+                }
+                100%{
+                    box-shadow:
+                        0 0 0 0 rgba(0, 200, 83, 0),
+                        0 8px 20px rgba(0, 200, 83, 0.35);
+                }
+            }
+            .accent-line {
+                width: 80px;
+                height: 4px;
+                background-color: var(--logo-color);
+                border-radius: 2px;
+                margin-top: 10px;
+            }
+
+            @media (max-width: 991px) {
+                .headline { font-size: 2.2rem; }
+                .hero-card { margin: 20px; }
             }
         </style>
 
-        <div class="wrap">
+        <div class="container">
+            <div class="hero-card p-4">
+                <div class="row align-items-center g-5">
 
-            <!-- Verified heading -->
-            <div class="divider-heading">
-                <span class="divider-line"></span>
-                <span class="label">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12 2L4 5V11C4 16 7.5 19.5 12 21C16.5 19.5 20 16 20 11V5L12 2Z" stroke="currentColor"
-                            stroke-width="2" stroke-linejoin="round" />
-                        <path d="M9 12L11 14L15 10" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                            stroke-linejoin="round" />
-                    </svg>
-                    Verified by Third-Party
-                </span>
-                <span class="divider-line"></span>
-            </div>
+                    <div class="col-lg-5">
+                        <h2 class="wow fadeInUp text-black profit-text mb-3">
+                            <span class="live-badge">
+                                <span style="font-size: 2rem;">Tracked</span>
+                                <span class="live-text">LIVE</span>
+                                {{-- <span class="live-dot"></span> --}}
+                                <div class="live-status">
+                                    <div class="dots">
+                                        <span class="dot"></span>
+                                        <span class="dot"></span>
+                                        <span class="dot"></span>
+                                    </div>
+                                </div>
+                            </span>
+                            <p class="live-simple-text pt-2 d-none">
+                                Verified Performance
+                            </p>
+                        </h2>
+                        <h2 class="headline mb-4 d-none">
+                            Trade with<br>
+                            <span>Verified Results</span>
+                        </h2>
 
-            <!-- Verification badges row -->
-            <div class="row g-3 align-items-center mb-5 justify-content-center">
-                <div class="col-12 col-md-4">
-                    <div class="badge-card">
-                        <div class="myfxbook-pill">
-                            <img src="{{url('public/frontend/images/home/MyFXBook-Verified.webp')}}" title="MyFXBook Verified" />
+                        <div class="check-list">
+                            <div class="check-item">
+                                <div class="check-icon">✓</div>
+                                Connected directly to live trading account
+                            </div>
+                            <div class="check-item">
+                                <div class="check-icon">✓</div>
+                                Auto-updated results
+                            </div>
+                            <div class="accent-line d-none"></div>
                         </div>
                     </div>
-                </div>
-                <div class="col-6 col-md-2 d-flex justify-content-center">
-                    <style>
-                        /* ============================= */
-                        /* 3D TRUSTED SHIELD ICON */
-                        /* ============================= */
 
-                        .trusted-shield{
-                            position: relative;
-                            width: 100px;
-                            height: auto;
-                            margin: auto;
-                            animation: floating 2s ease-in-out infinite;
-                            transform-style: preserve-3d;
-                        }
+                    <div class="col-lg-7 text-center text-lg-start">
 
-                        /* FLOATING EFFECT */
-                        @keyframes floating{
-                            0%,100%{
-                                transform: translateY(0px);
-                            }
-                            50%{
-                                transform: translateY(-12px);
-                            }
-                        }
+                        <div class="row align-items-center">
+                            <div class="col-md-4 mb-4 mb-md-0">
+                                {{-- <div class="shield-container">
+                                    <img src="https://cdn-icons-png.flaticon.com/512/3513/3513725.png" alt="Shield" class="shield-img" style="width: 250px;">
+                                </div> --}}
+                                <!-- 3D Trusted Shield -->
+                                <style>
+                                    /* ============================= */
+                                    /* 3D TRUSTED SHIELD ICON */
+                                    /* ============================= */
 
-                        /* MOBILE */
-                        @media(max-width:768px){
+                                    .trusted-shield{
+                                        position: relative;
+                                        width: 100px;
+                                        height: auto;
+                                        margin: auto;
+                                        animation: floating 2s ease-in-out infinite;
+                                        transform-style: preserve-3d;
+                                    }
 
-                            .trusted-shield{
-                                width: 100px;
-                                height: auto;
-                            }
-                        }
-                    </style>
-                    <div class="trusted-shield">
-                        <img src="{{url('public/frontend/images/Trusted-Sheild.png')}}">
-                    </div>
-                </div>
-                <div class="col-12 col-md-4">
-                    <div class="badge-card">
-                        <img src="{{url('public/frontend/images/home/BlueFX-Verified.webp')}}" title="Blue FX Verified" />
-                    </div>
-                </div>
-            </div>
+                                    /* FLOATING EFFECT */
+                                    @keyframes floating{
+                                        0%,100%{
+                                            transform: translateY(0px);
+                                        }
+                                        50%{
+                                            transform: translateY(-12px);
+                                        }
+                                    }
 
-            <!-- Daily / Weekly / Monthly toggle -->
-            <div class="d-flex justify-content-center mb-5">
-                <div class="btn-group toggle-group" role="group">
-                    <button type="button" class="btn">Daily</button>
-                    <button type="button" class="btn active">Weekly</button>
-                    <button type="button" class="btn">Monthly</button>
-                </div>
-            </div>
+                                    /* MOBILE */
+                                    @media(max-width:768px){
 
-            <!-- Stats grid -->
-            <div class="row g-3 mb-4">
-                <div class="col-6 col-lg-3">
-                    <div class="stat-card">
-                        <div class="stat-icon icon-red">
-                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-                                <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2" />
-                                <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2" />
-                                <circle cx="12" cy="12" r="1" fill="currentColor" />
-                            </svg>
-                        </div>
-                        <div class="stat-text">
-                            <div class="stat-value" style="color:var(--red)">75%</div>
-                            <div class="stat-label">Win Rate</div>
-                            <div class="stat-sub">Winning Accuracy</div>
+                                        .trusted-shield{
+                                            width: 100px;
+                                            height: auto;
+                                        }
+                                    }
+                                </style>
+                                <div class="trusted-shield">
+                                    <img src="{{url('public/frontend/images/Trusted-Sheild.png')}}">
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <h2 class="mb-4">
+                                    <b>Verified by third-party</b>
+                                </h2>
+                                <div class="verification-badge" style="background-color: #000;">
+                                    <span class="badge-check">✔</span>
+                                    <div>
+                                        <img src="{{url('public/frontend/images/home/MyFXBook-Verified.webp')}}" title="MyFXBook Verified" />
+                                        {{-- <div class="badge-text">MyFXBook Verified</div>
+                                        <div class="badge-subtext">Updated daily</div> --}}
+                                    </div>
+                                </div>
+                                <div class="verification-badge">
+                                    <span class="badge-check">✔</span>
+                                    <div>
+                                        <img src="{{url('public/frontend/images/home/BlueFX-Verified.webp')}}" title="BlueFX Verified" />
+                                        {{-- <div class="badge-text">BlueFX Verified</div>
+                                        <div class="badge-subtext">Updated daily</div> --}}
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-6 col-lg-3">
-                    <div class="stat-card">
-                        <div class="stat-icon icon-green">
-                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-                                <path d="M3 17L9 11L13 15L21 7" stroke="currentColor" stroke-width="2"
-                                    stroke-linecap="round" stroke-linejoin="round" />
-                                <path d="M15 7H21V13" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round" />
-                            </svg>
-                        </div>
-                        <div class="stat-text">
-                            <div class="stat-value" style="color:var(--green)">+1247</div>
-                            <div class="stat-label">Net Pips</div>
-                            <div class="stat-sub">Total Profit</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6 col-lg-3">
-                    <div class="stat-card">
-                        <div class="stat-icon icon-red">
-                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-                                <rect x="4" y="12" width="3" height="8" fill="currentColor" />
-                                <rect x="10.5" y="8" width="3" height="12" fill="currentColor" />
-                                <rect x="17" y="4" width="3" height="16" fill="currentColor" />
-                            </svg>
-                        </div>
-                        <div class="stat-text">
-                            <div class="stat-value" style="color:var(--red)">28</div>
-                            <div class="stat-label">Trades</div>
-                            <div class="stat-sub">Total Executed</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6 col-lg-3">
-                    <div class="stat-card">
-                        <div class="stat-icon icon-green">
-                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-                                <path d="M12 3V21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-                                <path d="M5 7H19" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-                                <circle cx="6" cy="10" r="3" stroke="currentColor"
-                                    stroke-width="2" />
-                                <circle cx="18" cy="10" r="3" stroke="currentColor"
-                                    stroke-width="2" />
-                            </svg>
-                        </div>
-                        <div class="stat-text">
-                            <div class="stat-value" style="color:var(--green)">1:2.4</div>
-                            <div class="stat-label">R:R Ratio</div>
-                            <div class="stat-sub">Risk to Reward</div>
-                        </div>
-                    </div>
+
                 </div>
             </div>
+        </div>
 
-            @include('frontend.element.result')
+        <div class="container">
+            <div class="toggle-btn mb-4">
+                <button class="active" data-type="daily">Daily</button>
+                <button data-type="weekly">Weekly</button>
+                <button data-type="monthly">Monthly</button>
+            </div>
+
+            <style>
+                .kpi-header {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-bottom: 18px;
+                }
+
+                .kpi-icon {
+                    width: 42px;
+                    height: 42px;
+                    border-radius: 12px;
+                    background: #d1fae5;
+                    color: #0066ff;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    border: 1px solid rgba(0, 102, 255, 0.15);
+                }
+
+                .kpi-trend {
+                    font-size: 12px;
+                    font-weight: 700;
+                    color: #10b981;
+                    background: #d1fae5;
+                    padding: 4px 10px;
+                    border-radius: 100px;
+                    display: flex;
+                    align-items: center;
+                    gap: 4px;
+                    font-family: var(--font-mono);
+                    border: 1px solid rgba(16, 185, 129, 0.15);
+                }
+
+                .glass-card small{
+                    vertical-align: sub;
+                    font-size: 20px;
+                }
+
+                .high-light-number{
+                    font-size: 3rem;
+                    margin-top: -30px;
+                    margin-left: 15px
+                }
+            </style>
+
+            <div class="row g-4 mb-4">
+                <div class="col-md-3">
+                    <div class="glass-card">
+                        <div class="kpi-header">
+                            <div class="kpi-icon" style="opacity: 0">
+
+                            </div>
+                            <span class="kpi-trend">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                            </span>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <h2 id="winRate" class="high-light-number">68%</h2>
+                            </div>
+                            <div class="col-6 text-end">
+                                <small>
+                                    <b>Win Rate</b>
+                                </small>
+                            </div>
+                            <div class="col-12 py-3 text-end">
+                                vs 70.8% prior week
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="glass-card">
+                        <div class="kpi-header">
+                            <div class="kpi-icon" style="opacity: 0">
+
+                            </div>
+                            <span class="kpi-trend">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline><polyline points="16 7 22 7 22 13"></polyline></svg>
+                            </span>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <h2 id="pips" class="high-light-number">+320</h2>
+                            </div>
+                            <div class="col-6 text-end">
+                                <small>
+                                    <b>Net Pips</b>
+                                </small>
+                            </div>
+                            <div class="col-12 py-3 text-end">
+                                7-day rolling total
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="glass-card">
+                        <div class="kpi-header">
+                            <div class="kpi-icon" style="opacity: 0">
+
+                            </div>
+                            <span class="kpi-trend">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"></path><path d="M7 14l4-4 4 4 5-5"></path></svg>
+                            </span>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <h2 id="trades" class="high-light-number">8</h2>
+                            </div>
+                            <div class="col-6 text-end">
+                                <small>
+                                    <b>Trades</b>
+                                </small>
+                            </div>
+                            <div class="col-12 py-3 text-end">
+                                21 wins · 7 losses
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="glass-card">
+                        <div class="kpi-header">
+                            <div class="kpi-icon" style="opacity: 0">
+
+                            </div>
+                            <span class="kpi-trend">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+                            </span>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <h2 id="rr" class="high-light-number">1:1.8</h2>
+                            </div>
+                            <div class="col-6 text-end">
+                                <small>
+                                    <b>R:R</b>
+                                </small>
+                            </div>
+                            <div class="col-12 py-3 text-end">
+                                across all closed trades
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-lg-8 d-none">
+                    <div class="glass-card">
+                        <canvas id="chart"></canvas>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+
+                    @include('frontend.element.result')
+
+                    <div class="glass-card d-none">
+                        <div class="panel-card">
+                            <div class="panel-card-header">
+                                <div class="panel-card-title">Recent Trades</div>
+                                <div class="panel-card-meta">Last 6 closed</div>
+                                <style>
+                                    .live-status{
+                                        display:flex;
+                                        align-items:baseline;
+                                        gap:4px;
+                                        font-size:32px;
+                                        font-weight:600;
+                                        color:var(--logo-color-hover);
+                                        text-shadow: 1px 3px 4px rgba(0, 0, 0, 0.5);
+                                    }
+
+                                    .dots{
+                                        display:flex;
+                                        gap:5px;
+                                    }
+
+                                    .dot{
+                                        width:5px;
+                                        height:5px;
+                                        background:var(--logo-color);
+                                        border-radius:50%;
+                                        animation:blink 2s infinite;
+                                    }
+
+                                    .dot:nth-child(2){
+                                        animation-delay:0.5s;
+                                    }
+
+                                    .dot:nth-child(3){
+                                        animation-delay:0.8s;
+                                    }
+
+                                    @keyframes blink{
+                                        0%,100%{
+                                            opacity:0.2;
+                                            transform:scale(0.8);
+                                        }
+                                        70%{
+                                            opacity:1;
+                                            transform:scale(1.2);
+                                        }
+                                        35%{
+                                            opacity:1;
+                                            transform:scale(1.5);
+                                        }
+                                    }
+                                </style>
+                                <div class="live-status">
+                                    LIVE
+                                    <div class="dots">
+                                        <span class="dot"></span>
+                                        <span class="dot"></span>
+                                        <span class="dot"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="trades-list">
+                                <div class="trade-row">
+                                    <div class="trade-icon down">↓</div>
+                                    <div class="trade-info">
+                                        <span class="trade-pair">XAU/USD</span>
+                                        <span class="trade-meta">SELL · 27 Apr 14:30</span>
+                                    </div>
+                                    <div class="trade-pnl profit">+38</div>
+                                </div>
+                                <div class="trade-row">
+                                    <div class="trade-icon up">↑</div>
+                                    <div class="trade-info">
+                                        <span class="trade-pair">EUR/USD</span>
+                                        <span class="trade-meta">BUY · 27 Apr 11:15</span>
+                                    </div>
+                                    <div class="trade-pnl profit">+22</div>
+                                </div>
+
+                                <div class="trade-row">
+                                    <div class="trade-icon down">↓</div>
+                                    <div class="trade-info">
+                                        <span class="trade-pair">GBP/USD</span>
+                                        <span class="trade-meta">SELL · 26 Apr 16:08</span>
+                                    </div>
+                                    <div class="trade-pnl loss">−12</div>
+                                </div>
+
+                                <div class="trade-row">
+                                    <div class="trade-icon up">↑</div>
+                                    <div class="trade-info">
+                                        <span class="trade-pair">USD/JPY</span>
+                                        <span class="trade-meta">BUY · 26 Apr 09:55</span>
+                                    </div>
+                                    <div class="trade-pnl profit">+44</div>
+                                </div>
+                                <div class="trade-row">
+                                    <div class="trade-icon up">↑</div>
+                                    <div class="trade-info">
+                                        <span class="trade-pair">XAU/USD</span>
+                                        <span class="trade-meta">BUY · 25 Apr 15:10</span>
+                                    </div>
+                                    <div class="trade-pnl profit">+118</div>
+                                </div>
+                                <div class="trade-row">
+                                    <div class="trade-icon down">↓</div>
+                                    <div class="trade-info">
+                                        <span class="trade-pair">EUR/USD</span>
+                                        <span class="trade-meta">SELL · 25 Apr 11:30</span>
+                                        </div>
+                                    <div class="trade-pnl loss">−9</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </section>
 
@@ -760,14 +1011,14 @@
 
         const ctx = document.getElementById('chart').getContext('2d');
 
-        const gradient = ctx.createLinearGradient(0, 0, 0, 300);
+        const gradient = ctx.createLinearGradient(0,0,0,300);
         gradient.addColorStop(0, 'rgba(0,123,255,0.5)');
         gradient.addColorStop(1, 'rgba(0,123,255,0)');
 
         let chart = new Chart(ctx, {
             type: 'line',
             data: {
-                labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
+                labels: ['Mon','Tue','Wed','Thu','Fri'],
                 datasets: [{
                     data: dashboardData.daily.chart,
                     borderWidth: 2,
@@ -777,21 +1028,13 @@
                 }]
             },
             options: {
-                plugins: {
-                    legend: {
-                        display: false
-                    }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
+                plugins: { legend: { display: false } },
+                scales: { y: { beginAtZero: true } }
             }
         });
 
         document.querySelectorAll('.toggle-btn button').forEach(btn => {
-            btn.addEventListener('click', function() {
+            btn.addEventListener('click', function () {
 
                 document.querySelectorAll('.toggle-btn button')
                     .forEach(b => b.classList.remove('active'));
@@ -1000,7 +1243,7 @@
                         </div>
                         <!-- Sidebar Our Pricing Nav End -->
                         <style>
-                            .pricing-header h2 small {
+                            .pricing-header h2 small{
                                 font-size: 20px;
                                 font-weight: 600;
                             }
@@ -1009,7 +1252,8 @@
                         <div class="pricing-tab-item" id="annually">
                             <div class="row">
 
-                                @foreach ($planArr as $k => $val)
+                                @foreach($planArr as $k => $val)
+
                                     <div class="col-lg-4 col-md-6">
                                         <!-- Pricing Box Start -->
                                         <div class="pricing-item {{ $val['price_item_class'] }}">
@@ -1020,15 +1264,15 @@
 
                                                 <h2>
                                                     <?php if (isset($val['discount_price']) && $val['discount_price'] !== '') : ?>
-                                                    <span class="text-muted" style="font-size: 60px">
-                                                        <strike class="me-2">
-                                                            <?= $val['discount_price'] ?>
-                                                        </strike>
-                                                    </span>
+                                                            <span class="text-muted" style="font-size: 60px">
+                                                                <strike class="me-2">
+                                                                    <?= $val['discount_price'] ?>
+                                                                </strike>
+                                                            </span>
                                                     <?php endif; ?>
 
                                                     {{ $val['price'] }}
-                                                    @if (!empty($val['type']))
+                                                   @if(!empty($val['type']))
                                                         <small>/{{ $val['type'] }}</small>
                                                     @endif
                                                 </h2>
@@ -1056,21 +1300,21 @@
                                                 <h3 class="d-none">What's Included:</h3>
 
                                                 <ul>
-                                                    @foreach ($val['feature'] as $f)
+                                                    @foreach($val['feature'] as $f)
                                                         <li>{{ $f }}</li>
                                                     @endforeach
                                                 </ul>
                                             </div>
                                             <!-- Pricing body End -->
 
-                                            @if (!empty($val['remove']) && is_array($val['remove']) && count($val['remove']) > 0)
+                                             @if(!empty($val['remove']) && is_array($val['remove']) && count($val['remove']) > 0)
                                                 <!-- Pricing body Start -->
                                                 <div class="pricing-body-exclude mt-1">
                                                     <h3 class="d-none">What's Exclude:</h3>
 
                                                     <ul>
-                                                        @if (!empty($val['remove']) && is_array($val['remove']))
-                                                            @foreach ($val['remove'] as $f)
+                                                        @if(!empty($val['remove']) && is_array($val['remove']))
+                                                            @foreach($val['remove'] as $f)
                                                                 <li>{!! $f !!}</li>
                                                             @endforeach
                                                         @endif
@@ -1082,6 +1326,7 @@
                                         </div>
                                         <!-- Pricing Box End -->
                                     </div>
+
                                 @endforeach
 
                             </div>
@@ -1128,7 +1373,7 @@
                         <!-- Team Member Info Counters Start -->
                         <div class="team-member-info-counters">
                             <!-- Member Info Counter Item Start -->
-                            @if (getConfigurationField('YEAR_OF_EXPERIENCE') && getConfigurationField('YEAR_OF_EXPERIENCE') != '-')
+                            @if(getConfigurationField('YEAR_OF_EXPERIENCE') && getConfigurationField('YEAR_OF_EXPERIENCE') != '-')
                                 <div class="member-info-counter-item">
                                     <h2>
                                         <span class="counter">
@@ -1141,7 +1386,7 @@
                             <!-- Member Info Counter Item End -->
 
                             <!-- Member Info Counter Item Start -->
-                            @if (getConfigurationField('SIGNAL_ACCURACY') && getConfigurationField('SIGNAL_ACCURACY') != '-')
+                            @if(getConfigurationField('SIGNAL_ACCURACY') && getConfigurationField('SIGNAL_ACCURACY') != '-')
                                 <div class="member-info-counter-item">
                                     <h2>
                                         <span class="counter">
@@ -1154,7 +1399,7 @@
                             <!-- Member Info Counter Item End -->
 
                             <!-- Member Info Counter Item Start -->
-                            @if (getConfigurationField('PIPS_MONTHLY') && getConfigurationField('PIPS_MONTHLY') != '-')
+                            @if(getConfigurationField('PIPS_MONTHLY') && getConfigurationField('PIPS_MONTHLY') != '-')
                                 <div class="member-info-counter-item">
                                     <h2>
                                         <span class="counter">
@@ -1167,7 +1412,7 @@
                             <!-- Member Info Counter Item End -->
 
                             <!-- Member Info Counter Item Start -->
-                            @if (getConfigurationField('COUNTRIES') && getConfigurationField('COUNTRIES') != '-')
+                            @if(getConfigurationField('COUNTRIES') && getConfigurationField('COUNTRIES') != '-')
                                 <div class="member-info-counter-item">
                                     <h2>
                                         <span class="counter">
@@ -1197,7 +1442,7 @@
 
                     <!-- Team Skills List Start -->
                     <div class="member-skills-list">
-                        @if (getConfigurationField('HUMAN_HYBRID_ANALYSIS') && getConfigurationField('HUMAN_HYBRID_ANALYSIS') != '-')
+                        @if(getConfigurationField('HUMAN_HYBRID_ANALYSIS') && getConfigurationField('HUMAN_HYBRID_ANALYSIS') != '-')
                             <div class="skills-progress-bar">
                                 <div class="skillbar" data-percent="95%">
                                     <div class="skill-data">
@@ -1215,7 +1460,7 @@
                         <!-- Skills Progress Bar End -->
 
                         <!-- Skills Progress Bar Start -->
-                        @if (getConfigurationField('VERIFIED_RESULTS') && getConfigurationField('VERIFIED_RESULTS') != '-')
+                        @if(getConfigurationField('VERIFIED_RESULTS') && getConfigurationField('VERIFIED_RESULTS') != '-')
                             <div class="skills-progress-bar">
                                 <!-- Skill Item Start -->
                                 <div class="skillbar" data-percent="98%">
@@ -1233,7 +1478,7 @@
                         <!-- Skills Progress Bar End -->
 
                         <!-- Skills Progress Bar Start -->
-                        @if (getConfigurationField('RISK_MANAGEMENT') && getConfigurationField('RISK_MANAGEMENT') != '-')
+                        @if(getConfigurationField('RISK_MANAGEMENT') && getConfigurationField('RISK_MANAGEMENT') != '-')
                             <div class="skills-progress-bar">
                                 <!-- Skill Item Start -->
                                 <div class="skillbar" data-percent="92%">
@@ -1251,7 +1496,7 @@
                         <!-- Skills Progress Bar End -->
 
                         <!-- Skills Progress Bar Start -->
-                        @if (getConfigurationField('SIGNAL_SUCCESS_RATE') && getConfigurationField('SIGNAL_SUCCESS_RATE') != '-')
+                        @if(getConfigurationField('SIGNAL_SUCCESS_RATE') && getConfigurationField('SIGNAL_SUCCESS_RATE') != '-')
                             <div class="skills-progress-bar">
                                 <!-- Skill Item Start -->
                                 <div class="skillbar" data-percent="87%">
@@ -1399,58 +1644,58 @@
             <div class="social-icons d-flex flex-wrap justify-content-center mb-5">
                 <div class="icon-track">
                     <!-- First Set -->
-                    @if (getConfigurationField('SOCIAL_FACEBOOK_LINK') != '-')
-                        <a href="{{ getConfigurationField('SOCIAL_FACEBOOK_LINK') }}" target="_blank">
-                            <i class="fab fa-facebook-f"></i>
-                        </a>
+                    @if ( getConfigurationField('SOCIAL_FACEBOOK_LINK') != '-')
+                    <a href="{{ getConfigurationField('SOCIAL_FACEBOOK_LINK') }}" target="_blank">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
                     @endif
 
-                    @if (getConfigurationField('SOCIAL_TWITTER_LINK') != '-')
-                        <a href="{{ getConfigurationField('SOCIAL_TWITTER_LINK') }}">
-                            <i class="fab fa-x-twitter"></i>
-                        </a>
+                     @if ( getConfigurationField('SOCIAL_TWITTER_LINK') != '-')
+                    <a href="{{ getConfigurationField('SOCIAL_TWITTER_LINK') }}">
+                        <i class="fab fa-x-twitter"></i>
+                    </a>
                     @endif
 
-                    @if (getConfigurationField('SOCIAL_LINKEDIN_LINK') != '-')
-                        <a href="{{ getConfigurationField('SOCIAL_LINKEDIN_LINK') }}" target="_blank">
-                            <i class="fab fa-linkedin-in"></i>
-                        </a>
+                     @if ( getConfigurationField('SOCIAL_LINKEDIN_LINK') != '-')
+                    <a href="{{ getConfigurationField('SOCIAL_LINKEDIN_LINK') }}" target="_blank">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
                     @endif
 
-                    @if (getConfigurationField('SOCIAL_PINTEREST_LINK') != '-')
-                        <a href="{{ getConfigurationField('SOCIAL_PINTEREST_LINK') }}" target="_blank">
-                            <i class="fab fa-pinterest"></i>
-                        </a>
+                     @if ( getConfigurationField('SOCIAL_PINTEREST_LINK') != '-')
+                    <a href="{{ getConfigurationField('SOCIAL_PINTEREST_LINK') }}" target="_blank">
+                        <i class="fab fa-pinterest"></i>
+                    </a>
                     @endif
 
-                    @if (getConfigurationField('SOCIAL_YOUTUBE_LINK') != '-')
-                        <a href="{{ getConfigurationField('SOCIAL_YOUTUBE_LINK') }}" target="_blank">
-                            <i class="fab fa-youtube"></i>
-                        </a>
+                     @if ( getConfigurationField('SOCIAL_YOUTUBE_LINK') != '-')
+                    <a href="{{ getConfigurationField('SOCIAL_YOUTUBE_LINK') }}" target="_blank">
+                        <i class="fab fa-youtube"></i>
+                    </a>
                     @endif
 
-                    @if (getConfigurationField('SOCIAL_WHATSAPP_LINK') != '-')
-                        <a href="{{ getConfigurationField('SOCIAL_WHATSAPP_LINK') }}" target="_blank">
-                            <i class="fab fa-whatsapp"></i>
-                        </a>
+                     @if ( getConfigurationField('SOCIAL_WHATSAPP_LINK') != '-')
+                    <a href="{{ getConfigurationField('SOCIAL_WHATSAPP_LINK') }}" target="_blank">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
                     @endif
 
-                    @if (getConfigurationField('SOCIAL_TELEGRAM_LINK') != '-')
-                        <a href="{{ getConfigurationField('SOCIAL_TELEGRAM_LINK') }}" target="_blank">
-                            <i class="fab fa-telegram"></i>
-                        </a>
+                    @if ( getConfigurationField('SOCIAL_TELEGRAM_LINK') != '-')
+                    <a href="{{ getConfigurationField('SOCIAL_TELEGRAM_LINK') }}" target="_blank">
+                        <i class="fab fa-telegram"></i>
+                    </a>
                     @endif
 
-                    @if (getConfigurationField('SOCIAL_TIKTOK_LINK') != '-')
-                        <a href="{{ getConfigurationField('SOCIAL_TIKTOK_LINK') }}" target="_blank">
-                            <i class="fab fa-tiktok"></i>
-                        </a>
+                    @if ( getConfigurationField('SOCIAL_TIKTOK_LINK') != '-')
+                    <a href="{{ getConfigurationField('SOCIAL_TIKTOK_LINK') }}" target="_blank">
+                        <i class="fab fa-tiktok"></i>
+                    </a>
                     @endif
 
-                    @if (getConfigurationField('SOCIAL_INSTAGRAM_LINK') != '-')
-                        <a href="{{ getConfigurationField('SOCIAL_INSTAGRAM_LINK') }}" target="_blank">
-                            <i class="fab fa-instagram"></i>
-                        </a>
+                    @if ( getConfigurationField('SOCIAL_INSTAGRAM_LINK') != '-')
+                    <a href="{{ getConfigurationField('SOCIAL_INSTAGRAM_LINK') }}" target="_blank">
+                        <i class="fab fa-instagram"></i>
+                    </a>
                     @endif
                 </div>
             </div>
