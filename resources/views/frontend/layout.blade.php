@@ -3,7 +3,7 @@
 
 <head>
     <!-- Meta -->
-    
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
@@ -70,6 +70,15 @@
     <!-- Main Custom Css -->
     <link rel="stylesheet" href="{{ url('public/frontend/css/custom.css?v=0.001') }}" media="screen">
 
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-00RBTNX5DY"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-00RBTNX5DY');
+    </script>
 
 </head>
 
