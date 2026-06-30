@@ -426,7 +426,9 @@
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                background: #fff;
+                /* background: #fff; */
+                box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.6);
+                padding: 35px;
             }
 
             /* .badge-card img,
@@ -435,7 +437,7 @@
             } */
 
             .myfxbook-pill {
-                background: #111;
+                /* background: #111; */
                 border-radius: 10px;
                 padding: 10px 18px;
                 display: flex;
@@ -598,7 +600,7 @@
                 <div class="col-12 col-md-4">
                     <div class="badge-card">
                         <div class="myfxbook-pill">
-                            <img src="{{url('public/frontend/images/home/MyFXBook-Verified.webp')}}" title="MyFXBook Verified" />
+                            <img src="{{url('public/frontend/images/home/MyFXBook-Verified.png')}}" title="MyFXBook Verified" />
                         </div>
                     </div>
                 </div>
