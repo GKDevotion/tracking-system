@@ -17,32 +17,32 @@
                         <div class="section-title section-title-center">
                             <h2 class="wow fadeInUp">Latest Free Signals Update</h2>
                             {{-- <h2 class="wow fadeInUp" data-wow-delay="0.2s" data-cursor="-opaque">
-                                Choose Your Plan, Start 
+                                Choose Your Plan, Start
                                 <span>Profiting</span>
                             </h2> --}}
                         </div>
                         <!-- Section Title End -->
                     </div>
-                </div> 
+                </div>
 
                 <style>
- 
+
                     /* Table wrapper */
                     .tbl-wrap {
                         border-radius: 8px;
                         overflow: hidden;
-                        border: 1px solid #666666; 
+                        border: 1px solid #666666;
                     }
-                
+
                     /* Table */
-                    .sig-table { 
-                        width: 100%; 
-                        border-collapse: collapse; 
+                    .sig-table {
+                        width: 100%;
+                        border-collapse: collapse;
                     }
-                
+
                     /* Header */
                     .sig-table thead tr { background: var(--logo-color); }
-                    .sig-table thead th { 
+                    .sig-table thead th {
                         font-weight: 700;
                         font-size: 0.82rem;
                         letter-spacing: 0.1em;
@@ -53,20 +53,20 @@
                         white-space: nowrap;
                         border: none;
                     }
-                
+
                     /* Body rows */
                     .sig-table tbody tr {
                         position: relative;
                         transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
                         cursor: pointer;
                     }
-                    .sig-table tbody tr:nth-child(odd)  { 
-                        background: #fff; 
-                    } 
-                
+                    .sig-table tbody tr:nth-child(odd)  {
+                        background: #fff;
+                    }
+
                     /* Hover */
                     .sig-table tbody tr:hover {
-                    background: rgba(46,204,143,0.11) !important; 
+                    background: rgba(46,204,143,0.11) !important;
                     transform: scaleY(1.015);
                     z-index: 3;
                     }
@@ -76,38 +76,38 @@
                     color: #fff;
                     transform: scale(1.06);
                     }
-                
+
                     /* Cells */
                     .sig-table tbody td {
                     padding: 13px 20px;
                     text-align: center;
                     border-top: 1px solid #666;
-                    white-space: nowrap; 
+                    white-space: nowrap;
                     font-size: 0.84rem;
                     font-weight: 500;
                     letter-spacing: 0.02em;
                     vertical-align: middle;
                     }
-                
+
                     /* Cell colour roles */
                     .c-date   { color: #000; font-weight: 600; }
                     .c-pair   { color: #000; font-weight: 600; letter-spacing: 0.06em; }
                     .c-entry  { color: #000; }
                     .c-profit { color: var(--logo-color); font-weight: 700; font-size: 0.92rem; }
                     .c-zero   { color: var(--text-muted); font-weight: 600; }
-                
+
                     /* Faded row overrides */
                     .row-faded .c-date,
                     .row-faded .c-pair,
-                    .row-faded .c-entry { 
+                    .row-faded .c-entry {
                         color: #000;
                     }
-                
+
                     /* Order badges */
                     .badge-order {
                     display: inline-block;
                     padding: 3px 16px;
-                    border-radius: 3px; 
+                    border-radius: 3px;
                     font-weight: 700;
                     font-size: 0.76rem;
                     letter-spacing: 0.1em;
@@ -125,18 +125,18 @@
                     }
                     .row-faded .badge-sell,
                     .row-faded .badge-buy { opacity: 0.38; }
-                
+
                     /* SL | TP */
                     .sl  {
-                         color: var(--logo-color);; 
+                         color: var(--logo-color);;
                     }
-                    .tp  { 
+                    .tp  {
                         color: #1a9e72;
                      }
                     .sep { color: var(--text-muted); margin: 0 5px; }
                     .row-faded .sl,
                     .row-faded .tp { opacity: 0.4; }
-                
+
                     /* Live Proof button */
                     .btn-live {
                     display: inline-block;
@@ -144,7 +144,7 @@
                     background: var(--logo-color);;
                     color: #fff;
                     border: none;
-                    border-radius: 5px; 
+                    border-radius: 5px;
                     font-weight: 700;
                     font-size: 0.72rem;
                     letter-spacing: 0.1em;
@@ -153,7 +153,7 @@
                     transition: background 0.18s ease, box-shadow 0.18s ease, transform 0.14s ease;
                     white-space: nowrap;
                     }
-                
+
                     /* Row entrance animation */
                     @keyframes fadeUp {
                     from { opacity: 0; transform: translateY(8px); }
@@ -175,7 +175,7 @@
                     .sig-table tbody tr:nth-child(13) { animation-delay: .52s; }
                     .sig-table tbody tr:nth-child(14) { animation-delay: .56s; }
                     .sig-table tbody tr:nth-child(15) { animation-delay: .60s; }
-                
+
                     /* Responsive */
                     @media (max-width: 900px) {
                     .tbl-wrap { overflow-x: auto; }
@@ -202,7 +202,7 @@
                         <tbody>
                                 @forelse($signals as $signal)
                                     <tr class="{{ $signal->profit == 0 ? 'row-faded' : '' }}">
-                                        
+
                                         {{-- Signal Date --}}
                                         <td class="c-date">
                                             {{ \Carbon\Carbon::parse($signal->signal_date)->format('d M y') }}
@@ -227,9 +227,9 @@
 
                                         {{-- SL / TP --}}
                                         <td>
-                                            <span class="sl">{{ $signal->stop_loss }}</span>
+                                            <span class="sl-">{{ $signal->stop_loss }}</span>
                                             <span class="sep">|</span>
-                                            <span class="tp">{{ $signal->take_profit }}</span>
+                                            <span class="tp-">{{ $signal->take_profit }}</span>
                                         </td>
 
                                         {{-- Profit --}}
@@ -255,9 +255,9 @@
                         </tbody>
 
                     </table>
-                        
+
                 </div>
- 
+
             </div>
         </div>
         <!-- Page Pricing End -->
