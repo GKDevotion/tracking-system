@@ -1,27 +1,27 @@
- 
-    <section class="forex-signal"> 
- 
+
+    <section class="forex-signal">
+
                 <style>
- 
- 
+
+
                     /* Table wrapper */
                     .tbl-wrap {
                         border-radius: 8px;
                         overflow: hidden;
-                        border: 1px solid #666666; 
+                        border: 1px solid #666666;
                     }
-                
+
                     /* Table */
-                    .sig-table { 
-                        width: 100%; 
-                        border-collapse: collapse; 
+                    .sig-table {
+                        width: 100%;
+                        border-collapse: collapse;
                     }
-                
+
                     /* Header */
-                    .sig-table thead tr { 
-                        background: var(--logo-color); 
+                    .sig-table thead tr {
+                        background: #000;
                     }
-                    .sig-table thead th { 
+                    .sig-table thead th {
                         font-weight: 700;
                         font-size: 0.82rem;
                         letter-spacing: 0.1em;
@@ -32,17 +32,17 @@
                         white-space: nowrap;
                         border: none;
                     }
-                
+
                     /* Body rows */
                     .sig-table tbody tr {
                         position: relative;
                         transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
                         cursor: pointer;
                     }
-                    .sig-table tbody tr:nth-child(odd)  { 
-                        background: #fff; 
-                    } 
-                
+                    .sig-table tbody tr:nth-child(odd)  {
+                        background: #fff;
+                    }
+
                     /* Hover */
                     .sig-table tbody tr:hover {
                     /* background: rgba(46,204,143,0.11) !important;  */
@@ -50,43 +50,43 @@
                     z-index: 3;
                     }
                     .sig-table tbody tr:hover .btn-live {
-                    background: var(--logo-color);
-                    box-shadow: 0 0 10px rgba(204, 46, 46, 0.6);
-                    color: #fff;
-                    transform: scale(1.06);
+                        background: #000;
+                        /* box-shadow: 0 0 10px rgba(204, 46, 46, 0.6); */
+                        color: #fff;
+                        transform: scale(1.06);
                     }
-                
+
                     /* Cells */
                     .sig-table tbody td {
                     padding: 13px 20px;
                     text-align: center;
                     border-top: 1px solid #666;
-                    white-space: nowrap; 
+                    white-space: nowrap;
                     font-size: 0.84rem;
                     font-weight: 500;
                     letter-spacing: 0.02em;
                     vertical-align: middle;
                     }
-                
+
                     /* Cell colour roles */
                     .c-date   { color: #000; font-weight: 600; }
                     .c-pair   { color: #000; font-weight: 600; letter-spacing: 0.06em; }
                     .c-entry  { color: #000; }
                     .c-profit { color: #000; font-weight: 700; font-size: 0.92rem; }
                     .c-zero   { color: var(--text-muted); font-weight: 600; }
-                
+
                     /* Faded row overrides */
                     .row-faded .c-date,
                     .row-faded .c-pair,
-                    .row-faded .c-entry { 
+                    .row-faded .c-entry {
                         color: #000;
                     }
-                
+
                     /* Order badges */
                     .badge-order {
                         display: inline-block;
                         padding: 3px 16px;
-                        border-radius: 3px; 
+                        border-radius: 3px;
                         font-weight: 700;
                         font-size: 0.8rem;
                         letter-spacing: 0.1em;
@@ -104,26 +104,26 @@
                     }
                     .row-faded .badge-sell,
                     .row-faded .badge-buy { opacity: 0.38; }
-                
+
                     /* SL | TP */
                     .sl  {
-                         color: #000; 
+                         color: #000;
                     }
-                    .tp  { 
+                    .tp  {
                         color: #000;
                      }
                     .sep { color: var(--text-muted); margin: 0 5px; }
                     .row-faded .sl,
                     .row-faded .tp { opacity: 0.4; }
-                
+
                     /* Live Proof button */
                     .btn-live {
                     display: inline-block;
                     padding: 6px 16px;
-                    background: var(--logo-color);;
+                    background: #000;
                     color: #fff;
                     border: none;
-                    border-radius: 5px; 
+                    border-radius: 5px;
                     font-weight: 700;
                     font-size: 0.72rem;
                     letter-spacing: 0.1em;
@@ -132,7 +132,7 @@
                     transition: background 0.18s ease, box-shadow 0.18s ease, transform 0.14s ease;
                     white-space: nowrap;
                     }
-                
+
                     /* Row entrance animation */
                     @keyframes fadeUp {
                     from { opacity: 0; transform: translateY(8px); }
@@ -154,7 +154,7 @@
                     .sig-table tbody tr:nth-child(13) { animation-delay: .52s; }
                     .sig-table tbody tr:nth-child(14) { animation-delay: .56s; }
                     .sig-table tbody tr:nth-child(15) { animation-delay: .60s; }
-                
+
                     /* Responsive */
                     @media (max-width: 900px) {
                     .tbl-wrap { overflow-x: auto; }
@@ -182,7 +182,7 @@
                             <tr>
                             <th>Date</th>
                             <th>Pair</th>
-                            <th>Order</th>  
+                            <th>Order</th>
                             <th>Profit</th>
                             <th>Live</th>
                             </tr>
@@ -191,7 +191,7 @@
                         <tbody>
                                 @forelse($signals as $signal)
                                     <tr class="{{ $signal->profit == 0 ? 'row-faded' : '' }}">
-                                        
+
                                         {{-- Signal Date --}}
                                         <td class="c-date">
                                             {{ \Carbon\Carbon::parse($signal->signal_date)->format('d M y') }}
@@ -208,7 +208,7 @@
                                                 {{ $signal->order_type == 0 ? 'BUY' : 'SELL' }}
                                             </span>
                                         </td>
- 
+
 
                                         {{-- Profit --}}
                                         {{-- <td class="{{ $signal->profit > 0 ? 'c-profit' : 'c-zero' }}">
@@ -235,9 +235,9 @@
                                 @endforelse
                         </tbody>
 
-                    </table> 
-                    
-                        
+                    </table>
+
+
                 </div>
-    
+
     </section>
