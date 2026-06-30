@@ -84,23 +84,23 @@
                 
                     /* Order badges */
                     .badge-order {
-                    display: inline-block;
-                    padding: 3px 16px;
-                    border-radius: 3px; 
-                    font-weight: 700;
-                    font-size: 0.76rem;
-                    letter-spacing: 0.1em;
-                    text-transform: uppercase;
+                        display: inline-block;
+                        padding: 3px 16px;
+                        border-radius: 3px; 
+                        font-weight: 700;
+                        font-size: 0.8rem;
+                        letter-spacing: 0.1em;
+                        text-transform: uppercase;
                     }
                     .badge-sell {
-                    color: #000;
-                    background: #fff;
-                    border: 1px solid #000;
+                        color: #000;
+                        background: #fff;
+                        /* border: 1px solid #000; */
                     }
                     .badge-buy {
                     color: #000;
                     background: #fff;
-                    border: 1px solid #000;
+                    /* border: 1px solid #000; */
                     }
                     .row-faded .badge-sell,
                     .row-faded .badge-buy { opacity: 0.38; }
@@ -160,6 +160,18 @@
                     .tbl-wrap { overflow-x: auto; }
                     .sig-table { min-width: 720px; }
                     }
+
+                    .c-profit {
+                        color: green;
+                    }
+
+                    .c-loss {
+                        color: red;
+                    }
+
+                    .c-zero {
+                        color: #666; /* or any neutral color */
+                    }
                 </style>
 
                  <div class="tbl-wrap">
@@ -170,9 +182,7 @@
                             <tr>
                             <th>Date</th>
                             <th>Pair</th>
-                            <th>Order</th>
-                            <th>Entry</th>
-                            <th>SL | TP</th>
+                            <th>Order</th>  
                             <th>Profit</th>
                             <th>Live</th>
                             </tr>
@@ -198,21 +208,13 @@
                                                 {{ $signal->order_type == 0 ? 'BUY' : 'SELL' }}
                                             </span>
                                         </td>
-
-                                        {{-- Entry Price --}}
-                                        <td class="c-entry">
-                                            {{ $signal->entry_price }}
-                                        </td>
-
-                                        {{-- SL / TP --}}
-                                        <td>
-                                            <span class="sl">{{ $signal->stop_loss }}</span>
-                                            <span class="sep">|</span>
-                                            <span class="tp">{{ $signal->take_profit }}</span>
-                                        </td>
+ 
 
                                         {{-- Profit --}}
-                                        <td class="{{ $signal->profit > 0 ? 'c-profit' : 'c-zero' }}">
+                                        {{-- <td class="{{ $signal->profit > 0 ? 'c-profit' : 'c-zero' }}">
+                                            {{ $signal->profit }}
+                                        </td> --}}
+                                        <td class="{{ $signal->profit > 0 ? 'c-profit' : ($signal->profit < 0 ? 'c-loss' : 'c-zero') }}">
                                             {{ $signal->profit }}
                                         </td>
 
