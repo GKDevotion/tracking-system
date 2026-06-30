@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Blog;
 use App\Models\Categories;
+use App\Models\ForexUpdate;
 use App\Models\Plan;
 use App\Models\Tag;
 use Exception;
@@ -28,6 +29,7 @@ class HomeController extends Controller
             $planArr[$plan->name] = [
                 'price_item_class' => $plan->is_highlighted ? 'highlighted-box box-bg-shape' : '',
                 'price' => $plan->price,
+                'discount_price' => $plan->discount_price,
                 'type' => $plan->type,
                 'value' => $plan->description,
                 'feature' => $plan->features,
@@ -56,7 +58,6 @@ class HomeController extends Controller
             ->latest()
             ->get();
 
-
         $categories = Categories::where('parent_id', 0)
             ->where('status', 1)
             ->when($request->search, function ($q) use ($request) {
@@ -79,7 +80,12 @@ class HomeController extends Controller
 
         $popularTags = Tag::where('status', 1)->get();
 
-        return view('frontend.index', compact('planArr', 'blogs', 'recentBlogs', 'categories', 'popularTags'));
+        $signals = ForexUpdate::where('status', 1)
+            ->orderBy('sort_order', 'ASC')
+            ->latest()
+            ->get();
+
+        return view('frontend.index', compact('planArr', 'blogs', 'recentBlogs', 'signals', 'categories', 'popularTags'));
     }
 
     /**

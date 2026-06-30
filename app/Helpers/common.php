@@ -16,4 +16,11 @@ if (!function_exists('getConfigurationField')) {
         $config = Configuration::where('key', $key)->first();
         return $config ? $config->value : $default;
     }
+
+     function getConfigurationDisplayName($key)
+    {
+        return \App\Models\Configuration::where('key', $key)
+            ->value('display_name');
+    }
 }
+

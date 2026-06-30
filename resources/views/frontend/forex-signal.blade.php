@@ -160,8 +160,26 @@
                                             <div class="pricing-item <?= $val['price_item_class'] ?>">
                                                 <!-- Pricing Header Start -->
                                                 <div class="pricing-header">
+
                                                     <h3><?= $k ?></h3>
-                                                    <h2><?= $val['price'] ?></h2>
+
+                                                    <h2> 
+                                                        <?php if (isset($val['discount_price']) && $val['discount_price'] !== '') : ?>
+                                                            <span class="text-muted" style="font-size: 60px">
+                                                                <strike class="me-2">
+                                                                    <?= $val['discount_price'] ?>
+                                                                </strike>
+                                                            </span>
+                                                        <?php endif; ?>
+
+                                                        <?= $val['price'] ?>
+                                                        <span class="fs-3">
+                                                            @if(!empty($val['type']))
+                                                                <small>/{{ $val['type'] }}</small>
+                                                            @endif
+                                                        </span>
+                                                    </h2>
+
                                                 </div>
                                                 <!-- Pricing Header End -->
 

@@ -40,6 +40,16 @@
                             </div>
 
                             <div class="col-md-6">
+                                <label class="form-label">Discount Price <span class="text-danger">*</span></label>
+                                <input type="text" name="discount_price" value="{{ old('discount_price', $plan->discount_price) }}"
+                                    class="form-control @error('discount_price') is-invalid @enderror" placeholder="$29"
+                                    required>
+                                @error('discount_price')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div class="col-md-6">
                                 <label class="form-label">Type <span class="text-danger">*</span></label>
                                 <input type="text" name="type" value="{{ old('type', $plan->type) }}"
                                     class="form-control @error('type') is-invalid @enderror" placeholder="Enter Type ( Month, only, etc)">

@@ -19,6 +19,8 @@ class ForexController extends Controller
             $planArr[$plan->name] = [
                 'price_item_class' => $plan->is_highlighted ? 'highlighted-box box-bg-shape' : '',
                 'price'            => $plan->price,
+                'type' => $plan->type,
+                'discount_price'   => $plan->discount_price,
                 'value'            => $plan->description,
                 // If you don't do Step 2 below, you must use json_decode($plan->features) here
                 'feature'          => is_string($plan->features) ? json_decode($plan->features, true) : $plan->features,

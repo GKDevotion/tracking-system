@@ -9,6 +9,7 @@ class Plan extends Model
     protected $fillable = [
         'name',
         'price',
+        'discount_price',
         'type',
         'description',
         'features',

@@ -29,6 +29,7 @@
                         <th>#</th>
                         <th>Name</th>
                         <th>Price</th>
+                        <th>Discount</th>
                         <th>Type</th>
                         <th>Description</th>
                         <th>CTA</th>
@@ -44,6 +45,7 @@
                             <td>{{ $plans->firstItem() + $i }}</td>
                             <td><strong>{{ $plan->name }}</strong></td>
                             <td>{{ $plan->price }}</td>
+                            <td>{{ $plan->discount_price }}</td>
                             <td>{{ $plan->type }}</td>
                             <td>{{ Str::limit($plan->description, 50) }}</td>
                             <td>{{ $plan->cta }}</td>

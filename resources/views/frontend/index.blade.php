@@ -747,6 +747,7 @@
                     margin-left: 15px
                 }
             </style>
+            
             <div class="row g-4 mb-4">
                 <div class="col-md-3">
                     <div class="glass-card">
@@ -857,7 +858,10 @@
                     </div>
                 </div>
                 <div class="col-lg-12">
-                    <div class="glass-card">
+
+                    @include('frontend.element.result')
+
+                    <div class="glass-card d-none">
                         <div class="panel-card">
                             <div class="panel-card-header">
                                 <div class="panel-card-title">Recent Trades</div>
@@ -1258,6 +1262,14 @@
                                                 <h3>{{ $k }}</h3>
 
                                                 <h2>
+                                                    <?php if (isset($val['discount_price']) && $val['discount_price'] !== '') : ?>
+                                                            <span class="text-muted" style="font-size: 60px">
+                                                                <strike class="me-2">
+                                                                    <?= $val['discount_price'] ?>
+                                                                </strike>
+                                                            </span>
+                                                    <?php endif; ?>
+                                                    
                                                     {{ $val['price'] }}
                                                    @if(!empty($val['type']))
                                                         <small>/{{ $val['type'] }}</small>
@@ -1360,31 +1372,56 @@
                         <!-- Team Member Info Counters Start -->
                         <div class="team-member-info-counters">
                             <!-- Member Info Counter Item Start -->
-                            <div class="member-info-counter-item">
-                                <h2><span class="counter">9</span>+</h2>
-                                <p>Years of experience</p>
-                            </div>
+                            @if(getConfigurationField('YEAR_OF_EXPERIENCE') && getConfigurationField('YEAR_OF_EXPERIENCE') != '-')
+                                <div class="member-info-counter-item">
+                                    <h2>
+                                        <span class="counter">
+                                            {{ (int) getConfigurationField('YEAR_OF_EXPERIENCE') }}
+                                        </span>+
+                                    </h2>
+                                    <p>{{ getConfigurationDisplayName('YEAR_OF_EXPERIENCE') }}</p>
+                                </div>
+                            @endif
                             <!-- Member Info Counter Item End -->
 
                             <!-- Member Info Counter Item Start -->
-                            <div class="member-info-counter-item">
-                                <h2><span class="counter">87</span>%</h2>
-                                <p>Signals Accuracy</p>
-                            </div>
+                            @if(getConfigurationField('SIGNAL_ACCURACY') && getConfigurationField('SIGNAL_ACCURACY') != '-')
+                                <div class="member-info-counter-item">
+                                    <h2>
+                                        <span class="counter">
+                                            {!! (int) getConfigurationField('SIGNAL_ACCURACY') !!}
+                                        </span>%
+                                    </h2>
+                                    <p>{!! getConfigurationDisplayName('SIGNAL_ACCURACY') !!}</p>
+                                </div>
+                            @endif
                             <!-- Member Info Counter Item End -->
 
                             <!-- Member Info Counter Item Start -->
-                            <div class="member-info-counter-item">
-                                <h2><span class="counter">3000</span>+</h2>
-                                <p>PIPs Monthly</p>
-                            </div>
+                            @if(getConfigurationField('PIPS_MONTHLY') && getConfigurationField('PIPS_MONTHLY') != '-')
+                                <div class="member-info-counter-item">
+                                    <h2>
+                                        <span class="counter">
+                                            {!! (int) getConfigurationField('PIPS_MONTHLY') !!}
+                                        </span>+
+                                    </h2>
+                                    <p>{!! getConfigurationDisplayName('PIPS_MONTHLY') !!}</p>
+                                </div>
+                            @endif
                             <!-- Member Info Counter Item End -->
 
                             <!-- Member Info Counter Item Start -->
-                            <div class="member-info-counter-item">
-                                <h2><span class="counter">50</span>+</h2>
-                                <p>Countries</p>
-                            </div>
+                            @if(getConfigurationField('COUNTRIES') && getConfigurationField('COUNTRIES') != '-')
+                                <div class="member-info-counter-item">
+                                    <h2>
+                                        <span class="counter">
+                                            {!! (int) getConfigurationField('COUNTRIES') !!}
+                                        </span>
+                                        +
+                                    </h2>
+                                    <p>{!! getConfigurationDisplayName('COUNTRIES') !!}</p>
+                                </div>
+                            @endif
                             <!-- Member Info Counter Item End -->
                         </div>
                         <!-- Team Member Info Counters End -->
@@ -1404,68 +1441,75 @@
 
                     <!-- Team Skills List Start -->
                     <div class="member-skills-list">
-                        <!-- Skills Progress Bar Start -->
-                        <div class="skills-progress-bar">
-                            <!-- Skill Item Start -->
-                            <div class="skillbar" data-percent="95%">
-                                <div class="skill-data">
-                                    <div class="skill-title">AI + Human hybride analysis</div>
-                                    <div class="skill-no">95%</div>
-                                </div>
-                                <div class="skill-progress">
-                                    <div class="count-bar"></div>
+                        @if(getConfigurationField('HUMAN_HYBRID_ANALYSIS') && getConfigurationField('HUMAN_HYBRID_ANALYSIS') != '-')
+                            <div class="skills-progress-bar">
+                                <div class="skillbar" data-percent="95%">
+                                    <div class="skill-data">
+                                        <div class="skill-title">
+                                            {!! getConfigurationDisplayName('HUMAN_HYBRID_ANALYSIS') !!}
+                                        </div>
+                                        <div class="skill-no">{!! getConfigurationField('HUMAN_HYBRID_ANALYSIS') !!}%</div>
+                                    </div>
+                                    <div class="skill-progress">
+                                        <div class="count-bar"></div>
+                                    </div>
                                 </div>
                             </div>
-                            <!-- Skill Item End -->
-                        </div>
+                        @endif
                         <!-- Skills Progress Bar End -->
 
                         <!-- Skills Progress Bar Start -->
-                        <div class="skills-progress-bar">
-                            <!-- Skill Item Start -->
-                            <div class="skillbar" data-percent="98%">
-                                <div class="skill-data">
-                                    <div class="skill-title">Verified Results</div>
-                                    <div class="skill-no">98%</div>
+                        @if(getConfigurationField('VERIFIED_RESULTS') && getConfigurationField('VERIFIED_RESULTS') != '-')
+                            <div class="skills-progress-bar">
+                                <!-- Skill Item Start -->
+                                <div class="skillbar" data-percent="98%">
+                                    <div class="skill-data">
+                                        <div class="skill-title"> {!! getConfigurationDisplayName('VERIFIED_RESULTS') !!}</div>
+                                        <div class="skill-no">{!! getConfigurationField('VERIFIED_RESULTS') !!}%</div>
+                                    </div>
+                                    <div class="skill-progress">
+                                        <div class="count-bar"></div>
+                                    </div>
                                 </div>
-                                <div class="skill-progress">
-                                    <div class="count-bar"></div>
-                                </div>
+                                <!-- Skill Item End -->
                             </div>
-                            <!-- Skill Item End -->
-                        </div>
+                        @endif
                         <!-- Skills Progress Bar End -->
 
                         <!-- Skills Progress Bar Start -->
-                        <div class="skills-progress-bar">
-                            <!-- Skill Item Start -->
-                            <div class="skillbar" data-percent="92%">
-                                <div class="skill-data">
-                                    <div class="skill-title">Risk Management</div>
-                                    <div class="skill-no">92%</div>
+                        @if(getConfigurationField('RISK_MANAGEMENT') && getConfigurationField('RISK_MANAGEMENT') != '-')
+                            <div class="skills-progress-bar">
+                                <!-- Skill Item Start -->
+                                <div class="skillbar" data-percent="92%">
+                                    <div class="skill-data">
+                                        <div class="skill-title">{!! getConfigurationDisplayName('RISK_MANAGEMENT') !!}</div>
+                                        <div class="skill-no">{!! getConfigurationField('RISK_MANAGEMENT') !!}%</div>
+                                    </div>
+                                    <div class="skill-progress">
+                                        <div class="count-bar"></div>
+                                    </div>
                                 </div>
-                                <div class="skill-progress">
-                                    <div class="count-bar"></div>
-                                </div>
+                                <!-- Skill Item End -->
                             </div>
-                            <!-- Skill Item End -->
-                        </div>
+                        @endif
                         <!-- Skills Progress Bar End -->
 
                         <!-- Skills Progress Bar Start -->
-                        <div class="skills-progress-bar">
-                            <!-- Skill Item Start -->
-                            <div class="skillbar" data-percent="87%">
-                                <div class="skill-data">
-                                    <div class="skill-title">Signal Success Rate</div>
-                                    <div class="skill-no">87%</div>
+                        @if(getConfigurationField('SIGNAL_SUCCESS_RATE') && getConfigurationField('SIGNAL_SUCCESS_RATE') != '-')
+                            <div class="skills-progress-bar">
+                                <!-- Skill Item Start -->
+                                <div class="skillbar" data-percent="87%">
+                                    <div class="skill-data">
+                                        <div class="skill-title">{!! getConfigurationDisplayName('SIGNAL_SUCCESS_RATE') !!}</div>
+                                        <div class="skill-no">{!! getConfigurationField('SIGNAL_SUCCESS_RATE') !!}%</div>
+                                    </div>
+                                    <div class="skill-progress">
+                                        <div class="count-bar"></div>
+                                    </div>
                                 </div>
-                                <div class="skill-progress">
-                                    <div class="count-bar"></div>
-                                </div>
+                                <!-- Skill Item End -->
                             </div>
-                            <!-- Skill Item End -->
-                        </div>
+                        @endif
                         <!-- Skills Progress Bar End -->
 
                     </div>
