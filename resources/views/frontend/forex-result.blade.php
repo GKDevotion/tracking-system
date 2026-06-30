@@ -142,7 +142,7 @@
                     .btn-live {
                     display: inline-block;
                     padding: 6px 16px;
-                    background: var(--logo-color);;
+                    background: #000;
                     color: #fff;
                     border: none;
                     border-radius: 5px;
