@@ -30,7 +30,7 @@
                             </div>
 
                             <div class="col-md-6">
-                                <label class="form-label">Price <span class="text-danger">*</span></label>
+                                <label class="form-label">Selling Price <span class="text-danger">*</span></label>
                                 <input type="text" name="price" value="{{ old('price', $plan->price) }}"
                                     class="form-control @error('price') is-invalid @enderror" placeholder="$29"
                                     required>
@@ -40,9 +40,9 @@
                             </div>
 
                             <div class="col-md-6">
-                                <label class="form-label">Discount Price <span class="text-danger">*</span></label>
+                                <label class="form-label">Purchase Price <span class="text-danger">*</span></label>
                                 <input type="text" name="discount_price" value="{{ old('discount_price', $plan->discount_price) }}"
-                                    class="form-control @error('discount_price') is-invalid @enderror" placeholder="$29"
+                                    class="form-control @error('discount_price') is-invalid @enderror" placeholder="Enter Purchase price"
                                     required>
                                 @error('discount_price')
                                     <div class="invalid-feedback">{{ $message }}</div>

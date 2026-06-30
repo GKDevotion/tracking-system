@@ -2580,6 +2580,7 @@ header.main-header .header-sticky.active{
 }
 
 .pricing-item.highlighted-box .pricing-header h2,
+.pricing-item.highlighted-box .pricing-header strike,
 .pricing-item.highlighted-box .pricing-item-content p,
 .pricing-item.highlighted-box .pricing-body h3,
 .pricing-item.highlighted-box .pricing-body ul li,

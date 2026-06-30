@@ -28,8 +28,8 @@
                     <tr>
                         <th>#</th>
                         <th>Name</th>
-                        <th>Price</th>
-                        <th>Discount</th>
+                        <th>Selling Price</th>
+                        <th>Purchase Price</th>
                         <th>Type</th>
                         <th>Description</th>
                         <th>CTA</th>
