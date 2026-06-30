@@ -114,15 +114,15 @@
                     letter-spacing: 0.1em;
                     text-transform: uppercase;
                     }
-                    .badge-sell {
-                    color: var(--logo-color);;
-                    background: rgba(255,77,109,0.1);
-                    border: 1px solid var(--logo-color);
+                    .badge-sell- {
+                        color: var(--logo-color);;
+                        background: rgba(255,77,109,0.1);
+                        border: 1px solid var(--logo-color);
                     }
-                    .badge-buy {
-                    color: #1a9e72;
-                    background: rgba(0,212,255,0.08);
-                    border: 1px solid #1a9e72;
+                    .badge-buy- {
+                        color: #1a9e72;
+                        background: rgba(0,212,255,0.08);
+                        border: 1px solid #1a9e72;
                     }
                     .row-faded .badge-sell,
                     .row-faded .badge-buy { opacity: 0.38; }
