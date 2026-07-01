@@ -150,7 +150,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (activeSlide.contains(video)) {
             carousel.pause();
             video.currentTime = 0;
-            video.playbackRate = 1.5; // 2X Speed
+            video.playbackRate = 1.0; // 2X Speed
             video.play();
         } else {
             video.pause();
