@@ -281,7 +281,7 @@ Route::middleware('auth')->group(function () {
                 'destroy' => 'web.blog-tag.destroy',
     ]);
 
-            // Blog Tag
+    // Blog Tag
     Route::resource('contact-us',ContactsController::class)
             ->names([
                 'index' => 'web.contact-us.index',
@@ -309,8 +309,8 @@ Route::middleware('auth')->group(function () {
                 'destroy' => 'web.bm-mail-template.destroy',
     ]);
 
-    Route::post('templates/send-to-client', [BmMailTemplateController::class, 'sendToClient'])
-             ->name('web.bm-mail-template.sendToClient');
+    Route::post('templates/send-to-client', [BmMailTemplateController::class, 'sendToClient'])->name('web.bm-mail-template.sendToClient');
+
 
     // Business mail Client
     Route::resource('bm-client', BmClientController::class)
@@ -324,8 +324,7 @@ Route::middleware('auth')->group(function () {
     ]);
 
     // AJAX single send (called via fetch from modal)
-    Route::post('clients/bulk-send', [BmClientController::class, 'bulkSend'])
-             ->name('clients.bulkSend');
+    Route::post('clients/bulk-send', [BmClientController::class, 'bulkSend']) ->name('clients.bulkSend');
 
 
     // Business mail Logs
@@ -341,6 +340,16 @@ Route::middleware('auth')->group(function () {
                 'update' => 'web.sales.update',
                 'show' => 'web.sales.show',
     ]);
+
+    Route::resource(
+        'telegram-posts',
+        TelegramPostController::class
+    );
+
+    Route::resource(
+        'signals',
+        ForexSignalController::class
+    );
 });
 
 
