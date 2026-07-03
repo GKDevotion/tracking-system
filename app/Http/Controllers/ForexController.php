@@ -5,10 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Plan;
 
 class ForexController extends Controller
-{ 
+{
 
     public function index()
-    { 
+    {
         $plans = Plan::where('is_active', 1)
             ->orderBy('sort_order')
             ->get();
@@ -33,5 +33,5 @@ class ForexController extends Controller
         // dd( $planArr );
         return view('frontend.forex-signal',compact('planArr'));
     }
- 
+
 }

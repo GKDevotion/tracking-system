@@ -9,15 +9,16 @@ class ForexUpdate extends Model
     protected $table = 'free_signals_updates';
     protected $fillable = [
             'signal_date',
+            'pair',
             'order_type',
             'entry_price',
-            'pair',
-            'live_btn_url',
             'stop_loss',
             'take_profit',
             'profit',
             'sort_order',
             'status',
+            'live_btn_url',
+            'post_id',
         ];
- 
+
 }

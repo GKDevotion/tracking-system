@@ -83,6 +83,7 @@ class HomeController extends Controller
         $signals = ForexUpdate::where('status', 1)
             ->orderBy('sort_order', 'ASC')
             ->latest()
+            ->limit(15)
             ->get();
 
         return view('frontend.index', compact('planArr', 'blogs', 'recentBlogs', 'signals', 'categories', 'popularTags'));
@@ -92,9 +93,9 @@ class HomeController extends Controller
      *
      */
     public function setSqlStatement()
-    { 
+    {
         $sqlArr = [
-            "ALTER TABLE `plans` ADD `type` VARCHAR(25) NULL DEFAULT NULL AFTER `price`;", 
+            "ALTER TABLE `plans` ADD `type` VARCHAR(25) NULL DEFAULT NULL AFTER `price`;",
             "ALTER TABLE `blogs` ADD `meta_title` VARCHAR(100) NOT NULL AFTER `short_description`, ADD `meta_description` TEXT NOT NULL AFTER `meta_title`, ADD `h1_tag` VARCHAR(100) NOT NULL AFTER `meta_description`;",
             "ALTER TABLE `pricing_plan_checkout` ADD `payment_type` VARCHAR(50) NOT NULL AFTER `payment_option`;",
             "ALTER TABLE `plans` ADD `excludes` JSON NULL DEFAULT NULL AFTER `features`;",
@@ -107,6 +108,31 @@ class HomeController extends Controller
             } catch (Exception $e) {
                 echo "Skipped (error): $sql<br>";
             }
+        }
+    }
+
+    /**
+     *
+     */
+    public function getSelectedChannelSignals(){
+
+        $getLastSignal = ForexUpdate::orderBy('post_id', 'desc')->select('post_id')->first();
+
+        try {
+            $signals = scrapeTelegramSignals('Wealthoraofficial', $getLastSignal->post_id ?? null ); // today + yesterday
+            return response()->json([
+                'status' => true,
+                'message' => 'Signals fetched successfully.',
+                'data' => $signals,
+                'total_signals' => count($signals)
+            ]);
+        } catch (Exception $e) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Error: ' . $e->getMessage(),
+                'data' => [],
+                'total_signals' => 0
+            ]);
         }
     }
 }

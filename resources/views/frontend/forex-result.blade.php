@@ -124,8 +124,7 @@
                         background: rgba(0,212,255,0.08);
                         border: 1px solid #1a9e72;
                     }
-                    .row-faded .badge-sell,
-                    .row-faded .badge-buy { opacity: 0.38; }
+                    /* .row-faded .badge-sell, .row-faded .badge-buy { opacity: 0.38; } */
 
                     /* SL | TP */
                     .sl  {
@@ -230,7 +229,11 @@
                                         <td>
                                             <span class="sl-">{{ $signal->stop_loss }}</span>
                                             <span class="sep">|</span>
-                                            <span class="tp-">{{ $signal->take_profit }}</span>
+                                            <span class="tp-">
+                                                @foreach (json_decode($signal->take_profit, true) as $k=>$tp)
+                                                    <span>{{ "TP" . ($k + 1) . ": " . $tp.", " }}</span>
+                                                @endforeach
+                                            </span>
                                         </td>
 
                                         {{-- Profit --}}

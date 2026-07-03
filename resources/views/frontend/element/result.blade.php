@@ -102,8 +102,7 @@
                     background: #fff;
                     /* border: 1px solid #000; */
                     }
-                    .row-faded .badge-sell,
-                    .row-faded .badge-buy { opacity: 0.38; }
+                    /* .row-faded .badge-sell, .row-faded .badge-buy { opacity: 0.38; } */
 
                     /* SL | TP */
                     .sl  {

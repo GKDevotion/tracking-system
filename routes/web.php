@@ -339,7 +339,6 @@ Route::middleware('auth')->group(function () {
     ]);
 });
 
-
 Route::get('/test-mail', function () {
     try {
         Mail::raw('This is a test email from Laravel!', function ($message) {
@@ -458,3 +457,8 @@ Route::get('telegram', function () {
             ], 500);
         }
 });
+
+/**
+ * Cron Function
+ */
+Route::get('/get-selected-channel-signals', [HomeController::class, 'getSelectedChannelSignals']);
