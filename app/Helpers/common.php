@@ -3,6 +3,7 @@
 
 use App\Models\Configuration;
 use App\Models\ForexUpdate;
+use Illuminate\Support\Carbon;
 
 if (!function_exists('getConfigurationField')) {
     /**
@@ -120,7 +121,7 @@ function scrapeTelegramSignals(string $channel, $afterId = null, int $maxPages =
 
                 // Values to insert/update
                 [
-                    'signal_date' => $timeNode ? $timeNode->getAttribute('datetime') : null,
+                    'signal_date' => $timeNode ? Carbon::parse($timeNode->getAttribute('datetime'))->format('Y-m-d') : null,
                     'pair' => $parsed['pair'] ?? null,
                     'order_type' => ( $parsed['direction'] == "SELL" ) ? 1 : 0,
                     'entry_price' => $parsed['entry_from'] ?? 0,
