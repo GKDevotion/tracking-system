@@ -81,7 +81,7 @@ class HomeController extends Controller
         $popularTags = Tag::where('status', 1)->get();
 
         $signals = ForexUpdate::where('status', 1)
-            ->orderBy('sort_order', 'ASC')
+            ->orderBy('sort_order', 'DESC')
             ->latest()
             ->limit(15)
             ->get();

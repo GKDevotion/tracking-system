@@ -11,7 +11,7 @@ class ForexResultController extends Controller
     public function index()
     {
         $signals = ForexUpdate::where('status', 1)
-            ->orderBy('sort_order', 'ASC')
+            ->orderBy('sort_order', 'DESC')
             ->latest()
             ->limit(30)
             ->get();
