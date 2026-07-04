@@ -67,9 +67,9 @@
         <div class="container">
             <div class="row text-center">
                 <h2 class="wow fadeInUp text-black profit-text">
-                    Thousands Joined.
-                    <span class="color-change">PROFIT</span>
-                    Started
+                    Thousands Have Already
+                    <span class="color-change">Joined</span>
+
                 </h2>
             </div>
         </div>
@@ -590,7 +590,7 @@
                         <path d="M9 12L11 14L15 10" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                             stroke-linejoin="round" />
                     </svg>
-                    Verified by Third-Party
+                    Result Verified by Third-Party
                 </span>
                 <span class="divider-line"></span>
             </div>
@@ -650,9 +650,9 @@
             </div>
 
             <!-- Daily / Weekly / Monthly toggle -->
-            <div class="d-flex justify-content-center mb-5">
-                <div class="btn-group toggle-group" role="group">
-                    <button type="button" class="btn">Daily</button>
+            <div class="text-center mb-5">
+                <div class="btn-group toggle-group gap-3" role="group">
+                    <button type="button" class="btn d-none">Daily</button>
                     <button type="button" class="btn active">Weekly</button>
                     <button type="button" class="btn">Monthly</button>
                 </div>
@@ -1022,14 +1022,17 @@
 
                                                 <h2>
                                                     <?php if (isset($val['discount_price']) && $val['discount_price'] !== '') : ?>
-                                                    <span class="text-muted" style="font-size: 60px">
+                                                    <span class="text-muted">
                                                         <strike class="me-2">
                                                             <?= $val['discount_price'] ?>
                                                         </strike>
                                                     </span>
                                                     <?php endif; ?>
 
-                                                    {{ $val['price'] }}
+                                                    <span style="font-size: 60px">
+                                                        {{ $val['price'] }}
+                                                    </span>
+
                                                     @if (!empty($val['type']))
                                                         <small>/{{ $val['type'] }}</small>
                                                     @endif

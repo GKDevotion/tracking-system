@@ -182,7 +182,7 @@
                             <th>Date</th>
                             <th>Pair</th>
                             <th>Order</th>
-                            <th>Profit</th>
+                            <th class="d-none">Profit</th>
                             <th>Live</th>
                             </tr>
                         </thead>
@@ -213,7 +213,7 @@
                                         {{-- <td class="{{ $signal->profit > 0 ? 'c-profit' : 'c-zero' }}">
                                             {{ $signal->profit }}
                                         </td> --}}
-                                        <td class="{{ $signal->profit > 0 ? 'c-profit' : ($signal->profit < 0 ? 'c-loss' : 'c-zero') }}">
+                                        <td class="d-none {{ $signal->profit > 0 ? 'c-profit' : ($signal->profit < 0 ? 'c-loss' : 'c-zero') }}">
                                             {{ $signal->profit }}
                                         </td>
 
