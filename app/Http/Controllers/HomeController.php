@@ -116,6 +116,7 @@ class HomeController extends Controller
      */
     public function getSelectedChannelSignals(){
 
+        return true;
         $getLastSignal = ForexUpdate::orderBy('post_id', 'desc')->select('post_id')->first();
 
         try {
