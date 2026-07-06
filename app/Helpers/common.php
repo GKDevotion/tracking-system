@@ -87,6 +87,7 @@ function scrapeTelegramSignals(string $channel, $afterId = null, int $maxPages =
 
         // Nodes come in ascending order (oldest -> newest) on each page
         foreach ($messageNodes as $node) {
+
             /** @var DOMElement $node */
             $postId = $node->getAttribute('data-post'); // e.g. "Wealthoraofficial/1234"
             if (!$postId) continue;
@@ -138,7 +139,7 @@ function scrapeTelegramSignals(string $channel, $afterId = null, int $maxPages =
                 ]
             );
 
-            $results[] = "https://t.me/{$postId}";
+            $results[] = $parsed;//"https://t.me/{$postId}";
         }
 
         if ($lowestIdOnPage === null) break;
