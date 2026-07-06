@@ -1033,9 +1033,7 @@
                                                     </span>
                                                     <?php endif; ?>
 
-                                                    <span style="font-size: 60px; text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.18);">
-                                                        <span style="font-size: 45px;">$</span>{{$val['price']}}
-                                                    </span>
+                                                    <span style="font-size: 60px; text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.18);"><span style="font-size: 45px;">$</span>{{$val['price']}}</span>
 
                                                     @if (!empty($val['type']))
                                                         <small>/{{ $val['type'] }}</small>
