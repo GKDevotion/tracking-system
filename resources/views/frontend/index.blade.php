@@ -1066,7 +1066,7 @@
 
                                                 <ul>
                                                     @foreach ($val['feature'] as $f)
-                                                        <li>{{ $f }}</li>
+                                                        <li>{{!! $f !!}}</li>
                                                     @endforeach
                                                 </ul>
                                             </div>
