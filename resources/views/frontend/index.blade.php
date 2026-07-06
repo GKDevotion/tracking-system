@@ -1024,7 +1024,7 @@
                                             <div class="pricing-header">
                                                 <h3>{{ $k }}</h3>
 
-                                                <h2 style="font-weight: 400;">
+                                                <h2 style="font-weight: 400; font-size: 28px;">
                                                     <?php if (isset($val['discount_price']) && $val['discount_price'] !== '') : ?>
                                                     <span class="text-muted">
                                                         <strike class="me-2">
@@ -1033,9 +1033,7 @@
                                                     </span>
                                                     <?php endif; ?>
 
-                                                    <span style="font-size: 60px; text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.18);">
-                                                        {{ $val['price'] }}
-                                                    </span>
+                                                    <span style="font-size: 60px; text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.18);">{{$val['price']}}</span>
 
                                                     @if (!empty($val['type']))
                                                         <small>/{{ $val['type'] }}</small>
