@@ -540,7 +540,7 @@
 
             .stat-value {
                 font-size: 2.2rem;
-                font-weight: 800;
+                /* font-weight: 800; */
                 line-height: 1.1;
             }
 
@@ -548,6 +548,7 @@
                 font-weight: 700;
                 font-size: .95rem;
                 margin-top: 2px;
+                color: ##665b5b;
             }
 
             .stat-sub {
@@ -670,7 +671,7 @@
                             </svg>
                         </div>
                         <div class="stat-text">
-                            <div class="stat-value" style="color:var(--red)">88%</div>
+                            <div class="stat-value" style="">88%</div>
                             <div class="stat-label">Win Rate</div>
                             <div class="stat-sub d-none">Winning Accuracy</div>
                         </div>
@@ -704,7 +705,7 @@
                         </div>
                         <div class="stat-text">
                             <div class="stat-value">
-                                <span>16 <small style="font-size: 16px;">Trade</small></span><br>
+                                <span>16 <small style="font-size: 16px; color: gray;">Trade</small></span><br>
 
                             </div>
                             <div class="stat-label">
@@ -728,7 +729,7 @@
                             </svg>
                         </div>
                         <div class="stat-text">
-                            <div class="stat-value" style="color:var(--green)">1:2.4</div>
+                            <div class="stat-value" style="">1:2.4</div>
                             <div class="stat-label">R:R Ratio</div>
                             <div class="stat-sub d-none">Risk to Reward</div>
                         </div>
