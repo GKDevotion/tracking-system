@@ -705,10 +705,12 @@
                         <div class="stat-text">
                             <div class="stat-value">
                                 <span>16 <small style="font-size: 16px;">Trade</small></span><br>
+
+                            </div>
+                            <div class="stat-label">
                                 <span style="color:var(--green); font-size: 16px; font-weight: 500;">14 win, </span>
                                 <span style="color:var(--red); font-size: 16px; font-weight: 500;">2 loss</span>
                             </div>
-                            <div class="stat-label d-none">Trades</div>
                             <div class="stat-sub d-none">Total Executed</div>
                         </div>
                     </div>
@@ -1099,11 +1101,11 @@
                     <!-- Pricing Benifit List Start -->
                     <div class="pricing-benefit-list wow fadeInUp" data-wow-delay="0.6s">
                         <ul>
-                            <li><img src="frontend/images/icon-pricing-benefit-1.svg" alt="">Get 30 day free trial
+                            <li><img src="{{url('public/frontend/images/icon-pricing-benefit-1.svg')}}" alt="Get free trial">Get free trial
                             </li>
-                            <li><img src="frontend/images/icon-pricing-benefit-2.svg" alt="">No Hidden Fees
+                            <li><img src="{{url('public/frontend/images/icon-pricing-benefit-2.svg')}}" alt="No Hidden Fees">No Hidden Fees
                             </li>
-                            <li><img src="frontend/images/icon-pricing-benefit-3.svg" alt="">You can cancel
+                            <li><img src="{{url('public/frontend/images/icon-pricing-benefit-3.svg')}}" alt="You can cancel anytime">You can cancel
                                 anytime </li>
                         </ul>
                     </div>
