@@ -194,7 +194,7 @@
                             <th>Order</th>
                             <th class="d-none">Entry</th>
                             <th>SL | TP</th>
-                            <th class="d-none">Profit</th>
+                            <th class="">Profit</th>
                             <th>Live</th>
                             </tr>
                         </thead>
@@ -237,7 +237,7 @@
                                         </td>
 
                                         {{-- Profit --}}
-                                        <td class="d-none {{ $signal->profit > 0 ? 'c-profit' : ($signal->profit < 0 ? 'c-loss' : 'c-zero') }}">
+                                        <td class="{{ $signal->profit > 0 ? 'c-profit' : ($signal->profit < 0 ? 'c-loss' : 'c-zero') }}">
                                             {{ $signal->profit }}
                                         </td>
 

@@ -539,7 +539,7 @@
             }
 
             .stat-value {
-                font-size: 1.8rem;
+                font-size: 2.2rem;
                 font-weight: 800;
                 line-height: 1.1;
             }
@@ -670,9 +670,9 @@
                             </svg>
                         </div>
                         <div class="stat-text">
-                            <div class="stat-value" style="color:var(--red)">75%</div>
+                            <div class="stat-value" style="color:var(--red)">88%</div>
                             <div class="stat-label">Win Rate</div>
-                            <div class="stat-sub">Winning Accuracy</div>
+                            <div class="stat-sub d-none">Winning Accuracy</div>
                         </div>
                     </div>
                 </div>
@@ -687,9 +687,9 @@
                             </svg>
                         </div>
                         <div class="stat-text">
-                            <div class="stat-value" style="color:var(--green)">+1247</div>
+                            <div class="stat-value" style="color:var(--green)">+4068</div>
                             <div class="stat-label">Net Pips</div>
-                            <div class="stat-sub">Total Profit</div>
+                            <div class="stat-sub d-none">Total Profit</div>
                         </div>
                     </div>
                 </div>
@@ -703,9 +703,13 @@
                             </svg>
                         </div>
                         <div class="stat-text">
-                            <div class="stat-value" style="color:var(--red)">28</div>
-                            <div class="stat-label">Trades</div>
-                            <div class="stat-sub">Total Executed</div>
+                            <div class="stat-value">
+                                <span>16 <small style="font-size: 16px;">Trade</small></span><br>
+                                <span style="color:var(--green); font-size: 16px; font-weight: 500;">14 win, </span>
+                                <span style="color:var(--red); font-size: 16px; font-weight: 500;">2 loss</span>
+                            </div>
+                            <div class="stat-label d-none">Trades</div>
+                            <div class="stat-sub d-none">Total Executed</div>
                         </div>
                     </div>
                 </div>
@@ -724,7 +728,7 @@
                         <div class="stat-text">
                             <div class="stat-value" style="color:var(--green)">1:2.4</div>
                             <div class="stat-label">R:R Ratio</div>
-                            <div class="stat-sub">Risk to Reward</div>
+                            <div class="stat-sub d-none">Risk to Reward</div>
                         </div>
                     </div>
                 </div>
@@ -1020,7 +1024,7 @@
                                             <div class="pricing-header">
                                                 <h3>{{ $k }}</h3>
 
-                                                <h2>
+                                                <h2 style="font-weight: 400;">
                                                     <?php if (isset($val['discount_price']) && $val['discount_price'] !== '') : ?>
                                                     <span class="text-muted">
                                                         <strike class="me-2">
@@ -1029,7 +1033,7 @@
                                                     </span>
                                                     <?php endif; ?>
 
-                                                    <span style="font-size: 60px">
+                                                    <span style="font-size: 60px; text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.18);">
                                                         {{ $val['price'] }}
                                                     </span>
 

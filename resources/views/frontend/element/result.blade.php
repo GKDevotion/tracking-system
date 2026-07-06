@@ -23,7 +23,7 @@
                     }
                     .sig-table thead th {
                         font-weight: 700;
-                        font-size: 0.82rem;
+                        font-size: rem;
                         letter-spacing: 0.1em;
                         text-transform: uppercase;
                         color: #fff;
@@ -52,8 +52,12 @@
                     .sig-table tbody tr:hover .btn-live {
                         background: #000;
                         /* box-shadow: 0 0 10px rgba(204, 46, 46, 0.6); */
-                        color: #fff;
+                        /* color: #fff !important; */
                         transform: scale(1.06);
+                    }
+
+                    .sig-table tbody tr:hover .btn-live a {
+                        color: #fff !important;
                     }
 
                     /* Cells */
@@ -62,7 +66,7 @@
                     text-align: center;
                     border-top: 1px solid #666;
                     white-space: nowrap;
-                    font-size: 0.84rem;
+                    font-size: 1rem;
                     font-weight: 500;
                     letter-spacing: 0.02em;
                     vertical-align: middle;
@@ -87,8 +91,8 @@
                         display: inline-block;
                         padding: 3px 16px;
                         border-radius: 3px;
-                        font-weight: 700;
-                        font-size: 0.8rem;
+                        /* font-weight: 700; */
+                        font-size: 1rem;
                         letter-spacing: 0.1em;
                         text-transform: uppercase;
                     }
@@ -119,9 +123,9 @@
                     .btn-live {
                     display: inline-block;
                     padding: 6px 16px;
-                    background: #000;
-                    color: #fff;
-                    border: none;
+                    background: #fff;
+                    /* color: #000; */
+                    border: 1px solid #000;
                     border-radius: 5px;
                     font-weight: 700;
                     font-size: 0.72rem;
@@ -182,7 +186,7 @@
                             <th>Date</th>
                             <th>Pair</th>
                             <th>Order</th>
-                            <th class="d-none">Profit</th>
+                            <th class="">Profit</th>
                             <th>Live</th>
                             </tr>
                         </thead>
@@ -213,14 +217,18 @@
                                         {{-- <td class="{{ $signal->profit > 0 ? 'c-profit' : 'c-zero' }}">
                                             {{ $signal->profit }}
                                         </td> --}}
-                                        <td class="d-none {{ $signal->profit > 0 ? 'c-profit' : ($signal->profit < 0 ? 'c-loss' : 'c-zero') }}">
-                                            {{ $signal->profit }}
+                                        <td class=" {{ $signal->profit > 0 ? 'c-profit' : ($signal->profit < 0 ? 'c-loss' : 'c-zero') }}">
+                                            @if ( $signal->profit)
+                                                {{ $signal->profit }}
+                                            @else
+                                                <span style="color:var(--green);font-size: 1.4rem;">Running</span>
+                                            @endif
                                         </td>
 
                                         {{-- Live Proof Button --}}
                                         <td>
                                             <button class="btn-live">
-                                                <a href="{{ $signal->live_btn_url }}" style="color: #fff; text-decoration: none">LIVE PROOF</a>
+                                                <a href="{{ $signal->live_btn_url }}" style="text-decoration: none">LIVE PROOF</a>
                                             </button>
                                         </td>
 

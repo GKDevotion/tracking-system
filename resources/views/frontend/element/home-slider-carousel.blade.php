@@ -98,21 +98,23 @@
         <!-- Slides -->
         <div class="carousel-inner">
 
-            <!-- Video Slide -->
-            <div class="carousel-item active">
-                <video id="carouselVideo"
-                       class="d-block w-100"
-                       autoplay
-                       muted
-                       playsinline
-                       preload="auto">
-                    <source src="{{ asset('storage/app/public/home-slider/trade-with-verify-signals.mp4') }}" type="video/mp4">
-                    Your browser does not support HTML5 video.
-                </video>
-            </div>
+            @if( false )
+                <!-- Video Slide -->
+                <div class="carousel-item active">
+                    <video id="carouselVideo"
+                        class="d-block w-100"
+                        autoplay
+                        muted
+                        playsinline
+                        preload="auto">
+                        <source src="{{ asset('storage/app/public/home-slider/trade-with-verify-signals.mp4') }}" type="video/mp4">
+                        Your browser does not support HTML5 video.
+                    </video>
+                </div>
+            @endif
 
             <!-- Image Slide -->
-            <div class="carousel-item">
+            <div class="carousel-item active">
                 <img src="{{ asset('storage/app/public/home-slider/website-07.png') }}"
                      class="d-block w-100"
                      alt="Money Making Machine">
