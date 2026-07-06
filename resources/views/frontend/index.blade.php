@@ -1028,15 +1028,13 @@
                                                     <?php if (isset($val['discount_price']) && $val['discount_price'] !== '') : ?>
                                                     <span class="text-muted">
                                                         <strike class="me-2">
-                                                            <span>$</span>
-                                                            <?= $val['discount_price'] ?>
+                                                            <span>$</span>{{$val['discount_price']}}
                                                         </strike>
                                                     </span>
                                                     <?php endif; ?>
 
                                                     <span style="font-size: 60px; text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.18);">
-                                                        <span>$</span>
-                                                        {{$val['price']}}
+                                                        <span>$</span>{{$val['price']}}
                                                     </span>
 
                                                     @if (!empty($val['type']))
