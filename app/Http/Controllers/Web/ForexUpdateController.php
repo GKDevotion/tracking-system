@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
-use App\Models\ForexUpdate; 
+use App\Models\ForexUpdate;
 use Illuminate\Http\Request;
 
 class ForexUpdateController extends Controller
@@ -37,17 +37,23 @@ class ForexUpdateController extends Controller
         $data = $request->validate([
             'signal_date' => 'required',
             'pair' => 'required',
-            'live_btn_url' => 'required', 
-            'order_type' => 'required|integer', 
-            'entry_price' => 'required|numeric',
+            // 'live_btn_url' => 'required',
+            'order_type' => 'required|integer',
+            // 'entry_price' => 'required|numeric',
             'stop_loss' => 'required|numeric',
-            'take_profit' => 'required|numeric', 
+            'take_profit' => 'required|numeric',
             'profit'    =>  'required|numeric',
             'take_profit'   =>  'required',
             'sort_order' => 'nullable|integer|min:0',
             'status' => 'required|in:0,1',
-            
-        ]); 
+
+        ]);
+
+        // Convert comma-separated string to JSON array
+        $data['take_profit'] = json_encode(
+            array_map('trim', explode(',', $request->take_profit))
+        );
+
 
         ForexUpdate::create($data);
 
@@ -81,15 +87,21 @@ class ForexUpdateController extends Controller
         $data = $request->validate([
             'signal_date' => 'required',
             'pair' => 'required',
-            'live_btn_url' => 'required',
+            // 'live_btn_url' => 'required',
             'order_type' => 'required',
-            'entry_price' => 'required|numeric',
+            // 'entry_price' => 'required|numeric',
             'stop_loss' => 'required|numeric',
             'take_profit' => 'required|numeric',
             'profit' => 'required|numeric',
             'sort_order' => 'nullable|integer|min:0',
             'status' => 'required|in:0,1',
         ]);
+
+        // Convert comma-separated string to JSON array
+        $data['take_profit'] = json_encode(
+            array_map('trim', explode(',', $request->take_profit))
+        );
+
 
         $plan->update($data);
 

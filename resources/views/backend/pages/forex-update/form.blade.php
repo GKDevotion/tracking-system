@@ -21,12 +21,12 @@
                         <div class="row g-3">
 
                             <div class="col-md-6">
-                                <label class="form-label">Signal Date <span class="text-danger">*</span></label> 
+                                <label class="form-label">Signal Date <span class="text-danger">*</span></label>
                                 <input type="date"
                                     name="signal_date"
                                     value="{{ old('signal_date', isset($plan) ? $plan->signal_date : '') }}"
                                     class="form-control @error('signal_date') is-invalid @enderror"
-                                    required> 
+                                    required>
                                 @error('signal_date')
                                     <div class="invalid-feedback">
                                         {{ $message }}
@@ -55,47 +55,48 @@
                                     <option value="1"
                                         {{ old('order_type', $plan->order_type ?? '') == '1' ? 'selected' : '' }}>Sell
                                     </option>
-                                </select> 
+                                </select>
                                 @error('order_type')
                                     <div class="invalid-feedback"> {{ $message }}</div>
                                 @enderror
                             </div>
- 
+
                             <div class="col-md-6">
-                                <label class="form-label">Entry Price <span class="text-danger">*</span></label>
+                                <label class="form-label">Entry Price <span class="text-danger"></span></label>
                                 <input type="number" step="0.0001" name="entry_price" value="{{ old('entry_price', $plan->entry_price) }}"
                                     class="form-control @error('entry_price') is-invalid @enderror" placeholder="Enter Your Entry Price"
-                                    required>
+                                    >
                                 @error('entry_price')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
-                            </div> 
+                            </div>
 
                             <div class="col-md-6">
                                 <label class="form-label">Stop Loss<span class="text-danger">*</span></label>
                                 <input type="number" step="0.0001" name="stop_loss" value="{{ old('stop_loss', $plan->stop_loss) }}"
-                                    class="form-control @error('stop_loss') is-invalid @enderror" placeholder="Enter Your Stop Loss"
-                                    required>
+                                    class="form-control @error('stop_loss') is-invalid @enderror" placeholder="Enter Your Stop Loss" required
+                                    >
                                 @error('stop_loss')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
-                            </div> 
+                            </div>
 
                             <div class="col-md-6">
                                 <label class="form-label">Take Profit<span class="text-danger">*</span></label>
                                 <input type="number" step="0.0001" name="take_profit" value="{{ old('take_profit', $plan->take_profit) }}"
-                                    class="form-control @error('take_profit') is-invalid @enderror" placeholder="Enter Your Take Profit"
-                                    required>
+                                    class="form-control @error('take_profit') is-invalid @enderror" placeholder="Enter Your Take Profit" required
+                                    >
+                                <small class="text-danger">(Comma Separated Values like: 1.00, 2.00, 3.00)</small>
                                 @error('take_profit')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
-                            
+
                             <div class="col-md-6">
-                                <label class="form-label">Profit<span class="text-danger">*</span></label>
+                                <label class="form-label">Profit<span class="text-danger"></span></label>
                                 <input type="number" step="0.0001" name="profit" value="{{ old('profit', $plan->profit) }}"
                                     class="form-control @error('profit') is-invalid @enderror" placeholder="Enter Your Profit"
-                                    required>
+                                    >
                                 @error('profit')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -125,13 +126,13 @@
 
                             {{-- Status --}}
                             <div class="col-md-6">
-                                <label class="form-label">Status</label> 
+                                <label class="form-label">Status</label>
                                 <select name="status" class="form-select @error('status') is-invalid @enderror">
-                                    <option value="1" {{ old('status', $plan->status ?? 1) == 1 ? 'selected' : '' }}> Active </option> 
+                                    <option value="1" {{ old('status', $plan->status ?? 1) == 1 ? 'selected' : '' }}> Active </option>
                                     <option value="0" {{ old('status', $plan->status ?? 1) == 0 ? 'selected' : '' }}> Inactive </option>
-                                </select> 
+                                </select>
                                 @error('status')<div class="invalid-feedback">{{ $message }}</div>@enderror
-                            </div> 
+                            </div>
 
                         </div>
 
