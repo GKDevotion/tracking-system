@@ -37,13 +37,12 @@ class ForexUpdateController extends Controller
         $data = $request->validate([
             'signal_date' => 'required',
             'pair' => 'required',
-            // 'live_btn_url' => 'required',
+            'live_btn_url' => 'required',
             'order_type' => 'required|integer',
-            // 'entry_price' => 'required|numeric',
+            'entry_price' => 'numeric',
             'stop_loss' => 'required|numeric',
-            'take_profit' => 'required|numeric',
+            'take_profit' => 'required',
             'profit'    =>  'required|numeric',
-            'take_profit'   =>  'required',
             'sort_order' => 'nullable|integer|min:0',
             'status' => 'required|in:0,1',
 
@@ -53,7 +52,6 @@ class ForexUpdateController extends Controller
         $data['take_profit'] = json_encode(
             array_map('trim', explode(',', $request->take_profit))
         );
-
 
         ForexUpdate::create($data);
 
@@ -87,11 +85,11 @@ class ForexUpdateController extends Controller
         $data = $request->validate([
             'signal_date' => 'required',
             'pair' => 'required',
-            // 'live_btn_url' => 'required',
+            'live_btn_url' => 'required',
             'order_type' => 'required',
-            // 'entry_price' => 'required|numeric',
+            'entry_price' => 'numeric',
             'stop_loss' => 'required|numeric',
-            'take_profit' => 'required|numeric',
+            'take_profit' => 'required',
             'profit' => 'required|numeric',
             'sort_order' => 'nullable|integer|min:0',
             'status' => 'required|in:0,1',
