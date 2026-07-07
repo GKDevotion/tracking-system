@@ -126,14 +126,13 @@ class HomeController extends Controller
                 $getLastSignal->post_id ?? null
             );
 
-            dd($messages);
             // $signals = scrapeTelegramSignals('Wealthoraofficial', $getLastSignal->post_id ?? null ); // today + yesterday
-            // return response()->json([
-            //     'status' => true,
-            //     'message' => 'Signals fetched successfully.',
-            //     'data' => $signals,
-            //     'total_signals' => count($signals)
-            // ]);
+            return response()->json([
+                'status' => true,
+                'message' => 'Signals fetched successfully.',
+                // 'data' => $signals,
+                'total_signals' => count($messages)
+            ]);
         } catch (Exception $e) {
             return response()->json([
                 'status' => false,
