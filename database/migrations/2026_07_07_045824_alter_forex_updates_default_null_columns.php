@@ -31,7 +31,7 @@ return new class extends Migration
             }
 
             if (!Schema::hasColumn('free_signals_updates', 'profit')) {
-                $table->integer('profit')->nullable()->default(null)->change();
+                $table->decimal('profit', 15, 4)->nullable()->default(null)->change();
             }
 
             if (!Schema::hasColumn('free_signals_updates', 'sort_order')) {
