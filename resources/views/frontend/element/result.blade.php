@@ -193,6 +193,7 @@
 
                         <tbody>
                                 @forelse($signals as $signal)
+                                {{dd($signal, $signal->live_btn_url)}}
                                     <tr class="{{ $signal->profit == 0 ? 'row-faded' : '' }}">
 
                                         {{-- Signal Date --}}
