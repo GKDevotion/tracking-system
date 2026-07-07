@@ -97,8 +97,11 @@ function scrapeTelegramSignals(string $channel, $afterId = null, int $maxPages =
                 $lowestIdOnPage = $msgId;
             }
 
-            $textNode = $xpath->query(".//div[contains(@class,'tgme_widget_message_text')]", $node)->item(0);
+            $textNode_0 = $xpath->query(".//div[contains(@class,'tgme_widget_message_text')]", $node)->item(0);
+            $textNode_1 = $xpath->query(".//div[contains(@class,'tgme_widget_message_text')]", $node)->item(1);
+
             $rawText = $textNode ? trim($textNode->textContent) : '';
+
             $text = preg_replace('/\s*\n\s*/', "\n", $rawText);
             $text = preg_replace('/[ \t]+/', ' ', $text);
 
@@ -110,11 +113,6 @@ function scrapeTelegramSignals(string $channel, $afterId = null, int $maxPages =
 
             $parsed['link'] = "https://t.me/{$postId}";
             $parsed['raw_text'] = $text;
-            // $parsed['raw_text'] = $msgId;
-
-            // if( $msgId == 346 ) {
-            //     dd( $node, $parsed, $afterId );
-            // }
 
             $results[] = $parsed;//"https://t.me/{$postId}";
         }
@@ -132,23 +130,12 @@ function parseSignal(string $text, string $postId, object $timeNode, int $msgId)
     if (preg_match('/(BUY|SELL)/i', $text, $stringMatch)) {
 
         $pairMatch = [];
-        if (preg_match('/([A-Z]{3})\/([A-Z]{3})/i', $text, $pairMatch)) {
+        if (preg_match('/^([A-Z]{3}\/[A-Z]{3}|[A-Z]{2,10}\d*)\b/i', trim($text), $pairMatch)) {
             // dd( "here", $pairMatch );
             $pairMatch = $pairMatch;
         }
 
-    // dd( $pairMatch, $stringMatch, $text, $postId, $timeNode, $msgId );
-
-        $live_btn_url = "https://t.me/{$postId}";
-        $pips = null;
-        $pair = strtoupper($pairMatch[0]);
-        $direction = strtoupper($stringMatch[0]);
-
         // Entry range, e.g. "Entry: 0.8642 – 0.8632" or "Entry: 114.55"
-        // preg_match('/Entry:\s*([\d.]+)\s*[-–]\s*([\d.]+)/i', $text, $entryMatch);
-        // dd( $msgId, $text, $entryMatch );
-        // $entryFrom = $entryMatch[1] ?? null;
-        // // $entryTo   = $entryMatch[2] ?? null;
         if (preg_match('/Entry:\s*([\d.]+)(?:\s*[-–]\s*([\d.]+))?/i', $text, $entryMatch)) {
 
             $entryPrices = array_filter([
@@ -156,106 +143,111 @@ function parseSignal(string $text, string $postId, object $timeNode, int $msgId)
                 $entryMatch[2] ?? null,
             ]);
 
-            // Example:
-            // ["0.8642", "0.8632"]
-            // or
-            // ["114.55"]
-        }
+            // dd( $text, $pairMatch, $entryPrices, $stringMatch );
 
-        dd( $entryMatch );
-        $entryFrom = $entryPrices[0] ?? null;
-        $entryTo   = $entryPrices[1] ?? null;
+            $live_btn_url = "https://t.me/{$postId}";
+            $pips = null;
+            $pair = strtoupper($pairMatch[0]);
+            $direction = strtoupper($stringMatch[0]);
 
+            $entryFrom = $entryPrices[0] ?? null;
+            // $entryTo   = $entryPrices[1] ?? null;
 
-        // SL
-        preg_match('/SL:\s*([\d.]+)/i', $text, $slMatch);
-        $sl = $slMatch[1] ?? null;
+            // SL
+            preg_match('/SL:\s*([\d.]+)/i', $text, $slMatch);
+            $sl = $slMatch[1] ?? null;
 
-        // TP1, TP2, TP3 (individually, order-agnostic)
-        preg_match('/TP1:\s*([\d.]+)/i', $text, $tp1Match);
-        preg_match('/TP2:\s*([\d.]+)/i', $text, $tp2Match);
-        preg_match('/TP3:\s*([\d.]+)/i', $text, $tp3Match);
+            // TP1, TP2, TP3 (individually, order-agnostic)
+            preg_match('/TP1:\s*([\d.]+)/i', $text, $tp1Match);
+            preg_match('/TP2:\s*([\d.]+)/i', $text, $tp2Match);
+            preg_match('/TP3:\s*([\d.]+)/i', $text, $tp3Match);
 
-        // Require at least entry or SL to consider this a real signal (filters out pure text updates)
-        if (!$entryFrom && !$sl) {
-            return null;
-        }
-
-        /**
-         * check old signal exist and hit profit or loss
-         */
-        $result_id = null;
-        $result_date = null;
-        $fetchOldData = false;
-        if (preg_match('/hit\s*:\s*([+-]?\d+(?:\.\d+)?)\s*pips/i', $text, $matches)) {// Hit Profit: +15 pips
-            $pips = $matches[1];
-            $fetchOldData = true;
-        } elseif (preg_match('/hit\s+tp\s*:\s*([+-]?\d+(?:\.\d+)?)\s*pips/i', $text, $matches)) {// Hit Loss: -10 pips
-            $pips = $matches[1];
-            $fetchOldData = true;
-        }
-
-        //get oparent signal id and date
-        if( $fetchOldData ) {
-
-            $oldSignal = ForexUpdate::where('live_btn_url', '!=', $live_btn_url)
-                ->where(
-                    [
-                        'pair' => $pair,
-                        'order_type' => ($direction == "SELL") ? 1 : 0,
-                        'status' => 1,
-                        'entry_price' => $entryFrom,
-                        'stop_loss' => $sl ?? 0,
-                    ]
-                )
-                ->whereJsonContains('take_profit', [$tp1Match[1] ?? null, $tp2Match[1] ?? null, $tp3Match[1] ?? null])
-                ->first();
-
-            if( $oldSignal ) {
-                $result_id = $oldSignal->id;
-                $result_date = Carbon::parse($timeNode->getAttribute('datetime'))->format('Y-m-d');
-                $live_btn_url = $oldSignal->live_btn_url ?? $live_btn_url;
+            // Require at least entry or SL to consider this a real signal (filters out pure text updates)
+            if (!$entryFrom && !$sl) {
+                return null;
             }
+
+            /**
+             * check old signal exist and hit profit or loss
+             */
+            $result_id = null;
+            $result_date = null;
+            $fetchOldData = false;
+            if (preg_match('/hit\s*:\s*([+-]?\d+(?:\.\d+)?)\s*pips/i', $text, $matches)) {// Hit Profit: +15 pips
+                dd( "HIT:", $text, $matches );
+                $pips = $matches[1];
+                $fetchOldData = true;
+            } elseif (preg_match('/hit\s+tp\s*:\s*([+-]?\d+(?:\.\d+)?)\s*pips/i', $text, $matches)) {// Hit Loss: -10 pips
+                dd( "HIT SL:", $text, $matches );
+                $pips = $matches[1];
+                $fetchOldData = true;
+            }
+
+            //get oparent signal id and date
+            if( $fetchOldData ) {
+
+                $oldSignal = ForexUpdate::where('live_btn_url', '!=', $live_btn_url)
+                    ->where(
+                        [
+                            'pair' => $pair,
+                            'order_type' => ($direction == "SELL") ? 1 : 0,
+                            'status' => 1,
+                            'entry_price' => $entryFrom,
+                            'stop_loss' => $sl ?? 0,
+                        ]
+                    )
+                    ->whereJsonContains('take_profit', [$tp1Match[1] ?? null, $tp2Match[1] ?? null, $tp3Match[1] ?? null])
+                    ->first();
+
+                if( $oldSignal ) {
+                    $result_id = $oldSignal->id;
+                    $result_date = Carbon::parse($timeNode->getAttribute('datetime'))->format('Y-m-d');
+                    $live_btn_url = $oldSignal->live_btn_url ?? $live_btn_url;
+                }
+            }
+
+            //store the parsed signal in the database
+            ForexUpdate::updateOrCreate(
+
+                // Check existing record by this column
+                [
+                    'live_btn_url' => $live_btn_url,
+                ],
+
+                // Values to insert/update
+                [
+                    'signal_date' => $timeNode ? Carbon::parse($timeNode->getAttribute('datetime'))->format('Y-m-d') : null,
+                    'pair' => $pair ?? null,
+                    'order_type' => ( $direction == "SELL" ) ? 1 : 0,
+                    'entry_price' => $entryFrom ?? 0,
+                    'stop_loss' => $sl ?? 0,
+                    'take_profit' => json_encode([
+                        $tp1Match[1] ?? null,
+                        $tp2Match[1] ?? null,
+                        $tp3Match[1] ?? null,
+                    ], 1),
+                    'profit' => $pips ?? null,
+                    'sort_order' => 0,
+                    'status' => 1,
+                    'post_id' => $msgId,
+                    'result_id' => $result_id,
+                    'result_date' => $result_date,
+                ]
+            );
+
+            return [
+                'pair'       => $pair,
+                'entry_from' => $entryFrom,
+                'sl'         => $sl,
+                'tp1'        => $tp1Match[1] ?? null,
+                'tp2'        => $tp2Match[1] ?? null,
+                'tp3'        => $tp3Match[1] ?? null,
+                'pips'       => $pips ?? null,
+            ];
         }
 
-        //store the parsed signal in the database
-        ForexUpdate::updateOrCreate(
+        return null; // not a signal message
 
-            // Check existing record by this column
-            [
-                'live_btn_url' => $live_btn_url,
-            ],
-
-            // Values to insert/update
-            [
-                'signal_date' => $timeNode ? Carbon::parse($timeNode->getAttribute('datetime'))->format('Y-m-d') : null,
-                'pair' => $pair ?? null,
-                'order_type' => ( $direction == "SELL" ) ? 1 : 0,
-                'entry_price' => $entryFrom ?? 0,
-                'stop_loss' => $sl ?? 0,
-                'take_profit' => json_encode([
-                    $tp1Match[1] ?? null,
-                    $tp2Match[1] ?? null,
-                    $tp3Match[1] ?? null,
-                ], 1),
-                'profit' => $pips ?? null,
-                'sort_order' => 0,
-                'status' => 1,
-                'post_id' => $msgId,
-                'result_id' => $result_id,
-                'result_date' => $result_date,
-            ]
-        );
-
-        return [
-            'pair'       => $pair,
-            'entry_from' => $entryFrom,
-            'sl'         => $sl,
-            'tp1'        => $tp1Match[1] ?? null,
-            'tp2'        => $tp2Match[1] ?? null,
-            'tp3'        => $tp3Match[1] ?? null,
-            'pips'       => $pips ?? null,
-        ];
         // return [
         //     'pair'       => $pair,
         //     'direction'  => $direction,

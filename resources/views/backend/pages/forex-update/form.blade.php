@@ -83,7 +83,7 @@
 
                             <div class="col-md-6">
                                 <label class="form-label">Take Profit<span class="text-danger">*</span></label>
-                                <input type="number" step="0.0001" name="take_profit" value="{{ old('take_profit', $plan->take_profit) }}"
+                                <input type="text" step="0.0001" name="take_profit" value="{{ old('take_profit', implode(",", json_decode( $plan->take_profit, true ) ) ) }}"
                                     class="form-control @error('take_profit') is-invalid @enderror" placeholder="Enter Your Take Profit" required
                                     >
                                 <small class="text-danger">(Comma Separated Values like: 1.00, 2.00, 3.00)</small>

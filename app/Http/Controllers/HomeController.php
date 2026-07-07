@@ -7,6 +7,7 @@ use App\Models\Categories;
 use App\Models\ForexUpdate;
 use App\Models\Plan;
 use App\Models\Tag;
+use App\Services\Telegram\TelegramScraper;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -116,18 +117,21 @@ class HomeController extends Controller
      */
     public function getSelectedChannelSignals(){
 
-    return true;
-
         $getLastSignal = ForexUpdate::orderBy('post_id', 'desc')->select('post_id')->first();
 
         try {
-            $signals = scrapeTelegramSignals('Wealthoraofficial', $getLastSignal->post_id ?? null ); // today + yesterday
-            return response()->json([
-                'status' => true,
-                'message' => 'Signals fetched successfully.',
-                'data' => $signals,
-                'total_signals' => count($signals)
-            ]);
+            $messages = TelegramScraper::scrape(
+                'Wealthoraofficial'
+            );
+
+            dd($messages);
+            // $signals = scrapeTelegramSignals('Wealthoraofficial', $getLastSignal->post_id ?? null ); // today + yesterday
+            // return response()->json([
+            //     'status' => true,
+            //     'message' => 'Signals fetched successfully.',
+            //     'data' => $signals,
+            //     'total_signals' => count($signals)
+            // ]);
         } catch (Exception $e) {
             return response()->json([
                 'status' => false,
