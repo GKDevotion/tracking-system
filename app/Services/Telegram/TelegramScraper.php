@@ -38,7 +38,36 @@ class TelegramScraper
                     ? $message['msg_id']
                     : min($lowestId, $message['msg_id']);
 
-                $results[] = $message;
+                // $signal = TelegramSignalParser::parseSignal($message['signal_text']);
+                // $result = TelegramSignalParser::parseResult($message['result_text']);
+
+                $signal = TelegramSignalParser::parseSignal(
+                    $message['signal_text']
+                );
+
+                if (!$signal) {
+                    continue;
+                }
+
+                $result = TelegramSignalParser::parseResult(
+                    $message['result_text']
+                );
+
+                TelegramSignalSaver::save(
+
+                    signal: $signal,
+
+                    result: $result,
+
+                    postId: $message['post_id'],
+
+                    msgId: $message['msg_id'],
+
+                    datetime: $message['datetime']
+
+                );
+
+                $results[] = $message['msg_id'];//$message;
             }
 
             if (!$lowestId) {
@@ -72,14 +101,11 @@ class TelegramScraper
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_TIMEOUT => 20,
-
             CURLOPT_USERAGENT =>
-                'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
-
+                'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36',
             CURLOPT_HTTPHEADER => [
                 'Accept-Language: en-US,en;q=0.9'
             ]
-
         ]);
 
         $html = curl_exec($ch);

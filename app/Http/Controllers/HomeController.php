@@ -86,7 +86,7 @@ class HomeController extends Controller
             ->orderBy('signal_date', 'DESC')
             ->latest()
             ->limit(15)
-            ->get(); 
+            ->get();
 
         return view('frontend.index', compact('planArr', 'blogs', 'recentBlogs', 'signals', 'categories', 'popularTags'));
     }
@@ -122,7 +122,8 @@ class HomeController extends Controller
 
         try {
             $messages = TelegramScraper::scrape(
-                'Wealthoraofficial'
+                'Wealthoraofficial',
+                $getLastSignal->post_id ?? null
             );
 
             dd($messages);
