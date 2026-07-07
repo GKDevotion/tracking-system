@@ -653,9 +653,9 @@
             <!-- Daily / Weekly / Monthly toggle -->
             <div class="text-center mb-5">
                 <div class="btn-group toggle-group gap-3" role="group">
-                    <button type="button" class="btn d-none">Daily</button>
-                    <button type="button" class="btn active">Weekly</button>
-                    <button type="button" class="btn">Monthly</button>
+                    <button type="button" class="btn d-none"  data-type="daily">Daily</button>
+                    <button type="button" class="btn active"  data-type="weekly">Weekly</button>
+                    <button type="button" class="btn"  data-type="monthly">Monthly</button>
                 </div>
             </div>
 
@@ -743,124 +743,279 @@
 
             </div> --}}
 
-            <div class="row g-3 mb-4">
+            <div id="weeklyCards">
+                <div class="row g-3 mb-4">
 
-                    <!-- Win Rate -->
-                    @if (getConfigurationField('WIN_RATE') && getConfigurationField('WIN_RATE') != '-')
-                        <div class="col-6 col-lg-3">
-                            <div class="stat-card">
-                                <div class="stat-icon icon-red">
-                                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-                                        <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/>
-                                        <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2"/>
-                                        <circle cx="12" cy="12" r="1" fill="currentColor"/>
-                                    </svg>
-                                </div>
-
-                                <div class="stat-text">
-                                    <div class="stat-value">
-                                        {!! (int) getConfigurationField('WIN_RATE') !!}%
+                        <!-- Win Rate -->
+                        @if (getConfigurationField('WEEKLY_WIN_RATE') && getConfigurationField('WEEKLY_WIN_RATE') != '-')
+                            <div class="col-6 col-lg-3">
+                                <div class="stat-card">
+                                    <div class="stat-icon icon-red">
+                                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                                            <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/>
+                                            <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2"/>
+                                            <circle cx="12" cy="12" r="1" fill="currentColor"/>
+                                        </svg>
                                     </div>
 
-                                    <div class="stat-label">
-                                        {!! getConfigurationDisplayName('WIN_RATE') !!}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    @endif
+                                    <div class="stat-text">
+                                        <div class="stat-value">
+                                            {!! getConfigurationField('WEEKLY_WIN_RATE') !!}%
+                                        </div>
 
-                    <!-- Net Pips -->
-                    @if (getConfigurationField('NET_PIPS') && getConfigurationField('NET_PIPS') != '-')
-                        <div class="col-6 col-lg-3">
-                            <div class="stat-card">
-                                <div class="stat-icon icon-green">
-                                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-                                        <path d="M3 17L9 11L13 15L21 7"
-                                            stroke="currentColor"
-                                            stroke-width="2"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"/>
-                                        <path d="M15 7H21V13"
-                                            stroke="currentColor"
-                                            stroke-width="2"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"/>
-                                    </svg>
-                                </div>
-
-                                <div class="stat-text">
-                                    <div class="stat-value text-success"> 
-                                        +{!! (int) getConfigurationField('NET_PIPS') !!}
-                                    </div>
-
-                                    <div class="stat-label">
-                                        {!! getConfigurationDisplayName('NET_PIPS') !!}
+                                        <div class="stat-label">
+                                            {!! getConfigurationDisplayName('WEEKLY_WIN_RATE') !!}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    @endif
+                        @endif
 
-                    <!-- Total Trades -->
-                    @if (getConfigurationField('TOTAL_TRADES') && getConfigurationField('TOTAL_TRADES') != '-')
-                        <div class="col-6 col-lg-3">
-                            <div class="stat-card">
-                                <div class="stat-icon icon-red">
-                                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-                                        <rect x="4" y="12" width="3" height="8" fill="currentColor"/>
-                                        <rect x="10.5" y="8" width="3" height="12" fill="currentColor"/>
-                                        <rect x="17" y="4" width="3" height="16" fill="currentColor"/>
-                                    </svg>
-                                </div>
-
-                                <div class="stat-text">
-                                    <div class="stat-value">
-                                        {!! (int) getConfigurationField('TOTAL_TRADES') !!}
-                                        <small style="font-size:16px;color:#777;">{!! getConfigurationDisplayName('TOTAL_TRADES') !!}</small>
+                        <!-- Net Pips -->
+                        @if (getConfigurationField('WEEKLY_NET_PIPS') && getConfigurationField('WEEKLY_NET_PIPS') != '-')
+                            <div class="col-6 col-lg-3">
+                                <div class="stat-card">
+                                    <div class="stat-icon icon-green">
+                                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                                            <path d="M3 17L9 11L13 15L21 7"
+                                                stroke="currentColor"
+                                                stroke-width="2"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"/>
+                                            <path d="M15 7H21V13"
+                                                stroke="currentColor"
+                                                stroke-width="2"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"/>
+                                        </svg>
                                     </div>
 
-                                    <div class="stat-label">
-                                        <span style="color:var(--green);">
-                                            {!! (int) getConfigurationField('WIN_TRADES') !!} <span>{!! getConfigurationDisplayName('WIN_TRADES') !!}</span>,
-                                        </span>
+                                    <div class="stat-text">
+                                        <div class="stat-value text-success"> 
+                                            +{!! getConfigurationField('WEEKLY_NET_PIPS') !!}
+                                        </div>
 
-                                        <span style="color:var(--red);">
-                                            {!! (int) getConfigurationField('LOSS_TRADES') !!} <span>{!! getConfigurationDisplayName('LOSS_TRADES') !!}</span>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    @endif
-
-                    <!-- RR Ratio -->
-                    @if (getConfigurationField('RR_RATIO') && getConfigurationField('RR_RATIO') != '-')
-                        <div class="col-6 col-lg-3">
-                            <div class="stat-card">
-                                <div class="stat-icon icon-green">
-                                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-                                        <path d="M12 3V21" stroke="currentColor" stroke-width="2"/>
-                                        <path d="M5 7H19" stroke="currentColor" stroke-width="2"/>
-                                        <circle cx="6" cy="10" r="3" stroke="currentColor" stroke-width="2"/>
-                                        <circle cx="18" cy="10" r="3" stroke="currentColor" stroke-width="2"/>
-                                    </svg>
-                                </div>
-
-                                <div class="stat-text">
-                                    <div class="stat-value">
-                                        {!! getConfigurationField('RR_RATIO') !!}
-                                    </div>
-
-                                    <div class="stat-label">
-                                        R:R Ratio
+                                        <div class="stat-label">
+                                            {!! getConfigurationDisplayName('WEEKLY_NET_PIPS') !!}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    @endif
+                        @endif
 
+                        <!-- Total Trades -->
+                        @if (getConfigurationField('WEEKLY_TOTAL_TRADES') && getConfigurationField('WEEKLY_TOTAL_TRADES') != '-')
+                            <div class="col-6 col-lg-3">
+                                <div class="stat-card">
+                                    <div class="stat-icon icon-red">
+                                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                                            <rect x="4" y="12" width="3" height="8" fill="currentColor"/>
+                                            <rect x="10.5" y="8" width="3" height="12" fill="currentColor"/>
+                                            <rect x="17" y="4" width="3" height="16" fill="currentColor"/>
+                                        </svg>
+                                    </div>
+
+                                    <div class="stat-text">
+                                        <div class="stat-value">
+                                            {!! getConfigurationField('WEEKLY_TOTAL_TRADES') !!}
+                                            <small style="font-size:16px;color:#777;">{!! getConfigurationDisplayName('WEEKLY_TOTAL_TRADES') !!}</small>
+                                        </div>
+
+                                        <div class="stat-label">
+                                            <span style="color:var(--green);">
+                                                {!! getConfigurationField('WEEKLY_WIN_TRADES') !!} <span>{!! getConfigurationDisplayName('WEEKLY_WIN_TRADES') !!}</span>,
+                                            </span>
+
+                                            <span style="color:var(--red);">
+                                                {!! getConfigurationField('WEEKLY_LOSS_TRADES') !!} <span>{!! getConfigurationDisplayName('WEEKLY_LOSS_TRADES') !!}</span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
+
+                        <!-- RR Ratio -->
+                        @if (getConfigurationField('WEEKLY_RR_RATIO') && getConfigurationField('WEEKLY_RR_RATIO') != '-')
+                            <div class="col-6 col-lg-3">
+                                <div class="stat-card">
+                                    <div class="stat-icon icon-green">
+                                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                                            <path d="M12 3V21" stroke="currentColor" stroke-width="2"/>
+                                            <path d="M5 7H19" stroke="currentColor" stroke-width="2"/>
+                                            <circle cx="6" cy="10" r="3" stroke="currentColor" stroke-width="2"/>
+                                            <circle cx="18" cy="10" r="3" stroke="currentColor" stroke-width="2"/>
+                                        </svg>
+                                    </div>
+
+                                    <div class="stat-text">
+                                        <div class="stat-value">
+                                            {!! getConfigurationField('WEEKLY_RR_RATIO') !!}
+                                        </div>
+
+                                        <div class="stat-label">
+                                            {!! getConfigurationDisplayName('WEEKLY_RR_RATIO') !!}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
+
+                </div>
             </div>
+
+            <div id="monthlyCards" style="display:none;">
+                <div class="row g-3 mb-4">
+
+                        <!-- Win Rate -->
+                        @if (getConfigurationField('MONTHLY_WIN_RATE') && getConfigurationField('MONTHLY_WIN_RATE') != '-')
+                            <div class="col-6 col-lg-3">
+                                <div class="stat-card">
+                                    <div class="stat-icon icon-red">
+                                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                                            <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/>
+                                            <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2"/>
+                                            <circle cx="12" cy="12" r="1" fill="currentColor"/>
+                                        </svg>
+                                    </div>
+
+                                    <div class="stat-text">
+                                        <div class="stat-value">
+                                            {!! getConfigurationField('MONTHLY_WIN_RATE') !!}%
+                                        </div>
+
+                                        <div class="stat-label">
+                                            {!! getConfigurationDisplayName('MONTHLY_WIN_RATE') !!}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
+
+                        <!-- Net Pips -->
+                        @if (getConfigurationField('MONTHLY_NET_PIPS') && getConfigurationField('MONTHLY_NET_PIPS') != '-')
+                            <div class="col-6 col-lg-3">
+                                <div class="stat-card">
+                                    <div class="stat-icon icon-green">
+                                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                                            <path d="M3 17L9 11L13 15L21 7"
+                                                stroke="currentColor"
+                                                stroke-width="2"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"/>
+                                            <path d="M15 7H21V13"
+                                                stroke="currentColor"
+                                                stroke-width="2"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"/>
+                                        </svg>
+                                    </div>
+
+                                    <div class="stat-text">
+                                        <div class="stat-value text-success"> 
+                                            +{!! getConfigurationField('MONTHLY_NET_PIPS') !!}
+                                        </div>
+
+                                        <div class="stat-label">
+                                            {!! getConfigurationDisplayName('MONTHLY_NET_PIPS') !!}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
+
+                        <!-- Total Trades -->
+                        @if (getConfigurationField('MONTHLY_TOTAL_TRADES') && getConfigurationField('MONTHLY_TOTAL_TRADES') != '-')
+                            <div class="col-6 col-lg-3">
+                                <div class="stat-card">
+                                    <div class="stat-icon icon-red">
+                                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                                            <rect x="4" y="12" width="3" height="8" fill="currentColor"/>
+                                            <rect x="10.5" y="8" width="3" height="12" fill="currentColor"/>
+                                            <rect x="17" y="4" width="3" height="16" fill="currentColor"/>
+                                        </svg>
+                                    </div>
+
+                                    <div class="stat-text">
+                                        <div class="stat-value">
+                                            {!! getConfigurationField('MONTHLY_TOTAL_TRADES') !!}
+                                            <small style="font-size:16px;color:#777;">{!! getConfigurationDisplayName('MONTHLY_TOTAL_TRADES') !!}</small>
+                                        </div>
+
+                                        <div class="stat-label">
+                                            <span style="color:var(--green);">
+                                                {!! getConfigurationField('MONTHLY_WIN_TRADES') !!} <span>{!! getConfigurationDisplayName('MONTHLY_WIN_TRADES') !!}</span>,
+                                            </span>
+
+                                            <span style="color:var(--red);">
+                                                {!! getConfigurationField('MONTHLY_LOSS_TRADES') !!} <span>{!! getConfigurationDisplayName('MONTHLY_LOSS_TRADES') !!}</span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
+
+                        <!-- RR Ratio -->
+                        @if (getConfigurationField('MONTHLY_RR_RATIO') && getConfigurationField('MONTHLY_RR_RATIO') != '-')
+                            <div class="col-6 col-lg-3">
+                                <div class="stat-card">
+                                    <div class="stat-icon icon-green">
+                                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                                            <path d="M12 3V21" stroke="currentColor" stroke-width="2"/>
+                                            <path d="M5 7H19" stroke="currentColor" stroke-width="2"/>
+                                            <circle cx="6" cy="10" r="3" stroke="currentColor" stroke-width="2"/>
+                                            <circle cx="18" cy="10" r="3" stroke="currentColor" stroke-width="2"/>
+                                        </svg>
+                                    </div>
+
+                                    <div class="stat-text">
+                                        <div class="stat-value">
+                                            {!! getConfigurationField('MONTHLY_RR_RATIO') !!}
+                                        </div>
+
+                                        <div class="stat-label">
+                                            {!! getConfigurationDisplayName('MONTHLY_RR_RATIO') !!}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
+
+                </div>
+            </div>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+
+                const buttons = document.querySelectorAll(".toggle-group .btn");
+
+                buttons.forEach(function(btn){
+
+                    btn.addEventListener("click", function(){
+
+                        buttons.forEach(function(b){
+                            b.classList.remove("active");
+                        });
+
+                        this.classList.add("active");
+
+                        if(this.dataset.type === "weekly"){
+                            document.getElementById("weeklyCards").style.display = "block";
+                            document.getElementById("monthlyCards").style.display = "none";
+                        }
+
+                        if(this.dataset.type === "monthly"){
+                            document.getElementById("weeklyCards").style.display = "none";
+                            document.getElementById("monthlyCards").style.display = "block";
+                        }
+
+                    });
+
+                });
+
+            });
+        </script>
 
             @include('frontend.element.result')
             
