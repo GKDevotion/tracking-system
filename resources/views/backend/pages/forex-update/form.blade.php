@@ -83,7 +83,7 @@
 
                             <div class="col-md-6">
                                 <label class="form-label">Take Profit<span class="text-danger">*</span></label>
-                                @if ($plan->take_profit)
+                                @if ( isset( $plan->take_profit ) && !empty( $plan->take_profit ) )
                                     <input type="text" step="0.0001" name="take_profit" value="{{ old('take_profit', implode(",", json_decode( $plan->take_profit, true ) ) ) }}"
                                     class="form-control @error('take_profit') is-invalid @enderror" placeholder="Enter Your Take Profit" required>
                                 @else
