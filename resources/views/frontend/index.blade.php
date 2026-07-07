@@ -660,7 +660,9 @@
             </div>
 
             <!-- Stats grid -->
-            <div class="row g-3 mb-4">
+            
+            {{-- <div class="row g-3 mb-4 d-none">
+
                 <div class="col-6 col-lg-3">
                     <div class="stat-card">
                         <div class="stat-icon icon-red">
@@ -671,12 +673,13 @@
                             </svg>
                         </div>
                         <div class="stat-text">
-                            <div class="stat-value" style="">88%</div>
+                            <div class="stat-value" style="">89%</div>
                             <div class="stat-label">Win Rate</div>
                             <div class="stat-sub d-none">Winning Accuracy</div>
                         </div>
                     </div>
                 </div>
+
                 <div class="col-6 col-lg-3">
                     <div class="stat-card">
                         <div class="stat-icon icon-green">
@@ -688,12 +691,13 @@
                             </svg>
                         </div>
                         <div class="stat-text">
-                            <div class="stat-value" style="color:var(--green)">+4068</div>
+                            <div class="stat-value" style="color:var(--green)"> +7711</div>
                             <div class="stat-label">Net Pips</div>
                             <div class="stat-sub d-none">Total Profit</div>
                         </div>
                     </div>
                 </div>
+
                 <div class="col-6 col-lg-3">
                     <div class="stat-card">
                         <div class="stat-icon icon-red">
@@ -705,17 +709,18 @@
                         </div>
                         <div class="stat-text">
                             <div class="stat-value">
-                                <span>16 <small style="font-size: 16px; color: gray;">Trade</small></span><br>
+                                <span>36 <small style="font-size: 16px; color: gray;">Trade</small></span><br>
 
                             </div>
                             <div class="stat-label">
-                                <span style="color:var(--green); font-size: 16px; font-weight: 500;">14 win, </span>
-                                <span style="color:var(--red); font-size: 16px; font-weight: 500;">2 loss</span>
+                                <span style="color:var(--green); font-size: 16px; font-weight: 500;">32 win, </span>
+                                <span style="color:var(--red); font-size: 16px; font-weight: 500;">4 loss</span>
                             </div>
                             <div class="stat-sub d-none">Total Executed</div>
                         </div>
                     </div>
                 </div>
+
                 <div class="col-6 col-lg-3">
                     <div class="stat-card">
                         <div class="stat-icon icon-green">
@@ -735,9 +740,130 @@
                         </div>
                     </div>
                 </div>
+
+            </div> --}}
+
+            <div class="row g-3 mb-4">
+
+                    <!-- Win Rate -->
+                    @if (getConfigurationField('WIN_RATE') && getConfigurationField('WIN_RATE') != '-')
+                        <div class="col-6 col-lg-3">
+                            <div class="stat-card">
+                                <div class="stat-icon icon-red">
+                                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                                        <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/>
+                                        <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2"/>
+                                        <circle cx="12" cy="12" r="1" fill="currentColor"/>
+                                    </svg>
+                                </div>
+
+                                <div class="stat-text">
+                                    <div class="stat-value">
+                                        {!! (int) getConfigurationField('WIN_RATE') !!}%
+                                    </div>
+
+                                    <div class="stat-label">
+                                        {!! getConfigurationDisplayName('WIN_RATE') !!}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+
+                    <!-- Net Pips -->
+                    @if (getConfigurationField('NET_PIPS') && getConfigurationField('NET_PIPS') != '-')
+                        <div class="col-6 col-lg-3">
+                            <div class="stat-card">
+                                <div class="stat-icon icon-green">
+                                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                                        <path d="M3 17L9 11L13 15L21 7"
+                                            stroke="currentColor"
+                                            stroke-width="2"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"/>
+                                        <path d="M15 7H21V13"
+                                            stroke="currentColor"
+                                            stroke-width="2"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"/>
+                                    </svg>
+                                </div>
+
+                                <div class="stat-text">
+                                    <div class="stat-value text-success"> 
+                                        +{!! (int) getConfigurationField('NET_PIPS') !!}
+                                    </div>
+
+                                    <div class="stat-label">
+                                        {!! getConfigurationDisplayName('NET_PIPS') !!}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+
+                    <!-- Total Trades -->
+                    @if (getConfigurationField('TOTAL_TRADES') && getConfigurationField('TOTAL_TRADES') != '-')
+                        <div class="col-6 col-lg-3">
+                            <div class="stat-card">
+                                <div class="stat-icon icon-red">
+                                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                                        <rect x="4" y="12" width="3" height="8" fill="currentColor"/>
+                                        <rect x="10.5" y="8" width="3" height="12" fill="currentColor"/>
+                                        <rect x="17" y="4" width="3" height="16" fill="currentColor"/>
+                                    </svg>
+                                </div>
+
+                                <div class="stat-text">
+                                    <div class="stat-value">
+                                        {!! (int) getConfigurationField('TOTAL_TRADES') !!}
+                                        <small style="font-size:16px;color:#777;">{!! getConfigurationDisplayName('TOTAL_TRADES') !!}</small>
+                                    </div>
+
+                                    <div class="stat-label">
+                                        <span style="color:var(--green);">
+                                            {!! (int) getConfigurationField('WIN_TRADES') !!} <span>{!! getConfigurationDisplayName('WIN_TRADES') !!}</span>,
+                                        </span>
+
+                                        <span style="color:var(--red);">
+                                            {!! (int) getConfigurationField('LOSS_TRADES') !!} <span>{!! getConfigurationDisplayName('LOSS_TRADES') !!}</span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+
+                    <!-- RR Ratio -->
+                    @if (getConfigurationField('RR_RATIO') && getConfigurationField('RR_RATIO') != '-')
+                        <div class="col-6 col-lg-3">
+                            <div class="stat-card">
+                                <div class="stat-icon icon-green">
+                                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                                        <path d="M12 3V21" stroke="currentColor" stroke-width="2"/>
+                                        <path d="M5 7H19" stroke="currentColor" stroke-width="2"/>
+                                        <circle cx="6" cy="10" r="3" stroke="currentColor" stroke-width="2"/>
+                                        <circle cx="18" cy="10" r="3" stroke="currentColor" stroke-width="2"/>
+                                    </svg>
+                                </div>
+
+                                <div class="stat-text">
+                                    <div class="stat-value">
+                                        {!! getConfigurationField('RR_RATIO') !!}
+                                    </div>
+
+                                    <div class="stat-label">
+                                        R:R Ratio
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+
             </div>
 
             @include('frontend.element.result')
+            
         </div>
     </section>
 
@@ -1142,10 +1268,10 @@
                                 <div class="member-info-counter-item">
                                     <h2>
                                         <span class="counter">
-                                            {{ (int) getConfigurationField('YEAR_OF_EXPERIENCE') }}
+                                            {!! getConfigurationField('YEAR_OF_EXPERIENCE') !!}
                                         </span>+
                                     </h2>
-                                    <p>{{ getConfigurationDisplayName('YEAR_OF_EXPERIENCE') }}</p>
+                                    <p>{!! getConfigurationDisplayName('YEAR_OF_EXPERIENCE') !!}</p>
                                 </div>
                             @endif
                             <!-- Member Info Counter Item End -->
@@ -1155,7 +1281,7 @@
                                 <div class="member-info-counter-item">
                                     <h2>
                                         <span class="counter">
-                                            {!! (int) getConfigurationField('SIGNAL_ACCURACY') !!}
+                                            {!! getConfigurationField('SIGNAL_ACCURACY') !!}
                                         </span>%
                                     </h2>
                                     <p>{!! getConfigurationDisplayName('SIGNAL_ACCURACY') !!}</p>
@@ -1168,7 +1294,7 @@
                                 <div class="member-info-counter-item">
                                     <h2>
                                         <span class="counter">
-                                            {!! (int) getConfigurationField('PIPS_MONTHLY') !!}
+                                            {!! getConfigurationField('PIPS_MONTHLY') !!}
                                         </span>+
                                     </h2>
                                     <p>{!! getConfigurationDisplayName('PIPS_MONTHLY') !!}</p>
@@ -1181,7 +1307,7 @@
                                 <div class="member-info-counter-item">
                                     <h2>
                                         <span class="counter">
-                                            {!! (int) getConfigurationField('COUNTRIES') !!}
+                                            {!! getConfigurationField('COUNTRIES') !!}
                                         </span>
                                         +
                                     </h2>
@@ -1207,6 +1333,7 @@
 
                     <!-- Team Skills List Start -->
                     <div class="member-skills-list">
+                        
                         @if (getConfigurationField('HUMAN_HYBRID_ANALYSIS') && getConfigurationField('HUMAN_HYBRID_ANALYSIS') != '-')
                             <div class="skills-progress-bar">
                                 <div class="skillbar" data-percent="95%">

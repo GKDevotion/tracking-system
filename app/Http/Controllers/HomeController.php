@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Blog;
 use App\Models\Categories;
+use App\Models\Configuration;
 use App\Models\ForexUpdate;
 use App\Models\Plan;
 use App\Models\Tag;
@@ -85,7 +86,7 @@ class HomeController extends Controller
             ->orderBy('signal_date', 'DESC')
             ->latest()
             ->limit(15)
-            ->get();
+            ->get(); 
 
         return view('frontend.index', compact('planArr', 'blogs', 'recentBlogs', 'signals', 'categories', 'popularTags'));
     }
