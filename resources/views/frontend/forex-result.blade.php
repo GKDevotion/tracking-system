@@ -237,8 +237,12 @@
                                         </td>
 
                                         {{-- Profit --}}
-                                        <td class="{{ $signal->profit > 0 ? 'c-profit' : ($signal->profit < 0 ? 'c-loss' : 'c-zero') }}">
-                                            {{ $signal->profit }}
+                                       <td class=" {{ $signal->profit > 0 ? 'c-profit' : ($signal->profit < 0 ? 'c-loss' : 'c-zero') }}">
+                                            @if ( $signal->profit)
+                                                {{ $signal->profit }}
+                                            @else
+                                                <span style="color:var(--green);font-size: 1.4rem;">Running</span>
+                                            @endif
                                         </td>
 
                                         {{-- Live Proof Button --}}
