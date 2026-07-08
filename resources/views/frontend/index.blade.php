@@ -548,7 +548,7 @@
                 font-weight: 700;
                 font-size: .95rem;
                 margin-top: 2px;
-                color: ##665b5b;
+                color: #665b5b;
             }
 
             .stat-sub {
