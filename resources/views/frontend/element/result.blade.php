@@ -52,13 +52,13 @@
                     .sig-table tbody tr:hover .btn-live {
                         background: #000;
                         /* box-shadow: 0 0 10px rgba(204, 46, 46, 0.6); */
-                        /* color: #fff !important; */
+                        color: #fff !important;
                         transform: scale(1.06);
                     }
 
-                    .sig-table tbody tr:hover .btn-live a {
+                    /* .sig-table tbody tr:hover .btn-live a {
                         color: #fff !important;
-                    }
+                    } */
 
                     /* Cells */
                     .sig-table tbody td {

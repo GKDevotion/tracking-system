@@ -71,11 +71,11 @@
                     z-index: 3;
                     }
                     .sig-table tbody tr:hover .btn-live {
-                    background: #000;
-                    /* var(--logo-color); */
-                    box-shadow: 0 0 16px rgba(46,204,143,0.6);
-                    color: #fff;
-                    transform: scale(1.06);
+                        background: #000;
+                        /* var(--logo-color); */
+                        box-shadow: 0 0 16px rgba(46,204,143,0.6);
+                        color: #fff;
+                        transform: scale(1.06);
                     }
 
                     /* Cells */
@@ -139,19 +139,19 @@
 
                     /* Live Proof button */
                     .btn-live {
-                    display: inline-block;
-                    padding: 6px 16px;
-                    background: #000;
-                    color: #fff;
-                    border: none;
-                    border-radius: 5px;
-                    font-weight: 700;
-                    font-size: 0.72rem;
-                    letter-spacing: 0.1em;
-                    text-transform: uppercase;
-                    cursor: pointer;
-                    transition: background 0.18s ease, box-shadow 0.18s ease, transform 0.14s ease;
-                    white-space: nowrap;
+                        display: inline-block;
+                        padding: 6px 16px;
+                        background: #000;
+                        color: #fff;
+                        border: none;
+                        border-radius: 5px;
+                        font-weight: 700;
+                        font-size: 0.72rem;
+                        letter-spacing: 0.1em;
+                        text-transform: uppercase;
+                        cursor: pointer;
+                        transition: background 0.18s ease, box-shadow 0.18s ease, transform 0.14s ease;
+                        white-space: nowrap;
                     }
 
                     /* Row entrance animation */
