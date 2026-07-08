@@ -821,7 +821,7 @@
                                             <small style="font-size:16px;color:#777;">{!! getConfigurationDisplayName('WEEKLY_TOTAL_TRADES') !!}</small>
                                         </div>
 
-                                        <div class="stat-label">
+                                        <div class="stat-label" style="font-weight: 400">
                                             <span style="color:var(--green);">
                                                 {!! getConfigurationField('WEEKLY_WIN_TRADES') !!} <span>{!! getConfigurationDisplayName('WEEKLY_WIN_TRADES') !!}</span>,
                                             </span>
