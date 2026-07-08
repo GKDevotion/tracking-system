@@ -35,4 +35,7 @@ return [
         ],
     ],
 
+    'mt5'=>[
+        'token'=>env('MT5_API_TOKEN')
+    ],
 ];

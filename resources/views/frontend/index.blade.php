@@ -660,7 +660,7 @@
             </div>
 
             <!-- Stats grid -->
-            
+
             {{-- <div class="row g-3 mb-4 d-none">
 
                 <div class="col-6 col-lg-3">
@@ -791,7 +791,7 @@
                                     </div>
 
                                     <div class="stat-text">
-                                        <div class="stat-value text-success"> 
+                                        <div class="stat-value text-success">
                                             +{!! getConfigurationField('WEEKLY_NET_PIPS') !!}
                                         </div>
 
@@ -912,7 +912,7 @@
                                     </div>
 
                                     <div class="stat-text">
-                                        <div class="stat-value text-success"> 
+                                        <div class="stat-value text-success">
                                             +{!! getConfigurationField('MONTHLY_NET_PIPS') !!}
                                         </div>
 
@@ -942,7 +942,7 @@
                                             <small style="font-size:16px;color:#777;">{!! getConfigurationDisplayName('MONTHLY_TOTAL_TRADES') !!}</small>
                                         </div>
 
-                                        <div class="stat-label">
+                                        <div class="stat-label" style="font-weight: 400">
                                             <span style="color:var(--green);">
                                                 {!! getConfigurationField('MONTHLY_WIN_TRADES') !!} <span>{!! getConfigurationDisplayName('MONTHLY_WIN_TRADES') !!}</span>,
                                             </span>
@@ -1018,7 +1018,7 @@
         </script>
 
             @include('frontend.element.result')
-            
+
         </div>
     </section>
 
@@ -1488,7 +1488,7 @@
 
                     <!-- Team Skills List Start -->
                     <div class="member-skills-list">
-                        
+
                         @if (getConfigurationField('HUMAN_HYBRID_ANALYSIS') && getConfigurationField('HUMAN_HYBRID_ANALYSIS') != '-')
                             <div class="skills-progress-bar">
                                 <div class="skillbar" data-percent="95%">

@@ -7,6 +7,7 @@ use App\Http\Controllers\API\BusinessMail\MailLogController;
 use App\Http\Controllers\API\BusinessMail\MailTemplateController;
 use App\Http\Controllers\API\DashboardController;
 use App\Http\Controllers\API\MenuController;
+use App\Http\Controllers\API\MT5Controller;
 use App\Http\Controllers\API\PermissionController;
 use App\Http\Controllers\API\RoleController;
 use App\Http\Controllers\API\TrackingController;
@@ -82,3 +83,13 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 
 });
+
+Route::prefix('mt5')
+    ->middleware('mt5.auth')
+    ->group(function () {
+
+        Route::get('/signals', [MT5Controller::class, 'signals']);
+        Route::post('/executed', [MT5Controller::class, 'executed']);
+        Route::post('/closed', [MT5Controller::class, 'closed']);
+
+    });
