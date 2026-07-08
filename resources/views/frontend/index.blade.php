@@ -745,7 +745,7 @@
             </div> --}}
 
             <style>
-                #weeklyCards{
+                .cards-block {
                     box-shadow: 2px 1px 10px rgba(0, 0, 0, 0.18);
                     padding: 0 10px 15px;
                     border-radius: 15px;
@@ -753,7 +753,7 @@
             </style>
 
             <div id="weeklyCards">
-                <div class="row g-3 mb-4">
+                <div class="row g-3 mb-4 cards-block">
 
                         <!-- Win Rate -->
                         @if (getConfigurationField('WEEKLY_WIN_RATE') && getConfigurationField('WEEKLY_WIN_RATE') != '-')
@@ -874,7 +874,7 @@
             </div>
 
             <div id="monthlyCards" style="display:none;">
-                <div class="row g-3 mb-4">
+                <div class="row g-3 mb-4 cards-block">
 
                         <!-- Win Rate -->
                         @if (getConfigurationField('MONTHLY_WIN_RATE') && getConfigurationField('MONTHLY_WIN_RATE') != '-')
