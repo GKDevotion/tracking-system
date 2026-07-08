@@ -747,7 +747,7 @@
             <style>
                 .cards-block {
                     box-shadow: 2px 1px 10px rgba(0, 0, 0, 0.18);
-                    padding: 0 10px 15px;
+                    padding: 20px;
                     border-radius: 15px;
                 }
             </style>
