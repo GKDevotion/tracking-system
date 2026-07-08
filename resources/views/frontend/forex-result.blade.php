@@ -201,7 +201,7 @@
 
                         <tbody>
                                 @forelse($signals as $signal)
-                                    <tr class="{{ $signal->profit == 0 ? 'row-faded' : '' }}">
+                                    <tr class="{{ $signal->profit == 0 ? 'row-faded' : '' }} redirect-tg-channel" data-link-url="{{ $signal->live_btn_url }}">
 
                                         {{-- Signal Date --}}
                                         <td class="c-date">
@@ -248,7 +248,7 @@
                                         {{-- Live Proof Button --}}
                                         <td>
                                             <button class="btn-live">
-                                                <a href="{{ $signal->live_btn_url }}" style="color: #fff; text-decoration: none">LIVE PROOF</a>
+                                                LIVE PROOF
                                             </button>
                                         </td>
 

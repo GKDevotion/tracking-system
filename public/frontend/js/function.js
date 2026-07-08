@@ -1,15 +1,15 @@
 (function ($) {
     "use strict";
-	
-	var $window = $(window); 
-	var $body = $('body'); 
+
+	var $window = $(window);
+	var $body = $('body');
 
 	/* Preloader Effect */
 	$window.on('load', function(){
 		$(".preloader").fadeOut(600);
 	});
 
-	/* Sticky Header */	
+	/* Sticky Header */
 	if($('.active-sticky-header').length){
 		$window.on('resize', function(){
 			setHeaderHeight();
@@ -17,8 +17,8 @@
 
 		function setHeaderHeight(){
 	 		$("header.main-header").css("height", $('header .header-sticky').outerHeight());
-		}	
-	
+		}
+
 		$window.on("scroll", function() {
 			var fromTop = $(window).scrollTop();
 			setHeaderHeight();
@@ -26,8 +26,8 @@
 			$("header .header-sticky").toggleClass("hide", (fromTop > headerHeight + 100));
 			$("header .header-sticky").toggleClass("active", (fromTop > 600));
 		});
-	}	
-	
+	}
+
 	/* Slick Menu JS */
 	$('#menu').slicknav({
 		label : '',
@@ -163,12 +163,12 @@
 		var textheading = $(".text-effect");
 
 		if(textheading.length == 0) return; gsap.registerPlugin(SplitText); textheading.each(function(index, el) {
-			
-			el.split = new SplitText(el, { 
+
+			el.split = new SplitText(el, {
 				type: "lines,words,chars",
 				linesClass: "split-line"
 			});
-			
+
 			if( $(el).hasClass('text-effect') ){
 				gsap.set(el.split.chars, {
 					opacity: .3,
@@ -190,7 +190,7 @@
 				duration: .7,
 				stagger: 0.2,
 			});
-			
+
 		});
 	}
 	/* Text Effect Animation End */
@@ -269,7 +269,7 @@
 	}
 	/* Contact form validation end */
 
-	/* Animated Wow Js */	
+	/* Animated Wow Js */
 	new WOW().init();
 
 	/* Popup Video */
@@ -293,8 +293,16 @@
 			  $('#annually').addClass('d-none');
 			  $('#monthly').removeClass('d-none');
 			}
-		  });                
-	}	
+		  });
+	}
 	/* Our Pricing Tab JS End  */
-	
+
 })(jQuery);
+
+$(document).on('click', '.redirect-tg-channel', function () {
+    var url = $(this).data('link-url');
+
+    if (url) {
+        window.open(url, '_blank');
+    }
+});
