@@ -1321,8 +1321,10 @@
                                                 <h2 style="font-weight: 400; font-size: 28px;">
                                                     <?php if (isset($val['discount_price']) && $val['discount_price'] !== '') : ?>
                                                     <span class="text-muted">
-                                                        <strike class="me-2">
-                                                            <span>$</span>{{$val['discount_price']}}
+                                                        <strike class="me-2 text-black">
+                                                            @if( (float)$val['discount_price'] > 0  )
+                                                                <span>$</span>{{$val['discount_price']}}
+                                                            @endif
                                                         </strike>
                                                     </span>
                                                     <?php endif; ?>
