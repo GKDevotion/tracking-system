@@ -1,8 +1,8 @@
 @extends('frontend.layout')
-@section('meta_title', $blog->meta_title ?? $blog->title) 
+@section('meta_title', $blog->meta_title ?? $blog->title)
 @section('meta_description', $blog->meta_description)
-@section('keyword', $blog->keyword) 
-@section('h1_tag', $blog->h1_tag) 
+@section('keyword', $blog->keyword)
+@section('h1_tag', $blog->h1_tag)
 
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
@@ -41,6 +41,11 @@
 
         .share-buttons .share-btn i {
             line-height: 1;
+        }
+
+        tbody, td, tfoot, th, thead, tr {
+            border-width: 1px;
+            padding: 5px;
         }
     </style>
 
