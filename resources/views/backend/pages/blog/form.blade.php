@@ -225,106 +225,26 @@
 @endsection
 
 @push('scripts')
-    <script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/47.1.0/super-build/ckeditor.js"></script>
 
     <script>
-        ClassicEditor
-            .create(document.querySelector('#description'), {
-                toolbar: {
-                    items: [
-                        'undo', 'redo',
-                        '|',
-                        'sourceEditing',
-                        'showBlocks',
-                        '|',
-                        'heading',
-                        'style',
-                        '|',
-                        'fontSize',
-                        'fontFamily',
-                        'fontColor',
-                        'fontBackgroundColor',
-                        '|',
-                        'bold',
-                        'italic',
-                        'underline',
-                        'strikethrough',
-                        'subscript',
-                        'superscript',
-                        'code',
-                        'removeFormat',
-                        '|',
-                        'link',
-                        'insertImage',
-                        'insertTable',
-                        'mediaEmbed',
-                        'blockQuote',
-                        'codeBlock',
-                        'htmlEmbed',
-                        'specialCharacters',
-                        'horizontalLine',
-                        'pageBreak',
-                        '|',
-                        'bulletedList',
-                        'numberedList',
-                        'todoList',
-                        'outdent',
-                        'indent',
-                        '|',
-                        'alignment',
-                        '|',
-                        'findAndReplace',
-                        'selectAll',
-                        '|',
-                        'highlight',
-                        '|',
-                        'imageUpload',
-                        'ckbox',
-                        '|',
-                        'exportPDF',
-                        'exportWord'
-                    ],
-                    shouldNotGroupWhenFull: true
-                },
-
-                image: {
-                    toolbar: [
-                        'imageTextAlternative',
-                        'imageStyle:inline',
-                        'imageStyle:block',
-                        'imageStyle:side',
-                        'toggleImageCaption',
-                        'linkImage'
-                    ]
-                },
-
-                table: {
-                    contentToolbar: [
-                        'tableColumn',
-                        'tableRow',
-                        'mergeTableCells',
-                        'tableProperties',
-                        'tableCellProperties'
-                    ]
-                },
-
-                link: {
-                    decorators: {
-                        openInNewTab: {
-                            mode: 'manual',
-                            label: 'Open in new tab',
-                            attributes: {
-                                target: '_blank',
-                                rel: 'noopener noreferrer'
-                            }
-                        }
-                    }
-                }
-            })
-            .catch(error => {
-                console.error(error);
-            });
-        </script>
+        CKEDITOR.ClassicEditor.create(document.querySelector('#description'), {
+            toolbar: {
+                items: [
+                    'heading','|',
+                    'fontFamily','fontSize','fontColor','fontBackgroundColor','|',
+                    'bold','italic','underline','strikethrough','subscript','superscript','code','removeFormat','|',
+                    'link','bulletedList','numberedList','todoList','|',
+                    'alignment','outdent','indent','|',
+                    'insertTable','imageUpload','mediaEmbed','blockQuote','codeBlock','htmlEmbed','|',
+                    'specialCharacters','horizontalLine','pageBreak','|',
+                    'findAndReplace','selectAll','showBlocks','sourceEditing','|',
+                    'undo','redo'
+                ],
+                shouldNotGroupWhenFull: true
+            }
+        });
+    </script>
 
     <script>
         function updateSubCategories(selectedCategoryId) {
