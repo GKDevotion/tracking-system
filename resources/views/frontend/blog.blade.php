@@ -112,9 +112,9 @@
         /* Also fix the card image height */
         .blog-img img {
             width: 100%;
-            height: 200px;
+            height: 255px;
             /* ADD THIS */
-            object-fit: cover;
+            /* object-fit: cover; */
             /* ADD THIS */
             transition: transform 0.5s ease;
         }

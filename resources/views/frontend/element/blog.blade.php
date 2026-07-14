@@ -43,9 +43,9 @@
 
     .blog-img img {
         width: 100%;
-        height: 200px;
-        object-fit: cover;
-        transition: transform 0.5s ease; 
+        height: 260px;
+        /* object-fit: cover; */
+        transition: transform 0.5s ease;
     }
 
     .blog-card:hover img {
