@@ -225,25 +225,22 @@
 @endsection
 
 @push('scripts')
-    <script src="https://cdn.ckeditor.com/ckeditor5/47.1.0/super-build/ckeditor.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
 
     <script>
-        CKEDITOR.ClassicEditor.create(document.querySelector('#description'), {
-            toolbar: {
-                items: [
-                    'heading','|',
-                    'fontFamily','fontSize','fontColor','fontBackgroundColor','|',
-                    'bold','italic','underline','strikethrough','subscript','superscript','code','removeFormat','|',
-                    'link','bulletedList','numberedList','todoList','|',
-                    'alignment','outdent','indent','|',
+        ClassicEditor
+            .create(document.querySelector('#description'), {
+                toolbar: [
+                    'heading', '|',
+                    'bold', 'italic', 'link',
+                    'bulletedList', 'numberedList', '|',
                     'insertTable','imageUpload','mediaEmbed','blockQuote','codeBlock','htmlEmbed','|',
-                    'specialCharacters','horizontalLine','pageBreak','|',
-                    'findAndReplace','selectAll','showBlocks','sourceEditing','|',
-                    'undo','redo'
-                ],
-                shouldNotGroupWhenFull: true
-            }
-        });
+                    'undo', 'redo'
+                ]
+            })
+            .catch(error => {
+                console.error(error);
+            });
     </script>
 
     <script>
