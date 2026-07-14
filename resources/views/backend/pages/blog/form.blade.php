@@ -108,7 +108,7 @@
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
-    
+
                                 <div class="col-6">
                                     <label class="form-label">Meta Title</label>
                                     <input type="text" name="meta_title" value="{{ old('meta_title', $blog->meta_title ?? '') }}"
@@ -129,7 +129,7 @@
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
-                            
+
                             <div class="col-12">
                                 <label class="form-label">Keywords (SEO)</label>
                                 <input type="text" name="keyword" value="{{ old('keyword', $blog->keyword ?? '') }}"
@@ -230,18 +230,101 @@
     <script>
         ClassicEditor
             .create(document.querySelector('#description'), {
-                toolbar: [
-                    'heading', '|',
-                    'bold', 'italic', 'link',
-                    'bulletedList', 'numberedList', '|',
-                    'blockQuote', 'insertTable', '|',
-                    'undo', 'redo'
-                ]
+                toolbar: {
+                    items: [
+                        'undo', 'redo',
+                        '|',
+                        'sourceEditing',
+                        'showBlocks',
+                        '|',
+                        'heading',
+                        'style',
+                        '|',
+                        'fontSize',
+                        'fontFamily',
+                        'fontColor',
+                        'fontBackgroundColor',
+                        '|',
+                        'bold',
+                        'italic',
+                        'underline',
+                        'strikethrough',
+                        'subscript',
+                        'superscript',
+                        'code',
+                        'removeFormat',
+                        '|',
+                        'link',
+                        'insertImage',
+                        'insertTable',
+                        'mediaEmbed',
+                        'blockQuote',
+                        'codeBlock',
+                        'htmlEmbed',
+                        'specialCharacters',
+                        'horizontalLine',
+                        'pageBreak',
+                        '|',
+                        'bulletedList',
+                        'numberedList',
+                        'todoList',
+                        'outdent',
+                        'indent',
+                        '|',
+                        'alignment',
+                        '|',
+                        'findAndReplace',
+                        'selectAll',
+                        '|',
+                        'highlight',
+                        '|',
+                        'imageUpload',
+                        'ckbox',
+                        '|',
+                        'exportPDF',
+                        'exportWord'
+                    ],
+                    shouldNotGroupWhenFull: true
+                },
+
+                image: {
+                    toolbar: [
+                        'imageTextAlternative',
+                        'imageStyle:inline',
+                        'imageStyle:block',
+                        'imageStyle:side',
+                        'toggleImageCaption',
+                        'linkImage'
+                    ]
+                },
+
+                table: {
+                    contentToolbar: [
+                        'tableColumn',
+                        'tableRow',
+                        'mergeTableCells',
+                        'tableProperties',
+                        'tableCellProperties'
+                    ]
+                },
+
+                link: {
+                    decorators: {
+                        openInNewTab: {
+                            mode: 'manual',
+                            label: 'Open in new tab',
+                            attributes: {
+                                target: '_blank',
+                                rel: 'noopener noreferrer'
+                            }
+                        }
+                    }
+                }
             })
             .catch(error => {
                 console.error(error);
             });
-    </script>
+        </script>
 
     <script>
         function updateSubCategories(selectedCategoryId) {
