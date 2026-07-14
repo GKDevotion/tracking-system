@@ -228,7 +228,7 @@
     <script src="https://cdn.ckeditor.com/ckeditor5/47.1.0/super-build/ckeditor.js"></script>
 
     <script>
-        CKEDITOR.ClassicEditor.create(document.querySelector('#description'), {
+        ClassicEditor.create(document.querySelector('#description'), {
             toolbar: {
                 items: [
                     'heading','|',
