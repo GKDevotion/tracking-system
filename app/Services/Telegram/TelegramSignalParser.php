@@ -68,10 +68,9 @@ class TelegramSignalParser
         $patterns = [
 
             'SL' => '/hit\s+sl\s*:\s*([+-]?\d+(?:\.\d+)?)\s*pips/i',
-
             'TP' => '/hit\s+tp\s*:\s*([+-]?\d+(?:\.\d+)?)\s*pips/i',
-
-            'HIT' => '/hit\s*:\s*([+-]?\d+(?:\.\d+)?)\s*pips/i',
+            'HIT_0' => '/hit\s*:\s*([+-]?\d+(?:\.\d+)?)\s*pips/i',
+            'HIT_1' => '/(?:pips?\s*)?hit\s*:?\s*([+-]?\d+(?:\.\d+)?)\s*pips?/i',
 
         ];
 
@@ -79,12 +78,13 @@ class TelegramSignalParser
 
             if (preg_match($regex, $text, $match)) {
 
+                if( $type == "HIT_0" || $type == "HIT_1" ){
+                    $type = "HIT";
+                }
+
                 return [
-
                     'type' => $type,
-
                     'profit' => $match[1],
-
                 ];
             }
         }
