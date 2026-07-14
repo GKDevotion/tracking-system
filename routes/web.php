@@ -8,6 +8,7 @@ use App\Http\Controllers\Web\BmMailTemplateController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\BlogsController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\CKEditorController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DisclaimerController;
 use App\Http\Controllers\CookieController;
@@ -462,3 +463,6 @@ Route::get('telegram', function () {
  * Cron Function
  */
 Route::get('/get-selected-channel-signals', [HomeController::class, 'getSelectedChannelSignals']);
+
+Route::post('/ckeditor/upload', [CKEditorController::class, 'upload'])
+    ->name('ckeditor.upload');
