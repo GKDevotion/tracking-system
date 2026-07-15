@@ -418,7 +418,7 @@
                 font-weight: 700;
                 font-size: 2.2rem;
                 white-space: nowrap;
-                letter-spacing: 3px;
+                letter-spacing: 2px;
             }
 
             .badge-card {
@@ -516,7 +516,7 @@
                 align-items: center;
                 gap: 30px;
                 text-align: left;
-                box-shadow: 2px 6px 4px rgba(0, 0, 0, 0.15);
+                box-shadow: 3px 4px 6px rgba(0, 0, 0, 0.6);
             }
 
             .stat-icon {
@@ -889,7 +889,7 @@
             @include('frontend.element.result')
 
             <!-- Verified heading -->
-            <div class="divider-heading mt-5">
+            <div class="divider-heading mt-5 pt-4 pb-2">
                 <span class="divider-line"></span>
                 <span class="label">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
