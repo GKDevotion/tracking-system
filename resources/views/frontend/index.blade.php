@@ -895,7 +895,7 @@
             @include('frontend.element.result')
 
             <!-- Verified heading -->
-            <div class="divider-heading">
+            <div class="divider-heading mt-5">
                 <span class="divider-line"></span>
                 <span class="label">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
