@@ -690,11 +690,17 @@
 
                                             <div class="stat-label" style="font-weight: 400">
                                                 <span style="color:var(--green);">
-                                                    {!! getConfigurationField('WEEKLY_WIN_TRADES') !!} <span>{!! getConfigurationDisplayName('WEEKLY_WIN_TRADES') !!}</span>,
+                                                    <span class="counter">{!! getConfigurationField('WEEKLY_WIN_TRADES') !!}</span>
+                                                    <span>
+                                                        {!! getConfigurationDisplayName('WEEKLY_WIN_TRADES') !!}
+                                                    </span>,
                                                 </span>
 
                                                 <span style="color:var(--red);">
-                                                    {!! getConfigurationField('WEEKLY_LOSS_TRADES') !!} <span>{!! getConfigurationDisplayName('WEEKLY_LOSS_TRADES') !!}</span>
+                                                    <span class="counter">{!! getConfigurationField('WEEKLY_LOSS_TRADES') !!}</span>
+                                                    <span>
+                                                        {!! getConfigurationDisplayName('WEEKLY_LOSS_TRADES') !!}
+                                                    </span>
                                                 </span>
                                             </div>
                                         </div>
@@ -811,11 +817,17 @@
 
                                             <div class="stat-label" style="font-weight: 400">
                                                 <span style="color:var(--green);">
-                                                    {!! getConfigurationField('MONTHLY_WIN_TRADES') !!} <span>{!! getConfigurationDisplayName('MONTHLY_WIN_TRADES') !!}</span>,
+                                                    <span class="counter">{!! getConfigurationField('MONTHLY_WIN_TRADES') !!}</span>
+                                                    <span>
+                                                        {!! getConfigurationDisplayName('MONTHLY_WIN_TRADES') !!}
+                                                    </span>,
                                                 </span>
 
                                                 <span style="color:var(--red);">
-                                                    {!! getConfigurationField('MONTHLY_LOSS_TRADES') !!} <span>{!! getConfigurationDisplayName('MONTHLY_LOSS_TRADES') !!}</span>
+                                                    <span class="counter">{!! getConfigurationField('MONTHLY_LOSS_TRADES') !!}</span>
+                                                    <span>
+                                                        {!! getConfigurationDisplayName('MONTHLY_LOSS_TRADES') !!}
+                                                    </span>
                                                 </span>
                                             </div>
                                         </div>
