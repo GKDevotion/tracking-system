@@ -86,7 +86,7 @@
                     text-align: center;
                     border-top: 1px solid #666;
                     white-space: nowrap;
-                    font-size: 0.84rem;
+                    font-size: 1rem;
                     font-weight: 500;
                     letter-spacing: 0.02em;
                     vertical-align: middle;
@@ -120,7 +120,7 @@
                     padding: 3px 16px;
                     border-radius: 3px;
                     font-weight: 700;
-                    font-size: 0.76rem;
+                    font-size: 1rem;
                     letter-spacing: 0.1em;
                     text-transform: uppercase;
                     }
