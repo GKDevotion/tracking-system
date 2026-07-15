@@ -901,7 +901,7 @@
             @include('frontend.element.result')
 
             <!-- Verified heading -->
-            <div class="divider-heading mt-5 pt-4 pb-2">
+            <div class="divider-heading mt-5 pt-5">
                 <span class="divider-line"></span>
                 <span class="label">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
@@ -1270,7 +1270,7 @@
                                                     </span>
                                                     <?php endif; ?>
 
-                                                    <span style="font-size: 60px; text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.18);"><span style="font-size: 45px;">$</span>{{$val['price']}}</span>
+                                                    <span style="font-size: 60px; text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.12);"><span style="font-size: 45px;">$</span>{{$val['price']}}</span>
 
                                                     @if (!empty($val['type']))
                                                         <small>/{{ $val['type'] }}</small>
