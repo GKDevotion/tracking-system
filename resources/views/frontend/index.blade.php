@@ -416,8 +416,9 @@
                 gap: 8px;
                 color: var(--red);
                 font-weight: 700;
-                font-size: 1.5rem;
+                font-size: 2.2rem;
                 white-space: nowrap;
+                letter-spacing: 3px;
             }
 
             .badge-card {
@@ -495,7 +496,7 @@
                 border-radius: 999px !important;
                 font-weight: 700;
                 padding: 8px 22px;
-                border: 1px solid var(--mute);
+                border: 1px solid var(--muted);
                 color: var(--ink);
             }
 
