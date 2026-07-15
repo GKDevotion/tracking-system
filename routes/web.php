@@ -264,11 +264,11 @@ Route::middleware('auth')->group(function () {
                 'edit' => 'web.blog-category.edit',
                 'update' => 'web.blog-category.update',
                 'destroy' => 'web.blog-category.destroy',
-    ]);
-
-    // Blog Tag
+                ]);
+                
+                // Blog Tag
     Route::resource('blog-tag', TagController::class)
-            ->names([
+    ->names([
                 'index' => 'web.blog-tag.index',
                 'create' => 'web.blog-tag.create',
                 'store' => 'web.blog-tag.store',
@@ -277,10 +277,10 @@ Route::middleware('auth')->group(function () {
                 'update' => 'web.blog-tag.update',
                 'destroy' => 'web.blog-tag.destroy',
     ]);
-
-            // Blog Tag
+    
+    // Blog Tag
     Route::resource('contact-us',ContactsController::class)
-            ->names([
+    ->names([
                 'index' => 'web.contact-us.index',
                 'create' => 'web.contact-us.create',
                 'store' => 'web.contact-us.store',
@@ -288,29 +288,29 @@ Route::middleware('auth')->group(function () {
                 'edit' => 'web.contact-us.edit',
                 'update' => 'web.contact-us.update',
                 'destroy' => 'web.contact-us.destroy',
-    ]);
-
+                ]);
+                
     // ── Categories ────────────────────────────────────────
     Route::resource('bm-category', BmCategoryController::class)
             ->only(['index', 'store', 'update', 'destroy'])
             ->names('web.bm-category');
-
-    // Business mail Template
+            
+            // Business mail Template
     Route::resource('bm-mail-template', BmMailTemplateController::class)
-            ->names([
-                'index' => 'web.bm-mail-template.index',
-                'create' => 'web.bm-mail-template.create',
+    ->names([
+        'index' => 'web.bm-mail-template.index',
+        'create' => 'web.bm-mail-template.create',
                 'edit' => 'web.bm-mail-template.edit',
                 'update' => 'web.bm-mail-template.update',
                 'show' => 'web.bm-mail-template.show',
                 'destroy' => 'web.bm-mail-template.destroy',
     ]);
-
+    
     Route::post('templates/send-to-client', [BmMailTemplateController::class, 'sendToClient'])
              ->name('web.bm-mail-template.sendToClient');
-
-    // Business mail Client
-    Route::resource('bm-client', BmClientController::class)
+             
+             // Business mail Client
+             Route::resource('bm-client', BmClientController::class)
             ->names([
                 'index' => 'web.bm-client.index',
                 'create' => 'web.bm-client.create',
@@ -318,38 +318,38 @@ Route::middleware('auth')->group(function () {
                 'update' => 'web.bm-client.update',
                 'show' => 'web.bm-client.show',
                 'destroy' => 'web.bm-client.destroy',
-    ]);
-
+                ]);
+                
     // AJAX single send (called via fetch from modal)
     Route::post('clients/bulk-send', [BmClientController::class, 'bulkSend'])
              ->name('clients.bulkSend');
-
-
-    // Business mail Logs
-    Route::get('bm-mail-logs/export', [BmMailLogController::class, 'export'])->name('web.bm-logs.export');
-    Route::get('bm-mail-logs',        [BmMailLogController::class, 'index']) ->name('web.bm-mail-logs.index');
-
+             
+             
+             // Business mail Logs
+             Route::get('bm-mail-logs/export', [BmMailLogController::class, 'export'])->name('web.bm-logs.export');
+             Route::get('bm-mail-logs',        [BmMailLogController::class, 'index']) ->name('web.bm-mail-logs.index');
+             
     // Sales Person
     Route::resource('sales', UserController::class)
-            ->names([
+    ->names([
                 'index' => 'web.sales.index',
                 'create' => 'web.sales.create',
                 'edit' => 'web.sales.edit',
                 'update' => 'web.sales.update',
                 'show' => 'web.sales.show',
-    ]);
+                ]);
 });
 
 Route::get('/test-mail', function () {
     try {
         Mail::raw('This is a test email from Laravel!', function ($message) {
             $message->to('gk@devotiontech.io')
-                    ->subject('Test Email');
-        });
-
-        return '✅ Mail sent successfully!';
-    } catch (\Exception $e) {
-        return "❌ Mail Failed: " . $e->getMessage();
+            ->subject('Test Email');
+            });
+            
+            return '✅ Mail sent successfully!';
+            } catch (\Exception $e) {
+                return "❌ Mail Failed: " . $e->getMessage();
     }
 });
 
@@ -381,20 +381,22 @@ Route::get('/forex-result', [ForexResultController::class, 'index'])->name('fore
 
 Route::get('/faqs', [FaqsController::class, 'index'])->name('faqs');
 
+Route::post('/blogs/upload-image', [BlogController::class, 'uploadImage'])->name('web.blogs.upload-image');
+
 Route::get('/clear', function () {
     try {
         Artisan::call('cache:clear');
         Artisan::call('config:clear');
         Artisan::call('view:clear');
         return 'Cache cleared successfully!';
-    } catch (\Exception $e) {
-        return '❌ Clear Failed: ' . $e->getMessage();
+        } catch (\Exception $e) {
+            return '❌ Clear Failed: ' . $e->getMessage();
     }
 });
-
-/**
- * Telegram Bot Webhook Route
- */
+            
+            /**
+             * Telegram Bot Webhook Route
+            */
 Route::get('telegram', function () {
     try {
             $text = "
