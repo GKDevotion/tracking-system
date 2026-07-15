@@ -648,7 +648,7 @@
                                         </div>
 
                                         <div class="stat-text">
-                                            <div class="stat-value text-success">
+                                            <div class="stat-value text-success" style="margin-left: -15px;">
                                                 +{!! getConfigurationField('WEEKLY_NET_PIPS') !!}
                                             </div>
 
@@ -769,7 +769,7 @@
                                         </div>
 
                                         <div class="stat-text">
-                                            <div class="stat-value text-success">
+                                            <div class="stat-value text-success" style="margin-left: -15px;">
                                                 +{!! getConfigurationField('MONTHLY_NET_PIPS') !!}
                                             </div>
 
