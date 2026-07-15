@@ -98,7 +98,7 @@
                     .c-entry  { color: #000; }
 
                     .c-profit {
-                        color: var(--green);
+                        color: green;
                     }
 
                     .c-loss {

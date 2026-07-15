@@ -77,7 +77,7 @@
                     .c-pair   { color: #000; font-weight: 600; letter-spacing: 0.06em; }
                     .c-entry  { color: #000; }
                     .c-profit {
-                        color: var(--green);
+                        color: green;
                     }
 
                     .c-loss {
