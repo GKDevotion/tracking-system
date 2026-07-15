@@ -34,7 +34,7 @@
             font-weight: 800;
         }
 
-        .join-section .profit-text span.color-change {
+        .join-section .profit-text span.color-change, .text-green-shadow {
             color: #46e546;
             font-size: 3rem;
             text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
@@ -1224,7 +1224,7 @@
                     <div class="section-title section-title-center">
                         <h3 class="wow fadeInUp">subscription plans</h3>
                         <h2 class="wow fadeInUp" data-wow-delay="0.2s" data-cursor="-opaque">
-                            Your Success Starts with the <span class="color-change">Right Plan</span>
+                            Your Success Starts with the <span class="text-green-shadow">Right Plan</span>
                         </h2>
                     </div>
                     <!-- Section Title End -->
