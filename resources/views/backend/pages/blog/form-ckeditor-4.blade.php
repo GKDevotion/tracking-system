@@ -225,22 +225,124 @@
 @endsection
 
 @push('scripts')
-    <script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
+    <script src="https://cdn.ckeditor.com/4.22.1/standard-all/ckeditor.js"></script>
 
     <script>
-        ClassicEditor
-            .create(document.querySelector('#description'), {
-                toolbar: [
-                    'heading', '|',
-                    'bold', 'italic', 'link',
-                    'bulletedList', 'numberedList', '|',
-                    'blockQuote', 'insertTable', '|',
-                    'undo', 'redo'
-                ]
-            })
-            .catch(error => {
-                console.error(error);
-            });
+        CKEDITOR.replace('description', {
+            height: 500,
+            allowedContent: true,
+            extraAllowedContent: '*(*);*{*}',
+            removeButtons: '',
+            toolbarCanCollapse: true,
+            toolbar: [
+                {
+                    name: 'document',
+                    items: [
+                        'Source','-',
+                        'Save','NewPage','Preview','Print','Templates'
+                    ]
+                },
+                {
+                    name: 'clipboard',
+                    items: [
+                        'Cut','Copy','Paste','PasteText','PasteFromWord',
+                        '-',
+                        'Undo','Redo'
+                    ]
+                },
+                {
+                    name: 'editing',
+                    items: [
+                        'Find','Replace','SelectAll','Scayt'
+                    ]
+                },
+                {
+                    name: 'forms',
+                    items: [
+                        'Form','Checkbox','Radio','TextField',
+                        'Textarea','Select','Button','ImageButton','HiddenField'
+                    ]
+                },
+                '/',
+                {
+                    name: 'basicstyles',
+                    items: [
+                        'Bold','Italic','Underline','Strike',
+                        'Subscript','Superscript',
+                        '-',
+                        'RemoveFormat'
+                    ]
+                },
+                {
+                    name: 'paragraph',
+                    items: [
+                        'NumberedList','BulletedList',
+                        '-',
+                        'Outdent','Indent',
+                        '-',
+                        'Blockquote',
+                        'CreateDiv',
+                        '-',
+                        'JustifyLeft',
+                        'JustifyCenter',
+                        'JustifyRight',
+                        'JustifyBlock',
+                        '-',
+                        'BidiLtr',
+                        'BidiRtl'
+                    ]
+                },
+                {
+                    name: 'links',
+                    items: [
+                        'Link','Unlink','Anchor'
+                    ]
+                },
+                {
+                    name: 'insert',
+                    items: [
+                        'Image',
+                        'Flash',
+                        'Table',
+                        'HorizontalRule',
+                        'Smiley',
+                        'SpecialChar',
+                        'PageBreak',
+                        'Iframe'
+                    ]
+                },
+                '/',
+                {
+                    name: 'styles',
+                    items: [
+                        'Styles',
+                        'Format',
+                        'Font',
+                        'FontSize'
+                    ]
+                },
+                {
+                    name: 'colors',
+                    items: [
+                        'TextColor',
+                        'BGColor'
+                    ]
+                },
+                {
+                    name: 'tools',
+                    items: [
+                        'Maximize',
+                        'ShowBlocks'
+                    ]
+                },
+                {
+                    name: 'about',
+                    items: [
+                        'About'
+                    ]
+                }
+            ]
+        });
     </script>
 
     <script>
