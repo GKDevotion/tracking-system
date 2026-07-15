@@ -515,6 +515,7 @@
                 align-items: center;
                 gap: 30px;
                 text-align: left;
+                box-shadow: 2px 6px 4px rgba(0, 0, 0, 0.15);
             }
 
             .stat-icon {
@@ -592,7 +593,7 @@
 
             <style>
                 .cards-block {
-                    box-shadow: 2px 1px 10px rgba(0, 0, 0, 0.18);
+                    /* box-shadow: 2px 1px 10px rgba(0, 0, 0, 0.18); */
                     padding: 20px;
                     border-radius: 15px;
                 }
