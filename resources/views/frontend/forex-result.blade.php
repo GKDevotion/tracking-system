@@ -251,7 +251,7 @@
                                             @if ( $signal->profit)
                                                 {{ $signal->profit }}
                                             @else
-                                                <span style="color:var(--green);font-size: 1.4rem;">Running</span>
+                                                <span style="color:green;font-size: 1rem;">Running</span>
                                             @endif
                                         </td>
 
