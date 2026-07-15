@@ -1224,7 +1224,7 @@
                     <div class="section-title section-title-center">
                         <h3 class="wow fadeInUp">subscription plans</h3>
                         <h2 class="wow fadeInUp" data-wow-delay="0.2s" data-cursor="-opaque">
-                            Your Success Starts with the <span style="color: #46e546; -webkit-text-fill-color: #46e546 !important; text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);">Right Plan</span>
+                            Your Success Starts with the <span style="color: #46e546; -webkit-text-fill-color: #46e546 !important; text-shadow: 2px 3px 6px rgba(0, 0, 0, 0.18);">Right Plan</span>
                         </h2>
                     </div>
                     <!-- Section Title End -->
