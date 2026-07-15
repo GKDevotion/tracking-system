@@ -96,7 +96,15 @@
                     .c-date   { color: #000; font-weight: 600; }
                     .c-pair   { color: #000; font-weight: 600; letter-spacing: 0.06em; }
                     .c-entry  { color: #000; }
-                    .c-profit { color: green; font-weight: 700; font-size: 0.92rem; }
+
+                    .c-profit {
+                        color: var(--green);
+                    }
+
+                    .c-loss {
+                        color: red;
+                    }
+
                     .c-zero   { color: var(--text-muted); font-weight: 600; }
 
                     /* Faded row overrides */
