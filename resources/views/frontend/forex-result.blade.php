@@ -203,7 +203,7 @@
                             <th>Pair</th>
                             <th>Order</th>
                             <th class="d-none">Entry</th>
-                            <th>SL | TP</th>
+                            <th style="width: 1%">SL | TP</th>
                             <th class="">Profit</th>
                             <th>Live</th>
                             </tr>
