@@ -191,6 +191,9 @@
                     .tbl-wrap { overflow-x: auto; }
                     .sig-table { min-width: 720px; }
                     }
+                    .text-left{
+                        text-align: left !important;
+                    }
                 </style>
 
                  <div class="tbl-wrap">

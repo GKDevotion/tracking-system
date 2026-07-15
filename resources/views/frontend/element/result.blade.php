@@ -182,6 +182,9 @@
                     .c-zero {
                         color: #666; /* or any neutral color */
                     }
+                    .text-left{
+                        text-align: left !important;
+                    }
                 </style>
 
                  <div class="tbl-wrap">
