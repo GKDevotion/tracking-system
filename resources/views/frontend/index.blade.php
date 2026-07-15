@@ -596,8 +596,8 @@
             <div class="text-center mb-2">
                 <div class="btn-group toggle-group gap-3" role="group">
                     <button type="button" class="btn d-none"  data-type="daily">Daily</button>
-                    <button type="button" class="btn active"  data-type="weekly">Weekly</button>
-                    <button type="button" class="btn"  data-type="monthly">Monthly</button>
+                    <button type="button" class="btn"  data-type="weekly">Weekly</button>
+                    <button type="button" class="btn active"  data-type="monthly">Monthly</button>
                 </div>
             </div>
 
@@ -610,7 +610,7 @@
             </style>
 
             <div class="cards-block">
-                <div id="weeklyCards">
+                <div id="weeklyCards" style="display:none;">
                     <div class="row g-3 mb-4">
 
                             <!-- Win Rate -->
@@ -737,7 +737,7 @@
                     </div>
                 </div>
 
-                <div id="monthlyCards" style="display:none;">
+                <div id="monthlyCards">
                     <div class="row g-3 mb-4">
 
                             <!-- Win Rate -->
