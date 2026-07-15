@@ -493,7 +493,7 @@
 
             .toggle-group .btn {
                 border-radius: 999px !important;
-                font-weight: 600;
+                font-weight: 700;
                 padding: 8px 22px;
                 border: 1px solid var(--mute);
                 color: var(--ink);
