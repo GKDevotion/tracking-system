@@ -516,7 +516,7 @@
                 align-items: center;
                 gap: 30px;
                 text-align: left;
-                box-shadow: 3px 4px 6px rgba(0, 0, 0, 0.6);
+                box-shadow: 2px 3px 6px rgba(0, 0, 0, 0.6);
             }
 
             .stat-icon {

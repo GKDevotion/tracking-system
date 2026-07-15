@@ -96,8 +96,8 @@
                         <!-- Benefit CTA Box Start -->
                         <div class="benefit-cta-box">
                             <div class="benefit-cta-content">
-                                <h2><span class="counter">10</span>K+</h2>
-                                <p>Voiceovers Delivered</p>
+                                <h2><span class="counter">57,000</span> PIPS</h2>
+                                <p>Delivered</p>
                             </div>
                         </div>
                         <!-- Benefit CTA Box End -->
