@@ -161,4 +161,30 @@ class BlogController extends Controller
 
         return back()->with('success', 'Blog deleted successfully.');
     }
+
+   public function uploadImage(Request $request)
+{
+    $request->validate([
+        'upload' => 'required|image|mimes:jpg,jpeg,png,gif,webp|max:5120',
+    ]);
+
+    // Create folder if it doesn't exist
+    if (!Storage::disk('public')->exists('blog-images')) {
+        Storage::disk('public')->makeDirectory('blog-images');
+    }
+
+    // Generate unique filename
+    $filename = Str::uuid() . '.' . $request->file('upload')->getClientOriginalExtension();
+
+    // Store file
+    $path = $request->file('upload')->storeAs(
+        'blog-images',
+        $filename,
+        'public'
+    );
+
+    return response()->json([
+        'url' => asset('storage/app/public/' . $path),
+    ]);
+}
 }

@@ -224,10 +224,60 @@
     </div>
 @endsection
 
-@push('scripts')
+@push('scripts') 
+
     <script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
 
     <script>
+        // The "classic" build above doesn't ship an upload adapter plugin
+        // (that's what caused the "filerepository-no-upload-adapter" error) —
+        // so we write a tiny adapter ourselves and register it manually.
+        class LaravelUploadAdapter {
+            constructor(loader) {
+                this.loader = loader;
+            }
+
+            upload() {
+                return this.loader.file.then(file => new Promise((resolve, reject) => {
+                    const data = new FormData();
+                    data.append('upload', file);
+
+                    fetch('{{ route('web.blogs.upload-image') }}', {
+                        method: 'POST',
+                        headers: {
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                            'Accept': 'application/json'
+                        },
+                        body: data
+                    })
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error('Upload failed with status ' + response.status);
+                            }
+                            return response.json();
+                        })
+                        .then(result => {
+                            if (result.error) {
+                                reject(result.error.message);
+                            } else {
+                                resolve({ default: result.url });
+                            }
+                        })
+                        .catch(error => reject(error.message || 'Upload failed'));
+                }));
+            }
+
+            abort() {
+                // Optional: hook up AbortController here if you need cancel support
+            }
+        }
+
+        function LaravelUploadAdapterPlugin(editor) {
+            editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
+                return new LaravelUploadAdapter(loader);
+            };
+        }
+
         ClassicEditor
             .create(document.querySelector('#description'), {
                 toolbar: [
@@ -235,8 +285,20 @@
                     'bold', 'italic', 'link',
                     'bulletedList', 'numberedList', '|',
                     'blockQuote', 'insertTable', '|',
+                    'uploadImage', '|',
                     'undo', 'redo'
-                ]
+                ],
+                image: {
+                    toolbar: [
+                        'imageStyle:inline',
+                        'imageStyle:block',
+                        'imageStyle:side',
+                        '|',
+                        'toggleImageCaption',
+                        'imageTextAlternative'
+                    ]
+                },
+                extraPlugins: [LaravelUploadAdapterPlugin]
             })
             .catch(error => {
                 console.error(error);
