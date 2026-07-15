@@ -236,7 +236,7 @@
                                         </td>
 
                                         {{-- SL / TP --}}
-                                        <td>
+                                        <td class="text-left">
                                             <span class="sl-">{{ $signal->stop_loss }}</span>
                                             <span class="sep">|</span>
                                             <span class="tp-">
