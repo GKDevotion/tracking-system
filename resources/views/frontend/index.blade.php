@@ -727,7 +727,7 @@
                                             </div>
 
                                             <div class="stat-label">
-                                                R:R Ratio
+                                                {!! getConfigurationDisplayName('WEEKLY_RR_RATIO') !!}
                                             </div>
                                         </div>
                                     </div>
