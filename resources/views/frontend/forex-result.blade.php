@@ -41,13 +41,15 @@
                     }
 
                     /* Header */
-                    .sig-table thead tr { background: #000; }
+                    .sig-table thead tr {
+                        background: #fddfdf59;
+                    }
                     .sig-table thead th {
                         font-weight: 700;
-                        font-size: 0.82rem;
+                        font-size: 1rem;
                         letter-spacing: 0.1em;
                         text-transform: uppercase;
-                        color: #fff;
+                        color: #000;
                         padding: 15px 20px;
                         text-align: center;
                         white-space: nowrap;
