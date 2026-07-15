@@ -627,7 +627,7 @@
 
                                         <div class="stat-text">
                                             <div class="stat-value">
-                                                {!! getConfigurationField('WEEKLY_WIN_RATE') !!}%
+                                                <span class="counter">{!! getConfigurationField('WEEKLY_WIN_RATE') !!}</span>%
                                             </div>
 
                                             <div class="stat-label">
@@ -659,7 +659,7 @@
 
                                         <div class="stat-text">
                                             <div class="stat-value text-success" style="margin-left: -15px;">
-                                                +{!! getConfigurationField('WEEKLY_NET_PIPS') !!}
+                                                +<span class="counter">{!! getConfigurationField('WEEKLY_NET_PIPS') !!}</span>
                                             </div>
 
                                             <div class="stat-label">
@@ -684,7 +684,7 @@
 
                                         <div class="stat-text">
                                             <div class="stat-value">
-                                                {!! getConfigurationField('WEEKLY_TOTAL_TRADES') !!}
+                                                <span class="counter">{!! getConfigurationField('WEEKLY_TOTAL_TRADES') !!}</span>
                                                 <small style="font-size:16px;color:#777;">{!! getConfigurationDisplayName('WEEKLY_TOTAL_TRADES') !!}</small>
                                             </div>
 
@@ -748,7 +748,7 @@
 
                                         <div class="stat-text">
                                             <div class="stat-value">
-                                                {!! getConfigurationField('MONTHLY_WIN_RATE') !!}%
+                                                <span class="counter">{!! getConfigurationField('MONTHLY_WIN_RATE') !!}</span>%
                                             </div>
 
                                             <div class="stat-label">
@@ -780,7 +780,7 @@
 
                                         <div class="stat-text">
                                             <div class="stat-value text-success" style="margin-left: -15px;">
-                                                +{!! getConfigurationField('MONTHLY_NET_PIPS') !!}
+                                                +<span class="counter">{!! getConfigurationField('MONTHLY_NET_PIPS') !!}</span>
                                             </div>
 
                                             <div class="stat-label" style="margin-left: -15px;">
@@ -805,7 +805,7 @@
 
                                         <div class="stat-text">
                                             <div class="stat-value">
-                                                {!! getConfigurationField('MONTHLY_TOTAL_TRADES') !!}
+                                                <span class="counter">{!! getConfigurationField('MONTHLY_TOTAL_TRADES') !!}</span>
                                                 <small style="font-size:16px;color:#777;">{!! getConfigurationDisplayName('MONTHLY_TOTAL_TRADES') !!}</small>
                                             </div>
 
