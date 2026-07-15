@@ -582,6 +582,22 @@
 
         <div class="wrap">
 
+            <!-- Verified heading -->
+            <div class="divider-heading">
+                <span class="divider-line"></span>
+                <span class="label">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2L4 5V11C4 16 7.5 19.5 12 21C16.5 19.5 20 16 20 11V5L12 2Z" stroke="currentColor"
+                            stroke-width="2" stroke-linejoin="round" />
+                        <path d="M9 12L11 14L15 10" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                    Result Verified by Third-Party
+                </span>
+                <span class="divider-line"></span>
+            </div>
+
             <!-- Daily / Weekly / Monthly toggle -->
             <div class="text-center mb-5">
                 <div class="btn-group toggle-group gap-3" role="group">
@@ -598,22 +614,6 @@
                     border-radius: 15px;
                 }
             </style>
-
-            <!-- Verified heading -->
-            <div class="divider-heading">
-                <span class="divider-line"></span>
-                <span class="label">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12 2L4 5V11C4 16 7.5 19.5 12 21C16.5 19.5 20 16 20 11V5L12 2Z" stroke="currentColor"
-                            stroke-width="2" stroke-linejoin="round" />
-                        <path d="M9 12L11 14L15 10" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                            stroke-linejoin="round" />
-                    </svg>
-                    Result Verified by Third-Party
-                </span>
-                <span class="divider-line"></span>
-            </div>
 
             <div class="cards-block">
                 <div id="weeklyCards">
