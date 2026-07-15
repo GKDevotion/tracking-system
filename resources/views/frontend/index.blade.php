@@ -508,7 +508,7 @@
             .stat-card {
                 border: 1px solid var(--line);
                 border-radius: 16px;
-                padding: 20px;
+                padding: 40px 20px;
                 height: 100%;
                 background: #fff;
                 display: flex;
@@ -539,15 +539,15 @@
             }
 
             .stat-value {
-                font-size: 2.2rem;
-                /* font-weight: 800; */
+                font-size: 2.5rem;
+                font-weight: 500;
                 line-height: 1.1;
-                text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.18);
+                /* text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.18); */
             }
 
             .stat-label {
                 font-weight: 700;
-                font-size: .95rem;
+                font-size: 1rem;
                 margin-top: 2px;
                 color: #665b5b;
             }
@@ -581,76 +581,6 @@
 
         <div class="wrap">
 
-            <!-- Verified heading -->
-            <div class="divider-heading">
-                <span class="divider-line"></span>
-                <span class="label">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12 2L4 5V11C4 16 7.5 19.5 12 21C16.5 19.5 20 16 20 11V5L12 2Z" stroke="currentColor"
-                            stroke-width="2" stroke-linejoin="round" />
-                        <path d="M9 12L11 14L15 10" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                            stroke-linejoin="round" />
-                    </svg>
-                    Result Verified by Third-Party
-                </span>
-                <span class="divider-line"></span>
-            </div>
-
-            <!-- Verification badges row -->
-            <div class="row g-3 align-items-center mb-5 justify-content-center">
-                <div class="col-12 col-md-4">
-                    <div class="badge-card">
-                        <div class="myfxbook-pill">
-                            <img src="{{url('public/frontend/images/home/MyFXBook-Verified.png')}}" title="MyFXBook Verified" />
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6 col-md-2 d-flex justify-content-center">
-                    <style>
-                        /* ============================= */
-                        /* 3D TRUSTED SHIELD ICON */
-                        /* ============================= */
-
-                        .trusted-shield{
-                            position: relative;
-                            width: 100px;
-                            height: auto;
-                            margin: auto;
-                            animation: floating 2s ease-in-out infinite;
-                            transform-style: preserve-3d;
-                        }
-
-                        /* FLOATING EFFECT */
-                        @keyframes floating{
-                            0%,100%{
-                                transform: translateY(0px);
-                            }
-                            50%{
-                                transform: translateY(-12px);
-                            }
-                        }
-
-                        /* MOBILE */
-                        @media(max-width:768px){
-
-                            .trusted-shield{
-                                width: 100px;
-                                height: auto;
-                            }
-                        }
-                    </style>
-                    <div class="trusted-shield">
-                        <img src="{{url('public/frontend/images/Trusted-Sheild.png')}}">
-                    </div>
-                </div>
-                <div class="col-12 col-md-4">
-                    <div class="badge-card">
-                        <img src="{{url('public/frontend/images/home/BlueFX-Verified.webp')}}" title="Blue FX Verified" />
-                    </div>
-                </div>
-            </div>
-
             <!-- Daily / Weekly / Monthly toggle -->
             <div class="text-center mb-5">
                 <div class="btn-group toggle-group gap-3" role="group">
@@ -659,90 +589,6 @@
                     <button type="button" class="btn"  data-type="monthly">Monthly</button>
                 </div>
             </div>
-
-            <!-- Stats grid -->
-
-            {{-- <div class="row g-3 mb-4 d-none">
-
-                <div class="col-6 col-lg-3">
-                    <div class="stat-card">
-                        <div class="stat-icon icon-red">
-                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-                                <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2" />
-                                <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2" />
-                                <circle cx="12" cy="12" r="1" fill="currentColor" />
-                            </svg>
-                        </div>
-                        <div class="stat-text">
-                            <div class="stat-value" style="">89%</div>
-                            <div class="stat-label">Win Rate</div>
-                            <div class="stat-sub d-none">Winning Accuracy</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-6 col-lg-3">
-                    <div class="stat-card">
-                        <div class="stat-icon icon-green">
-                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-                                <path d="M3 17L9 11L13 15L21 7" stroke="currentColor" stroke-width="2"
-                                    stroke-linecap="round" stroke-linejoin="round" />
-                                <path d="M15 7H21V13" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round" />
-                            </svg>
-                        </div>
-                        <div class="stat-text">
-                            <div class="stat-value" style="color:var(--green)"> +7711</div>
-                            <div class="stat-label">Net Pips</div>
-                            <div class="stat-sub d-none">Total Profit</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-6 col-lg-3">
-                    <div class="stat-card">
-                        <div class="stat-icon icon-red">
-                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-                                <rect x="4" y="12" width="3" height="8" fill="currentColor" />
-                                <rect x="10.5" y="8" width="3" height="12" fill="currentColor" />
-                                <rect x="17" y="4" width="3" height="16" fill="currentColor" />
-                            </svg>
-                        </div>
-                        <div class="stat-text">
-                            <div class="stat-value">
-                                <span>36 <small style="font-size: 16px; color: gray;">Trade</small></span><br>
-
-                            </div>
-                            <div class="stat-label">
-                                <span style="color:var(--green); font-size: 16px; font-weight: 500;">32 win, </span>
-                                <span style="color:var(--red); font-size: 16px; font-weight: 500;">4 loss</span>
-                            </div>
-                            <div class="stat-sub d-none">Total Executed</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-6 col-lg-3">
-                    <div class="stat-card">
-                        <div class="stat-icon icon-green">
-                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-                                <path d="M12 3V21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-                                <path d="M5 7H19" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-                                <circle cx="6" cy="10" r="3" stroke="currentColor"
-                                    stroke-width="2" />
-                                <circle cx="18" cy="10" r="3" stroke="currentColor"
-                                    stroke-width="2" />
-                            </svg>
-                        </div>
-                        <div class="stat-text">
-                            <div class="stat-value" style="">1:2.4</div>
-                            <div class="stat-label">R:R Ratio</div>
-                            <div class="stat-sub d-none">Risk to Reward</div>
-                        </div>
-                    </div>
-                </div>
-
-            </div> --}}
 
             <style>
                 .cards-block {
@@ -926,7 +772,7 @@
                                                 +{!! getConfigurationField('MONTHLY_NET_PIPS') !!}
                                             </div>
 
-                                            <div class="stat-label">
+                                            <div class="stat-label" style="margin-left: -15px;">
                                                 {!! getConfigurationDisplayName('MONTHLY_NET_PIPS') !!}
                                             </div>
                                         </div>
@@ -1027,8 +873,79 @@
                     });
                 </script>
 
-                @include('frontend.element.result')
             </div>
+
+            <!-- Verified heading -->
+            <div class="divider-heading">
+                <span class="divider-line"></span>
+                <span class="label">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2L4 5V11C4 16 7.5 19.5 12 21C16.5 19.5 20 16 20 11V5L12 2Z" stroke="currentColor"
+                            stroke-width="2" stroke-linejoin="round" />
+                        <path d="M9 12L11 14L15 10" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                    Result Verified by Third-Party
+                </span>
+                <span class="divider-line"></span>
+            </div>
+
+            <!-- Verification badges row -->
+            <div class="row g-3 align-items-center mb-5 justify-content-center">
+                <div class="col-12 col-md-4">
+                    <div class="badge-card">
+                        <div class="myfxbook-pill">
+                            <img src="{{url('public/frontend/images/home/MyFXBook-Verified.png')}}" title="MyFXBook Verified" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-2 d-flex justify-content-center">
+                    <style>
+                        /* ============================= */
+                        /* 3D TRUSTED SHIELD ICON */
+                        /* ============================= */
+
+                        .trusted-shield{
+                            position: relative;
+                            width: 100px;
+                            height: auto;
+                            margin: auto;
+                            animation: floating 2s ease-in-out infinite;
+                            transform-style: preserve-3d;
+                        }
+
+                        /* FLOATING EFFECT */
+                        @keyframes floating{
+                            0%,100%{
+                                transform: translateY(0px);
+                            }
+                            50%{
+                                transform: translateY(-12px);
+                            }
+                        }
+
+                        /* MOBILE */
+                        @media(max-width:768px){
+
+                            .trusted-shield{
+                                width: 100px;
+                                height: auto;
+                            }
+                        }
+                    </style>
+                    <div class="trusted-shield">
+                        <img src="{{url('public/frontend/images/Trusted-Sheild.png')}}">
+                    </div>
+                </div>
+                <div class="col-12 col-md-4">
+                    <div class="badge-card">
+                        <img src="{{url('public/frontend/images/home/BlueFX-Verified.webp')}}" title="Blue FX Verified" />
+                    </div>
+                </div>
+            </div>
+
+            @include('frontend.element.result')
         </div>
     </section>
 
