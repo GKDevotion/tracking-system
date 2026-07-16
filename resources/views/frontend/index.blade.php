@@ -87,7 +87,7 @@
                     <source src="{{ url('public/frontend/audio/getChannel-click.mp3') }}" type="audio/mpeg">
                 </audio>
             </a>
- 
+
 
             <!-- Desktop Animation -->
             <div id="lottie-desktop" class="lottie-animation"></div>
@@ -108,9 +108,9 @@
                     --line:#d9d9d9;
                     --green:#38c172;
                 }
-                
-                .hero-animation{ 
-                    margin:0 auto; 
+
+                .hero-animation{
+                    margin:0 auto;
                     text-align:center;
                     position:relative;
                 }
@@ -125,7 +125,7 @@
                 .network{
                     position:relative;
                     width:100%;
-                    aspect-ratio: 1400 / 560; 
+                    aspect-ratio: 1400 / 560;
                 }
                 .network svg{
                     position:absolute; inset:0;
@@ -145,7 +145,7 @@
                 .center-badge{
                     position:absolute;
                     left:50%; top:50%;
-                    transform:translate(-50%,-54%); 
+                    transform:translate(-50%,-54%);
                     color:#fff;
                     font-weight:800;
                     font-size:15px;
@@ -195,8 +195,8 @@
                     font-weight:800; font-size:15px; white-space:nowrap;
                 }
         </style>
-        
-        <section class="hero-animation"> 
+
+        <section class="hero-animation">
             <div class="network" id="network">
                 <svg viewBox="0 0 1900 560" preserveAspectRatio="none">
                 <!-- LEFT paths -->
@@ -220,7 +220,7 @@
                 <path id="p-r3d" class="line dotted"></path>
                 </svg>
 
-                <div class="center-badge" id="centerBadge"> 
+                <div class="center-badge" id="centerBadge">
                     <a href="{{ getConfigurationField('SOCIAL_TELEGRAM_LINK') }}" target="_blank"
                         class="main-button is-centered w-inline-block today-signal-sound">
                         <div class="button-text-wrap" style="display: block;">
@@ -246,32 +246,31 @@
                             setTimeout(function () {
                                 window.open(url, '_blank');
                             }, 200);
-                        }); 
+                        });
                     </script>
 
                 <!-- Icon markers: swap the <img src="..."> for the official logo files you have
                     rights to use. Fallback colored badges are shown if no image is provided. -->
                 <div class="marker" data-path="p-l1" data-duration="7"  data-delay="0">
-                <div class="badge"><div class="fallback" style="background:#0057b8;">NDQ</div></div>
+                    <div class="badge"><div class="fallback" style="background:#0057b8;">NDQ</div></div>
                 </div>
                 <div class="marker" data-path="p-l2" data-duration="8"  data-delay="1.5">
-                <div class="badge"><div class="fallback" style="background:#10a37f;">AI</div></div>
+                    <div class="badge"><div class="fallback" style="background:#10a37f;">AI</div></div>
                 </div>
                 <div class="marker" data-path="p-l3" data-duration="6.5" data-delay="3">
-                <div class="badge"><div class="fallback" style="background:linear-gradient(135deg,#4285f4,#ea4335,#fbbc05,#34a853);">G</div></div>
+                    <div class="badge"><div class="fallback" style="background:#fbbc05;">G</div></div>
                 </div>
-
                 <div class="marker" data-path="p-r1" data-duration="7.5" data-delay="0.8">
-                <div class="badge"><div class="fallback" style="background:#d97757;">C</div></div>
+                    <div class="badge"><div class="fallback" style="background:#d97757;">C</div></div>
                 </div>
                 <div class="marker" data-path="p-r2" data-duration="6"   data-delay="2.2">
-                <div class="badge"><div class="fallback" style="background:#111;">BB</div></div>
+                    <div class="badge"><div class="fallback" style="background:#111;">BB</div></div>
                 </div>
                 <div class="marker" data-path="p-r3" data-duration="8.2" data-delay="4">
-                <div class="badge"><div class="fallback" style="background:#2962ff;">TV</div></div>
+                    <div class="badge"><div class="fallback" style="background:#2962ff;">TV</div></div>
                 </div>
             </div>
-        
+
         </section>
 
         <script>
@@ -393,7 +392,7 @@
             })();
         </script>
 
- 
+
         <script>
             // Desktop Lottie
             lottie.loadAnimation({
@@ -1556,7 +1555,7 @@
     <!-- Page Pricing End -->
 
     @include('frontend.element.blog')
- 
+
 
     <!-- Page Team Single Start -->
     <div class="page-team-single pt-0 mt-0 mt-md-5">
