@@ -3239,7 +3239,7 @@ header.main-header .header-sticky.active{
 
 .benefit-img img{
 	width: 100%;
-	aspect-ratio: 1 / 1.3;
+	/* aspect-ratio: 1 / 1.3; */
 	object-fit: cover;
 	border-radius: 20px;
 }
@@ -3312,8 +3312,8 @@ header.main-header .header-sticky.active{
 	flex-wrap: wrap;
 	align-items: center;
 	border-top: 1px solid var(--divider-color);
-	margin-top: 40px;
-	padding-top: 40px;
+	margin-top: 20px;
+	padding-top: 20px;
 }
 
 .benefit-body-item .icon-box{

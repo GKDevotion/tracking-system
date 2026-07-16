@@ -27,6 +27,10 @@
                             font-size: 20px;
                             font-weight: 600;
                         }
+                        .section-title h2 {
+                            font-weight: 700;
+                            color: var(--primary-color);
+                        }
                     </style>
                     <!-- Pricing Tab Item Start -->
                     <div class="pricing-tab-item" id="annually">
@@ -93,7 +97,7 @@
                                                 setTimeout(function () {
                                                     window.location.href = url;
                                                 }, 200); // Adjust to match your sound length
-                                            }); 
+                                            });
                                         </script>
                                         <!-- Pricing Button End -->
 

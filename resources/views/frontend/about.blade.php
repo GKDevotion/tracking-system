@@ -51,7 +51,7 @@
                     <!-- About Us Content Start -->
                     <div class="about-us-content">
                         <!-- Section Title Start -->
-                        <div class="section-title">
+                        <div class="section-title mb-0">
                             <h2 class="text-effect wow fadeInUp" data-wow-delay="0.2s" data-cursor="-opaque">
                                 Wealthora was created to bring clarity, structure, and discipline to the trading journey.
                             </h2>
@@ -82,46 +82,25 @@
     <div class="our-benefits bg-section">
         <div class="container">
             <div class="row align-items-center">
-                <div class="col-lg-5">
-                    <!-- Our Benefit Image Start -->
-                    <div class="our-benefit-image wow fadeInUp">
-                        <!-- Benefit Image Start -->
-                        <div class="benefit-img">
-                            <figure class="image-anime">
-                                <img src="public/frontend/images/benefit-image.jpg" alt="">
-                            </figure>
-                        </div>
-                        <!-- Benefit Image End -->
+                <div class="col-lg-12">
+                    <!-- Section Title Start -->
+                    <div class="section-title text-center mb-0">
+                        <h3 class="wow fadeInUp">
+                            Wealthora community
+                        </h3>
+                        <h2 class="wow fadeInUp" data-wow-delay="0.2s" data-cursor="-opaque">
+                            Inside the Wealthora <span>community,</span> <br>members gain access to:
+                        </h2>
 
-                        <!-- Benefit CTA Box Start -->
-                        <div class="benefit-cta-box">
-                            <div class="benefit-cta-content">
-                                <h2><span class="counter">57,000</span> PIPS</h2>
-                                <p>Delivered</p>
-                            </div>
-                        </div>
-                        <!-- Benefit CTA Box End -->
+                        <p class="wow fadeInUp" data-wow-delay="0.4s">
+                            Tools and insights designed for professional trading growth
+                        </p>
                     </div>
-                    <!-- Our Benefit Image End -->
+                    <!-- Section Title End -->
                 </div>
-
-                <div class="col-lg-7">
+                <div class="col-lg-6">
                     <!-- Benefit Content Start -->
                     <div class="benefit-content">
-                        <!-- Section Title Start -->
-                        <div class="section-title">
-                            <h3 class="wow fadeInUp">
-                                Wealthora community
-                            </h3>
-                            <h2 class="wow fadeInUp" data-wow-delay="0.2s" data-cursor="-opaque">
-                                Inside the Wealthora <span>community, members</span> gain access to:
-                            </h2>
-
-                            <p class="wow fadeInUp" data-wow-delay="0.4s">
-                                Tools and insights designed for professional trading growth
-                            </p>
-                        </div>
-                        <!-- Section Title End -->
 
                         <!-- Benefit Body Start -->
                         <div class="benefit-body">
@@ -185,6 +164,29 @@
                         <!-- Benefit Body End -->
                     </div>
                     <!-- Benefit Content End -->
+                </div>
+
+                <div class="col-lg-6">
+                    <!-- Our Benefit Image Start -->
+                    <div class="our-benefit-image wow fadeInUp">
+                        <!-- Benefit Image Start -->
+                        <div class="benefit-img">
+                            <figure class="image-anime">
+                                <img src="{{url('public/frontend/images/about-us-elephant.png')}}" alt="">
+                            </figure>
+                        </div>
+                        <!-- Benefit Image End -->
+
+                        <!-- Benefit CTA Box Start -->
+                        <div class="benefit-cta-box d-none">
+                            <div class="benefit-cta-content">
+                                <h2><span class="counter">57,000</span> PIPS</h2>
+                                <p>Delivered</p>
+                            </div>
+                        </div>
+                        <!-- Benefit CTA Box End -->
+                    </div>
+                    <!-- Our Benefit Image End -->
                 </div>
 
                 <div class="row">
