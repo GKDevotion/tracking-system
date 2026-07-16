@@ -232,4 +232,33 @@ class TelegramScraper
 
         return trim($text);
     }
+
+    /**
+     * Fetch telegram deleted signals
+     */
+    public static function scrapeDeleted(
+        string $channel,
+        ?int $afterId = null,
+        int $maxPages = 20
+    ): array {
+
+        $resultIds = [];
+
+        // for ($page = 0; $page < $maxPages; $page++) {
+
+            $html = self::fetchPage($channel, $afterId);
+
+            $messages = self::extractMessages($html);
+
+            // if (empty($messages)) {
+            //     break;
+            // }
+
+            foreach ($messages as $message) {
+                $resultIds[] = $message['msg_id'];
+            }
+        // }
+
+        return $resultIds;
+    }
 }
