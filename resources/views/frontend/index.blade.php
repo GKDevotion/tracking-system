@@ -76,7 +76,7 @@
 
         <link href="{{ url('public/frontend/css/lottie.css') }}" rel="stylesheet" />
         <script src="{{ url('public/frontend/js/lottie.min.js') }}"></script>
-        <div class="cta-background-wrap is-relative">
+        <div class="cta-background-wrap is-relative d-none">
 
             <a href="{{ getConfigurationField('SOCIAL_TELEGRAM_LINK') }}" target="_blank"
                 class="main-button is-centered w-inline-block today-signal-sound">
@@ -87,25 +87,7 @@
                     <source src="{{ url('public/frontend/audio/getChannel-click.mp3') }}" type="audio/mpeg">
                 </audio>
             </a>
-
-
-            <script>
-                $(".today-signal-sound").on("click", function(e) {
-
-                    e.preventDefault();
-
-                    const sound = document.getElementById("todaySignalSound");
-                    const url = this.href;
-
-                    sound.currentTime = 0;
-                    sound.play().catch(() => {});
-
-                    // Navigate after the sound starts
-                    setTimeout(function () {
-                        window.open(url, '_blank');
-                    }, 200);
-                }); 
-            </script>
+ 
 
             <!-- Desktop Animation -->
             <div id="lottie-desktop" class="lottie-animation"></div>
@@ -117,6 +99,301 @@
             <div id="lottie-mobile" class="lottie-animation is-mobile"></div>
 
         </div>
+
+        <style>
+                :root{
+                    --red:#ff3b1f;
+                    --red-dark:#e02c10;
+                    --ink:#141414;
+                    --line:#d9d9d9;
+                    --green:#38c172;
+                }
+                
+                .hero-animation{ 
+                    margin:0 auto; 
+                    text-align:center;
+                    position:relative;
+                }
+                .hero-animation h1{
+                    font-size:clamp(28px,4vw,46px);
+                    font-weight:800;
+                    margin:0 0 8px;
+                }
+                .hero-animation h1 .accent{ color:var(--green); }
+
+                /* ---------- network stage ---------- */
+                .network{
+                    position:relative;
+                    width:100%;
+                    aspect-ratio: 1400 / 560; 
+                }
+                .network svg{
+                    position:absolute; inset:0;
+                    width:100%; height:100%;
+                    overflow:visible;
+                }
+                .line{
+                    fill:none;
+                    stroke:var(--line);
+                    stroke-width:1.5;
+                }
+                .line.dotted{
+                    stroke-dasharray:2 8;
+                    opacity:.9;
+                }
+
+                .center-badge{
+                    position:absolute;
+                    left:50%; top:50%;
+                    transform:translate(-50%,-54%); 
+                    color:#fff;
+                    font-weight:800;
+                    font-size:15px;
+                    letter-spacing:.03em;
+                    padding:14px 26px;
+                    border-radius:999px;
+                    box-shadow:0 10px 24px rgba(255,59,31,.35);
+                    z-index:5;
+                    white-space:nowrap;
+                }
+
+                .marker{
+                    position:absolute;
+                    width:56px; height:56px;
+                    transform:translate(-50%,-50%);
+                    display:flex; align-items:center; justify-content:center;
+                    z-index:4;
+                    pointer-events:none;
+                }
+                .marker .badge{
+                    width:100%; height:100%;
+                    border-radius:14px;
+                    background:#fff;
+                    border:1px solid #eee;
+                    box-shadow:0 6px 18px rgba(0,0,0,.10);
+                    display:flex; align-items:center; justify-content:center;
+                    overflow:hidden;
+                }
+                .marker .badge img{
+                    width:70%; height:70%; object-fit:contain;
+                }
+                .marker .fallback{
+                    width:100%; height:100%;
+                    border-radius:14px;
+                    display:flex; align-items:center; justify-content:center;
+                    color:#fff; font-weight:800; font-size:13px;
+                }
+
+                .divider{
+                    display:flex; align-items:center; gap:14px;
+                    margin-top:28px;
+                }
+                .divider::before,.divider::after{
+                    content:""; flex:1; height:1px; background:var(--line);
+                }
+                .divider span{
+                    font-weight:800; font-size:15px; white-space:nowrap;
+                }
+        </style>
+        
+        <section class="hero-animation"> 
+            <div class="network" id="network">
+                <svg viewBox="0 0 1900 560" preserveAspectRatio="none">
+                <!-- LEFT paths -->
+                <path id="p-l1"  class="line solid"></path>
+                <path id="p-l1d" class="line dotted"></path>
+
+                <path id="p-l2"  class="line solid"></path>
+                <path id="p-l2d" class="line dotted"></path>
+
+                <path id="p-l3"  class="line solid"></path>
+                <path id="p-l3d" class="line dotted"></path>
+
+                <!-- RIGHT paths (mirrored) -->
+                <path id="p-r1"  class="line solid"></path>
+                <path id="p-r1d" class="line dotted"></path>
+
+                <path id="p-r2"  class="line solid"></path>
+                <path id="p-r2d" class="line dotted"></path>
+
+                <path id="p-r3"  class="line solid"></path>
+                <path id="p-r3d" class="line dotted"></path>
+                </svg>
+
+                <div class="center-badge" id="centerBadge"> 
+                    <a href="{{ getConfigurationField('SOCIAL_TELEGRAM_LINK') }}" target="_blank"
+                        class="main-button is-centered w-inline-block today-signal-sound">
+                        <div class="button-text-wrap" style="display: block;">
+                            <div class="btn-text text-white signal-btn">TODAY SIGNALS</div>
+                        </div>
+                        <audio id="todaySignalSound" preload="auto">
+                            <source src="{{ url('public/frontend/audio/getChannel-click.mp3') }}" type="audio/mpeg">
+                        </audio>
+                    </a>
+                </div>
+                    <script>
+                        $(".today-signal-sound").on("click", function(e) {
+
+                            e.preventDefault();
+
+                            const sound = document.getElementById("todaySignalSound");
+                            const url = this.href;
+
+                            sound.currentTime = 0;
+                            sound.play().catch(() => {});
+
+                            // Navigate after the sound starts
+                            setTimeout(function () {
+                                window.open(url, '_blank');
+                            }, 200);
+                        }); 
+                    </script>
+
+                <!-- Icon markers: swap the <img src="..."> for the official logo files you have
+                    rights to use. Fallback colored badges are shown if no image is provided. -->
+                <div class="marker" data-path="p-l1" data-duration="7"  data-delay="0">
+                <div class="badge"><div class="fallback" style="background:#0057b8;">NDQ</div></div>
+                </div>
+                <div class="marker" data-path="p-l2" data-duration="8"  data-delay="1.5">
+                <div class="badge"><div class="fallback" style="background:#10a37f;">AI</div></div>
+                </div>
+                <div class="marker" data-path="p-l3" data-duration="6.5" data-delay="3">
+                <div class="badge"><div class="fallback" style="background:linear-gradient(135deg,#4285f4,#ea4335,#fbbc05,#34a853);">G</div></div>
+                </div>
+
+                <div class="marker" data-path="p-r1" data-duration="7.5" data-delay="0.8">
+                <div class="badge"><div class="fallback" style="background:#d97757;">C</div></div>
+                </div>
+                <div class="marker" data-path="p-r2" data-duration="6"   data-delay="2.2">
+                <div class="badge"><div class="fallback" style="background:#111;">BB</div></div>
+                </div>
+                <div class="marker" data-path="p-r3" data-duration="8.2" data-delay="4">
+                <div class="badge"><div class="fallback" style="background:#2962ff;">TV</div></div>
+                </div>
+            </div>
+        
+        </section>
+
+        <script>
+            (function(){
+            const svg = document.querySelector('.network svg');
+            const stage = document.getElementById('network');
+            const centerBadge = document.getElementById('centerBadge');
+            const viewBox = svg.viewBox.baseVal; // {x,y,width,height}
+
+            // Path shapes as templates: every curve ends at {cx},{cy}, which gets
+            // replaced with the button's real measured center. The middle-row lines
+            // (l2 / r2) are kept perfectly straight so they run flush into the pill,
+            // matching the reference layout.
+            const BUTTON_HALF_WIDTH = 90;
+
+            const pathTemplates = {
+            // LEFT SIDE
+            'p-l1': (cx, cy) =>
+                `M -60,70 C 350,70 ${cx-260},${cy} ${cx-BUTTON_HALF_WIDTH},${cy}`,
+
+            'p-l1d': (cx, cy) =>
+                `M -60,140 C 350,140 ${cx-260},${cy} ${cx-BUTTON_HALF_WIDTH},${cy}`,
+
+            'p-l2': (cx, cy) =>
+                `M -60,${cy} L ${cx-BUTTON_HALF_WIDTH},${cy}`,
+
+            'p-l2d': (cx, cy) =>
+                `M -60,${cy} L ${cx-BUTTON_HALF_WIDTH},${cy}`,
+
+            'p-l3': (cx, cy) =>
+                `M -60,530 C 350,530 ${cx-260},${cy} ${cx-BUTTON_HALF_WIDTH},${cy}`,
+
+            'p-l3d': (cx, cy) =>
+                `M -60,440 C 350,440 ${cx-260},${cy} ${cx-BUTTON_HALF_WIDTH},${cy}`,
+
+            // RIGHT SIDE
+            'p-r1': (cx, cy) =>
+                `M 1960,70 C 1610,70 ${cx+260},${cy} ${cx+BUTTON_HALF_WIDTH},${cy}`,
+
+            'p-r1d': (cx, cy) =>
+                `M 1960,140 C 1610,140 ${cx+260},${cy} ${cx+BUTTON_HALF_WIDTH},${cy}`,
+
+            'p-r2': (cx, cy) =>
+                `M 1960,${cy} L ${cx+BUTTON_HALF_WIDTH},${cy}`,
+
+            'p-r2d': (cx, cy) =>
+                `M 1960,${cy} L ${cx+BUTTON_HALF_WIDTH},${cy}`,
+
+            'p-r3': (cx, cy) =>
+                `M 1960,530 C 1610,530 ${cx+260},${cy} ${cx+BUTTON_HALF_WIDTH},${cy}`,
+
+            'p-r3d': (cx, cy) =>
+                `M 1960,440 C 1610,440 ${cx+260},${cy} ${cx+BUTTON_HALF_WIDTH},${cy}`
+            };
+            const markers = document.querySelectorAll('.marker');
+            let items = [];
+
+            function alignToButton(){
+                // Read the button's real center relative to the network container, in px
+                const stageRect = stage.getBoundingClientRect();
+                const btnRect = centerBadge.getBoundingClientRect();
+                const pxCenterX = (btnRect.left + btnRect.width / 2) - stageRect.left;
+                const pxCenterY = (btnRect.top + btnRect.height / 2) - stageRect.top;
+
+                // Convert that pixel position into the SVG's own coordinate space
+                const cx = (pxCenterX / stageRect.width) * viewBox.width;
+                const cy = (pxCenterY / stageRect.height) * viewBox.height;
+
+                Object.keys(pathTemplates).forEach(id => {
+                svg.querySelector('#' + id).setAttribute('d', pathTemplates[id](cx, cy));
+                });
+
+                // Rebuild marker/path lookup now that lengths have changed
+                items = Array.from(markers).map(marker => {
+                const pathEl = svg.querySelector('#' + marker.dataset.path);
+                return {
+                    marker,
+                    pathEl,
+                    length: pathEl.getTotalLength(),
+                    duration: parseFloat(marker.dataset.duration || 7),
+                    delay: parseFloat(marker.dataset.delay || 0)
+                };
+                });
+            }
+
+            function positionMarker(item, t){
+                const point = item.pathEl.getPointAtLength(t * item.length);
+                const leftPct = (point.x / viewBox.width) * 100;
+                const topPct  = (point.y / viewBox.height) * 100;
+                item.marker.style.left = leftPct + '%';
+                item.marker.style.top  = topPct + '%';
+
+                let opacity = 1;
+                if (t < 0.08) opacity = t / 0.08;
+                else if (t > 0.92) opacity = (1 - t) / 0.08;
+                item.marker.style.opacity = Math.max(0, Math.min(1, opacity));
+            }
+
+            function loop(now){
+                const t = now / 1000;
+                items.forEach(item => {
+                const elapsed = (t - item.delay);
+                if (elapsed < 0){
+                    item.marker.style.opacity = 0;
+                } else {
+                    const progress = (elapsed % item.duration) / item.duration;
+                    positionMarker(item, progress);
+                }
+                });
+                requestAnimationFrame(loop);
+            }
+
+            // Run on load, on resize, and once immediately (covers cached/instant loads)
+            window.addEventListener('load', alignToButton);
+            window.addEventListener('resize', alignToButton);
+            alignToButton();
+
+            requestAnimationFrame(loop);
+            })();
+        </script>
+
+ 
         <script>
             // Desktop Lottie
             lottie.loadAnimation({
@@ -1256,6 +1533,7 @@
     <!-- Page Pricing End -->
 
     @include('frontend.element.blog')
+ 
 
     <!-- Page Team Single Start -->
     <div class="page-team-single pt-0 mt-0 mt-md-5">

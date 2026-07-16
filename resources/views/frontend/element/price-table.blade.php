@@ -71,10 +71,30 @@
 
                                         <!-- Pricing Button Start -->
                                         <div class="pricing-btn">
-                                            <a href="{{ url('purchase?plan=' . $val['link']) }}" class="btn-default">
+                                            <a href="{{ url('purchase?plan=' . $val['link']) }}" class="btn-default get-pricing-btn-sound">
                                                 Get Started Now
                                             </a>
+                                            <audio id="pricingBtnSound" preload="auto">
+                                                <source src="{{ url('public/frontend/audio/getChannel-click.mp3') }}" type="audio/mpeg">
+                                            </audio>
                                         </div>
+                                        <script>
+                                            $(".get-pricing-btn-sound").on("click", function(e) {
+
+                                                e.preventDefault();
+
+                                                const sound = document.getElementById("pricingBtnSound");
+                                                const url = this.href;
+
+                                                sound.currentTime = 0;
+                                                sound.play().catch(() => {});
+
+                                                // Navigate after the sound starts
+                                                setTimeout(function () {
+                                                    window.location.href = url;
+                                                }, 200); // Adjust to match your sound length
+                                            }); 
+                                        </script>
                                         <!-- Pricing Button End -->
 
                                         <!-- Pricing body Start -->
