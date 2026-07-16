@@ -70,6 +70,8 @@
     <!-- Main Custom Css -->
     <link rel="stylesheet" href="{{ url('public/frontend/css/custom.css?v=0.001') }}" media="screen">
 
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    
     @if( env( 'APP_ENV' ) != 'local' )
         <!-- Google tag (gtag.js) -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-00RBTNX5DY"></script>

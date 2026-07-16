@@ -269,7 +269,7 @@
                     }
                 </style>
                 <div class="join-tg-channel">
-                    <a class="channel-blob-btn" href="https://t.me/Wealthoraofficial" target="_blank">
+                    <a href="https://t.me/Wealthoraofficial" target="_blank" class="click-channel-sound channel-blob-btn">
                         Join Channel
                         <span class="channel-blob-btn__inner">
                         <span class="channel-blob-btn__blobs">
@@ -280,14 +280,57 @@
                         </span>
                         </span>
                     </a>
+                    <audio id="tabClickChannelSound" preload="auto">
+                        <source src="{{ url('public/frontend/audio/getChannel-click.mp3') }}" type="audio/mpeg">
+                    </audio>
                 </svg>
             </div>
+
             <div class="d-flex" style="padding: 0 50px 0 0;">
-                <a href="{{url('forex-signal')}}" class="btn btn-logo rounded-pill px-4 py-2 fw-bold">Get Started →</a>
-            </div>
+                <a href="{{url('forex-signal')}}" class="btn get-started-btn-sound btn-logo rounded-pill px-4 py-2 fw-bold">Get Started →</a>
+                <audio id="tabClickSound" preload="auto">
+                    <source src="public/frontend/audio/chutter-click.mp3" type="audio/mpeg">
+                </audio>
+            </div> 
+
+            <script> 
+                    $(".get-started-btn-sound").on("click", function(e) {
+
+                        e.preventDefault();
+
+                        const sound = document.getElementById("tabClickSound");
+                        const url = this.href;
+
+                        sound.currentTime = 0;
+                        sound.play().catch(() => {});
+
+                        // Navigate after the sound starts
+                        setTimeout(function () {
+                            window.location.href = url;
+                        }, 200); // Adjust to match your sound length
+                    }); 
+
+                    $(".click-channel-sound").on("click", function(e) {
+
+                        e.preventDefault();
+
+                        const sound = document.getElementById("tabClickChannelSound");
+                        const url = this.href;
+
+                        sound.currentTime = 0;
+                        sound.play().catch(() => {});
+
+                        // Navigate after the sound starts
+                        setTimeout(function () {
+                            window.open(url, '_blank');
+                        }, 200);
+                    }); 
+            </script>
+        
         </div>
     </div>
 </nav>
+
 
 
 <!-- Announcement Bar -->

@@ -79,11 +79,33 @@
         <div class="cta-background-wrap is-relative">
 
             <a href="{{ getConfigurationField('SOCIAL_TELEGRAM_LINK') }}" target="_blank"
-                class="main-button is-centered w-inline-block">
+                class="main-button is-centered w-inline-block today-signal-sound">
                 <div class="button-text-wrap" style="display: block;">
                     <div class="btn-text text-white signal-btn">TODAY SIGNALS</div>
                 </div>
+                <audio id="todaySignalSound" preload="auto">
+                    <source src="{{ url('public/frontend/audio/getChannel-click.mp3') }}" type="audio/mpeg">
+                </audio>
             </a>
+
+
+            <script>
+                $(".today-signal-sound").on("click", function(e) {
+
+                    e.preventDefault();
+
+                    const sound = document.getElementById("todaySignalSound");
+                    const url = this.href;
+
+                    sound.currentTime = 0;
+                    sound.play().catch(() => {});
+
+                    // Navigate after the sound starts
+                    setTimeout(function () {
+                        window.open(url, '_blank');
+                    }, 200);
+                }); 
+            </script>
 
             <!-- Desktop Animation -->
             <div id="lottie-desktop" class="lottie-animation"></div>
@@ -610,6 +632,7 @@
             </style>
 
             <div class="cards-block">
+
                 <div id="weeklyCards" style="display:none;">
                     <div class="row g-3 mb-4">
 
@@ -864,14 +887,27 @@
                     </div>
                 </div>
 
+                <audio id="tabClickSound" preload="auto">
+                    <source src="{{ url('public/frontend/audio/chutter-click.mp3') }}" type="audio/mpeg">
+                </audio>
+       
                 <script>
                     document.addEventListener("DOMContentLoaded", function () {
 
                         const buttons = document.querySelectorAll(".toggle-group .btn");
+                        const clickSound = document.getElementById("tabClickSound");
 
                         buttons.forEach(function(btn){
 
                             btn.addEventListener("click", function(){
+
+                                // Play sound
+                                if(clickSound){
+                                    clickSound.currentTime = 0;
+                                    clickSound.play().catch(function(err){
+                                        console.log(err);
+                                    });
+                                }
 
                                 buttons.forEach(function(b){
                                     b.classList.remove("active");
