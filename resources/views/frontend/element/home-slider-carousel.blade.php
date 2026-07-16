@@ -395,7 +395,7 @@
         @endif
 
         <!-- Content Slide -->
-        <div class="carousel-item active">
+        <div class="carousel-item d-none">
             <section class="hero-slider">
                 <div class="hero-slider-bg"></div>
                 <div class="hero-slider-grid"></div>
@@ -503,7 +503,7 @@
         </div>
 
         <!-- Image Slide -->
-        <div class="carousel-item">
+        <div class="carousel-item active">
             <a href="https://t.me/Wealthoraofficial" target="_blank">
                 <img src="{{ asset('storage/app/public/home-slider/website-07.png') }}"
                     class="d-block w-100"
