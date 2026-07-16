@@ -142,4 +142,43 @@ class HomeController extends Controller
             ]);
         }
     }
+
+    /**
+     *
+     */
+    public function getDeletedChannelSignals(){
+
+        $getLastSignal = ForexUpdate::orderBy('post_id', 'desc')->select('post_id')->first();
+
+        if( $getLastSignal ){
+            $post_id = $getLastSignal->post_id - 10;
+
+            try {
+                $ids = TelegramScraper::scrapeDeleted(
+                    'Wealthoraofficial',
+                    $post_id
+                );
+
+                ForexUpdate::whereBetween('post_id', [min($ids), max($ids)])
+                    ->whereNotIn('post_id', $ids)
+                    ->where('status', 1)
+                    ->update([
+                        'status' => 0
+                ]);
+
+                return response()->json([
+                    'status' => true,
+                    'message' => 'Signals fetched successfully.',
+                    'total_signals' => count($ids)
+                ]);
+            } catch (Exception $e) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Error: ' . $e->getMessage(),
+                    'data' => [],
+                    'total_signals' => 0
+                ]);
+            }
+        }
+    }
 }

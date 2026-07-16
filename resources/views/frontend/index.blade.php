@@ -583,8 +583,15 @@
             box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
         }
 
+        .signal-live-badge {
+            display: inline-flex;
+            align-items: baseline;
+            gap: 8px;
+            position: relative;
+        }
+
         /* Shine effect */
-        .live-badge::before {
+        .live-badge::before, signal-live-badge::before {
             content: '';
             position: absolute;
             top: 0;
@@ -646,6 +653,17 @@
             animation: gradientMove 2s linear infinite;
             text-shadow: 0px 4px 4px rgb(243 98 98 / 50%);
             font-size: 3rem;
+        }
+
+        .signal-live-text {
+            font-weight: 600;
+            background: linear-gradient(90deg, red, #ff0000, red);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: red;
+            animation: gradientMove 2s linear infinite;
+            text-shadow: 0px 4px 4px rgb(243 98 98 / 50%);
+            font-size: 2.3rem;
         }
 
         @keyframes gradientMove {
@@ -885,8 +903,13 @@
             <!-- Verified heading -->
             <div class="divider-heading">
                 <span class="divider-line"></span>
+                <span class="signal-live-badge">
+                    <span class="signal-live-text">LIVE</span>
+                    <span class="live-dot"></span>
+                    <span class="live-dot"></span>
+                </span>
                 <span class="label text-black">
-                    Live Signals Proof
+                    Signals Proof
                 </span>
                 <span class="divider-line"></span>
             </div>
@@ -1167,7 +1190,7 @@
                 <audio id="tabClickSound" preload="auto">
                     <source src="{{ url('public/frontend/audio/chutter-click.mp3') }}" type="audio/mpeg">
                 </audio>
-       
+
                 <script>
                     document.addEventListener("DOMContentLoaded", function () {
 
