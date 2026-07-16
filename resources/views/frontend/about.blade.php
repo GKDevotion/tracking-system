@@ -84,7 +84,7 @@
             <div class="row align-items-center">
                 <div class="col-lg-12">
                     <!-- Section Title Start -->
-                    <div class="section-title text-center mb-0">
+                    <div class="section-title mb-0">
                         <h3 class="wow fadeInUp">
                             Wealthora community
                         </h3>
