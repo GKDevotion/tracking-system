@@ -373,7 +373,7 @@
     <!-- Indicators -->
     <div class="carousel-indicators">
         <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="0" class="active"></button>
-        <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="1"></button>
+        {{-- <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="1"></button> --}}
     </div>
 
     <!-- Slides -->
@@ -395,7 +395,7 @@
         @endif
 
         <!-- Content Slide -->
-        <div class="carousel-item d-none">
+        {{-- <div class="carousel-item active">
             <section class="hero-slider">
                 <div class="hero-slider-bg"></div>
                 <div class="hero-slider-grid"></div>
@@ -500,7 +500,7 @@
                     </div>
                 </div>
             </section>
-        </div>
+        </div> --}}
 
         <!-- Image Slide -->
         <div class="carousel-item active">
