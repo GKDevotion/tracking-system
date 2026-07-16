@@ -75,9 +75,15 @@
 
                                         <!-- Pricing Button Start -->
                                         <div class="pricing-btn">
-                                            <a href="{{ url('purchase?plan=' . $val['link']) }}" class="btn-default get-pricing-btn-sound">
-                                                Get Started Now
-                                            </a>
+                                            @if(  $val['link'] == "free" )
+                                                <a href="https://t.me/Wealthoraofficial" class="btn-default get-pricing-btn-sound">
+                                                    Get Started Now
+                                                </a>
+                                            @else
+                                                <a href="{{ url('purchase?plan=' . $val['link']) }}" class="btn-default get-pricing-btn-sound">
+                                                    Get Started Now
+                                                </a>
+                                            @endif
                                             <audio id="pricingBtnSound" preload="auto">
                                                 <source src="{{ url('public/frontend/audio/getChannel-click.mp3') }}" type="audio/mpeg">
                                             </audio>
