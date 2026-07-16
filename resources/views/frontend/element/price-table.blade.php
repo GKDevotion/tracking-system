@@ -76,7 +76,7 @@
                                         <!-- Pricing Button Start -->
                                         <div class="pricing-btn">
                                             @if(  $val['link'] == "free" )
-                                                <a href="https://t.me/Wealthoraofficial" class="btn-default get-pricing-btn-sound">
+                                                <a href="https://t.me/Wealthoraofficial" target="_blank" class="btn-default get-pricing-btn-sound">
                                                     Get Started Now
                                                 </a>
                                             @else
