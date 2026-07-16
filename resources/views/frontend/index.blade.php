@@ -159,29 +159,42 @@
 
                 .marker{
                     position:absolute;
-                    width:56px; height:56px;
+                    min-width:100px;
+                    height:40px;
                     transform:translate(-50%,-50%);
-                    display:flex; align-items:center; justify-content:center;
+                    display:flex;
+                    align-items:center;
+                    justify-content:center;
                     z-index:4;
                     pointer-events:none;
                 }
                 .marker .badge{
-                    width:100%; height:100%;
+                    width:100%;
+                    height:100%;
                     border-radius:14px;
-                    background:#fff;
-                    border:1px solid #eee;
-                    box-shadow:0 6px 18px rgba(0,0,0,.10);
-                    display:flex; align-items:center; justify-content:center;
+                    /* background:#fff; */
+                    /* border:1px solid #eee; */
+                    /* box-shadow:0 6px 18px rgba(0,0,0,.10); */
+                    display:flex;
+                    align-items:center;
+                    justify-content:center;
                     overflow:hidden;
                 }
                 .marker .badge img{
-                    width:70%; height:70%; object-fit:contain;
+                    width:70%;
+                    height:70%;
+                    object-fit:contain;
                 }
                 .marker .fallback{
-                    width:100%; height:100%;
+                    width:100%;
+                    height:100%;
                     border-radius:14px;
-                    display:flex; align-items:center; justify-content:center;
-                    color:#fff; font-weight:800; font-size:13px;
+                    display:flex;
+                    align-items:center;
+                    justify-content:center;
+                    color:#fff;
+                    font-weight:800;
+                    font-size:1rem;
                 }
 
                 .divider{
@@ -251,23 +264,40 @@
 
                 <!-- Icon markers: swap the <img src="..."> for the official logo files you have
                     rights to use. Fallback colored badges are shown if no image is provided. -->
-                <div class="marker" data-path="p-l1" data-duration="7"  data-delay="0">
-                    <div class="badge"><div class="fallback" style="background:#0057b8;">NDQ</div></div>
+                <div class="marker" data-path="p-l1" data-duration="10"  data-delay="0">
+                    <div class="badge">
+                        <div class="fallback" style="background:#0057b8;">EURUSD</div>
+                    </div>
                 </div>
-                <div class="marker" data-path="p-l2" data-duration="8"  data-delay="1.5">
-                    <div class="badge"><div class="fallback" style="background:#10a37f;">AI</div></div>
+                <div class="marker" data-path="p-l2" data-duration="9"  data-delay="1.5">
+                    <div class="badge">
+                        <div class="fallback" style="background:black;">XAUUSD</div>
+                    </div>
                 </div>
-                <div class="marker" data-path="p-l3" data-duration="6.5" data-delay="3">
-                    <div class="badge"><div class="fallback" style="background:#fbbc05;">G</div></div>
+                <div class="marker" data-path="p-l3" data-duration="8" data-delay="3">
+                    <div class="badge">
+                        <div class="fallback" style="background:blue;">NAS100</div>
+                    </div>
                 </div>
-                <div class="marker" data-path="p-r1" data-duration="7.5" data-delay="0.8">
-                    <div class="badge"><div class="fallback" style="background:#d97757;">C</div></div>
+                <div class="marker" data-path="p-r1" data-duration="7" data-delay="0.8">
+                    <div class="badge">
+                        <div class="fallback" style="background:#d97757;">US30</div>
+                    </div>
                 </div>
-                <div class="marker" data-path="p-r2" data-duration="6"   data-delay="2.2">
-                    <div class="badge"><div class="fallback" style="background:#111;">BB</div></div>
+                <div class="marker" data-path="p-r2" data-duration="8" data-delay="2.2">
+                    <div class="badge">
+                        <div class="fallback" style="background:black;">USOIL</div>
+                    </div>
                 </div>
-                <div class="marker" data-path="p-r3" data-duration="8.2" data-delay="4">
-                    <div class="badge"><div class="fallback" style="background:#2962ff;">TV</div></div>
+                <div class="marker" data-path="p-r3" data-duration="9" data-delay="4">
+                    <div class="badge">
+                        <div class="fallback" style="background:#14cacd;">GBPUSD</div>
+                    </div>
+                </div>
+                <div class="marker" data-path="p-r3" data-duration="12" data-delay="3">
+                    <div class="badge">
+                        <div class="fallback" style="background:#c1079f;">USDCAD</div>
+                    </div>
                 </div>
             </div>
 
@@ -614,8 +644,8 @@
 
         /* Live dot with ripple */
         .live-dot {
-            width: 10px;
-            height: 10px;
+            width: 8px;
+            height: 8px;
             background: #ff4d4f;
             border-radius: 50%;
             position: relative;

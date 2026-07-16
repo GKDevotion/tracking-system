@@ -216,7 +216,7 @@
                                         </td>
 
                                         {{-- Order Type --}}
-                                        <td class=" text-left">
+                                        <td class="">
                                             <span class="badge-order {{ $signal->order_type == 0 ? 'badge-buy' : 'badge-sell' }}">
                                                 {{ $signal->order_type == 0 ? 'BUY' : 'SELL' }}
                                             </span>
