@@ -200,9 +200,7 @@
                         border-color: var(--primary-color) !important;
                     }
 
-                    .page-link.active:hover{
-                        background-color: var(--logo-color) !important;
-                        border-color: var(--primary-color) !important;
+                    .page-link.active:hover .page-link{
                         color: var(--bg-color) !important;
                     }
 
