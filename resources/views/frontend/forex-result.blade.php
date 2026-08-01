@@ -200,6 +200,12 @@
                         border-color: var(--primary-color) !important;
                     }
 
+                    .page-link.active:hover{
+                        background-color: var(--logo-color) !important;
+                        border-color: var(--primary-color) !important;
+                        color: var(--bg-color) !important;
+                    }
+
                     .page-link{
                         color: var(--primary-color) !important;
                     }
