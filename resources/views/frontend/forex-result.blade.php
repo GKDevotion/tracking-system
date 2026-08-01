@@ -279,6 +279,9 @@
 
                 </div>
 
+                <div class="d-flex justify-content-center mt-4">
+                    {{ $signals->links() }}
+                </div>
             </div>
         </div>
         <!-- Page Pricing End -->

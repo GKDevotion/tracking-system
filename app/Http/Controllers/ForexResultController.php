@@ -10,11 +10,9 @@ class ForexResultController extends Controller
 
     public function index()
     {
-        $signals = ForexUpdate::where('status', 1)
-            ->orderBy('signal_date', 'DESC')
-            ->latest()
-            ->limit(30)
-            ->get();
+       $signals = ForexUpdate::where('status', 1)
+                ->orderByDesc('signal_date')
+                ->paginate(15);
         return view('frontend.forex-result',compact('signals'));
     }
 

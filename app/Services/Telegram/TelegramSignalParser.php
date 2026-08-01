@@ -67,10 +67,25 @@ class TelegramSignalParser
 
         $patterns = [
 
-            'SL' => '/hit\s+sl\s*:\s*([+-]?\d+(?:\.\d+)?)\s*pips/i',
-            'TP' => '/hit\s+tp\s*:\s*([+-]?\d+(?:\.\d+)?)\s*pips/i',
-            'HIT_0' => '/hit\s*:\s*([+-]?\d+(?:\.\d+)?)\s*pips/i',
-            'HIT_1' => '/(?:pips?\s*)?hit\s*:?\s*([+-]?\d+(?:\.\d+)?)\s*pips?/i',
+            // 'SL' => '/hit\s+sl\s*:\s*([+-]?\d+(?:\.\d+)?)\s*pips/i',
+            // 'TP' => '/hit\s+tp\s*:\s*([+-]?\d+(?:\.\d+)?)\s*pips/i',
+            // 'HIT_0' => '/hit\s*:\s*([+-]?\d+(?:\.\d+)?)\s*pips/i',
+            // 'HIT_1' => '/(?:pips?\s*)?hit\s*:?\s*([+-]?\d+(?:\.\d+)?)\s*pips?/i',
+
+            // Matches: SL HIT: -68 PIPS or SL HIT: −68 PIPS
+            'SL_0' => '/sl\s+hit\s*:\s*([+\-−]?\d+(?:\.\d+)?)\s*pips?/i',
+
+            // Existing format: HIT SL: -68 PIPS
+            'SL_1' => '/hit\s+sl\s*:\s*([+\-−]?\d+(?:\.\d+)?)\s*pips?/i',
+
+            // Matches: TP HIT: +120 PIPS
+            'TP_0' => '/tp\s+hit\s*:\s*([+\-−]?\d+(?:\.\d+)?)\s*pips?/i',
+
+            // Existing format: HIT TP: +120 PIPS
+            'TP_1' => '/hit\s+tp\s*:\s*([+\-−]?\d+(?:\.\d+)?)\s*pips?/i',
+
+            'HIT_0' => '/hit\s*:\s*([+\-−]?\d+(?:\.\d+)?)\s*pips?/i',
+            'HIT_1' => '/(?:pips?\s*)?hit\s*:?\s*([+\-−]?\d+(?:\.\d+)?)\s*pips?/i',
 
         ];
 
@@ -78,8 +93,16 @@ class TelegramSignalParser
 
             if (preg_match($regex, $text, $match)) {
 
-                if( $type == "HIT_0" || $type == "HIT_1" ){
-                    $type = "HIT";
+                if (in_array($type, ['HIT_0', 'HIT_1'])) {
+                    $type = 'HIT';
+                }
+
+                if (in_array($type, ['SL_0', 'SL_1'])) {
+                    $type = 'SL';
+                }
+
+                if (in_array($type, ['TP_0', 'TP_1'])) {
+                    $type = 'TP';
                 }
 
                 return [
