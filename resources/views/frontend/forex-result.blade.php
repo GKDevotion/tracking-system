@@ -194,6 +194,20 @@
                     .text-left{
                         text-align: left !important;
                     }
+
+                    .active>.page-link, .page-link.active{
+                        background-color: var(--primary-color) !important;
+                        border-color: var(--primary-color) !important;
+                    }
+
+                    .page-link{
+                        color: var(--primary-color) !important;
+                    }
+
+                    .page-link:hover{
+                        color: var(--logo-color) !important;
+                        border-color: var(--logo-color) !important;
+                    }
                 </style>
 
                  <div class="tbl-wrap">
