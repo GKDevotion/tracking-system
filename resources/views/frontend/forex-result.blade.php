@@ -196,7 +196,7 @@
                     }
 
                     .active>.page-link, .page-link.active{
-                        background-color: var(--primary-color) !important;
+                        background-color: var(--logo-color) !important;
                         border-color: var(--primary-color) !important;
                     }
 
