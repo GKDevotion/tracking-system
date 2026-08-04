@@ -1137,7 +1137,7 @@
                                         </div>
 
                                         <div class="stat-text">
-                                            <div class="stat-value text-success" style="margin-left: -15px;">
+                                            <div class="stat-value text-success" style="margin-left: -25px;">
                                                 +<span class="counter">{!! getConfigurationField('MONTHLY_NET_PIPS') !!}</span>
                                             </div>
 
