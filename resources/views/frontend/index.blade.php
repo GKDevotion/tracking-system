@@ -887,7 +887,7 @@
             }
 
             .stat-value {
-                font-size: 2.5rem;
+                font-size: 2.3rem;
                 font-weight: 500;
                 line-height: 1.1;
                 /* text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.18); */
@@ -1010,7 +1010,7 @@
                                         </div>
 
                                         <div class="stat-text">
-                                            <div class="stat-value text-success" style="margin-left: -15px;">
+                                            <div class="stat-value text-success" style="margin-left: -25px;">
                                                 +<span class="counter">{!! getConfigurationField('WEEKLY_NET_PIPS') !!}</span>
                                             </div>
 
