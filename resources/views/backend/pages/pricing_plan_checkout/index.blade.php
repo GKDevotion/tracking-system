@@ -61,7 +61,7 @@
                                     @endif
                                 </span>
                             </td>
-                            <td>{{ $checkout->countryData->name }}</td>
+                            <td>{{ $checkout->countryData->name ?? '-' }}</td>
                             <td>
                                 <span class="badge {{ $checkout->trade_signals == 0 ? 'bg-success' : 'bg-primary' }}">
                                     {{ $checkout->trade_signals == 0 ? 'Telegram' : 'WhatsApp' }}
