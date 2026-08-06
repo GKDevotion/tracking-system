@@ -36,17 +36,12 @@ class TelegramSignalParser
         return [
 
             'pair' => $pair,
-
             'direction' => $direction,
-
             'entry_price' => $entry[0] ?? null,
-
             'entry_range' => $entry,
-
             'stop_loss' => $sl,
-
             'take_profit' => $tp,
-
+            'text' => $text,
         ];
     }
 
@@ -108,6 +103,7 @@ class TelegramSignalParser
                 return [
                     'type' => $type,
                     'profit' => $match[1],
+                    'text' => $text,
                 ];
             }
         }

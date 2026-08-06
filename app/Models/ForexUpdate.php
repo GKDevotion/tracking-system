@@ -19,6 +19,8 @@ class ForexUpdate extends Model
             'status',
             'live_btn_url',
             'post_id',
+            'result_id',
+            'result_date',
         ];
 
 }

@@ -15,7 +15,7 @@ class TelegramScraper
     public static function scrape(
         string $channel,
         ?int $afterId = null,
-        int $maxPages = 20
+        int $maxPages = 30
     ): array {
 
         $results = [];
@@ -53,21 +53,19 @@ class TelegramScraper
                     $message['result_text']
                 );
 
+                if( !$result ) {
+                    continue;
+                }
+
                 TelegramSignalSaver::save(
-
                     signal: $signal,
-
                     result: $result,
-
                     postId: $message['post_id'],
-
                     msgId: $message['msg_id'],
-
                     datetime: $message['datetime']
-
                 );
 
-                $results[] = $message['msg_id'];//$message;
+                $results[] = $message['msg_id'];
             }
 
             if (!$lowestId) {

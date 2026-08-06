@@ -10,6 +10,76 @@ class TelegramSignalSaver
     /**
      * Save Signal
      */
+    public static function _save(
+        array $signal,
+        ?array $result,
+        string $postId,
+        int $msgId,
+        ?string $datetime
+    ): ForexUpdate {
+
+        $liveBtnUrl = "https://t.me/{$postId}";
+
+        $resultId = null;
+        $resultDate = null;
+
+        /*
+        |--------------------------------------------------------------------------
+        | If this telegram message contains HIT/SL result,
+        | find original signal.
+        |--------------------------------------------------------------------------
+        */
+
+
+        $oldSignal = self::findOldSignal(
+            $signal,
+            $liveBtnUrl
+        );
+
+        $resultDate = Carbon::parse($datetime)->format('Y-m-d');
+
+        if ($oldSignal) {
+            // dd($msgId, $resultDate, $oldSignal->id, $result);
+            $dataObj = ForexUpdate::find($oldSignal->id);
+            $dataObj->update(
+                [
+                    'profit' => $result['profit'] ?? null,
+                    'status' => 1,
+                    'sort_order' => 0,
+                    'result_id' => $msgId,
+                    'result_date' => $resultDate,
+                ]
+            );
+            return $dataObj;
+        }
+
+        return ForexUpdate::updateOrCreate(
+            [
+                'live_btn_url' => $liveBtnUrl
+            ],
+            [
+                'signal_date' => $datetime
+                    ? Carbon::parse($datetime)->format('Y-m-d')
+                    : null,
+                'pair' => $signal['pair'],
+                'order_type' => $signal['direction'] == 'SELL'
+                    ? 1
+                    : 0,
+                'entry_price' => $signal['entry_price'],
+                'stop_loss' => $signal['stop_loss'],
+                'take_profit' => json_encode(
+                    $signal['take_profit']
+                ),
+                'profit' => $result['profit'] ?? null,
+                'status' => 1,
+                'sort_order' => 0,
+                'post_id' => $msgId,
+                'result_id' => $resultId,
+                'result_date' => $resultDate,
+            ]
+        );
+    }
+
     public static function save(
         array $signal,
         ?array $result,
@@ -31,16 +101,13 @@ class TelegramSignalSaver
         */
 
         if ($result) {
-
             $oldSignal = self::findOldSignal(
                 $signal,
                 $liveBtnUrl
             );
 
             if ($oldSignal) {
-
                 $resultId = $oldSignal->id;
-
                 $resultDate = Carbon::parse($datetime)
                     ->format('Y-m-d');
 
@@ -50,45 +117,29 @@ class TelegramSignalSaver
         }
 
         return ForexUpdate::updateOrCreate(
-
             [
                 'live_btn_url' => $liveBtnUrl
             ],
-
             [
-
                 'signal_date' => $datetime
                     ? Carbon::parse($datetime)->format('Y-m-d')
                     : null,
-
                 'pair' => $signal['pair'],
-
                 'order_type' => $signal['direction'] == 'SELL'
                     ? 1
                     : 0,
-
                 'entry_price' => $signal['entry_price'],
-
                 'stop_loss' => $signal['stop_loss'],
-
                 'take_profit' => json_encode(
                     $signal['take_profit']
                 ),
-
                 'profit' => $result['profit'] ?? null,
-
                 'status' => 1,
-
                 'sort_order' => 0,
-
                 'post_id' => $msgId,
-
                 'result_id' => $resultId,
-
                 'result_date' => $resultDate,
-
             ]
-
         );
     }
 
@@ -123,8 +174,13 @@ class TelegramSignalSaver
 
         if (!empty($signal['entry_price'])) {
 
-            $query->where(
-                'entry_price',
+            // $query->where(
+            //     'entry_price',
+            //     $signal['entry_price']
+            // );
+
+            $query->whereRaw(
+                'ABS(entry_price - ?) < 0.01',
                 $signal['entry_price']
             );
 
@@ -138,8 +194,13 @@ class TelegramSignalSaver
 
         if (!empty($signal['stop_loss'])) {
 
-            $query->where(
-                'stop_loss',
+            // $query->where(
+            //     'stop_loss',
+            //     $signal['stop_loss']
+            // );
+
+            $query->whereRaw(
+                'ABS(stop_loss - ?) < 0.01',
                 $signal['stop_loss']
             );
 
@@ -157,7 +218,8 @@ class TelegramSignalSaver
 
                 $query->whereJsonContains(
                     'take_profit',
-                    $tp
+                    // $tp
+                    number_format((float) $tp, 2, '.', '')
                 );
 
             }
