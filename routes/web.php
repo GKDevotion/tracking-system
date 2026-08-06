@@ -192,6 +192,7 @@ Route::middleware('auth')->group(function () {
                 'edit' => 'web.forex-update.edit',
                 'update' => 'web.forex-update.update',
                 'destroy' => 'web.forex-update.destroy',
+                'delete' => 'web.forex-update.destroy',
     ]);
 
     // Blogs

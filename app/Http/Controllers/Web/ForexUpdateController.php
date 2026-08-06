@@ -11,7 +11,7 @@ class ForexUpdateController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function _index(Request $request)
     {
         $plans = ForexUpdate::when($request->search, fn($q) => $q->where('take_profit', 'like', "%{$request->search}%"))
             ->orderBy('signal_date', 'desc')
@@ -19,6 +19,26 @@ class ForexUpdateController extends Controller
             ->withQueryString();
 
         return view('backend.pages.forex-update.index', compact('plans'));
+    }
+
+    public function index(Request $request)
+    {
+        $perPage = $request->get('per_page', 15);
+
+        $plans = ForexUpdate::when($request->search, function ($q) use ($request) {
+                $q->where(function ($query) use ($request) {
+                    $query->where('pair', 'like', "%{$request->search}%")
+                        ->orWhere('order_type', 'like', "%{$request->search}%")
+                        ->orWhere('take_profit', 'like', "%{$request->search}%")
+                        ->orWhere('entry_price', 'like', "%{$request->search}%")
+                        ->orWhere('profit', 'like', "%{$request->search}%");
+                });
+            })
+            ->orderByDesc('signal_date')
+            ->paginate($perPage)
+            ->withQueryString();
+
+        return view('backend.pages.forex-update.index', compact('plans', 'perPage'));
     }
 
     /**
@@ -115,5 +135,14 @@ class ForexUpdateController extends Controller
         $plan->delete();
 
         return redirect()->route('web.forex-update.index')->with('success', 'Forex Update deleted successfully.');
+    }
+
+    public function _destroy($id)
+    {
+        ForexUpdate::findOrFail($id)->delete();
+
+        return response()->json([
+            'success' => true
+        ]);
     }
 }

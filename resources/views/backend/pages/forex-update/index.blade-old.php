@@ -62,7 +62,7 @@
                 </thead>
                 <tbody>
                     @forelse($plans as $i => $plan)
-                        <tr id="row-{{ $plan->id }}">
+                        <tr>
                             <td>{{ $plans->firstItem() + $i }}</td>
                             <td>{{ $plan->signal_date }}</td>
                             <td>{{ $plan->pair }}</td>
@@ -80,13 +80,13 @@
                                 <a href="{{ route('web.forex-update.edit', $plan) }}" class="btn btn-sm btn-outline-warning">
                                     <i class="bi bi-pencil"></i>
                                 </a>
-
-                                <button
-                                    class="btn btn-sm btn-outline-danger delete-btn"
-                                    data-id="{{ $plan->id }}"
-                                    data-url="{{ route('web.forex-update.destroy',$plan) }}">
-                                    <i class="bi bi-trash"></i>
-                                </button>
+                                <form action="{{ route('web.forex-update.destroy', $plan) }}" method="POST" class="d-inline"
+                                      onsubmit="return confirm('Delete this Forex Update?')">
+                                    @csrf @method('DELETE')
+                                    <button class="btn btn-sm btn-outline-danger">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </form>
                             </td>
                         </tr>
                     @empty
@@ -100,66 +100,4 @@
         <div class="card-footer">{{ $plans->links() }}</div>
     @endif
 </div>
-
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script>
-$(document).on('click', '.delete-btn', function () {
-
-    let url = $(this).data('url');
-    let id = $(this).data('id');
-
-    Swal.fire({
-        title: 'Delete Forex Update?',
-        text: "This action cannot be undone.",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#dc3545',
-        cancelButtonColor: '#6c757d',
-        confirmButtonText: 'Yes, Delete'
-    }).then((result) => {
-
-        if (result.isConfirmed) {
-
-            $.ajax({
-                url: url,
-                type: 'POST',
-                data: {
-                    _token: $('meta[name="csrf-token"]').attr('content'),
-                    _method: 'DELETE'
-                },
-
-                success: function(response){
-
-                    $('#row-'+id).fadeOut(300,function(){
-                        $(this).remove();
-                    });
-
-                    Swal.fire({
-                        icon:'success',
-                        title:'Deleted!',
-                        text:'Forex Update deleted successfully.',
-                        timer:1500,
-                        showConfirmButton:false
-                    });
-
-                },
-
-                error:function(){
-
-                    Swal.fire({
-                        icon:'error',
-                        title:'Error',
-                        text:'Unable to delete record.'
-                    });
-
-                }
-
-            });
-
-        }
-
-    });
-
-});
-</script>
 @endsection
