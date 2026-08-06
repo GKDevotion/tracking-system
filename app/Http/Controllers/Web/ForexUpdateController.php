@@ -14,7 +14,7 @@ class ForexUpdateController extends Controller
     public function index(Request $request)
     {
         $plans = ForexUpdate::when($request->search, fn($q) => $q->where('take_profit', 'like', "%{$request->search}%"))
-            ->orderBy('sort_order')
+            ->orderBy('signal_date', 'desc')
             ->paginate(10)
             ->withQueryString();
 
