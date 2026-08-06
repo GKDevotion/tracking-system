@@ -116,9 +116,15 @@ class HomeController extends Controller
     /**
      *
      */
-    public function getSelectedChannelSignals(){
+    public function getSelectedChannelSignals( Request $request ){
 
-        $getLastSignal = ForexUpdate::orderBy('post_id', 'desc')->select('post_id')->first();
+        $getLastSignal = null;
+        if( isset( $request->setNull ) && $request->setNull == 1 ){
+            // Reset last signal
+            $getLastSignal = null;
+        } else {
+            $getLastSignal = ForexUpdate::orderBy('post_id', 'desc')->select('post_id')->first();
+        }
 
         try {
             $messages = TelegramScraper::scrape(
