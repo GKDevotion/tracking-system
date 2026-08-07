@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\PricingPlanCheckout;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\PricingPlanCheckoutMail;
+use Exception;
+use Illuminate\Support\Facades\Log;
 
 class CheckoutController extends Controller
 {
@@ -121,8 +125,7 @@ class CheckoutController extends Controller
         |--------------------------------------------------------------------------
         */
 
-        $fullName =
-            $request->first_name . ' ' . $request->last_name;
+        $fullName = $request->first_name . ' ' . $request->last_name;
 
         /*
         |--------------------------------------------------------------------------
@@ -144,37 +147,39 @@ class CheckoutController extends Controller
         |--------------------------------------------------------------------------
         */
 
-        PricingPlanCheckout::create([
-
+        $checkout = PricingPlanCheckout::create([
             'user_id' => Auth::id(),
-
             'plan' => $planValue,
-
             'first_name' => $request->first_name,
-
             'last_name' => $request->last_name,
-
             'full_name' => $fullName,
-
             'email' => $request->email,
-
             'country' => $request->country,
-
             'trade_signals' => $tradeSignals,
-
             'tele_username' => $request->telegram_username,
-
             'mobile_number' => $request->phone,
-
-            // crypto OR bank
-            'payment_type' => $request->payment_type,
-
-            // 0=TRC20, 1=BEP20, 2=BANK
-            'payment_option' => $paymentOption,
-
+            'payment_type' => $request->payment_type,// crypto OR bank
+            'payment_option' => $paymentOption,// 0=TRC20, 1=BEP20, 2=BANK
             'confirm_payment' => $filePath,
 
         ]);
+
+        try {
+            $mail = Mail::to('support@wealthora.io');
+
+            // Attach payment proof if uploaded
+            if ($filePath) {
+                $mail->send(
+                    (new PricingPlanCheckoutMail($checkout))
+                        ->attach(storage_path('app/public/' . $filePath))
+                );
+            } else {
+                $mail->send(new PricingPlanCheckoutMail($checkout));
+           }
+        } catch (Exception $e) {
+            Log::error('Mail Error: ' . $e->getMessage());
+
+        }
 
         return response()->json([
 
