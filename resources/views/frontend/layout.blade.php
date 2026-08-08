@@ -34,10 +34,7 @@
 
     <!-- Favicon Icon -->
     <link rel="shortcut icon" href="{{ url('public/frontend/images/favicon.png') }}" type="image/x-icon">
-
-    <link rel="icon" type="image/png" href="{{ url('public/frontend/images/favicon.png') }}">
-    <link rel="apple-touch-icon" href="{{ url('public/frontend/images/favicon.png') }}">
-
+ 
     <!-- Google Fonts Css-->
     <link rel="preconnect" href="https://fonts.googleapis.com/">
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>

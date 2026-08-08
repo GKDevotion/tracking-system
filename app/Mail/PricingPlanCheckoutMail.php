@@ -19,7 +19,6 @@ class PricingPlanCheckoutMail extends Mailable
 
     public function build()
     {
-        return $this->subject('New Pricing Plan Registration')
-                    ->view('emails.pricing-plan-checkout');
+        return $this->subject('New Pricing Plan Registration')->view('emails.pricing-plan-checkout');
     }
 }
