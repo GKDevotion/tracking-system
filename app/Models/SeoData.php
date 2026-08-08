@@ -11,6 +11,7 @@ class SeoData extends Model
         'page_slug',
         'meta_title',
         'meta_description',
+        'json_ld',
         'keywords',
         'h1_tag',
         'og_title',
@@ -21,6 +22,10 @@ class SeoData extends Model
         'status',
     ];
 
+    protected $casts = [
+        'json_ld' => 'array',
+    ];
+    
     public function user()
     {
         return $this->belongsTo(User::class);

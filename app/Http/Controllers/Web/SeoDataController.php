@@ -60,12 +60,14 @@ class SeoDataController extends Controller
             'og_title'         => 'nullable|string|max:255',
             'og_description'   => 'nullable|string',
             'og_image'         => 'nullable|string',
+            'json_ld'          => 'nullable|json',
             'canonical_url'    => 'nullable|string|max:255',
             'robots'           => 'nullable|string|max:255',
             'status'           => 'nullable|boolean',
         ]);
+ 
 
-        SeoData::create([ 
+        $seoData = SeoData::create([ 
             'page_slug'        => $request->page_slug,
             'meta_title'       => $request->meta_title,
             'meta_description' => $request->meta_description,
@@ -74,11 +76,11 @@ class SeoDataController extends Controller
             'og_title'         => $request->og_title,
             'og_description'   => $request->og_description,
             'og_image'         => $request->og_image,
-            'canonical_url'    => $request->canonical_url,
+            'canonical_url'    => $request->canonical_url, 
+            'json_ld'          => $request->json_ld ? json_decode($request->json_ld, true) : null,
             'robots'           => $request->robots,
             'status'           => $request->status ?? 1,
-        ]);
-
+        ]); 
         return redirect()
             ->route('web.seo-data.index')
             ->with('success', 'SEO Data created successfully.');
@@ -97,14 +99,13 @@ class SeoDataController extends Controller
     /**
      * Edit form
      */
-    public function edit(SeoData $seoData, $id)
+    public function edit($id)
     {
-          // IMPORTANT
         $seoData = SeoData::findOrFail($id);
 
         $menus = Menu::where('is_active', 1)
-        ->orderBy('sort_order')
-        ->get();
+            ->orderBy('sort_order')
+            ->get();
 
         return view('backend.pages.seo-data.form', compact('seoData', 'menus'));
     }
@@ -112,16 +113,18 @@ class SeoDataController extends Controller
     /**
      * Update record
      */
-    public function update(Request $request, SeoData $seoData)
+    public function update(Request $request, $id)
     {
+        $seoData = SeoData::findOrFail($id);
+
         $request->validate([
-            'page_slug'        => 'required|string|max:255,' . $seoData->id,
             'meta_title'       => 'nullable|string|max:255',
             'meta_description' => 'nullable|string',
             'keywords'         => 'nullable|string',
             'h1_tag'           => 'nullable|string|max:255',
             'og_title'         => 'nullable|string|max:255',
             'og_description'   => 'nullable|string',
+            'json_ld'          => 'nullable|json',
             'og_image'         => 'nullable|string',
             'canonical_url'    => 'nullable|string|max:255',
             'robots'           => 'nullable|string|max:255',
@@ -129,7 +132,6 @@ class SeoDataController extends Controller
         ]);
 
         $seoData->update([
-            'page_slug'        => $request->page_slug,
             'meta_title'       => $request->meta_title,
             'meta_description' => $request->meta_description,
             'keywords'         => $request->keywords,
@@ -138,6 +140,9 @@ class SeoDataController extends Controller
             'og_description'   => $request->og_description,
             'og_image'         => $request->og_image,
             'canonical_url'    => $request->canonical_url,
+            'json_ld'          => $request->json_ld
+                ? json_decode($request->json_ld, true)
+                : null,
             'robots'           => $request->robots,
             'status'           => $request->status ?? 1,
         ]);
@@ -146,7 +151,6 @@ class SeoDataController extends Controller
             ->route('web.seo-data.index')
             ->with('success', 'SEO Data updated successfully.');
     }
-
     /**
      * Delete record
      */

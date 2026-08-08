@@ -96,6 +96,15 @@
         })(window,document,'script','dataLayer','GTM-55LZXM8H');</script>
         <!-- End Google Tag Manager -->
     @endif
+
+    @if(!empty($seo?->json_ld))
+    <script type="application/ld+json">
+        {!! json_encode(
+            $seo->json_ld,
+            JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE
+        ) !!}
+    </script>
+@endif
 </head>
 
 <body>

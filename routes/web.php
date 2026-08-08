@@ -174,14 +174,17 @@ Route::middleware('auth')->group(function () {
     ]);
 
     Route::resource('seo-data', SeoDataController::class)
-            ->names([
-                'index' => 'web.seo-data.index',
-                'create' => 'web.seo-data.create',
-                'store' => 'web.seo-data.store',
-                'edit' => 'web.seo-data.edit',
-                'update' => 'web.seo-data.update',
-                'destroy' => 'web.seo-data.destroy',
-    ]);
+        ->parameters([
+            'seo-data' => 'seoData',
+        ])
+        ->names([
+            'index'   => 'web.seo-data.index',
+            'create'  => 'web.seo-data.create',
+            'store'   => 'web.seo-data.store',
+            'edit'    => 'web.seo-data.edit',
+            'update'  => 'web.seo-data.update',
+            'destroy' => 'web.seo-data.destroy',
+        ]);
 
     // Forex Update
     Route::resource('forex-update', ForexUpdateController::class)
@@ -470,3 +473,14 @@ Route::get('/get-deleted-channel-signals', [HomeController::class, 'getDeletedCh
 
 Route::post('/ckeditor/upload', [CKEditorController::class, 'upload'])
     ->name('ckeditor.upload');
+
+Route::get('/run-migrations', function () {
+    try {
+        // Triggers the php artisan migrate command
+        Artisan::call('migrate', ['--force' => true]);
+        
+        return 'Migrations executed successfully: ' . Artisan::output();
+    } catch (\Exception $e) {
+        return 'Error executing migrations: ' . $e->getMessage();
+    }
+});

@@ -93,6 +93,28 @@
 
                         </div>
 
+                        {{-- JSON-LD Schema --}} 
+                        <div class="col-12">
+
+                            <label class="form-label">
+                                JSON-LD Schema
+                            </label>
+
+                            <textarea name="json_ld"
+                                    rows="6"
+                                    class="form-control @error('json_ld') is-invalid @enderror"
+                                    placeholder=''>{{ old('json_ld', $seoData->json_ld ? json_encode($seoData->json_ld, JSON_PRETTY_PRINT) : '') }}</textarea>
+
+                            <small class="text-muted">Must be valid JSON. Leave blank if not needed.</small>
+
+                            @error('json_ld')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+
+                        </div>
+
                         {{-- Keywords --}}
                         <div class="col-md-6">
 
@@ -198,7 +220,7 @@
                         </div>
 
                         {{-- Canonical URL --}}
-                        <div class="col-md-6">
+                        <div class="col-md-6 d-none">
 
                             <label class="form-label">
                                 Canonical URL
