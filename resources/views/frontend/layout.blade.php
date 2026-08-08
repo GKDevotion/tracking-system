@@ -14,7 +14,7 @@
                     ->first();
     @endphp
 
-    <title>{{ $seo->meta_title ?? config('app.name') }}</title>
+    <title>{{ $seo->meta_title ?? "Wealthora - Growing your Future" }}</title>
 
     <meta name="description" content="{{ $seo->meta_description ?? '' }}">
     <meta name="keywords" content="{{ $seo->keywords ?? '' }}">
@@ -22,7 +22,7 @@
     <link rel="canonical" href="{{ $seo->canonical_url ?? url()->current() }}">
 
     {{-- Open Graph --}}
-    <meta property="og:title" content="{{ $seo->og_title ?? $seo->meta_title ?? config('app.name') }}">
+    <meta property="og:title" content="{{ $seo->og_title ?? $seo->meta_title ?? "Wealthora - Growing your Future" }}">
     <meta property="og:description" content="{{ $seo->og_description ?? $seo->meta_description ?? '' }}">
     <meta property="og:image" content="{{ $seo->og_image ?? asset('default-og.jpg') }}">
     <meta property="og:url" content="{{ url()->current() }}">
@@ -31,9 +31,6 @@
     {{-- Optional H1 Tag --}}
     <meta name="h1_tag" content="{{ $seo->h1_tag ?? '' }}">
     <meta name="author" content="Wealthora">
-
-    <!-- Page Title -->
-    <title>Wealthora - Growing your Future</title>
 
     <!-- Favicon Icon -->
     <link rel="shortcut icon" href="{{ url('public/frontend/images/favicon.png') }}" type="image/x-icon">
@@ -71,7 +68,7 @@
     <link rel="stylesheet" href="{{ url('public/frontend/css/custom.css?v=0.001') }}" media="screen">
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    
+
     @if( env( 'APP_ENV' ) != 'local' )
         <!-- Google tag (gtag.js) -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-00RBTNX5DY"></script>
