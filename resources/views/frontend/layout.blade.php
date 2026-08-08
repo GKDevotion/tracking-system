@@ -30,7 +30,7 @@
 
     {{-- Optional H1 Tag --}}
     <meta name="h1_tag" content="{{ $seo->h1_tag ?? '' }}">
-    <meta name="author" content="ZCapital">
+    <meta name="author" content="Wealthora">
 
     <!-- Page Title -->
     <title>Wealthora - Growing your Future</title>
