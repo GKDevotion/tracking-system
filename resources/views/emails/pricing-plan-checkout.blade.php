@@ -51,6 +51,11 @@
                                 </tr>
 
                                 <tr>
+                                    <td style="padding:12px 16px; background-color:#f7f8fa; border:1px solid #e5e8ec; color:#6b7280; font-weight:bold;">Phone</td>
+                                    <td style="padding:12px 16px; background-color:#ffffff; border:1px solid #e5e8ec; color:#000;">{{ $checkout->mobile_number }}</td>
+                                </tr>
+
+                                <tr>
                                     <td style="padding:12px 16px; background-color:#f7f8fa; border:1px solid #e5e8ec; color:#6b7280; font-weight:bold;">Country</td>
                                     <td style="padding:12px 16px; background-color:#ffffff; border:1px solid #e5e8ec; color:#000;">{{ $checkout->countryData?->name ?? 'N/A' }}</td>
                                 </tr>
@@ -72,11 +77,6 @@
                                             @break
                                         @endswitch
                                     </td>
-                                </tr>
-
-                                <tr>
-                                    <td style="padding:12px 16px; background-color:#f7f8fa; border:1px solid #e5e8ec; color:#6b7280; font-weight:bold;">Phone</td>
-                                    <td style="padding:12px 16px; background-color:#ffffff; border:1px solid #e5e8ec; color:#000;">{{ $checkout->mobile_number }}</td>
                                 </tr>
 
                                 <tr>
