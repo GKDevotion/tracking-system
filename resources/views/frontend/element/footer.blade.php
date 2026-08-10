@@ -214,11 +214,11 @@
                     <div class="col-6 col-md col-divider">
                         <h6 class="footer-col-title">Service</h6>
                         <ul class="footer-links">
-                            <li><a href="#">How It Works</a></li>
-                            <li><a href="#">Pricing</a></li>
-                            <li><a href="#">Performance</a></li>
-                            <li><a href="#">Support</a></li>
-                            <li><a href="#">Risk Management</a></li>
+                            <li><a href="javascript:void(0);">How It Works</a></li>
+                            <li><a href="{{ url('forex-signal') }}">Pricing</a></li>
+                            <li><a href="javascript:void();">Performance</a></li>
+                            <li><a href="javascript:void();">Support</a></li>
+                            <li><a href="javascript:void();">Risk Management</a></li>
                         </ul>
                     </div>
 

@@ -337,50 +337,59 @@
 
                     <div class="row g-3">
 
+                        @if (getConfigurationField('BANK_NAME') && getConfigurationField('BANK_NAME') != '-')
                         <div class="col-md-6">
 
                             <label class="fw-bold d-block">
-                                Bank Name
+                               {!! getConfigurationDisplayName('BANK_NAME') !!}  
                             </label>
 
                             <p class="mb-0">
-                                Mashreq Bank PSC
+                                {!! getConfigurationField('BANK_NAME') !!}  
                             </p>
 
                         </div>
+                        @endif
 
+                         @if (getConfigurationField('ACCOUNT_HOLDER_NAME') && getConfigurationField('ACCOUNT_HOLDER_NAME') != '-')
                         <div class="col-md-6">
 
                             <label class="fw-bold d-block">
-                                Account Holder Name
+                                {!! getConfigurationDisplayName('ACCOUNT_HOLDER_NAME') !!}  
                             </label>
 
                             <p class="mb-0">
-                                WEALTHORA INTERNATIONAL FZE
+                               {!! getConfigurationField('ACCOUNT_HOLDER_NAME') !!} 
                             </p>
                         </div>
+                        @endif
 
+                         @if (getConfigurationField('ACCOUNT_NUMBER') && getConfigurationField('ACCOUNT_NUMBER') != '-')
                         <div class="col-md-6">
 
                             <label class="fw-bold d-block">
-                                Account Number
+                               {!! getConfigurationDisplayName('ACCOUNT_NUMBER') !!}  
                             </label>
 
                             <p class="mb-0">
-                                019102096844
+                                {!! getConfigurationField('ACCOUNT_NUMBER') !!}  
                             </p>
                         </div>
+                        @endif
 
+                        @if (getConfigurationField('IBAN') && getConfigurationField('IBAN') != '-')
                         <div class="col-md-6">
 
                             <label class="fw-bold d-block">
-                                IBAN
+                                {!! getConfigurationDisplayName('IBAN') !!}  
                             </label>
 
                             <p class="mb-0">
-                                AE170330000019102096844
+                                {!! getConfigurationField('IBAN') !!}  
                             </p>
                         </div>
+                        @endif
+
                     </div>
                 </div>
             </div>
