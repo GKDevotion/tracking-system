@@ -162,7 +162,7 @@ class HomeController extends Controller
 
             try {
                 $ids = TelegramScraper::scrapeDeleted(
-                    '+VRkTH1K9l5cxYzQ8',//'Wealthoraofficial',
+                    'Wealthoraofficial',
                     $post_id
                 );
 
