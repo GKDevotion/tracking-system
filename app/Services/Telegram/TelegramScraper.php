@@ -86,8 +86,8 @@ class TelegramScraper
         ?int $afterId
     ): string {
 
-        echo $url = "https://t.me/s/" . urlencode($channel);
-die;
+        $url = "https://t.me/s/" . urlencode($channel);
+
         if ($afterId) {
             $url .= "?after={$afterId}";
         }
