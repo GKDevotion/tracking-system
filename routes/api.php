@@ -95,5 +95,5 @@ Route::prefix('mt5')
 
     });
 
-
+Route::get('/telegram/test-webhook', [TelegramController::class, 'testWebhook']);
 Route::post('/telegram/private-channel-webhook', [TelegramController::class, 'privateChannelWebhook']);

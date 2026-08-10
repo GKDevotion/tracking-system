@@ -9,6 +9,21 @@ use Illuminate\Support\Facades\Log;
 
 class TelegramController extends Controller
 {
+    public function testWebhook(Request $request)
+    {
+        Log::channel('daily')->info('TELEGRAM WEBHOOK HIT');
+
+        Log::channel('daily')->info(
+            'TELEGRAM DATA',
+            $request->all()
+        );
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Webhook received'
+        ]);
+    }
+
     public function privateChannelWebhook(Request $request)
     {
         Log::info('Telegram Signal Processing', [
