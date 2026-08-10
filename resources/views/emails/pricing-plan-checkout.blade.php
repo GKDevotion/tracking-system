@@ -21,7 +21,7 @@
                             <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
                                 <tr>
                                     <td style="color:#ffffff; font-size:20px; font-weight:bold; font-family: Arial, Helvetica, sans-serif;">
-                                        New Pricing Plan Registration
+                                        New {{ $checkout->plan }} Pricing Plan Registration
                                     </td>
                                 </tr>
                             </table>
