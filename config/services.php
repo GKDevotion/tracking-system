@@ -38,4 +38,9 @@ return [
     'mt5'=>[
         'token'=>env('MT5_API_TOKEN')
     ],
+
+    'telegram' => [
+        'bot_token' => env('TELEGRAM_BOT_TOKEN'),
+        'channel_id' => env('TELEGRAM_CHANNEL_ID'),
+    ],
 ];
