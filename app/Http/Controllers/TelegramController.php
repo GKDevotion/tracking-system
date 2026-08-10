@@ -3,57 +3,71 @@
 namespace App\Http\Controllers;
 
 use App\Models\TelegramPrivateSignal;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class TelegramController extends Controller
 {
     public function privateChannelWebhook(Request $request)
     {
-        $post = $request->input('channel_post');
-
-        if (!$post) {
-            return response()->json([
-                'status' => 'ignored'
-            ]);
-        }
-
-        $chatId = $post['chat']['id'] ?? null;
-        $messageId = $post['message_id'] ?? null;
-        $text = $post['text'] ?? '';
-
-        if ($chatId != config('services.telegram.channel_id')) {
-            return response()->json([
-                'status' => 'invalid_channel'
-            ]);
-        }
-
-        $signal = $this->parseSignal($text);
-
-        if (!$signal) {
-            return response()->json([
-                'status' => 'not_signal'
-            ]);
-        }
-
-        TelegramPrivateSignal::updateOrCreate(
-            [
-                'telegram_message_id' => $messageId,
-                'channel_id' => $chatId,
-            ],
-            [
-                'symbol' => $signal['symbol'],
-                'direction' => $signal['direction'],
-                'entry' => $signal['entry'],
-                'stop_loss' => $signal['stop_loss'],
-                'take_profit_1' => $signal['take_profit_1'],
-                'take_profit_2' => $signal['take_profit_2'],
-                'raw_message' => $text,
-            ]
-        );
-
-        return response()->json([
-            'status' => 'success'
+        Log::info('Telegram Signal Processing', [
+            $request->all()
         ]);
+
+        try{
+            $post = $request->input('channel_post');
+
+            if (!$post) {
+                return response()->json([
+                    'status' => 'ignored'
+                ]);
+            }
+
+            $chatId = $post['chat']['id'] ?? null;
+            $messageId = $post['message_id'] ?? null;
+            $text = $post['text'] ?? '';
+
+            if ($chatId != config('services.telegram.channel_id')) {
+                return response()->json([
+                    'status' => 'invalid_channel'
+                ]);
+            }
+
+            $signal = $this->parseSignal($text);
+
+            if (!$signal) {
+                return response()->json([
+                    'status' => 'not_signal'
+                ]);
+            }
+
+            TelegramPrivateSignal::updateOrCreate(
+                [
+                    'telegram_message_id' => $messageId,
+                    'channel_id' => $chatId,
+                ],
+                [
+                    'symbol' => $signal['symbol'],
+                    'direction' => $signal['direction'],
+                    'entry' => $signal['entry'],
+                    'stop_loss' => $signal['stop_loss'],
+                    'take_profit_1' => $signal['take_profit_1'],
+                    'take_profit_2' => $signal['take_profit_2'],
+                    'raw_message' => $text,
+                ]
+            );
+
+            return response()->json([
+                'status' => 'success'
+            ]);
+        } catch ( Exception $e) {
+            Log::error('Telegram Signal Error', [
+                'message' => $e->getMessage(),
+                'file' => $e->getFile(),
+                'line' => $e->getLine(),
+            ]);
+        }
     }
 
     private function parseSignal(string $text)
