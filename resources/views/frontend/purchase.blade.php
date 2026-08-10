@@ -277,7 +277,6 @@
                                     <img src="https://www.forexgdp.com/wp-content/uploads/2024/12/USDT-tether-trc-20-token-logo.png"
                                         width="150"
                                         class="mb-2">
-
                                 </div>
 
                             </div>
@@ -315,9 +314,7 @@
 
                             <p class="text-primary fw-bold text-break"
                                 id="walletAddr">
-
                                 TGjYaSW5StCyejzv8KebpkjsjDaxtxnBdh
-
                             </p>
 
                         </div>
@@ -383,18 +380,10 @@
                             <p class="mb-0">
                                 AE170330000019102096844
                             </p>
-
                         </div>
-
-
-
-
                     </div>
-
                 </div>
-
             </div>
-
         </div>
 
         {{-- PAYMENT PROOF --}}
