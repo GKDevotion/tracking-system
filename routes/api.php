@@ -12,6 +12,7 @@ use App\Http\Controllers\API\PermissionController;
 use App\Http\Controllers\API\RoleController;
 use App\Http\Controllers\API\TrackingController;
 use App\Http\Controllers\API\UserController;
+use App\Http\Controllers\TelegramController;
 use Illuminate\Support\Facades\Route;
 
 // ─── Public Auth Routes ────────────────────────────────────────────────────────
@@ -93,3 +94,6 @@ Route::prefix('mt5')
         Route::post('/closed', [MT5Controller::class, 'closed']);
 
     });
+
+
+Route::post('/telegram/private-channel-webhook', [TelegramController::class, 'privateChannelWebhook']);
