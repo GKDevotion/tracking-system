@@ -42,6 +42,10 @@ use App\Http\Controllers\Web\PlanController;
 use App\Http\Controllers\Web\PricingPlanCheckoutController;
 use App\Http\Controllers\Web\SalesUserController;
 use App\Http\Controllers\Web\SeoDataController;
+use App\Mail\CheckoutThankYouMail;
+use App\Mail\PaymentConfirmationMail;
+use App\Mail\PaymentSubmittedAdminMail;
+use App\Models\PricingPlanCheckout;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
@@ -362,7 +366,7 @@ Route::get('/test-mail', function () {
 Route::get('/', [HomeController::class, 'index'])->name('index');
 Route::get('/purchase', [PurchaseController::class, 'index'])->name('purchase');
 
-Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
+// Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
 
 Route::get('news-analysis', [BlogsController::class, 'index'])->name('news.analysis');
 Route::get('/blog/{slug}', [BlogsController::class, 'show']) ->name('blog.details');
@@ -484,3 +488,45 @@ Route::get('/run-migrations', function () {
         return 'Error executing migrations: ' . $e->getMessage();
     }
 });
+
+Route::get('/checkout', function () {
+    return view('frontend.checkout', ['countries' => \App\Models\Country::all()]);
+})->name('checkout.form');
+
+Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
+
+// Step 2 — payment upload form, reached via the emailed link
+Route::get('/checkout/payment/{token}', [CheckoutController::class, 'showPaymentForm'])->name('checkout.payment.show');
+Route::post('/checkout/payment/{token}', [CheckoutController::class, 'storePayment'])->name('checkout.payment.store');
+
+
+ 
+if (app()->environment('local')) {
+ 
+    // http://127.0.0.1:8000/preview/checkout-thankyou
+    Route::get('/preview/checkout-thankyou', function () {
+        $checkout = PricingPlanCheckout::latest()->first();
+ 
+        abort_if(!$checkout, 404, 'No checkout records yet — submit the form once first.');
+ 
+        return new CheckoutThankYouMail($checkout);
+    });
+ 
+    // http://127.0.0.1:8000/preview/payment-confirmation
+    Route::get('/preview/payment-confirmation', function () {
+        $checkout = PricingPlanCheckout::latest()->first();
+ 
+        abort_if(!$checkout, 404, 'No checkout records yet.');
+ 
+        return new PaymentConfirmationMail($checkout);
+    });
+ 
+    // http://127.0.0.1:8000/preview/payment-submitted-admin
+    Route::get('/preview/payment-submitted-admin', function () {
+        $checkout = PricingPlanCheckout::latest()->first();
+ 
+        abort_if(!$checkout, 404, 'No checkout records yet.');
+ 
+        return new PaymentSubmittedAdminMail($checkout);
+    });
+}

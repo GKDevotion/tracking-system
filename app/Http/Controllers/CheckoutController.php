@@ -2,191 +2,163 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Mail\CheckoutThankYouMail;
+use App\Mail\PaymentConfirmationMail;
+use App\Mail\PaymentSubmittedAdminMail;
+use App\Models\Plan;
 use App\Models\PricingPlanCheckout;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Mail;
-use App\Mail\PricingPlanCheckoutMail;
 use Exception;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Validation\Rule;
+use Symfony\Component\HttpFoundation\Response;
 
 class CheckoutController extends Controller
 {
+    /**
+     * STEP 1 — Personal information form.
+     * Saves the lead, generates the unique reference + payment link,
+     * and emails the user a "thank you" message.
+     * For the free plan there is no payment step, so the record is
+     * marked completed right away.
+     */
     public function store(Request $request)
     {
-        $plan = $request->get('plan', 'basic');
-
+        $plan   = $request->get('plan', 'basic');
         $isFree = $plan === 'free';
+ 
+        $request->validate([
+            'first_name' => 'required|string|max:255',
+            'last_name'  => 'required|string|max:255',
+            'email'      => ['required', 'email', 'max:255', Rule::unique('pricing_plan_checkout', 'email')],
+            'country'    => 'required',
+            'platform'   => 'required|in:telegram,whatsapp',
+            'telegram_username' => ['nullable', 'string', 'max:255', Rule::unique('pricing_plan_checkout', 'tele_username')],
+            'phone'      => ['required', 'string', 'max:255', Rule::unique('pricing_plan_checkout', 'mobile_number')],
+        ]);
 
-        /*
-        |--------------------------------------------------------------------------
-        | VALIDATION
-        |--------------------------------------------------------------------------
-        */
+        $planMap   = Plan::where('is_active', 1)->pluck('name', 'id');
+        $planValue = $planMap[$plan] ?? 0;
+
+        $tradeSignals = $request->platform === 'telegram' ? 0 : 1;
+
+        $fullName = trim($request->first_name . ' ' . $request->last_name);
+
+        $checkout = PricingPlanCheckout::create([
+            'user_id'        => Auth::id(),
+            'plan'           => $planValue,
+            'first_name'     => $request->first_name,
+            'last_name'      => $request->last_name,
+            'full_name'      => $fullName,
+            'email'          => $request->email,
+            'country'        => $request->country,
+            'trade_signals'  => $tradeSignals,
+            'tele_username'  => $request->telegram_username,
+            'mobile_number'  => $request->phone,
+            'status'         => $isFree
+                ? PricingPlanCheckout::STATUS_COMPLETED
+                : PricingPlanCheckout::STATUS_PENDING_PAYMENT,
+        ]);
+
+        $this->safeSend(fn () => Mail::to($checkout->email)->send(new CheckoutThankYouMail($checkout)));
+
+        return response()->json([
+            'success'     => true,
+            'message'     => $isFree
+                ? 'Thanks! Your free plan is active. Please check your email for confirmation.'
+                : 'Thanks! Please check your email for the link to complete your payment.',
+            'unique_id'   => $checkout->unique_id,
+            'payment_url' => $isFree ? null : $checkout->payment_url,
+        ]);
+    }
+
+    /**
+     * STEP 2 — Show the payment upload form for a given secure token.
+     */
+    public function showPaymentForm(string $token)
+    {
+        $checkout = PricingPlanCheckout::where('payment_token', $token)->firstOrFail();
+
+        if ($checkout->status !== PricingPlanCheckout::STATUS_PENDING_PAYMENT) {
+            return view('frontend.checkout-payment', [
+                'checkout'       => $checkout,
+                'alreadySubmitted' => true,
+            ]);
+        }
+
+        return view('frontend.checkout-payment', [
+            'checkout'          => $checkout,
+            'alreadySubmitted'  => false,
+        ]);
+    }
+
+    /**
+     * STEP 2 — Store payment proof, mark the record submitted,
+     * email the admin (with the proof attached) and email the user a confirmation.
+     */
+    public function storePayment(Request $request, string $token)
+    {
+        $checkout = PricingPlanCheckout::where('payment_token', $token)->firstOrFail();
+
+        if ($checkout->status !== PricingPlanCheckout::STATUS_PENDING_PAYMENT) {
+            return response()->json([
+                'success' => false,
+                'message' => 'This payment link has already been used or is no longer valid.',
+            ], Response::HTTP_CONFLICT);
+        }
 
         $rules = [
-
-            'first_name' => 'required|string|max:255',
-
-            'last_name' => 'required|string|max:255',
-
-            'email' => 'required|email|max:255',
-
-            'country' => 'required',
-
-            'platform' => 'required|in:telegram,whatsapp',
-
-            'telegram_username' => 'nullable|string|max:255',
-
-            'phone' => 'required|string|max:255',
-
+            'payment_type' => 'required|in:crypto,bank',
+            'proof_file'   => 'required|file|mimes:jpeg,png,jpg,gif,pdf|max:2048',
         ];
 
-        if (!$isFree) {
-
-            // crypto OR bank
-            $rules['payment_type'] =
-                'required|in:crypto,bank';
-
-            // proof required
-            $rules['proof_file'] =
-                'required|file|mimes:jpeg,png,jpg,gif,pdf|max:2048';
-
-            // only for crypto
-            if ($request->payment_type == 'crypto') {
-
-                $rules['crypto_network'] =
-                    'required|in:trc20,bep20';
-            }
+        if ($request->payment_type === 'crypto') {
+            $rules['crypto_network'] = 'required|in:trc20,bep20';
         }
 
         $request->validate($rules);
 
-        /*
-        |--------------------------------------------------------------------------
-        | PLAN MAP
-        |--------------------------------------------------------------------------
-        */
-
-        $planMap = [
-
-            'basic' => 0,
-
-            'advanced' => 1,
-
-            'institutional' => 2,
-
-        ];
-
-        $planValue = $planMap[$plan] ?? 0;
-
-        /*
-        |--------------------------------------------------------------------------
-        | TRADE SIGNALS
-        |--------------------------------------------------------------------------
-        */
-
-        $tradeSignals =
-            $request->platform === 'telegram'
-            ? 0
-            : 1;
-
-        /*
-        |--------------------------------------------------------------------------
-        | PAYMENT OPTION
-        |--------------------------------------------------------------------------
-        |
-        | 0 = TRC20
-        | 1 = BEP20
-        | 2 = BANK
-        |
-        */
-
-        $paymentOption = null;
-
-        if (!$isFree) {
-
-            if ($request->payment_type == 'bank') {
-
-                $paymentOption = 2;
-
-            } else {
-
-                $paymentOption =
-                    $request->crypto_network == 'trc20'
-                    ? 0
-                    : 1;
-            }
+        // 0 = TRC20, 1 = BEP20, 2 = BANK
+        if ($request->payment_type === 'bank') {
+            $paymentOption = 2;
+        } else {
+            $paymentOption = $request->crypto_network === 'trc20' ? 0 : 1;
         }
-
-        /*
-        |--------------------------------------------------------------------------
-        | FULL NAME
-        |--------------------------------------------------------------------------
-        */
-
-        $fullName = $request->first_name . ' ' . $request->last_name;
-
-        /*
-        |--------------------------------------------------------------------------
-        | FILE UPLOAD
-        |--------------------------------------------------------------------------
-        */
 
         $filePath = null;
-
         if ($request->hasFile('proof_file')) {
-
-            $filePath = $request->file('proof_file')
-                ->store('uploads', 'public');
+            $filePath = $request->file('proof_file')->store('uploads', 'public');
         }
 
-        /*
-        |--------------------------------------------------------------------------
-        | SAVE DATA
-        |--------------------------------------------------------------------------
-        */
-
-        $checkout = PricingPlanCheckout::create([
-            'user_id' => Auth::id(),
-            'plan' => $planValue,
-            'first_name' => $request->first_name,
-            'last_name' => $request->last_name,
-            'full_name' => $fullName,
-            'email' => $request->email,
-            'country' => $request->country,
-            'trade_signals' => $tradeSignals,
-            'tele_username' => $request->telegram_username,
-            'mobile_number' => $request->phone,
-            'payment_type' => $request->payment_type,// crypto OR bank
-            'payment_option' => $paymentOption,// 0=TRC20, 1=BEP20, 2=BANK
-            'confirm_payment' => $filePath,
-
+        $checkout->update([
+            'payment_type'         => $request->payment_type,
+            'payment_option'       => $paymentOption,
+            'confirm_payment'      => $filePath,
+            'status'               => PricingPlanCheckout::STATUS_PAYMENT_SUBMITTED,
+            'payment_submitted_at' => now(),
         ]);
 
-        try {
-            $mail = Mail::to('support@wealthora.io');
-
-            // Attach payment proof if uploaded
-            if ($filePath) {
-                $mail->send(
-                    (new PricingPlanCheckoutMail($checkout))
-                        ->attach(storage_path('app/public/' . $filePath))
-                );
-            } else {
-                $mail->send(new PricingPlanCheckoutMail($checkout));
-           }
-        } catch (Exception $e) {
-            Log::error('Mail Error: ' . $e->getMessage());
-
-        }
+        $this->safeSend(fn () => Mail::to('support@wealthora.io')->send(new PaymentSubmittedAdminMail($checkout)));
+        $this->safeSend(fn () => Mail::to($checkout->email)->send(new PaymentConfirmationMail($checkout)));
 
         return response()->json([
-
-            'success' => true,
-
-            'message' => 'Checkout submitted successfully.'
-
+            'success'   => true,
+            'message'   => 'Payment proof submitted successfully.',
+            'unique_id' => $checkout->unique_id,
         ]);
+    }
+
+    /**
+     * Send mail without letting an SMTP failure break the request/response cycle.
+     */
+    private function safeSend(callable $send): void
+    {
+        try {
+            $send();
+        } catch (Exception $e) {
+            Log::error('Mail Error: ' . $e->getMessage());
+        }
     }
 }

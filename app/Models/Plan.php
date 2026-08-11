@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Plan extends Model
 {
+    protected $table = 'plans';
+
     protected $fillable = [
         'name',
         'price',
@@ -28,4 +30,5 @@ class Plan extends Model
         'is_highlighted' => 'boolean',
         'is_active' => 'boolean',
     ];
+
 }
