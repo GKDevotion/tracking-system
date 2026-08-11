@@ -45,7 +45,7 @@ class TelegramController extends Controller
             $text = $post['text'] ?? '';
 
             $tgChatIds = [
-                "-3746642220", // Wealthora Signals VIP
+                "-1003746642220", // Wealthora Signals VIP
                 // "-1004411633101", // Wealthora Signals Free
             ];
 
