@@ -43,7 +43,7 @@
 
                         <div class="col-md-6">
                             <label class="form-label mb-0">Country *</label>
-                            <select class="form-select" name="country" required>
+                            <select class="form-select" name="country_id" required>
                                 <option value="">Select Country</option>
                                 @foreach ($countries as $country)
                                     <option value="{{ $country->id }}">{{ $country->name }}</option>
