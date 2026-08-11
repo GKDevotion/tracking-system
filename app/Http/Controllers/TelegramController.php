@@ -37,13 +37,18 @@ class TelegramController extends Controller
                 return response()->json([
                     'status' => 'ignored'
                 ]);
-            }
+            }//1003746642220
 
             $chatId = $post['chat']['id'] ?? null;
             $messageId = $post['message_id'] ?? null;
             $text = $post['text'] ?? '';
 
-            if ($chatId != config('services.telegram.channel_id')) {
+            $tgChatIds = [
+                "-3746642220", // Wealthora Signals VIP
+                // "-1004411633101", // Wealthora Signals Free
+            ];
+
+            if (!in_array($chatId, $tgChatIds)) {
                 return response()->json([
                     'status' => 'invalid_channel'
                 ]);
