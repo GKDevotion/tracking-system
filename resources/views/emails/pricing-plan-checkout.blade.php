@@ -21,7 +21,7 @@
                             <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
                                 <tr>
                                     <td style="color:#ffffff; font-size:20px; font-weight:bold; font-family: Arial, Helvetica, sans-serif;">
-                                        New {{ $checkout->plan }} Pricing Plan Registration
+                                        New {{ $checkout->planDetails->name }} Pricing Plan Registration
                                     </td>
                                 </tr>
                             </table>
@@ -57,32 +57,26 @@
 
                                 <tr>
                                     <td style="padding:12px 16px; background-color:#f7f8fa; border:1px solid #e5e8ec; color:#6b7280; font-weight:bold;">Country</td>
-                                    <td style="padding:12px 16px; background-color:#ffffff; border:1px solid #e5e8ec; color:#000;">{{ $checkout->countryData?->name ?? 'N/A' }}</td>
+                                    <td style="padding:12px 16px; background-color:#ffffff; border:1px solid #e5e8ec; color:#000;">{{ $checkout->countryData->name ?? 'N/A' }}</td>
                                 </tr>
 
                                 <tr>
                                     <td style="padding:12px 16px; background-color:#f7f8fa; border:1px solid #e5e8ec; color:#6b7280; font-weight:bold;">Plan</td>
                                     <td style="padding:12px 16px; background-color:#ffffff; border:1px solid #e5e8ec; color:#000;">
-                                        @switch($checkout->plan)
-                                            @case(0)
-                                                <span style="display:inline-block; padding:4px 10px; background-color:#e6f4ea; color:#1e7e34; border-radius:4px; font-size:12px; font-weight:bold;">Basic</span>
-                                            @break
-
-                                            @case(1)
-                                                <span style="display:inline-block; padding:4px 10px; background-color:#fff4e5; color:#b45309; border-radius:4px; font-size:12px; font-weight:bold;">Advanced</span>
-                                            @break
-
-                                            @case(2)
-                                                <span style="display:inline-block; padding:4px 10px; background-color:#e8eaf6; color:#3730a3; border-radius:4px; font-size:12px; font-weight:bold;">Institutional</span>
-                                            @break
-                                        @endswitch
+                                        {{ $checkout->planDetails->name ?? 'N/A'}}
                                     </td>
                                 </tr>
 
-                                <tr>
-                                    <td style="padding:12px 16px; background-color:#f7f8fa; border:1px solid #e5e8ec; color:#6b7280; font-weight:bold;">Telegram Username</td>
-                                    <td style="padding:12px 16px; background-color:#ffffff; border:1px solid #e5e8ec; color:#000;">{{ $checkout->tele_username }}</td>
-                                </tr>
+                               @if(!empty($checkout->tele_username))
+                                    <tr>
+                                        <td style="padding:12px 16px; background-color:#f7f8fa; border:1px solid #e5e8ec; color:#6b7280; font-weight:bold;">
+                                            Telegram Username
+                                        </td>
+                                        <td style="padding:12px 16px; background-color:#ffffff; border:1px solid #e5e8ec; color:#000;">
+                                            {{ $checkout->tele_username }}
+                                        </td>
+                                    </tr>
+                                @endif
 
                                 <tr>
                                     <td style="padding:12px 16px; background-color:#f7f8fa; border:1px solid #e5e8ec; color:#6b7280; font-weight:bold;">Trade Signals</td>

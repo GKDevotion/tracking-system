@@ -13,8 +13,8 @@ class PricingPlanCheckoutMail extends Mailable
     public $checkout;
 
     public function __construct($checkout)
-    {
-        $this->checkout = $checkout;
+    { 
+        $this->checkout = $checkout; 
     }
 
     public function build()
