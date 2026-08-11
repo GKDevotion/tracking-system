@@ -15,7 +15,7 @@
                     <div class="col-lg-12">
                         <!-- Section Title Start -->
                         <div class="section-title section-title-center">
-                            <h2 class="wow fadeInUp">Latest Free Signals Update</h2>
+                            <h2 class="wow fadeInUp">Latest Signals Update</h2>
                             {{-- <h2 class="wow fadeInUp" data-wow-delay="0.2s" data-cursor="-opaque">
                                 Choose Your Plan, Start
                                 <span>Profiting</span>
