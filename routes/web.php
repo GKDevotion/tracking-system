@@ -482,7 +482,7 @@ Route::get('/run-migrations', function () {
     try {
         // Triggers the php artisan migrate command
         Artisan::call('migrate', ['--force' => true]);
-        
+
         return 'Migrations executed successfully: ' . Artisan::output();
     } catch (\Exception $e) {
         return 'Error executing migrations: ' . $e->getMessage();
@@ -500,33 +500,33 @@ Route::get('/checkout/payment/{token}', [CheckoutController::class, 'showPayment
 Route::post('/checkout/payment/{token}', [CheckoutController::class, 'storePayment'])->name('checkout.payment.store');
 
 
- 
+
 if (app()->environment('local')) {
- 
+
     // http://127.0.0.1:8000/preview/checkout-thankyou
     Route::get('/preview/checkout-thankyou', function () {
         $checkout = PricingPlanCheckout::latest()->first();
- 
+
         abort_if(!$checkout, 404, 'No checkout records yet — submit the form once first.');
- 
+
         return new CheckoutThankYouMail($checkout);
     });
- 
+
     // http://127.0.0.1:8000/preview/payment-confirmation
     Route::get('/preview/payment-confirmation', function () {
         $checkout = PricingPlanCheckout::latest()->first();
- 
+
         abort_if(!$checkout, 404, 'No checkout records yet.');
- 
+
         return new PaymentConfirmationMail($checkout);
     });
- 
+
     // http://127.0.0.1:8000/preview/payment-submitted-admin
     Route::get('/preview/payment-submitted-admin', function () {
         $checkout = PricingPlanCheckout::latest()->first();
- 
+
         abort_if(!$checkout, 404, 'No checkout records yet.');
- 
+
         return new PaymentSubmittedAdminMail($checkout);
     });
 }

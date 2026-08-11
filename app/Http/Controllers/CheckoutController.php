@@ -26,9 +26,6 @@ class CheckoutController extends Controller
      */
     public function store(Request $request)
     {
-        $plan   = $request->get('plan', 'basic');
-        $isFree = $plan === 'free';
- 
         $request->validate([
             'first_name' => 'required|string|max:255',
             'last_name'  => 'required|string|max:255',
@@ -39,8 +36,9 @@ class CheckoutController extends Controller
             'phone'      => ['required', 'string', 'max:255', Rule::unique('pricing_plan_checkout', 'mobile_number')],
         ]);
 
-        $planMap   = Plan::where('is_active', 1)->pluck('name', 'id');
-        $planValue = $planMap[$plan] ?? 0;
+        $planMap   = Plan::where('is_active', 1)->pluck('id', 'name')->toArray();
+
+        $planValue = $planMap[$request->plan] ?? 0;
 
         $tradeSignals = $request->platform === 'telegram' ? 0 : 1;
 
@@ -57,20 +55,16 @@ class CheckoutController extends Controller
             'trade_signals'  => $tradeSignals,
             'tele_username'  => $request->telegram_username,
             'mobile_number'  => $request->phone,
-            'status'         => $isFree
-                ? PricingPlanCheckout::STATUS_COMPLETED
-                : PricingPlanCheckout::STATUS_PENDING_PAYMENT,
+            'status'         => PricingPlanCheckout::STATUS_PENDING_PAYMENT
         ]);
 
         $this->safeSend(fn () => Mail::to($checkout->email)->send(new CheckoutThankYouMail($checkout)));
 
         return response()->json([
             'success'     => true,
-            'message'     => $isFree
-                ? 'Thanks! Your free plan is active. Please check your email for confirmation.'
-                : 'Thanks! Please check your email for the link to complete your payment.',
+            'message'     => 'Thanks! Please check your email for the link to complete your payment.',
             'unique_id'   => $checkout->unique_id,
-            'payment_url' => $isFree ? null : $checkout->payment_url,
+            'payment_url' => $checkout->payment_url,
         ]);
     }
 

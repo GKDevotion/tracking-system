@@ -18,10 +18,9 @@ class CheckoutThankYouMail extends Mailable
 
     public function __construct(PricingPlanCheckout $checkout)
     {
-        
+
         $this->checkout = $checkout;
 
-        dd( $this->checkout);
         // Only paid plans get a payment link. Free plans get null here.
         $this->paymentUrl = $checkout->status === PricingPlanCheckout::STATUS_PENDING_PAYMENT
             ? $checkout->payment_url

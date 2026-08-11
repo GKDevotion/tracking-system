@@ -27,6 +27,7 @@ class ForexController extends Controller
                 'remove'          => is_string($plan->remove) ? json_decode($plan->remove, true) : $plan->remove,
                 'cta'              => $plan->cta,
                 'link'             => ($plan->link === '-' || empty($plan->link)) ? 'free' : $plan->link,
+                'name'           => $plan->name,
             ];
         }
 

@@ -12,6 +12,7 @@
                 <!-- Section Title End -->
             </div>
         </div>
+
         <div class="row">
             <div class="col-lg-12">
                 <!-- Our Pricing Box Start -->
@@ -75,12 +76,12 @@
 
                                         <!-- Pricing Button Start -->
                                         <div class="pricing-btn">
-                                            @if(  $val['link'] == "free" )
+                                            @if(  strtolower($val['name']) == "free" )
                                                 <a href="https://t.me/Wealthoraofficial" target="_blank" class="btn-default get-pricing-btn-sound">
                                                     Get Started Now
                                                 </a>
                                             @else
-                                                <a href="{{ url('purchase?plan=' . $val['link']) }}" class="btn-default get-pricing-btn-sound">
+                                                <a href="{{ url('purchase?plan=' . urlencode($val['name'])) }}" class="btn-default get-pricing-btn-sound">
                                                     Get Started Now
                                                 </a>
                                             @endif

@@ -77,5 +77,9 @@ class PricingPlanCheckout extends Model
         return route('checkout.payment.show', $this->payment_token);
     }
 
- 
+    public function planDetails(): BelongsTo
+    {
+        return $this->belongsTo(Plan::class, 'plan', 'id');
+    }
+
 }

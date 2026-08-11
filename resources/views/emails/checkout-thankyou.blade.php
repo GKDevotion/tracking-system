@@ -31,12 +31,12 @@
                                         <table width="100%" cellpadding="6" cellspacing="0" style="font-size:14px;color:#333;">
                                             <tr>
                                                 <td style="color:#888;width:40%;">Plan</td>
-                                                <td style="font-weight:bold;">{{ $checkout->plan->name }}</td>
+                                                <td style="font-weight:bold;">{{ $checkout->planDetails->name }}</td>
                                             </tr>
-                                            @if($checkout->plan_amount > 0)
+                                            @if($checkout->planDetails->price > 0)
                                             <tr>
                                                 <td style="color:#888;">Amount</td>
-                                                <td style="font-weight:bold;">${{ number_format($checkout->plan_amount, 2) }}</td>
+                                                <td style="font-weight:bold;">${{ number_format($checkout->planDetails->price, 2) }}</td>
                                             </tr>
                                             @endif
                                             <tr>
