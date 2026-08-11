@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Payment received</title>
+    <title>Payment Details Received</title>
 </head>
 <body style="margin:0;padding:0;background:#f4f4f7;font-family:Arial,Helvetica,sans-serif;">
     <table width="100%" cellpadding="0" cellspacing="0" style="background:#f4f4f7;padding:30px 0;">
@@ -16,16 +16,46 @@
                     </tr>
                     <tr>
                         <td style="padding:30px;">
-                            <h2 style="margin-top:0;color:#222;">Hi {{ $checkout->first_name }},</h2>
+                            <h2 style="margin-top:0;color:#222;">Dear {{ $checkout->first_name }},</h2>
+
+                            <p style="color:#2e7d32;font-weight:bold;line-height:1.6;font-size:16px;">
+                                ✅ We have received your payment details successfully.
+                            </p>
+
+                            <table cellpadding="0" cellspacing="0" style="margin:20px 0;width:100%;">
+                                <tr>
+                                    <td style="padding:6px 0;color:#444;">
+                                        <strong>Client ID:</strong>
+                                        <span style="color:#ff4500;">{{ $checkout->unique_id }}</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:6px 0;color:#444;">
+                                        <strong>Plan:</strong>
+                                        <strong>{{ $checkout->planDetails->name }}</strong>
+                                    </td>
+                                </tr>
+                            </table>
 
                             <p style="color:#444;line-height:1.6;">
-                                We've received your payment proof for reference
-                                <strong style="color:#ff4500;">{{ $checkout->unique_id }}</strong>.
+                                Your payment is now <strong>under verification by our Finance Team</strong>.
                             </p>
 
                             <p style="color:#444;line-height:1.6;">
-                                Our team will verify it and activate your plan within 1–2 hours.
-                                We'll notify you as soon as it's confirmed.
+                                No further action is required from you at this time.
+                            </p>
+
+                            <p style="color:#444;line-height:1.6;">
+                                We will notify you by email once your payment has been verified.
+                            </p>
+
+                            <p style="color:#444;line-height:1.6;">
+                                Thank you for your patience.
+                            </p>
+
+                            <p style="color:#444;line-height:1.6;margin-top:30px;">
+                                Regards,<br>
+                                <strong>Wealthora Signal Team</strong>
                             </p>
                         </td>
                     </tr>

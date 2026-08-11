@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
+use App\Mail\PaymentVerifiedVipMail;
 use App\Models\PricingPlanCheckout;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 
 class PricingPlanCheckoutController extends Controller
 {
@@ -61,5 +64,28 @@ class PricingPlanCheckoutController extends Controller
         $pricingPlanCheckout->update($data);
 
         return redirect()->route('web.pricing-plan-checkout.index')->with('success', 'Checkout updated successfully.');
+    }
+
+    public function verifyPayment(PricingPlanCheckout $checkout)
+    {
+        if ($checkout->status !== PricingPlanCheckout::STATUS_PAYMENT_SUBMITTED) {
+            return back()->with('error', 'This payment cannot be verified in its current state.');
+        }
+
+        $checkout->update([
+            'status'          => PricingPlanCheckout::STATUS_VERIFIED,
+            'start_date'      => now(),
+            'expiry_date'     => now()->addDays($checkout->planDetails->duration_days ?? 30),
+            'vip_access_link' => $checkout->planDetails->vip_access_link ?? config('app.vip_access_url'),
+            'verified_at'     => now(),
+        ]);
+
+        try {
+            Mail::to($checkout->email)->send(new PaymentVerifiedVipMail($checkout));
+        } catch (\Exception $e) {
+            Log::error('VIP welcome mail failed: ' . $e->getMessage());
+        }
+
+        return back()->with('success', 'Payment verified and VIP welcome email sent to ' . $checkout->email);
     }
 }

@@ -45,6 +45,8 @@ use App\Http\Controllers\Web\SeoDataController;
 use App\Mail\CheckoutThankYouMail;
 use App\Mail\PaymentConfirmationMail;
 use App\Mail\PaymentSubmittedAdminMail;
+use App\Mail\PaymentVerifiedVipMail;
+use App\Mail\PricingPlanCheckoutMail;
 use App\Models\PricingPlanCheckout;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
@@ -523,10 +525,21 @@ if (app()->environment('local')) {
 
     // http://127.0.0.1:8000/preview/payment-submitted-admin
     Route::get('/preview/payment-submitted-admin', function () {
+        $checkout = PricingPlanCheckout::latest()->first(); 
+        abort_if(!$checkout, 404, 'No checkout records yet.');
+
+        return new PricingPlanCheckoutMail($checkout);
+    });
+
+    // http://127.0.0.1:8000/preview/payment-verified-vip
+    Route::get('/preview/payment-verified-vip', function () {
         $checkout = PricingPlanCheckout::latest()->first();
 
         abort_if(!$checkout, 404, 'No checkout records yet.');
 
-        return new PaymentSubmittedAdminMail($checkout);
+        return new PaymentVerifiedVipMail($checkout);
     });
+Route::post('/pricing-plan-checkout/{checkout}/verify', [PricingPlanCheckoutController::class, 'verifyPayment'])
+    ->name('web.pricing-plan-checkout.verify');
+ 
 }

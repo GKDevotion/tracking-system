@@ -28,64 +28,88 @@
         <div class="table-responsive">
             <table class="table table-hover mb-0">
                 <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Full Name</th>
-                        <th>Email</th>
-                        <th>Plan</th>
-                        <th>Country</th>
-                        <th>Trade Signals</th>
-                        <th>Payment Option</th>
-                        <th>Created Date</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @forelse($checkouts as $i => $checkout)
-                        <tr>
-                            <td>{{ $checkouts->firstItem() + $i }}</td>
-                            <td>
-                                <div class="d-flex align-items-center gap-2">
-                                    <div style="width:32px;height:32px;background:linear-gradient(135deg,#3b82f6,#8b5cf6);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:.75rem;font-weight:700">
-                                        {{ strtoupper(substr($checkout->full_name, 0, 2)) }}
-                                    </div>
-                                    <strong>{{ $checkout->full_name }}</strong>
-                                </div>
-                            </td>
-                            <td>{{ $checkout->email }}</td>
-                            <td>
-                                <span class="badge bg-info text-dark">
-                                    @if($checkout->plan == 0) Basic Plan
-                                    @elseif($checkout->plan == 1) Advanced Trader
-                                    @else Institutional Trader
-                                    @endif
-                                </span>
-                            </td>
-                            <td>{{ $checkout->countryData->name ?? '-' }}</td>
-                            <td>
-                                <span class="badge {{ $checkout->trade_signals == 0 ? 'bg-success' : 'bg-primary' }}">
-                                    {{ $checkout->trade_signals == 0 ? 'Telegram' : 'WhatsApp' }}
-                                </span>
-                            </td>
-                            <td>
-                                <span class="badge bg-secondary">
-                                    {{ $checkout->payment_option == 0 ? 'USDT-Tether' : 'USDT-BEP20' }}
-                                </span>
-                            </td>
-                            <td>{{ $checkout->created_at->format('d M Y') }}</td>
-                            <td>
-                                <a href="{{ route('web.pricing-plan-checkout.show', $checkout) }}" class="btn btn-sm btn-outline-info">
-                                    <i class="bi bi-eye"></i>
-                                </a>
-                                <a href="{{ route('web.pricing-plan-checkout.edit', $checkout) }}" class="btn btn-sm btn-outline-warning">
-                                    <i class="bi bi-pencil"></i>
-                                </a>
-                            </td>
-                        </tr>
-                    @empty
-                        <tr><td colspan="8" class="text-center text-muted py-4">No checkouts found.</td></tr>
-                    @endforelse
-                </tbody>
+    <tr>
+        <th>#</th>
+        <th>Full Name</th>
+        <th>Email</th>
+        <th>Plan</th>
+        <th>Country</th>
+        <th>Trade Signals</th>
+        <th>Payment Option</th>
+        <th>Status</th>
+        <th>Created Date</th>
+        <th>Action</th>
+    </tr>
+</thead>
+<tbody>
+    @forelse($checkouts as $i => $checkout)
+        <tr>
+            <td>{{ $checkouts->firstItem() + $i }}</td>
+            <td>
+                <div class="d-flex align-items-center gap-2">
+                    <div style="width:32px;height:32px;background:linear-gradient(135deg,#3b82f6,#8b5cf6);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:.75rem;font-weight:700">
+                        {{ strtoupper(substr($checkout->full_name, 0, 2)) }}
+                    </div>
+                    <strong>{{ $checkout->full_name }}</strong>
+                </div>
+            </td>
+            <td>{{ $checkout->email }}</td>
+            <td>
+                <span class="badge bg-info text-dark">{{ $checkout->plan_name }}</span>
+            </td>
+            <td>{{ $checkout->countryData->name ?? '-' }}</td>
+            <td>
+                <span class="badge {{ $checkout->trade_signals == 0 ? 'bg-success' : 'bg-primary' }}">
+                    {{ $checkout->trade_signals == 0 ? 'Telegram' : 'WhatsApp' }}
+                </span>
+            </td>
+            <td>
+                <span class="badge bg-secondary">
+                    {{ $checkout->payment_option == 0 ? 'USDT-Tether' : 'USDT-BEP20' }}
+                </span>
+            </td>
+            <td>
+                @php
+                    $statusColors = [
+                        'pending_payment'    => 'bg-secondary',
+                        'payment_submitted'  => 'bg-warning text-dark',
+                        'verified'           => 'bg-success',
+                        'rejected'           => 'bg-danger',
+                        'completed'          => 'bg-success',
+                    ];
+                @endphp
+                <span class="badge {{ $statusColors[$checkout->status] ?? 'bg-secondary' }}">
+                    {{ ucwords(str_replace('_', ' ', $checkout->status)) }}
+                </span>
+            </td>
+            <td>{{ $checkout->created_at->format('d M Y') }}</td>
+            <td class="d-flex gap-1">
+                <a href="{{ route('web.pricing-plan-checkout.show', $checkout) }}" class="btn btn-sm btn-outline-info">
+                    <i class="bi bi-eye"></i>
+                </a>
+                <a href="{{ route('web.pricing-plan-checkout.edit', $checkout) }}" class="btn btn-sm btn-outline-warning">
+                    <i class="bi bi-pencil"></i>
+                </a>
+
+                @if($checkout->status === \App\Models\PricingPlanCheckout::STATUS_PAYMENT_SUBMITTED)
+                    <form action="{{ route('web.pricing-plan-checkout.verify', $checkout) }}" method="POST"
+                          onsubmit="return confirm('Verify payment and send VIP welcome email to {{ $checkout->email }}?');">
+                        @csrf
+                        <button type="submit" class="btn btn-sm btn-success">
+                            <i class="bi bi-check-circle"></i> Verify
+                        </button>
+                    </form>
+                @elseif($checkout->status === \App\Models\PricingPlanCheckout::STATUS_VERIFIED)
+                    <span class="btn btn-sm btn-success disabled">
+                        <i class="bi bi-check-circle-fill"></i> Verified
+                    </span>
+                @endif
+            </td>
+        </tr>
+    @empty
+        <tr><td colspan="9" class="text-center text-muted py-4">No checkouts found.</td></tr>
+    @endforelse
+</tbody>
             </table>
         </div>
     </div>

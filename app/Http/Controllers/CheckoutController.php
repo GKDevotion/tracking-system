@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Mail\CheckoutThankYouMail;
 use App\Mail\PaymentConfirmationMail;
 use App\Mail\PaymentSubmittedAdminMail;
+use App\Mail\PaymentVerifiedVipMail;
 use App\Models\Plan;
 use App\Models\PricingPlanCheckout;
 use Exception;
@@ -154,5 +155,36 @@ class CheckoutController extends Controller
         } catch (Exception $e) {
             Log::error('Mail Error: ' . $e->getMessage());
         }
+    }
+
+    public function verifyPayment(Request $request, string $token)
+    {
+        $checkout = PricingPlanCheckout::where('payment_token', $token)->firstOrFail();
+
+        if ($checkout->status !== PricingPlanCheckout::STATUS_PAYMENT_SUBMITTED) {
+            return response()->json([
+                'success' => false,
+                'message' => 'This payment cannot be verified in its current state.',
+            ], Response::HTTP_CONFLICT);
+        }
+
+        $startDate  = now();
+        $expiryDate = now()->addDays($checkout->plan?->duration_days ?? 30); // adjust to your Plan model
+
+        $checkout->update([
+            'status'           => PricingPlanCheckout::STATUS_VERIFIED,
+            'start_date'       => $startDate,
+            'expiry_date'      => $expiryDate,
+            'vip_access_link'  => config('app.vip_access_url'), // or per-plan link
+            'verified_at'      => now(),
+        ]);
+
+        $this->safeSend(fn () => Mail::to($checkout->email)->send(new PaymentVerifiedVipMail($checkout)));
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Payment verified and VIP welcome email sent.',
+            'unique_id' => $checkout->unique_id,
+        ]);
     }
 }

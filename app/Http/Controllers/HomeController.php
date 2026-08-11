@@ -38,6 +38,7 @@ class HomeController extends Controller
                 'remove' => $plan->remove,
                 'cta' => $plan->cta,
                 'link' => $finalLink,
+                'name' => $plan->name
             ];
         }
 
