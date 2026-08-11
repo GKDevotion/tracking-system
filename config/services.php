@@ -42,5 +42,7 @@ return [
     'telegram' => [
         'bot_token' => env('TELEGRAM_BOT_TOKEN'),
         'channel_id' => env('TELEGRAM_CHANNEL_ID'),
+        'private_bot_token' => env('TELEGRAM_PRIVATE_BOT_TOKEN'),
+        'private_channel_id' => env('TELEGRAM_PRIVATE_CHANNEL_ID'),
     ],
 ];
