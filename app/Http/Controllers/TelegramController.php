@@ -32,11 +32,12 @@ class TelegramController extends Controller
 
         try{
             $post = $request->input('channel_post');
-
+            dd( $post );
             if (!$post) {
                 return response()->json([
                     'status' => 'ignored'
                 ]);
+
             }//1003746642220
 
             $chatId = $post['chat']['id'] ?? null;
