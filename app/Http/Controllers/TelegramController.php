@@ -4,9 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\TelegramPrivateSignal;
 use App\Models\TelegramPrivateSignalUpdate;
-use App\Services\TelegramPrivateSignalParser;
+use App\Services\Telegram\TelegramPrivateSignalParser;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Throwable;
 
