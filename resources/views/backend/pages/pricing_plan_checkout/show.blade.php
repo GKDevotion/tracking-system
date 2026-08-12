@@ -12,11 +12,8 @@
             </div>
             <h5 class="fw-bold mb-0">{{ $pricingPlanCheckout->full_name }}</h5>
             <p class="text-muted mb-3">{{ $pricingPlanCheckout->email }}</p>
-            <span class="badge bg-info text-dark px-3 py-2 mb-4">
-                @if($pricingPlanCheckout->plan == 0) Basic Plan
-                @elseif($pricingPlanCheckout->plan == 1) Advanced Trader
-                @else Institutional Trader
-                @endif
+            <span class="badge bg-info text-dark px-3 py-2 mb-4 fs-5">
+                {{ $pricingPlanCheckout->planDetails->name }}
             </span>
 
             <div class="text-start">
@@ -26,7 +23,7 @@
                 </div>
                 <div class="mb-2 d-flex align-items-center gap-2">
                     <i class="bi bi-geo-alt text-primary"></i>
-                    <span style="font-size:.875rem">{{ $pricingPlanCheckout->country }}</span>
+                    <span style="font-size:.875rem">{{ $pricingPlanCheckout->countryData->name }}</span>
                 </div>
                 <div class="mb-2 d-flex align-items-center gap-2">
                     <i class="bi bi-phone text-primary"></i>
