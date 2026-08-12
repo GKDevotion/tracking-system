@@ -55,7 +55,7 @@
             </td>
             <td>{{ $checkout->email }}</td>
             <td>
-                <span class="badge bg-info text-dark">{{ $checkout->plan_name }}</span>
+                <span class="badge bg-info text-dark">{{ $checkout->planDetails->name }}</span>
             </td>
             <td>{{ $checkout->countryData->name ?? '-' }}</td>
             <td>

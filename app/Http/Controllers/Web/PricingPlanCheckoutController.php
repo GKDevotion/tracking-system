@@ -23,6 +23,7 @@ class PricingPlanCheckoutController extends Controller
             ->latest()
             ->paginate(10)
             ->withQueryString();
+ 
 
         return view('backend.pages.pricing_plan_checkout.index', compact('checkouts'));
     }
@@ -59,9 +60,9 @@ class PricingPlanCheckoutController extends Controller
             'mobile_number' => 'required|string|max:255',
             'payment_option' => 'required|in:0,1',
             // confirm_payment can be updated if needed
-        ]);
-
+        ]); 
         $pricingPlanCheckout->update($data);
+          
 
         return redirect()->route('web.pricing-plan-checkout.index')->with('success', 'Checkout updated successfully.');
     }

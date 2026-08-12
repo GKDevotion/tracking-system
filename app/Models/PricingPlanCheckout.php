@@ -18,7 +18,7 @@ class PricingPlanCheckout extends Model
         'last_name',
         'full_name',
         'email',
-        'country',
+        'country_id',
         'trade_signals',
         'tele_username',
         'mobile_number',
