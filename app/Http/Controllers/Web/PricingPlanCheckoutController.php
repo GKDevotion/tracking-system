@@ -16,7 +16,7 @@ class PricingPlanCheckoutController extends Controller
      */
     public function index(Request $request)
     {
-        $checkouts = PricingPlanCheckout::with('user')
+        $checkouts = PricingPlanCheckout::query()
             ->when($request->search, fn($q) => $q->where('full_name', 'like', "%{$request->search}%")
                 ->orWhere('email', 'like', "%{$request->search}%"))
             ->when($request->plan, fn($q) => $q->where('plan', $request->plan))
