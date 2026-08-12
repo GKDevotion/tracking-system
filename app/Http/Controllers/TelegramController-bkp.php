@@ -2,12 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ForexUpdate;
 use App\Models\TelegramPrivateSignal;
 use App\Models\TelegramPrivateSignalUpdate;
 use App\Services\Telegram\TelegramPrivateSignalParser;
-use App\Services\Telegram\TelegramSignalParser;
-use App\Services\Telegram\TelegramSignalSaver;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Throwable;
@@ -22,10 +19,6 @@ class TelegramController extends Controller
     public function privateChannelWebhook(Request $request)
     {
         $update = $request->all();
-
-        if (isset($update[0]) && is_array($update[0])) {
-            $update = $update[0];
-        }
 
         Log::info('Telegram Signal Processing', $update);
 
@@ -89,117 +82,65 @@ class TelegramController extends Controller
             |--------------------------------------------------------------------------
             */
 
-            if( true ){
+            $messageId =
+                $channelPost['message_id'] ?? null;
 
-                $datetime = null;
+            $replyToMessageId =
+                $channelPost['reply_to_message']['message_id']
+                ?? null;
 
-                if( isset( $channelPost['reply_to_message']['message_id'] ) &&  $channelPost['reply_to_message']['message_id'] > 0 ){
-                    $result = TelegramSignalParser::parseResult(
-                        $channelPost['text']
+            $text =
+                $channelPost['text']
+                ?? $channelPost['caption']
+                ?? '';
+
+            /*
+            |--------------------------------------------------------------------------
+            | Telegram date
+            |--------------------------------------------------------------------------
+            */
+
+            $telegramDate = null;
+
+            if (!empty($channelPost['date'])) {
+                $telegramDate =
+                    date(
+                        'Y-m-d H:i:s',
+                        $channelPost['date']
                     );
+            }
 
-                    if( $result ) {
+            /*
+            |--------------------------------------------------------------------------
+            | Current message is a reply?
+            |--------------------------------------------------------------------------
+            */
 
-                        if (!empty($channelPost['reply_to_message']['date'])) {
-                            $datetime = date( 'Y-m-d H:i:s', $channelPost['reply_to_message']['date'] );
-                        }
+            if ($replyToMessageId) {
 
-                        ForexUpdate::where('post_id', $channelPost['reply_to_message']['message_id'])
-                        ->update([
-                            // 'signal_date'  => $datetime,
-                            // 'pair'         => $signal['pair'],
-                            // 'order_type'   => $signal['direction'] == 'SELL' ? 1 : 0,
-                            // 'entry_price'  => $signal['entry_price'],
-                            // 'stop_loss'    => $signal['stop_loss'],
-                            // 'take_profit'  => json_encode($signal['take_profit']),
-                            'profit'       => $result['profit'] ?? null,
-                            'status'       => 1,
-                            // 'sort_order'   => 0,
-                            'result_id'    => $channelPost['message_id'],
-                            'result_date'  => $datetime,
-                        ]);
-                    }
-                } else {
-
-                    $signal = TelegramSignalParser::parseSignal(
-                        $channelPost['text']
-                    );
-
-                    if (!empty($channelPost['date'])) {
-                        $datetime = date( 'Y-m-d H:i:s', $channelPost['date'] );
-                    }
-
-                    ForexUpdate::create([
-                        'post_id'      => $channelPost['message_id'],
-                        'signal_date'  => $datetime,
-                        'pair'         => $signal['pair'],
-                        'order_type'   => $signal['direction'] === 'SELL' ? 1 : 0,
-                        'entry_price'  => $signal['entry_price'],
-                        'stop_loss'    => $signal['stop_loss'],
-                        'take_profit'  => json_encode($signal['take_profit']),
-                        'profit'       => $result['profit'] ?? null,
-                        'status'       => 1,
-                        'sort_order'   => 0,
-                        'result_id'    => null,
-                        'result_date'  => null,
-                        'live_btn_url' => "https://t.me/c/3746642220/".$channelPost['message_id']
-                    ]);
-                }
-            } else {
-                $messageId = $channelPost['message_id'] ?? null;
-
-                $replyToMessageId = $channelPost['reply_to_message']['message_id'] ?? null;
-
-                $text = $channelPost['text'] ?? $channelPost['caption'] ?? '';
-
-                /*
-                |--------------------------------------------------------------------------
-                | Telegram date
-                |--------------------------------------------------------------------------
-                */
-
-                $telegramDate = null;
-
-                if (!empty($channelPost['date'])) {
-                    $telegramDate =
-                        date(
-                            'Y-m-d H:i:s',
-                            $channelPost['date']
-                        );
-                }
-
-                /*
-                |--------------------------------------------------------------------------
-                | Current message is a reply?
-                |--------------------------------------------------------------------------
-                */
-
-                if ($replyToMessageId) {
-
-                    return $this->processReplyMessage(
-                        channelId: $channelId,
-                        messageId: $messageId,
-                        replyToMessageId: $replyToMessageId,
-                        text: $text,
-                        channelPost: $channelPost,
-                        telegramDate: $telegramDate
-                    );
-                }
-
-                /*
-                |--------------------------------------------------------------------------
-                | Normal message
-                |--------------------------------------------------------------------------
-                */
-
-                return $this->processNormalMessage(
+                return $this->processReplyMessage(
                     channelId: $channelId,
                     messageId: $messageId,
+                    replyToMessageId: $replyToMessageId,
                     text: $text,
                     channelPost: $channelPost,
                     telegramDate: $telegramDate
                 );
             }
+
+            /*
+            |--------------------------------------------------------------------------
+            | Normal message
+            |--------------------------------------------------------------------------
+            */
+
+            return $this->processNormalMessage(
+                channelId: $channelId,
+                messageId: $messageId,
+                text: $text,
+                channelPost: $channelPost,
+                telegramDate: $telegramDate
+            );
 
         } catch (Throwable $e) {
 

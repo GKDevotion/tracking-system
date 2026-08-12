@@ -92,8 +92,9 @@ Route::prefix('mt5')
         Route::get('/signals', [MT5Controller::class, 'signals']);
         Route::post('/executed', [MT5Controller::class, 'executed']);
         Route::post('/closed', [MT5Controller::class, 'closed']);
+    }
+);
 
-    });
 
 Route::get('/telegram/test-webhook', [TelegramController::class, 'testWebhook']);
 Route::post('/telegram/private-channel-webhook', [TelegramController::class, 'privateChannelWebhook']);
