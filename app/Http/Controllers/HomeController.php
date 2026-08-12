@@ -119,6 +119,7 @@ class HomeController extends Controller
      */
     public function getSelectedChannelSignals( Request $request ){
 
+        return true;
         $getLastSignal = null;
         if( isset( $request->setNull ) && $request->setNull == 1 ){
             // Reset last signal
@@ -156,6 +157,7 @@ class HomeController extends Controller
      */
     public function getDeletedChannelSignals(){
 
+        return true;
         $getLastSignal = ForexUpdate::orderBy('post_id', 'desc')->select('post_id')->first();
 
         if( $getLastSignal ){
