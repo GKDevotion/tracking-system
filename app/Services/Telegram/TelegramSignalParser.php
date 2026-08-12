@@ -34,7 +34,6 @@ class TelegramSignalParser
         $tp = self::extractTakeProfits($text);
 
         return [
-
             'pair' => $pair,
             'direction' => $direction,
             'entry_price' => $entry[0] ?? null,
