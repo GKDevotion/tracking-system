@@ -231,7 +231,7 @@ class TelegramPrivateSignalParser
         */
 
         preg_match(
-            '/([+\-−]?\s*[0-9]+(?:\.[0-9]+)?)\s*PIPS/i',
+            '/([+\-−–]?\s*[0-9]+(?:\.[0-9]+)?)\s*PIPS/i',
             $text,
             $matches
         );
@@ -240,11 +240,17 @@ class TelegramPrivateSignalParser
             return null;
         }
 
+        $value = trim($matches[1]);
+
+        // Normalize Unicode minus/dash characters
         $value = str_replace(
-            [' ', '−'],
-            ['', '-'],
-            $matches[1]
+            ['−', '–', '—'],
+            '-',
+            $value
         );
+
+        // Remove spaces
+        $value = str_replace(' ', '', $value);
 
         return (float) $value;
     }
