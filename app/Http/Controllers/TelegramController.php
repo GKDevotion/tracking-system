@@ -142,6 +142,7 @@ class TelegramController extends Controller
                         'sort_order'   => 0,
                         'result_id'    => null,
                         'result_date'  => null,
+                        'live_btn_url' => "https://t.me/c/3746642220/".$channelPost['message_id']
                     ]);
                 }
             } else {
