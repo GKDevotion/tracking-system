@@ -203,7 +203,7 @@
 
                         <tbody>
                                 @forelse($signals as $signal)
-                                    <tr class="{{ $signal->profit == 0 ? 'row-faded' : '' }} redirect-tg-channel" data-link-url="https://t.me/Wealthoraofficial/{{ $signal->post_id }}">
+                                    <tr class="{{ $signal->profit == 0 ? 'row-faded' : '' }} redirect-tg-channel" data-link-url="https://t.me/c/3746642220/{{ $signal->post_id }}">
 
                                         {{-- Signal Date --}}
                                         <td class="c-date">
