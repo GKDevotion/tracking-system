@@ -501,7 +501,8 @@ Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.s
 Route::get('/checkout/payment/{token}', [CheckoutController::class, 'showPaymentForm'])->name('checkout.payment.show');
 Route::post('/checkout/payment/{token}', [CheckoutController::class, 'storePayment'])->name('checkout.payment.store');
 
-
+Route::post('/pricing-plan-checkout/{checkout}/verify', [PricingPlanCheckoutController::class, 'verifyPayment'])->name('web.pricing-plan-checkout.verify');
+ 
 
 if (app()->environment('local')) {
 
@@ -539,7 +540,5 @@ if (app()->environment('local')) {
 
         return new PaymentVerifiedVipMail($checkout);
     });
-Route::post('/pricing-plan-checkout/{checkout}/verify', [PricingPlanCheckoutController::class, 'verifyPayment'])
-    ->name('web.pricing-plan-checkout.verify');
- 
+
 }
