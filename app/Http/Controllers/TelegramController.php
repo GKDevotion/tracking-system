@@ -104,7 +104,10 @@ class TelegramController extends Controller
                             $datetime = date( 'Y-m-d H:i:s', $channelPost['reply_to_message']['date'] );
                         }
 
-                        ForexUpdate::where('post_id', $channelPost['reply_to_message']['message_id'])
+                        ForexUpdate::where([
+                            'ticket' => "3746642220",
+                            'post_id'=> $channelPost['reply_to_message']['message_id']
+                        ])
                         ->update([
                             // 'signal_date'  => $datetime,
                             // 'pair'         => $signal['pair'],
@@ -115,6 +118,7 @@ class TelegramController extends Controller
                             'profit'       => $result['profit'] ?? null,
                             'status'       => 1,
                             // 'sort_order'   => 0,
+                            'ticket' => "3746642220",
                             'result_id'    => $channelPost['message_id'],
                             'result_date'  => $datetime,
                         ]);
@@ -142,6 +146,7 @@ class TelegramController extends Controller
                         'sort_order'   => 0,
                         'result_id'    => null,
                         'result_date'  => null,
+                        'ticket'       => "3746642220",
                         'live_btn_url' => "https://t.me/c/3746642220/".$channelPost['message_id']
                     ]);
                 }
