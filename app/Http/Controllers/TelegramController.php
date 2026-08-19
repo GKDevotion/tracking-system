@@ -93,62 +93,64 @@ class TelegramController extends Controller
 
                 $datetime = null;
 
-                if( isset( $channelPost['reply_to_message']['message_id'] ) &&  $channelPost['reply_to_message']['message_id'] > 0 ){
-                    $result = TelegramSignalParser::parseResult(
-                        $channelPost['text']
-                    );
+                if( isset( $channelPost['text'] ) ){
+                    if( isset( $channelPost['reply_to_message']['message_id'] ) &&  $channelPost['reply_to_message']['message_id'] > 0 ){
+                        $result = TelegramSignalParser::parseResult(
+                            $channelPost['text']
+                        );
 
-                    if( $result ) {
+                        if( $result ) {
 
-                        if (!empty($channelPost['reply_to_message']['date'])) {
-                            $datetime = date( 'Y-m-d H:i:s', $channelPost['reply_to_message']['date'] );
+                            if (!empty($channelPost['reply_to_message']['date'])) {
+                                $datetime = date( 'Y-m-d H:i:s', $channelPost['reply_to_message']['date'] );
+                            }
+
+                            ForexUpdate::where([
+                                'ticket' => "3746642220",
+                                'post_id'=> $channelPost['reply_to_message']['message_id']
+                            ])
+                            ->update([
+                                // 'signal_date'  => $datetime,
+                                // 'pair'         => $signal['pair'],
+                                // 'order_type'   => $signal['direction'] == 'SELL' ? 1 : 0,
+                                // 'entry_price'  => $signal['entry_price'],
+                                // 'stop_loss'    => $signal['stop_loss'],
+                                // 'take_profit'  => json_encode($signal['take_profit']),
+                                'profit'       => $result['profit'] ?? null,
+                                'status'       => 1,
+                                // 'sort_order'   => 0,
+                                'ticket' => "3746642220",
+                                'result_id'    => $channelPost['message_id'],
+                                'result_date'  => $datetime,
+                            ]);
+                        }
+                    } else {
+
+                        $signal = TelegramSignalParser::parseSignal(
+                            $channelPost['text']
+                        );
+
+                        if (!empty($channelPost['date'])) {
+                            $datetime = date( 'Y-m-d H:i:s', $channelPost['date'] );
                         }
 
-                        ForexUpdate::where([
-                            'ticket' => "3746642220",
-                            'post_id'=> $channelPost['reply_to_message']['message_id']
-                        ])
-                        ->update([
-                            // 'signal_date'  => $datetime,
-                            // 'pair'         => $signal['pair'],
-                            // 'order_type'   => $signal['direction'] == 'SELL' ? 1 : 0,
-                            // 'entry_price'  => $signal['entry_price'],
-                            // 'stop_loss'    => $signal['stop_loss'],
-                            // 'take_profit'  => json_encode($signal['take_profit']),
+                        ForexUpdate::create([
+                            'post_id'      => $channelPost['message_id'],
+                            'signal_date'  => $datetime,
+                            'pair'         => $signal['pair'],
+                            'order_type'   => $signal['direction'] === 'SELL' ? 1 : 0,
+                            'entry_price'  => $signal['entry_price'],
+                            'stop_loss'    => $signal['stop_loss'],
+                            'take_profit'  => json_encode($signal['take_profit']),
                             'profit'       => $result['profit'] ?? null,
                             'status'       => 1,
-                            // 'sort_order'   => 0,
-                            'ticket' => "3746642220",
-                            'result_id'    => $channelPost['message_id'],
-                            'result_date'  => $datetime,
+                            'sort_order'   => 0,
+                            'result_id'    => null,
+                            'result_date'  => null,
+                            'ticket'       => "3746642220",
+                            'live_btn_url' => "https://t.me/c/3746642220/".$channelPost['message_id']
                         ]);
                     }
-                } else {
-
-                    $signal = TelegramSignalParser::parseSignal(
-                        $channelPost['text']
-                    );
-
-                    if (!empty($channelPost['date'])) {
-                        $datetime = date( 'Y-m-d H:i:s', $channelPost['date'] );
-                    }
-
-                    ForexUpdate::create([
-                        'post_id'      => $channelPost['message_id'],
-                        'signal_date'  => $datetime,
-                        'pair'         => $signal['pair'],
-                        'order_type'   => $signal['direction'] === 'SELL' ? 1 : 0,
-                        'entry_price'  => $signal['entry_price'],
-                        'stop_loss'    => $signal['stop_loss'],
-                        'take_profit'  => json_encode($signal['take_profit']),
-                        'profit'       => $result['profit'] ?? null,
-                        'status'       => 1,
-                        'sort_order'   => 0,
-                        'result_id'    => null,
-                        'result_date'  => null,
-                        'ticket'       => "3746642220",
-                        'live_btn_url' => "https://t.me/c/3746642220/".$channelPost['message_id']
-                    ]);
                 }
             } else {
                 $messageId = $channelPost['message_id'] ?? null;
