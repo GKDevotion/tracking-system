@@ -115,9 +115,6 @@ class TelegramController extends Controller
                                 'result_id'    => $channelPost['message_id'],
                                 'result_date'  => $datetime,
                             ]);
-
-                            dd( $results, $channelPost['message_id'], $channelPost['reply_to_message']['message_id'] );
-
                         }
                     } else {
 
