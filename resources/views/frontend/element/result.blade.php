@@ -203,7 +203,17 @@
 
                         <tbody>
                                 @forelse($signals as $signal)
-                                    <tr class="{{ $signal->profit == 0 ? 'row-faded' : '' }} redirect-tg-channel" data-link-url="{{ $signal->live_btn_url }}">
+                                    <?php
+                                    $res = 0;
+                                    $live_btn_url = $signal->live_btn_url;
+
+                                    if( $signal->profit != null && $signal->result_id ){
+                                        $res = $signal->result_id;
+                                        $live_btn_url = preg_replace('/\/[^\/]+$/', '/' . $signal->result_id, $signal->live_btn_url);
+                                    }
+                                    ?>
+
+                                    <tr class="{{ $signal->profit == 0 ? 'row-faded' : '' }} redirect-tg-channel" {{$res}} data-link-url="{{ $live_btn_url }}">
 
                                         {{-- Signal Date --}}
                                         <td class="c-date">
