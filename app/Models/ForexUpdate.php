@@ -21,6 +21,7 @@ class ForexUpdate extends Model
             'post_id',
             'result_id',
             'result_date',
+            'ticket'
         ];
 
 }

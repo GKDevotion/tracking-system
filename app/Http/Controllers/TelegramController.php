@@ -105,24 +105,19 @@ class TelegramController extends Controller
                                 $datetime = date( 'Y-m-d H:i:s', $channelPost['reply_to_message']['date'] );
                             }
 
-                            ForexUpdate::where([
+                            $results = ForexUpdate::where([
                                 'ticket' => "3746642220",
                                 'post_id'=> $channelPost['reply_to_message']['message_id']
                             ])
                             ->update([
-                                // 'signal_date'  => $datetime,
-                                // 'pair'         => $signal['pair'],
-                                // 'order_type'   => $signal['direction'] == 'SELL' ? 1 : 0,
-                                // 'entry_price'  => $signal['entry_price'],
-                                // 'stop_loss'    => $signal['stop_loss'],
-                                // 'take_profit'  => json_encode($signal['take_profit']),
                                 'profit'       => $result['profit'] ?? null,
                                 'status'       => 1,
-                                // 'sort_order'   => 0,
-                                'ticket' => "3746642220",
                                 'result_id'    => $channelPost['message_id'],
                                 'result_date'  => $datetime,
                             ]);
+
+                            dd( $results, $channelPost['message_id'], $channelPost['reply_to_message']['message_id'] );
+
                         }
                     } else {
 
