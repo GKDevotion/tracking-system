@@ -236,7 +236,7 @@
                                     $live_btn_url = $signal->live_btn_url;
 
                                     if( $signal->profit > 0 ){
-                                        $live_btn_url = preg_replace('/\/[^\/]+$/', '/' . $signal->post_id, $signal->live_btn_url);
+                                        $live_btn_url = preg_replace('/\/[^\/]+$/', '/' . $signal->result_id, $signal->live_btn_url);
                                     }
                                     ?>
                                     <tr class="{{ $signal->profit == 0 ? 'row-faded' : '' }} redirect-tg-channel" data-link-url="{{ $live_btn_url }}">
