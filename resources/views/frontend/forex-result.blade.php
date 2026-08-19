@@ -235,7 +235,7 @@
                                     <?php
                                     $live_btn_url = $signal->live_btn_url;
 
-                                    if( $signal->profit > 0 ){
+                                    if( $signal->profit > 0 && $signal->result_id ){
                                         $live_btn_url = preg_replace('/\/[^\/]+$/', '/' . $signal->result_id, $signal->live_btn_url);
                                     }
                                     ?>
