@@ -73,6 +73,7 @@
 	--purple-color: #3d0563c4;
     --logo-color: #F04A34;
     --logo-color-hover: #f04a34e9;
+    --text-blue: #0000ff;
 }
 
 /************************************/
@@ -89,6 +90,9 @@ body{
     background: var(--bg-color);
 }
 
+.text-blue{
+    color: var(--text-blue) !important;
+}
 ::-webkit-scrollbar-track{
 	background-color: var(--primary-color);
 	border-left: 1px solid var(--primary-color);

@@ -1010,7 +1010,7 @@
                                         </div>
 
                                         <div class="stat-text">
-                                            <div class="stat-value text-success" style="margin-left: -25px;">
+                                            <div class="stat-value text-blue" style="margin-left: -25px;">
                                                 +<span class="counter">{!! getConfigurationField('WEEKLY_NET_PIPS') !!}</span>
                                             </div>
 
@@ -1137,7 +1137,7 @@
                                         </div>
 
                                         <div class="stat-text">
-                                            <div class="stat-value text-success" style="margin-left: -25px;">
+                                            <div class="stat-value text-blue" style="margin-left: -25px;">
                                                 +<span class="counter">{!! getConfigurationField('MONTHLY_NET_PIPS') !!}</span>
                                             </div>
 

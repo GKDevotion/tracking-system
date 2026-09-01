@@ -98,7 +98,7 @@
                     .c-entry  { color: #000; }
 
                     .c-profit {
-                        color: green;
+                        color: var(--text-blue);
                     }
 
                     .c-loss {
@@ -281,7 +281,7 @@
                                             @if ( $signal->profit)
                                                 {{ $signal->profit }}
                                             @else
-                                                <span style="color:green;font-size: 1rem;">Running</span>
+                                                <span class="text-blue">Running</span>
                                             @endif
                                         </td>
 
