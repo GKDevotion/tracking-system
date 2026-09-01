@@ -122,26 +122,29 @@ class TelegramController extends Controller
                             $channelPost['text']
                         );
 
-                        if (!empty($channelPost['date'])) {
-                            $datetime = date( 'Y-m-d H:i:s', $channelPost['date'] );
-                        }
+                        if( $signal ){
 
-                        ForexUpdate::create([
-                            'post_id'      => $channelPost['message_id'],
-                            'signal_date'  => $datetime,
-                            'pair'         => $signal['pair'],
-                            'order_type'   => $signal['direction'] === 'SELL' ? 1 : 0,
-                            'entry_price'  => $signal['entry_price'],
-                            'stop_loss'    => $signal['stop_loss'],
-                            'take_profit'  => json_encode($signal['take_profit']),
-                            'profit'       => $result['profit'] ?? null,
-                            'status'       => 1,
-                            'sort_order'   => 0,
-                            'result_id'    => null,
-                            'result_date'  => null,
-                            'ticket'       => "3746642220",
-                            'live_btn_url' => "https://t.me/c/3746642220/".$channelPost['message_id']
-                        ]);
+                            if (!empty($channelPost['date'])) {
+                                $datetime = date( 'Y-m-d H:i:s', $channelPost['date'] );
+                            }
+
+                            ForexUpdate::create([
+                                'post_id'      => $channelPost['message_id'],
+                                'signal_date'  => $datetime,
+                                'pair'         => $signal['pair'],
+                                'order_type'   => $signal['direction'] === 'SELL' ? 1 : 0,
+                                'entry_price'  => $signal['entry_price'],
+                                'stop_loss'    => $signal['stop_loss'],
+                                'take_profit'  => json_encode($signal['take_profit']),
+                                'profit'       => $result['profit'] ?? null,
+                                'status'       => 1,
+                                'sort_order'   => 0,
+                                'result_id'    => null,
+                                'result_date'  => null,
+                                'ticket'       => "3746642220",
+                                'live_btn_url' => "https://t.me/c/3746642220/".$channelPost['message_id']
+                            ]);
+                        }
                     }
                 }
             } else {
