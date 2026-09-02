@@ -34,7 +34,7 @@
 
     <!-- Favicon Icon -->
     <link rel="shortcut icon" href="{{ url('public/frontend/images/favicon.png') }}" type="image/x-icon">
- 
+
     <!-- Google Fonts Css-->
     <link rel="preconnect" href="https://fonts.googleapis.com/">
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
@@ -65,7 +65,7 @@
     <!-- <link rel="stylesheet" href="{{ url('public/frontend/css/mousecursor.css') }}"> -->
 
     <!-- Main Custom Css -->
-    <link rel="stylesheet" href="{{ url('public/frontend/css/custom.css?v=0.001') }}" media="screen">
+    <link rel="stylesheet" href="{{ url('public/frontend/css/custom.css?v=0.002') }}" media="screen">
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
