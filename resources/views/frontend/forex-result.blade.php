@@ -225,7 +225,7 @@
                             <th>Order</th>
                             <th class="d-none">Entry</th>
                             <th style="width: 1%">SL | TP</th>
-                            <th class="">Profit</th>
+                            <th class="">PIPS</th>
                             <th>Live</th>
                             </tr>
                         </thead>

@@ -886,6 +886,11 @@
                 color: var(--green);
             }
 
+            .icon-blue {
+                background: var(--green-soft);
+                color: var(--text-blue);
+            }
+
             .stat-value {
                 font-size: 2.3rem;
                 font-weight: 500;
@@ -994,18 +999,10 @@
                             @if (getConfigurationField('WEEKLY_NET_PIPS') && getConfigurationField('WEEKLY_NET_PIPS') != '-')
                                 <div class="col-6 col-lg-3">
                                     <div class="stat-card">
-                                        <div class="stat-icon icon-green">
-                                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-                                                <path d="M3 17L9 11L13 15L21 7"
-                                                    stroke="currentColor"
-                                                    stroke-width="2"
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"/>
-                                                <path d="M15 7H21V13"
-                                                    stroke="currentColor"
-                                                    stroke-width="2"
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"/>
+                                        <div class="stat-icon icon-blue">
+                                            <svg class="text-blue-600" width="22" height="22" viewBox="0 0 24 24" fill="blue">
+                                                <path d="M3 17L9 11L13 15L21 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                <path d="M15 7H21V13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
                                             </svg>
                                         </div>
 
@@ -1121,20 +1118,10 @@
                             @if (getConfigurationField('MONTHLY_NET_PIPS') && getConfigurationField('MONTHLY_NET_PIPS') != '-')
                                 <div class="col-6 col-lg-3">
                                     <div class="stat-card">
-                                        <div class="stat-icon icon-green">
-                                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-                                                <path d="M3 17L9 11L13 15L21 7"
-                                                    stroke="currentColor"
-                                                    stroke-width="2"
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"/>
-                                                <path d="M15 7H21V13"
-                                                    stroke="currentColor"
-                                                    stroke-width="2"
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"/>
-                                            </svg>
-                                        </div>
+                                        <svg class="text-blue-600" width="22" height="22" viewBox="0 0 24 24" fill="blue">
+                                            <path d="M3 17L9 11L13 15L21 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                            <path d="M15 7H21V13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                        </svg>
 
                                         <div class="stat-text">
                                             <div class="stat-value text-blue" style="margin-left: -25px;">

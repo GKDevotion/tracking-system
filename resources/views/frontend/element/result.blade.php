@@ -196,7 +196,7 @@
                             <th>Date</th>
                             <th>Pair</th>
                             <th>Order</th>
-                            <th class="">Profit</th>
+                            <th class="">PIPS</th>
                             <th>Live</th>
                             </tr>
                         </thead>
