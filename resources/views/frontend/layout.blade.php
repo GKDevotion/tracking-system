@@ -65,7 +65,7 @@
     <!-- <link rel="stylesheet" href="{{ url('public/frontend/css/mousecursor.css') }}"> -->
 
     <!-- Main Custom Css -->
-    <link rel="stylesheet" href="{{ url('public/frontend/css/custom.css?v=0.002') }}" media="screen">
+    <link rel="stylesheet" href="{{ url('public/frontend/css/custom.css?v=0.003') }}" media="screen">
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
