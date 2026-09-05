@@ -1038,7 +1038,7 @@
                                             </div>
 
                                             <div class="stat-label" style="font-weight: 400">
-                                                <span style="color:var(--green);">
+                                                <span style="color:var(--text-blue);">
                                                     <span class="counter">{!! getConfigurationField('WEEKLY_WIN_TRADES') !!}</span>
                                                     <span>
                                                         {!! getConfigurationDisplayName('WEEKLY_WIN_TRADES') !!}
@@ -1061,8 +1061,8 @@
                             @if (getConfigurationField('WEEKLY_RR_RATIO') && getConfigurationField('WEEKLY_RR_RATIO') != '-')
                                 <div class="col-6 col-lg-3">
                                     <div class="stat-card">
-                                        <div class="stat-icon icon-green">
-                                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                                        <div class="stat-icon icon-blue">
+                                            <svg width="22" height="22" viewBox="0 0 24 24" fill="blue">
                                                 <path d="M12 3V21" stroke="currentColor" stroke-width="2"/>
                                                 <path d="M5 7H19" stroke="currentColor" stroke-width="2"/>
                                                 <circle cx="6" cy="10" r="3" stroke="currentColor" stroke-width="2"/>
@@ -1157,7 +1157,7 @@
                                             </div>
 
                                             <div class="stat-label" style="font-weight: 400">
-                                                <span style="color:var(--green);">
+                                                <span style="color:var(--text-blue);">
                                                     <span class="counter">{!! getConfigurationField('MONTHLY_WIN_TRADES') !!}</span>
                                                     <span>
                                                         {!! getConfigurationDisplayName('MONTHLY_WIN_TRADES') !!}
@@ -1180,8 +1180,8 @@
                             @if (getConfigurationField('MONTHLY_RR_RATIO') && getConfigurationField('MONTHLY_RR_RATIO') != '-')
                                 <div class="col-6 col-lg-3">
                                     <div class="stat-card">
-                                        <div class="stat-icon icon-green">
-                                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                                        <div class="stat-icon icon-blue">
+                                            <svg width="22" height="22" viewBox="0 0 24 24" fill="blue">
                                                 <path d="M12 3V21" stroke="currentColor" stroke-width="2"/>
                                                 <path d="M5 7H19" stroke="currentColor" stroke-width="2"/>
                                                 <circle cx="6" cy="10" r="3" stroke="currentColor" stroke-width="2"/>
