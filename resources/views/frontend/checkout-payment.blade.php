@@ -1,7 +1,7 @@
 @extends('frontend.layout')
 @section('content')
     <style>
-        :root {  
+        :root {
             --amber-tint: #fdf3e3;
             --amber-tint-strong: #fbe8c8;
             --navy: #111827;
@@ -68,7 +68,7 @@
         .select-card.active { border-color: var(--logo-color) ; }
         .select-card input { margin-top: 3px; accent-color: var(--logo-color) 	; }
         .select-card .icon-circle {
-            width: 42px; height: 42px; border-radius: 50%; flex-shrink: 0; 
+            width: 42px; height: 42px; border-radius: 50%; flex-shrink: 0;
             border:1px solid var(--logo-color);
             display: flex; align-items: center; justify-content: center;  color: var(--logo-color) 	;
         }
@@ -318,7 +318,7 @@
                                         </span>
                                     </label>
 
-                                    <label class="select-card" id="cardBep20" onclick="selectPayment('bep20', this)">
+                                    <label class="select-card d-none" id="cardBep20" onclick="selectPayment('bep20', this)">
                                         <input type="radio" name="crypto_display">
                                         <span class="icon-circle"><img src="https://www.forexgdp.com/wp-content/uploads/2024/12/usdt-bep20-address.png" alt="USDT BEP20"></span>
                                         <span>
@@ -487,7 +487,7 @@
 
                 <div class="pay-footer">
                     <span>Need help? Contact our support team.</span>
-                    
+
                     <span class="fline">
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="m22 6-10 7L2 6"></path></svg>
                         <a href="mailto:support@wealthora.com">support@wealthora.com</a>
