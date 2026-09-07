@@ -55,7 +55,7 @@
 
                                 <p style="text-align:center;margin:26px 0;">
                                     <a href="{{ $paymentUrl }}"
-                                       style="background:#ff4500;color:#ffffff;text-decoration:none;padding:14px 28px;border-radius:6px;font-weight:bold;display:inline-block;">
+                                       style="background:blue;color:#ffffff;text-decoration:none;padding:14px 28px;border-radius:6px;font-weight:bold;display:inline-block;">
                                         Complete Payment
                                     </a>
                                 </p>
