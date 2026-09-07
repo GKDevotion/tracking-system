@@ -19,7 +19,7 @@
 
         .checkout-shell {
             display: grid;
-            grid-template-columns: 340px 1fr;
+            grid-template-columns: 100% 1fr;
             background: #fff;
             border-radius: 22px;
             box-shadow: 0 20px 50px rgba(15, 23, 42, 0.08);
@@ -223,7 +223,8 @@
         <div class="checkout-shell">
 
             {{-- ================= LEFT PANEL ================= --}}
-            <div class="side-panel">
+            <div class="side-panel d-none">
+                
                 <div class="side-icon">
                     <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
                 </div>
