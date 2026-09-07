@@ -435,6 +435,10 @@
                     max-width: 100%;
                 }
 
+                .footer-top{
+                    padding: 60px 30px;
+                }
+
                 .footer-bottom-links li a {
                     padding: 0 8px;
                 }

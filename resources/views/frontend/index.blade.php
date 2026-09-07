@@ -1271,7 +1271,7 @@
             </div>
 
             <!-- Verification badges row -->
-            <div class="row g-3 align-items-center mb-5 justify-content-center">
+            <div class="row g-3 align-items-center  justify-content-center">
                 <div class="col-12 col-md-4">
                     <div class="badge-card">
                         <div class="myfxbook-pill">
@@ -1310,6 +1310,17 @@
                             .trusted-shield{
                                 width: 100px;
                                 height: auto;
+                            }
+                            .divider-heading .label{
+                                font-size: 1.2rem;
+                            }
+                            .badge-card {
+                                display: flex;
+                                flex-direction: row;
+                                justify-content: space-between;
+                                align-items: center;
+                                width: 75%;
+                                margin: 0 auto;
                             }
                         }
                     </style>
