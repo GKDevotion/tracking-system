@@ -3,7 +3,7 @@
 
 @section('content')
     <style>
-        :root {  
+        :root {
             --navy: #0f172a;
             --muted: #64748b;
             --border-soft: #e6ebf1;
@@ -11,10 +11,10 @@
             --panel-end: #dbe8fe;
         }
 
-        .checkout-container { 
-            margin: auto; 
-            margin-top: 110px; 
-            margin-bottom: 60px; 
+        .checkout-container {
+            margin: auto;
+            margin-top: 110px;
+            margin-bottom: 60px;
         }
 
         .checkout-shell {
@@ -146,8 +146,8 @@
         }
         .comm-card:hover { border-color: #c7d7fb; }
         .comm-card input { accent-color: var(--red-color) 	; }
-        .comm-card.active { 
-            border-color: var(--red-color) 	;  
+        .comm-card.active {
+            border-color: var(--red-color) 	;
         }
 
         .comm-badge {
@@ -224,7 +224,7 @@
 
             {{-- ================= LEFT PANEL ================= --}}
             <div class="side-panel d-none">
-                
+
                 <div class="side-icon">
                     <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
                 </div>
@@ -418,7 +418,7 @@
                 By proceeding, you agree to our <a href="{{ url('terms-and-conditions') }}">&nbsp;Terms &amp; Conditions</a>
             </span>
             <span class="divider"></span>
-            <span>Already have an account? 
+            <span>Already have an account?
                 <a href="support@wealthora.com">Contact Support</a>
             </span>
         </div>
@@ -496,6 +496,9 @@
                     form.classList.remove('was-validated');
                     submitBtn.innerHTML = 'Submitted';
                     statusMsg.scrollIntoView({ behavior: 'smooth' });
+                    setTimeout(() => {
+                        $('#infoForm').hide();
+                    }, 1000);
                 })
                 .catch((error) => {
                     statusMsg.classList.remove('hidden', 'alert-success');
