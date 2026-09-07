@@ -94,10 +94,15 @@ class TelegramController extends Controller
                 $datetime = null;
 
                 if( isset( $channelPost['text'] ) ){
+
+                    Log::info('Channel Text Exist:', $channelPost['text']);
+
                     if( isset( $channelPost['reply_to_message']['message_id'] ) &&  $channelPost['reply_to_message']['message_id'] > 0 ){
                         $result = TelegramSignalParser::parseResult(
                             $channelPost['text']
                         );
+
+                        Log::info('Telegram Signal Reply Processing: ', $channelPost['reply_to_message']['message_id']);
 
                         if( $result ) {
 
@@ -105,7 +110,7 @@ class TelegramController extends Controller
                                 $datetime = date( 'Y-m-d H:i:s', $channelPost['reply_to_message']['date'] );
                             }
 
-                            $results = ForexUpdate::where([
+                            $res = ForexUpdate::where([
                                 'ticket' => "3746642220",
                                 'post_id'=> $channelPost['reply_to_message']['message_id']
                             ])
@@ -115,8 +120,14 @@ class TelegramController extends Controller
                                 'result_id'    => $channelPost['message_id'],
                                 'result_date'  => $datetime,
                             ]);
+
+                            Log::info('Result Updated: Old ID (' . $channelPost['reply_to_message']['message_id'] . ') = New ID (' . $channelPost['message_id'] . ')', $res);
+                        } else {
+                            Log::info('Telegram Signal Reply Processing: No Result Found', $result);
                         }
                     } else {
+
+                        Log::info('Telegram Signal Entry Processing: ', $channelPost['message_id']);
 
                         $signal = TelegramSignalParser::parseSignal(
                             $channelPost['text']
@@ -128,7 +139,7 @@ class TelegramController extends Controller
                                 $datetime = date( 'Y-m-d H:i:s', $channelPost['date'] );
                             }
 
-                            ForexUpdate::create([
+                            $res = ForexUpdate::create([
                                 'post_id'      => $channelPost['message_id'],
                                 'signal_date'  => $datetime,
                                 'pair'         => $signal['pair'],
@@ -144,8 +155,12 @@ class TelegramController extends Controller
                                 'ticket'       => "3746642220",
                                 'live_btn_url' => "https://t.me/c/3746642220/".$channelPost['message_id']
                             ]);
+
+                            Log::info('Result Created: ID (' . $channelPost['message_id'] . ')', $res);
                         }
                     }
+                } else {
+                    Log::info('Channel Text Not Exist:');
                 }
             } else {
                 $messageId = $channelPost['message_id'] ?? null;
