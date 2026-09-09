@@ -95,14 +95,23 @@ class TelegramController extends Controller
 
                 if( isset( $channelPost['text'] ) ){
 
-                    Log::info('Channel Text Exist:', $channelPost['text']);
+                    Log::info('Channel Text Exist:', [
+                        'message_id' => $channelPost['message_id'],
+                        'text'       => $channelPost['text']
+                    ]);
 
                     if( isset( $channelPost['reply_to_message']['message_id'] ) &&  $channelPost['reply_to_message']['message_id'] > 0 ){
                         $result = TelegramSignalParser::parseResult(
                             $channelPost['text']
                         );
 
-                        Log::info('Telegram Signal Reply Processing: ', $channelPost['reply_to_message']['message_id']);
+                        $oldPostId = $channelPost['reply_to_message']['message_id'];
+                        $newPostId = $channelPost['message_id'];
+
+                        Log::info('Telegram Signal Reply Processing: ', [
+                            'old_post_id'  => $oldPostId,
+                            'new_post_id'  => $newPostId
+                        ]);
 
                         if( $result ) {
 
@@ -111,23 +120,32 @@ class TelegramController extends Controller
                             }
 
                             $res = ForexUpdate::where([
-                                'ticket' => "3746642220",
-                                'post_id'=> $channelPost['reply_to_message']['message_id']
-                            ])
-                            ->update([
-                                'profit'       => $result['profit'] ?? null,
-                                'status'       => 1,
-                                'result_id'    => $channelPost['message_id'],
-                                'result_date'  => $datetime,
+                                'ticket'  => '3746642220',
+                                'post_id' => $oldPostId,
+                            ])->update([
+                                'profit'      => $result['profit'] ?? null,
+                                'status'      => 1,
+                                'result_id'   => $newPostId,
+                                'result_date' => $datetime,
                             ]);
 
-                            Log::info('Result Updated: Old ID (' . $channelPost['reply_to_message']['message_id'] . ') = New ID (' . $channelPost['message_id'] . ')', $res);
+                            Log::info('Forex result update completed', [
+                                'ticket'       => '3746642220',
+                                'old_post_id'  => $oldPostId,
+                                'new_result_id'=> $newPostId,
+                                'updated_rows' => $res,
+                            ]);
                         } else {
-                            Log::info('Telegram Signal Reply Processing: No Result Found', $result);
+                            Log::info('Telegram Signal Reply Processing: No Result Found', [
+                                'old_post_id'  => $oldPostId,
+                                'new_post_id'  => $newPostId,
+                            ]);
                         }
                     } else {
 
-                        Log::info('Telegram Signal Entry Processing: ', $channelPost['message_id']);
+                        Log::info('Telegram Signal Entry Processing: ', [
+                            'message_id' => $channelPost['message_id']
+                        ]);
 
                         $signal = TelegramSignalParser::parseSignal(
                             $channelPost['text']
@@ -156,11 +174,15 @@ class TelegramController extends Controller
                                 'live_btn_url' => "https://t.me/c/3746642220/".$channelPost['message_id']
                             ]);
 
-                            Log::info('Result Created: ID (' . $channelPost['message_id'] . ')', $res);
+                            Log::info('Result Created: ID (' . $channelPost['message_id'] . ')', [
+                                'signal' => $signal
+                            ]);
                         }
                     }
                 } else {
-                    Log::info('Channel Text Not Exist:');
+                    Log::info('Channel Text Not Exist:', [
+                        'message_id' => $channelPost['message_id']
+                    ]);
                 }
             } else {
                 $messageId = $channelPost['message_id'] ?? null;
