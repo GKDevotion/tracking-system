@@ -19,13 +19,6 @@
             font-size: 3rem;
         }
 
-        /* .join-section .profit-text span
-                {
-                    color: #46e546;
-                    font-size: 3rem;
-                    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
-                } */
-
         .cta-background-wrap {
             margin-top: -70px;
         }
@@ -42,11 +35,11 @@
 
         @media only screen and (max-width: 991px) {
             .join-section .profit-text {
-                font-size: 2rem;
+                font-size: 1.8rem;
             }
 
             .join-section .profit-text span.color-change {
-                font-size: 2.5rem;
+                font-size: 2rem;
             }
 
             .main-button.is-centered {
@@ -63,174 +56,164 @@
         }
     </style>
     <!-- Lunch Movement Animation -->
-    <section class="join-section section-cta pt-5">
+    <section class="join-section section-cta pt-2">
         <div class="container">
             <div class="row text-center">
                 <h2 class="wow fadeInUp text-black profit-text">
                     Thousands Have Already
                     <span class="color-change">Joined</span>
-
                 </h2>
             </div>
         </div>
 
-        <link href="{{ url('public/frontend/css/lottie.css') }}" rel="stylesheet" />
+        <link href="{{ url('public/frontend/css/lottie.css?v=0.0.01') }}" rel="stylesheet" />
         <script src="{{ url('public/frontend/js/lottie.min.js') }}"></script>
-        <div class="cta-background-wrap is-relative d-none">
-
-            <a href="{{ getConfigurationField('SOCIAL_TELEGRAM_LINK') }}" target="_blank"
-                class="main-button is-centered w-inline-block today-signal-sound">
-                <div class="button-text-wrap" style="display: block;">
-                    <div class="btn-text text-white signal-btn">TODAY SIGNALS</div>
-                </div>
-                <audio id="todaySignalSound" preload="auto">
-                    <source src="{{ url('public/frontend/audio/getChannel-click.mp3') }}" type="audio/mpeg">
-                </audio>
-            </a>
-
-
-            <!-- Desktop Animation -->
-            <div id="lottie-desktop" class="lottie-animation"></div>
-
-            <div class="overlay-left"></div>
-            <div class="overlay-right"></div>
-
-            <!-- Mobile Animation -->
-            <div id="lottie-mobile" class="lottie-animation is-mobile"></div>
-
-        </div>
 
         <style>
-                :root{
-                    --red:#ff3b1f;
-                    --red-dark:#e02c10;
-                    --ink:#141414;
-                    --line:#d9d9d9;
-                    --green:#38c172;
-                }
+            :root {
+                --red: #ff3b1f;
+                --red-dark: #e02c10;
+                --ink: #141414;
+                --line: #d9d9d9;
+                --green: #38c172;
+            }
 
-                .hero-animation{
-                    margin:0 auto;
-                    text-align:center;
-                    position:relative;
-                }
-                .hero-animation h1{
-                    font-size:clamp(28px,4vw,46px);
-                    font-weight:800;
-                    margin:0 0 8px;
-                }
-                .hero-animation h1 .accent{ color:var(--green); }
+            .hero-animation {
+                margin: 0 auto;
+                text-align: center;
+                position: relative;
+                width: 100%;
+                overflow: hidden;
+            }
 
-                /* ---------- network stage ---------- */
-                .network{
-                    position:relative;
-                    width:100%;
-                    aspect-ratio: 1400 / 560;
-                }
-                .network svg{
-                    position:absolute; inset:0;
-                    width:100%; height:100%;
-                    overflow:visible;
-                }
-                .line{
-                    fill:none;
-                    stroke:var(--line);
-                    stroke-width:1.5;
-                }
-                .line.dotted{
-                    stroke-dasharray:2 8;
-                    opacity:.9;
-                }
+            .hero-animation h1 {
+                font-size: clamp(28px, 4vw, 46px);
+                font-weight: 800;
+                margin: 0 0 8px;
+            }
 
-                .center-badge{
-                    position:absolute;
-                    left:50%; top:50%;
-                    transform:translate(-50%,-54%);
-                    color:#fff;
-                    font-weight:800;
-                    font-size:15px;
-                    letter-spacing:.03em;
-                    padding:14px 26px;
-                    border-radius:999px;
-                    box-shadow:0 10px 24px rgba(255,59,31,.35);
-                    z-index:5;
-                    white-space:nowrap;
-                }
+            .hero-animation h1 .accent {
+                color: var(--green);
+            }
 
-                .marker{
-                    position:absolute;
-                    min-width:100px;
-                    height:40px;
-                    transform:translate(-50%,-50%);
-                    display:flex;
-                    align-items:center;
-                    justify-content:center;
-                    z-index:4;
-                    pointer-events:none;
-                }
-                .marker .badge{
-                    width:100%;
-                    height:100%;
-                    border-radius:14px;
-                    /* background:#fff; */
-                    /* border:1px solid #eee; */
-                    /* box-shadow:0 6px 18px rgba(0,0,0,.10); */
-                    display:flex;
-                    align-items:center;
-                    justify-content:center;
-                    overflow:hidden;
-                }
-                .marker .badge img{
-                    width:70%;
-                    height:70%;
-                    object-fit:contain;
-                }
-                .marker .fallback{
-                    width:100%;
-                    height:100%;
-                    border-radius:14px;
-                    display:flex;
-                    align-items:center;
-                    justify-content:center;
-                    color:#fff;
-                    font-weight:800;
-                    font-size:1rem;
-                }
+            /* ---------- Responsive Network Container ---------- */
+            .network {
+                position: relative;
+                width: 100%;
+                /* max-width: 1400px; */
+                margin: 0 auto;
+                aspect-ratio: 1400 / 560;
+            }
 
-                .divider{
-                    display:flex; align-items:center; gap:14px;
-                    margin-top:28px;
+            .network svg {
+                position: absolute;
+                inset: 0;
+                width: 100%;
+                height: 100%;
+                overflow: visible;
+            }
+
+            .line {
+                fill: none;
+                stroke: var(--line);
+                stroke-width: 1.5;
+            }
+
+            .line.dotted {
+                stroke-dasharray: 2 8;
+                opacity: .9;
+            }
+
+            /* Responsive CTA Center Badge */
+            .center-badge {
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+                z-index: 5;
+                white-space: nowrap;
+            }
+
+            .center-badge .main-button {
+                position: relative !important;
+                top: auto !important;
+                left: auto !important;
+                translate: none !important;
+            }
+
+            /* Marker Responsive Sizing */
+            .marker {
+                position: absolute;
+                width: clamp(70px, 8vw, 110px);
+                height: clamp(30px, 3.5vw, 42px);
+                transform: translate(-50%, -50%);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 4;
+                pointer-events: none;
+                will-change: left, top, opacity;
+            }
+
+            .marker .badge {
+                width: 100%;
+                height: 100%;
+                border-radius: 12px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                overflow: hidden;
+            }
+
+            .marker .badge img {
+                width: 70%;
+                height: 70%;
+                object-fit: contain;
+            }
+
+            .marker .fallback {
+                width: 100%;
+                height: 100%;
+                border-radius: 12px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: #fff;
+                font-weight: 800;
+                font-size: clamp(0.65rem, 1.1vw, 0.95rem);
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+            }
+
+            /* Mobile Adjustments (Screen width < 768px) */
+            @media screen and (max-width: 767px) {
+                .network {
+                    aspect-ratio: 1000 / 650; /* Add vertical headroom for mobile */
                 }
-                .divider::before,.divider::after{
-                    content:""; flex:1; height:1px; background:var(--line);
-                }
-                .divider span{
-                    font-weight:800; font-size:15px; white-space:nowrap;
-                }
+            }
         </style>
 
         <section class="hero-animation">
             <div class="network" id="network">
                 <svg viewBox="0 0 1900 560" preserveAspectRatio="none">
-                <!-- LEFT paths -->
-                <path id="p-l1"  class="line solid"></path>
-                <path id="p-l1d" class="line dotted"></path>
+                    <!-- LEFT paths -->
+                    <path id="p-l1"  class="line solid"></path>
+                    <path id="p-l1d" class="line dotted"></path>
 
-                <path id="p-l2"  class="line solid"></path>
-                <path id="p-l2d" class="line dotted"></path>
+                    <path id="p-l2"  class="line solid"></path>
+                    <path id="p-l2d" class="line dotted"></path>
 
-                <path id="p-l3"  class="line solid"></path>
-                <path id="p-l3d" class="line dotted"></path>
+                    <path id="p-l3"  class="line solid"></path>
+                    <path id="p-l3d" class="line dotted"></path>
 
-                <!-- RIGHT paths (mirrored) -->
-                <path id="p-r1"  class="line solid"></path>
-                <path id="p-r1d" class="line dotted"></path>
+                    <!-- RIGHT paths -->
+                    <path id="p-r1"  class="line solid"></path>
+                    <path id="p-r1d" class="line dotted"></path>
 
-                <path id="p-r2"  class="line solid"></path>
-                <path id="p-r2d" class="line dotted"></path>
+                    <path id="p-r2"  class="line solid"></path>
+                    <path id="p-r2d" class="line dotted"></path>
 
-                <path id="p-r3"  class="line solid"></path>
-                <path id="p-r3d" class="line dotted"></path>
+                    <path id="p-r3"  class="line solid"></path>
+                    <path id="p-r3d" class="line dotted"></path>
                 </svg>
 
                 <div class="center-badge" id="centerBadge">
@@ -244,32 +227,14 @@
                         </audio>
                     </a>
                 </div>
-                    <script>
-                        $(".today-signal-sound").on("click", function(e) {
 
-                            e.preventDefault();
-
-                            const sound = document.getElementById("todaySignalSound");
-                            const url = this.href;
-
-                            sound.currentTime = 0;
-                            sound.play().catch(() => {});
-
-                            // Navigate after the sound starts
-                            setTimeout(function () {
-                                window.open(url, '_blank');
-                            }, 200);
-                        });
-                    </script>
-
-                <!-- Icon markers: swap the <img src="..."> for the official logo files you have
-                    rights to use. Fallback colored badges are shown if no image is provided. -->
-                <div class="marker" data-path="p-l1" data-duration="10"  data-delay="0">
+                <!-- Icon Markers -->
+                <div class="marker" data-path="p-l1" data-duration="10" data-delay="0">
                     <div class="badge">
                         <div class="fallback" style="background:#0057b8;">EURUSD</div>
                     </div>
                 </div>
-                <div class="marker" data-path="p-l2" data-duration="9"  data-delay="1.5">
+                <div class="marker" data-path="p-l2" data-duration="9" data-delay="1.5">
                     <div class="badge">
                         <div class="fallback" style="background:black;">XAUUSD</div>
                     </div>
@@ -300,146 +265,123 @@
                     </div>
                 </div>
             </div>
-
         </section>
 
         <script>
-            (function(){
-            const svg = document.querySelector('.network svg');
-            const stage = document.getElementById('network');
-            const centerBadge = document.getElementById('centerBadge');
-            const viewBox = svg.viewBox.baseVal; // {x,y,width,height}
+            (function() {
+                const svg = document.querySelector('.network svg');
+                const stage = document.getElementById('network');
+                const centerBadge = document.getElementById('centerBadge');
+                const viewBox = svg.viewBox.baseVal;
 
-            // Path shapes as templates: every curve ends at {cx},{cy}, which gets
-            // replaced with the button's real measured center. The middle-row lines
-            // (l2 / r2) are kept perfectly straight so they run flush into the pill,
-            // matching the reference layout.
-            const BUTTON_HALF_WIDTH = 90;
+                const pathTemplates = {
+                    // LEFT SIDE
+                    'p-l1': (cx, cy, hw) => `M -60,70 C 350,70 ${cx - 260},${cy} ${cx - hw},${cy}`,
+                    'p-l1d': (cx, cy, hw) => `M -60,140 C 350,140 ${cx - 260},${cy} ${cx - hw},${cy}`,
+                    'p-l2': (cx, cy, hw) => `M -60,${cy} L ${cx - hw},${cy}`,
+                    'p-l2d': (cx, cy, hw) => `M -60,${cy} L ${cx - hw},${cy}`,
+                    'p-l3': (cx, cy, hw) => `M -60,530 C 350,530 ${cx - 260},${cy} ${cx - hw},${cy}`,
+                    'p-l3d': (cx, cy, hw) => `M -60,440 C 350,440 ${cx - 260},${cy} ${cx - hw},${cy}`,
 
-            const pathTemplates = {
-            // LEFT SIDE
-            'p-l1': (cx, cy) =>
-                `M -60,70 C 350,70 ${cx-260},${cy} ${cx-BUTTON_HALF_WIDTH},${cy}`,
-
-            'p-l1d': (cx, cy) =>
-                `M -60,140 C 350,140 ${cx-260},${cy} ${cx-BUTTON_HALF_WIDTH},${cy}`,
-
-            'p-l2': (cx, cy) =>
-                `M -60,${cy} L ${cx-BUTTON_HALF_WIDTH},${cy}`,
-
-            'p-l2d': (cx, cy) =>
-                `M -60,${cy} L ${cx-BUTTON_HALF_WIDTH},${cy}`,
-
-            'p-l3': (cx, cy) =>
-                `M -60,530 C 350,530 ${cx-260},${cy} ${cx-BUTTON_HALF_WIDTH},${cy}`,
-
-            'p-l3d': (cx, cy) =>
-                `M -60,440 C 350,440 ${cx-260},${cy} ${cx-BUTTON_HALF_WIDTH},${cy}`,
-
-            // RIGHT SIDE
-            'p-r1': (cx, cy) =>
-                `M 1960,70 C 1610,70 ${cx+260},${cy} ${cx+BUTTON_HALF_WIDTH},${cy}`,
-
-            'p-r1d': (cx, cy) =>
-                `M 1960,140 C 1610,140 ${cx+260},${cy} ${cx+BUTTON_HALF_WIDTH},${cy}`,
-
-            'p-r2': (cx, cy) =>
-                `M 1960,${cy} L ${cx+BUTTON_HALF_WIDTH},${cy}`,
-
-            'p-r2d': (cx, cy) =>
-                `M 1960,${cy} L ${cx+BUTTON_HALF_WIDTH},${cy}`,
-
-            'p-r3': (cx, cy) =>
-                `M 1960,530 C 1610,530 ${cx+260},${cy} ${cx+BUTTON_HALF_WIDTH},${cy}`,
-
-            'p-r3d': (cx, cy) =>
-                `M 1960,440 C 1610,440 ${cx+260},${cy} ${cx+BUTTON_HALF_WIDTH},${cy}`
-            };
-            const markers = document.querySelectorAll('.marker');
-            let items = [];
-
-            function alignToButton(){
-                // Read the button's real center relative to the network container, in px
-                const stageRect = stage.getBoundingClientRect();
-                const btnRect = centerBadge.getBoundingClientRect();
-                const pxCenterX = (btnRect.left + btnRect.width / 2) - stageRect.left;
-                const pxCenterY = (btnRect.top + btnRect.height / 2) - stageRect.top;
-
-                // Convert that pixel position into the SVG's own coordinate space
-                const cx = (pxCenterX / stageRect.width) * viewBox.width;
-                const cy = (pxCenterY / stageRect.height) * viewBox.height;
-
-                Object.keys(pathTemplates).forEach(id => {
-                svg.querySelector('#' + id).setAttribute('d', pathTemplates[id](cx, cy));
-                });
-
-                // Rebuild marker/path lookup now that lengths have changed
-                items = Array.from(markers).map(marker => {
-                const pathEl = svg.querySelector('#' + marker.dataset.path);
-                return {
-                    marker,
-                    pathEl,
-                    length: pathEl.getTotalLength(),
-                    duration: parseFloat(marker.dataset.duration || 7),
-                    delay: parseFloat(marker.dataset.delay || 0)
+                    // RIGHT SIDE
+                    'p-r1': (cx, cy, hw) => `M 1960,70 C 1610,70 ${cx + 260},${cy} ${cx + hw},${cy}`,
+                    'p-r1d': (cx, cy, hw) => `M 1960,140 C 1610,140 ${cx + 260},${cy} ${cx + hw},${cy}`,
+                    'p-r2': (cx, cy, hw) => `M 1960,${cy} L ${cx + hw},${cy}`,
+                    'p-r2d': (cx, cy, hw) => `M 1960,${cy} L ${cx + hw},${cy}`,
+                    'p-r3': (cx, cy, hw) => `M 1960,530 C 1610,530 ${cx + 260},${cy} ${cx + hw},${cy}`,
+                    'p-r3d': (cx, cy, hw) => `M 1960,440 C 1610,440 ${cx + 260},${cy} ${cx + hw},${cy}`
                 };
-                });
-            }
 
-            function positionMarker(item, t){
-                const point = item.pathEl.getPointAtLength(t * item.length);
-                const leftPct = (point.x / viewBox.width) * 100;
-                const topPct  = (point.y / viewBox.height) * 100;
-                item.marker.style.left = leftPct + '%';
-                item.marker.style.top  = topPct + '%';
+                const markers = document.querySelectorAll('.marker');
+                let items = [];
 
-                let opacity = 1;
-                if (t < 0.08) opacity = t / 0.08;
-                else if (t > 0.92) opacity = (1 - t) / 0.08;
-                item.marker.style.opacity = Math.max(0, Math.min(1, opacity));
-            }
+                function alignToButton() {
+                    const stageRect = stage.getBoundingClientRect();
+                    const btnRect = centerBadge.getBoundingClientRect();
 
-            function loop(now){
-                const t = now / 1000;
-                items.forEach(item => {
-                const elapsed = (t - item.delay);
-                if (elapsed < 0){
-                    item.marker.style.opacity = 0;
-                } else {
-                    const progress = (elapsed % item.duration) / item.duration;
-                    positionMarker(item, progress);
+                    const pxCenterX = (btnRect.left + btnRect.width / 2) - stageRect.left;
+                    const pxCenterY = (btnRect.top + btnRect.height / 2) - stageRect.top;
+
+                    const cx = (pxCenterX / stageRect.width) * viewBox.width;
+                    const cy = (pxCenterY / stageRect.height) * viewBox.height;
+
+                    // Dynamically calculate half-width in SVG coordinates
+                    const halfWidthPx = btnRect.width / 2;
+                    const buttonHalfWidthSvg = (halfWidthPx / stageRect.width) * viewBox.width;
+
+                    Object.keys(pathTemplates).forEach(id => {
+                        const pathEl = svg.querySelector('#' + id);
+                        if (pathEl) {
+                            pathEl.setAttribute('d', pathTemplates[id](cx, cy, buttonHalfWidthSvg));
+                        }
+                    });
+
+                    items = Array.from(markers).map(marker => {
+                        const pathEl = svg.querySelector('#' + marker.dataset.path);
+                        return {
+                            marker,
+                            pathEl,
+                            length: pathEl.getTotalLength(),
+                            duration: parseFloat(marker.dataset.duration || 7),
+                            delay: parseFloat(marker.dataset.delay || 0)
+                        };
+                    });
                 }
-                });
+
+                function positionMarker(item, t) {
+                    const point = item.pathEl.getPointAtLength(t * item.length);
+                    const leftPct = (point.x / viewBox.width) * 100;
+                    const topPct = (point.y / viewBox.height) * 100;
+
+                    item.marker.style.left = leftPct + '%';
+                    item.marker.style.top = topPct + '%';
+
+                    let opacity = 1;
+                    if (t < 0.08) opacity = t / 0.08;
+                    else if (t > 0.92) opacity = (1 - t) / 0.08;
+                    item.marker.style.opacity = Math.max(0, Math.min(1, opacity));
+                }
+
+                function loop(now) {
+                    const t = now / 1000;
+                    items.forEach(item => {
+                        const elapsed = (t - item.delay);
+                        if (elapsed < 0) {
+                            item.marker.style.opacity = 0;
+                        } else {
+                            const progress = (elapsed % item.duration) / item.duration;
+                            positionMarker(item, progress);
+                        }
+                    });
+                    requestAnimationFrame(loop);
+                }
+
+                // Bind events for responsiveness
+                window.addEventListener('load', alignToButton);
+                window.addEventListener('resize', alignToButton);
+
+                if ('ResizeObserver' in window) {
+                    new ResizeObserver(alignToButton).observe(stage);
+                }
+
+                alignToButton();
                 requestAnimationFrame(loop);
-            }
-
-            // Run on load, on resize, and once immediately (covers cached/instant loads)
-            window.addEventListener('load', alignToButton);
-            window.addEventListener('resize', alignToButton);
-            alignToButton();
-
-            requestAnimationFrame(loop);
             })();
-        </script>
 
+            // Audio Handler
+            $(".today-signal-sound").on("click", function(e) {
+                e.preventDefault();
+                const sound = document.getElementById("todaySignalSound");
+                const url = this.href;
 
-        <script>
-            // Desktop Lottie
-            lottie.loadAnimation({
-                container: document.getElementById('lottie-desktop'),
-                renderer: 'svg',
-                loop: true,
-                autoplay: true,
-                path: 'public/frontend/json/Landing_Page_Animation_Merge_Without_Text.json'
-            });
+                if (sound) {
+                    sound.currentTime = 0;
+                    sound.play().catch(() => {});
+                }
 
-            // Mobile Lottie
-            lottie.loadAnimation({
-                container: document.getElementById('lottie-mobile'),
-                renderer: 'svg',
-                loop: true,
-                autoplay: true,
-                path: 'public/frontend/json/Landing_Page_Animation_Merge_Without_Text.json'
+                setTimeout(function () {
+                    window.open(url, '_blank');
+                }, 200);
             });
         </script>
     </section>

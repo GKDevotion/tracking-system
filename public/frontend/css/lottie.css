@@ -160,7 +160,12 @@
     .main-button.is-centered {
         inset: auto auto 30%;
         translate: 0;
-        height: 50px;
+        height: 30px;
+        width: 100%;
+    }
+
+    .signal-btn{
+        font-size: 0.7rem;
     }
 
     .button-text-wrap {
