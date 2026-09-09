@@ -101,7 +101,7 @@
                 position: relative;
                 width: 100%;
                 /* max-width: 1400px; */
-                margin: 0 auto;
+                margin: -75 auto;
                 aspect-ratio: 1400 / 560;
             }
 
