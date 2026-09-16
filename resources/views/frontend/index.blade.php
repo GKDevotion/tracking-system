@@ -871,6 +871,17 @@
                 .divider-heading{
                     margin-top: 40px;
                 }
+
+                .stat-card {
+                    display: flow;
+                    align-items: center;
+                    text-align: center;
+                }
+
+                .stat-icon {
+                    display: inline-flex;
+                    margin-bottom: 20px;
+                }
             }
         </style>
 
