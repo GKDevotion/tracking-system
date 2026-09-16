@@ -858,6 +858,14 @@
                 .desktop-break {
                     display: none;
                 }
+
+                .ml-15{
+                    margin-left: -15px;
+                }
+
+                .ml-25{
+                    margin-left: -25px;
+                }
             }
 
             @media (max-width:767px) {
@@ -967,11 +975,11 @@
                                         </div>
 
                                         <div class="stat-text">
-                                            <div class="stat-value text-blue" style="margin-left: -25px;">
+                                            <div class="stat-value text-blue ml-25">
                                                 +<span class="counter">{!! getConfigurationField('WEEKLY_NET_PIPS') !!}</span>
                                             </div>
 
-                                            <div class="stat-label">
+                                            <div class="stat-label ml-15">
                                                 {!! getConfigurationDisplayName('WEEKLY_NET_PIPS') !!}
                                             </div>
                                         </div>
@@ -1086,11 +1094,11 @@
                                         </div>
 
                                         <div class="stat-text">
-                                            <div class="stat-value text-blue" style="margin-left: -25px;">
+                                            <div class="stat-value text-blue ml-25">
                                                 +<span class="counter">{!! getConfigurationField('MONTHLY_NET_PIPS') !!}</span>
                                             </div>
 
-                                            <div class="stat-label" style="margin-left: -15px;">
+                                            <div class="stat-label ml-15">
                                                 {!! getConfigurationDisplayName('MONTHLY_NET_PIPS') !!}
                                             </div>
                                         </div>
