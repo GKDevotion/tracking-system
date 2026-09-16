@@ -853,6 +853,13 @@
                 margin-top: 2px;
             }
 
+            /* Hide the break tag on smaller screens */
+            @media (min-width: 768px) {
+                .desktop-break {
+                    display: none;
+                }
+            }
+
             @media (max-width:767px) {
                 .stat-value {
                     font-size: 1.6rem;
@@ -995,9 +1002,9 @@
                                                     <span class="counter">{!! getConfigurationField('WEEKLY_WIN_TRADES') !!}</span>
                                                     <span>
                                                         {!! getConfigurationDisplayName('WEEKLY_WIN_TRADES') !!}
-                                                    </span>,
+                                                    </span>
                                                 </span>
-
+                                                <br class="desktop-break">
                                                 <span style="color:var(--red);">
                                                     <span class="counter">{!! getConfigurationField('WEEKLY_LOSS_TRADES') !!}</span>
                                                     <span>
@@ -1114,9 +1121,9 @@
                                                     <span class="counter">{!! getConfigurationField('MONTHLY_WIN_TRADES') !!}</span>
                                                     <span>
                                                         {!! getConfigurationDisplayName('MONTHLY_WIN_TRADES') !!}
-                                                    </span>,
+                                                    </span>
                                                 </span>
-
+                                                <br class="desktop-break">
                                                 <span style="color:var(--red);">
                                                     <span class="counter">{!! getConfigurationField('MONTHLY_LOSS_TRADES') !!}</span>
                                                     <span>
