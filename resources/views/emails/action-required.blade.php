@@ -50,14 +50,14 @@
 
                             <p style="text-align:center;margin:0 0 24px;">
                                 <a href="{{ $paymentUrl }}"
-                                   style="background:#ff4500;color:#ffffff;text-decoration:none;padding:14px 28px;border-radius:6px;font-weight:bold;display:inline-block;">
+                                   style="background:#0000ff;color:#ffffff;text-decoration:none;padding:14px 28px;border-radius:6px;font-weight:bold;display:inline-block;">
                                     Update Payment Details
                                 </a>
                             </p>
 
                             <p style="color:#888;font-size:13px;line-height:1.5;margin:0 0 24px;">
                                 If the button doesn't work, copy and paste this link into your browser:<br>
-                                <a href="{{ $paymentUrl }}" style="color:#ff4500;">{{ $paymentUrl }}</a>
+                                <a href="{{ $paymentUrl }}" style="color:#0000ff;">{{ $paymentUrl }}</a>
                             </p>
 
                             <p style="color:#444;line-height:1.6;margin:0 0 16px;">

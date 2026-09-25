@@ -62,7 +62,7 @@
 
                                 <p style="color:#888;font-size:13px;line-height:1.5;margin-bottom:24px;">
                                     If the button doesn't work, copy and paste this link into your browser:<br>
-                                    <a href="{{ $paymentUrl }}" style="color:#ff4500;">{{ $paymentUrl }}</a>
+                                    <a href="{{ $paymentUrl }}" style="color:#0000ff;">{{ $paymentUrl }}</a>
                                 </p>
 
                                 <p style="color:#444;line-height:1.6;">

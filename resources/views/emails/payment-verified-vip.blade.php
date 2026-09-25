@@ -58,7 +58,7 @@
 
                             <p style="text-align:center;margin:28px 0;">
                                 <a href="{{ $checkout->vip_access_link }}"
-                                   style="background:#ff4500;color:#ffffff;text-decoration:none;padding:14px 28px;border-radius:6px;font-weight:bold;display:inline-block;">
+                                   style="background:#0000ff;color:#ffffff;text-decoration:none;padding:14px 28px;border-radius:6px;font-weight:bold;display:inline-block;">
                                     Access Wealthora VIP →
                                 </a>
                             </p>
