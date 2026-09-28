@@ -19,7 +19,7 @@
 
                     /* Header */
                     .sig-table thead tr {
-                        background: #fddfdf59;
+                        background: #80808080;
                     }
                     .sig-table thead th {
                         font-weight: 700;
@@ -196,6 +196,7 @@
                             <th>Date</th>
                             <th>Pair</th>
                             <th>Order</th>
+                            <th>Entry</th>
                             <th class="">PIPS</th>
                             <th>Live</th>
                             </tr>
@@ -232,6 +233,10 @@
                                             </span>
                                         </td>
 
+                                        {{-- Entry Price --}}
+                                        <td class="c-entry">
+                                            {{ number_format( $signal->entry_price, 2 ) }}
+                                        </td>
 
                                         {{-- Profit --}}
                                         {{-- <td class="{{ $signal->profit > 0 ? 'c-profit' : 'c-zero' }}">
@@ -239,7 +244,7 @@
                                         </td> --}}
                                         <td class=" {{ $signal->profit > 0 ? 'c-profit' : ($signal->profit < 0 ? 'c-loss' : 'c-zero') }}">
                                             @if ( $signal->profit)
-                                                {{ $signal->profit }}
+                                                {{ number_format( $signal->profit, 2 ) }}
                                             @else
                                                 <span class="text-blue">Running</span>
                                             @endif

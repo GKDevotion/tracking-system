@@ -42,7 +42,7 @@
 
                     /* Header */
                     .sig-table thead tr {
-                        background: #fddfdf59;
+                        background: #80808080;
                     }
                     .sig-table thead th {
                         font-weight: 700;
@@ -223,7 +223,7 @@
                             <th>Date</th>
                             <th>Pair</th>
                             <th>Order</th>
-                            <th class="d-none">Entry</th>
+                            <th>Entry</th>
                             <th style="width: 1%">SL | TP</th>
                             <th class="">PIPS</th>
                             <th>Live</th>
@@ -261,17 +261,17 @@
                                         </td>
 
                                         {{-- Entry Price --}}
-                                        <td class="c-entry d-none">
-                                            {{ $signal->entry_price }}
+                                        <td class="c-entry">
+                                            {{ number_format( $signal->entry_price, 2 ) }}
                                         </td>
 
                                         {{-- SL / TP --}}
                                         <td class="text-left">
-                                            <span class="sl-">{{ $signal->stop_loss }}</span>
+                                            <span class="sl-">{{ number_format( $signal->stop_loss, 2 ) }}</span>
                                             <span class="sep">|</span>
                                             <span class="tp-">
                                                 @foreach (json_decode($signal->take_profit, true) as $k=>$tp)
-                                                    <span>{{ "TP" . ($k + 1) . ": " . $tp.", " }}</span>
+                                                    <span>{{ "TP" . ($k + 1) . ": " . number_format( $tp, 2 ).", " }}</span>
                                                 @endforeach
                                             </span>
                                         </td>
@@ -279,7 +279,7 @@
                                         {{-- Profit --}}
                                        <td class=" {{ $signal->profit > 0 ? 'c-profit' : ($signal->profit < 0 ? 'c-loss' : 'c-zero') }}">
                                             @if ( $signal->profit)
-                                                {{ $signal->profit }}
+                                                {{ number_format( $signal->profit, 2 ) }}
                                             @else
                                                 <span class="text-blue">Running</span>
                                             @endif

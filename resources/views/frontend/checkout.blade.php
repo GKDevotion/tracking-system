@@ -358,7 +358,7 @@
                                 </span>
                                 Telegram
                             </label>
-                            <label class="comm-card" id="cardWhatsApp">
+                            <label class="comm-card d-none" id="cardWhatsApp">
                                 <input class="form-check-input d-none" type="radio" name="platform" id="optWhatsApp" value="whatsapp">
                                 <span class="comm-badge wa">
                                  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">

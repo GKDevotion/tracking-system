@@ -88,35 +88,35 @@
 
                 {{-- PERSONAL INFORMATION --}}
                 <div class="mb-4">
-                    <h4 class="section-title">Personal Information</h4> 
+                    <h4 class="section-title">Personal Information</h4>
                     <div class="row g-3">
 
                         <div class="col-md-6">
-                            <label class="form-label mb-0">First Name *</label> 
-                            <input type="text" class="form-control form-control-lg" id="firstName" name="first_name" required> 
+                            <label class="form-label mb-0">First Name *</label>
+                            <input type="text" class="form-control form-control-lg" id="firstName" name="first_name" required>
                             <div class="invalid-feedback">Required</div>
                         </div>
 
                         <div class="col-md-6">
-                            <label class="form-label mb-0">Last Name *</label> 
+                            <label class="form-label mb-0">Last Name *</label>
                             <input type="text" class="form-control form-control-lg" id="lastName" name="last_name" required>
                         </div>
 
                         <div class="col-md-6">
-                            <label class="form-label mb-0">Email *</label> 
+                            <label class="form-label mb-0">Email *</label>
                             <input type="email" class="form-control form-control-lg" id="email" name="email" required>
                         </div>
 
                         <div class="col-md-6">
-                            <label class="form-label mb-0">Country *</label> 
-                            <select class="form-select" name="country" required> 
-                                <option value="">Select Country</option> 
+                            <label class="form-label mb-0">Country *</label>
+                            <select class="form-select" name="country" required>
+                                <option value="">Select Country</option>
                                 @foreach ($countries as $country)
                                     <option value="{{ $country->id }}"
                                         {{ old('country') == $country->id ? 'selected' : '' }}>
                                         {{ $country->name }}
                                     </option>
-                                @endforeach 
+                                @endforeach
                             </select>
                         </div>
 
@@ -127,7 +127,7 @@
                 {{-- RECEIVING SIGNALS --}}
                 <div class="mb-4 animate__animated animate__fadeInUp">
 
-                    <h4 class="section-title">Receiving Signals</h4> 
+                    <h4 class="section-title">Receiving Signals</h4>
                     <p class="text-muted small">
                         Where should we send your trading signals?
                     </p>
@@ -135,12 +135,12 @@
                     <div class="d-flex gap-4 mb-3">
 
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="platform" id="optTelegram" value="telegram" checked> 
+                            <input class="form-check-input" type="radio" name="platform" id="optTelegram" value="telegram" checked>
                             <label class="form-check-label" for="optTelegram"> Telegram </label>
                         </div>
 
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="platform" id="optWhatsApp" value="whatsapp"> 
+                        <div class="form-check d-none">
+                            <input class="form-check-input" type="radio" name="platform" id="optWhatsApp" value="whatsapp">
                             <label class="form-check-label" for="optWhatsApp"> WhatsApp </label>
                         </div>
 
@@ -150,14 +150,14 @@
 
                         <div class="col-md-6" id="tgField">
 
-                            <label class="form-label mb-0"> Telegram Username * </label> 
+                            <label class="form-label mb-0"> Telegram Username * </label>
                             <input type="text" class="form-control" id="telegramUser" name="telegram_username" placeholder="@username" required>
 
                         </div>
 
                         <div class="col-md-6">
 
-                            <label class="form-label mb-0"> Phone Number * </label> 
+                            <label class="form-label mb-0"> Phone Number * </label>
                             <input type="tel" class="form-control" id="phone" name="phone" placeholder="Enter Your Mobile Number" required>
 
                         </div>
@@ -180,12 +180,12 @@
                         <div class="d-flex gap-4 mb-4">
 
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="payment_method" id="paymentCrypto" value="crypto" checked> 
+                                <input class="form-check-input" type="radio" name="payment_method" id="paymentCrypto" value="crypto" checked>
                                 <label class="form-check-label" for="paymentCrypto"> Crypto </label>
                             </div>
 
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="payment_method" id="paymentBank" value="bank"> 
+                                <input class="form-check-input" type="radio" name="payment_method" id="paymentBank" value="bank">
                                 <label class="form-check-label" for="paymentBank"> Bank Transfer </label>
                             </div>
 
@@ -204,7 +204,7 @@
 
                                         <div class="col-md-12 mb-3">
 
-                                            <div class="payment-card active" onclick="selectPayment('trc20', this)"> 
+                                            <div class="payment-card active" onclick="selectPayment('trc20', this)">
                                                 <img src="https://www.forexgdp.com/wp-content/uploads/2024/12/USDT-tether-trc-20-token-logo.png" width="150" class="mb-2">
                                             </div>
 
@@ -232,7 +232,7 @@
                                             USDT - TRC20 - Tron Network
                                         </h5>
 
-                                        <img id="qrCodeImg" src="{{ url('public/frontend/images/QR-Code-usdt-bep20-bnb-bsc-network-gdp.png') }}" alt="QR" class="my-3 img-fluid"> 
+                                        <img id="qrCodeImg" src="{{ url('public/frontend/images/QR-Code-usdt-bep20-bnb-bsc-network-gdp.png') }}" alt="QR" class="my-3 img-fluid">
                                         <p class="text-primary fw-bold text-break" id="walletAddr">
                                             TGjYaSW5StCyejzv8KebpkjsjDaxtxnBdh
                                         </p>
@@ -259,11 +259,11 @@
                                     <div class="col-md-6">
 
                                         <label class="fw-bold d-block">
-                                        {!! getConfigurationDisplayName('BANK_NAME') !!}  
+                                        {!! getConfigurationDisplayName('BANK_NAME') !!}
                                         </label>
 
                                         <p class="mb-0">
-                                            {!! getConfigurationField('BANK_NAME') !!}  
+                                            {!! getConfigurationField('BANK_NAME') !!}
                                         </p>
 
                                     </div>
@@ -273,11 +273,11 @@
                                     <div class="col-md-6">
 
                                         <label class="fw-bold d-block">
-                                            {!! getConfigurationDisplayName('ACCOUNT_HOLDER_NAME') !!}  
+                                            {!! getConfigurationDisplayName('ACCOUNT_HOLDER_NAME') !!}
                                         </label>
 
                                         <p class="mb-0">
-                                        {!! getConfigurationField('ACCOUNT_HOLDER_NAME') !!} 
+                                        {!! getConfigurationField('ACCOUNT_HOLDER_NAME') !!}
                                         </p>
                                     </div>
                                     @endif
@@ -286,11 +286,11 @@
                                     <div class="col-md-6">
 
                                         <label class="fw-bold d-block">
-                                        {!! getConfigurationDisplayName('ACCOUNT_NUMBER') !!}  
+                                        {!! getConfigurationDisplayName('ACCOUNT_NUMBER') !!}
                                         </label>
 
                                         <p class="mb-0">
-                                            {!! getConfigurationField('ACCOUNT_NUMBER') !!}  
+                                            {!! getConfigurationField('ACCOUNT_NUMBER') !!}
                                         </p>
                                     </div>
                                     @endif
@@ -299,11 +299,11 @@
                                     <div class="col-md-6">
 
                                         <label class="fw-bold d-block">
-                                            {!! getConfigurationDisplayName('IBAN') !!}  
+                                            {!! getConfigurationDisplayName('IBAN') !!}
                                         </label>
 
                                         <p class="mb-0">
-                                            {!! getConfigurationField('IBAN') !!}  
+                                            {!! getConfigurationField('IBAN') !!}
                                         </p>
                                     </div>
                                     @endif
@@ -319,8 +319,8 @@
                     {{-- PAYMENT PROOF --}}
                     <div class="mb-4">
 
-                        <h4 class="section-title"> Confirm Payment </h4> 
-                        <label class="form-label mb-0 fw-bold"> Upload Transaction Screenshot / PDF * </label> 
+                        <h4 class="section-title"> Confirm Payment </h4>
+                        <label class="form-label mb-0 fw-bold"> Upload Transaction Screenshot / PDF * </label>
                         <input type="file" class="form-control form-control-lg" id="proofFile" name="proof_file" accept="image/*,.pdf" required>
 
                     </div>

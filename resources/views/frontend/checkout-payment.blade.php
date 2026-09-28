@@ -271,13 +271,13 @@
                             <input type="hidden" name="crypto_network" id="cryptoNetwork" value="trc20">
 
                             {{-- Step 1 --}}
-                            <div class="step-block">
+                            <div class="step-block d-none">
                                 <div class="step-num">1</div>
                                 <h5>Choose Payment Type</h5>
                                 <p class="step-sub">Select how you would like to make the payment</p>
 
                                 <div class="select-cards">
-                                    
+
                                     <label class="select-card active" id="cardCrypto">
                                         <input type="radio" name="payment_method" id="paymentCrypto" value="crypto" checked>
                                         <span class="icon-circle">
@@ -374,7 +374,7 @@
 
                             {{-- Step 3 --}}
                             <div class="step-block">
-                                <div class="step-num">3</div>
+                                <div class="step-num">1</div>
                                 <h5>Confirm Payment</h5>
                                 <p class="step-sub">Upload your transaction proof</p>
 
@@ -416,7 +416,7 @@
                     {{-- ================= RIGHT: SUMMARY / QR ================= --}}
                     <div id="sideColumn">
                         <div class="side-card">
-                            <div class="side-card-title">
+                            <div class="side-card-title d-none">
                                 <span class="icon-badge">
                                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
                                 </span>
@@ -426,11 +426,11 @@
                                 <span>Amount to Pay</span>
                                 <strong>{{ number_format($checkout->planDetails->price ?? 0, 2) }} USDT</strong>
                             </div>
-                            <div class="summary-row">
+                            <div class="summary-row d-none">
                                 <span>Network Fee</span>
                                 <span>0.00 USDT</span>
                             </div>
-                            <div class="summary-total">
+                            <div class="summary-total d-none">
                                 <span>Total Payable</span>
                                 <span>{{ number_format($checkout->planDetails->price ?? 0, 2) }} USDT</span>
                             </div>
@@ -439,7 +439,7 @@
                         <div class="qr-card" id="qrCard">
                             <div class="qr-card-header">
                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
-                                <span id="qrCardTitle">Pay with USDT – TRC20</span>
+                                <span id="qrCardTitle">Pay with USDT - TRC20</span>
                             </div>
                             <div class="qr-card-body">
                                 <p class="qr-sub">Scan the QR code or copy the address below</p>
@@ -460,7 +460,7 @@
                             </div>
                         </div>
 
-                        <div class="side-card" id="whyCryptoCard">
+                        <div class="side-card d-none" id="whyCryptoCard">
                             <div class="side-card-title" style="margin-bottom:18px;">
                                 <h6>Why pay with Crypto?</h6>
                             </div>
