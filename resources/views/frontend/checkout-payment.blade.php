@@ -277,6 +277,7 @@
                                 <p class="step-sub">Select how you would like to make the payment</p>
 
                                 <div class="select-cards">
+                                    
                                     <label class="select-card active" id="cardCrypto">
                                         <input type="radio" name="payment_method" id="paymentCrypto" value="crypto" checked>
                                         <span class="icon-circle">
@@ -302,7 +303,7 @@
                             </div>
 
                             {{-- Step 2 --}}
-                            <div class="step-block" id="cryptoSection">
+                            <div class="step-block d-none" id="cryptoSection">
                                 <div class="step-num">2</div>
                                 <h5>Select Payment Option</h5>
                                 <p class="step-sub">Choose your preferred cryptocurrency</p>
