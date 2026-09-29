@@ -9,10 +9,8 @@ class ForexController extends Controller
 
     public function index()
     {
-        $plans = Plan::where('is_active', 1)
-            ->orderBy('sort_order')
-            ->get();
-
+        $plans = Plan::where('is_active', 1)->orderBy('sort_order')->get();
+        
         $planArr = [];
         foreach ($plans as $plan) {
             // dd( $plans[0]->remove );

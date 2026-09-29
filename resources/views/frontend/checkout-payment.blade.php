@@ -216,11 +216,103 @@
 
         #statusMessage.alert { border-radius: 12px; }
 
+        .pay-grid.success-state {
+            grid-template-columns: 1fr;
+        }
+
+        .pay-grid.success-state > div:first-child {
+            width: 100%;
+        }
+
+        .status-message-full {
+            width: 100%;
+            max-width: 100%;
+            border: 2px solid #ff5a2c;
+            border-radius: 0;
+            background: #ffffff;
+            box-shadow: none;
+            padding: 0;
+            overflow: hidden;
+            color: #111827;
+        }
+
+        .status-message-full .success-banner {
+            background: #ff5a2c;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            min-height: 82px;
+            padding: 18px 30px;
+            font-size: clamp(1.2rem, 2vw, 1rem);
+            font-weight: 800;
+            line-height: 1.2;
+        }
+
+        .status-message-full .success-body {
+            background: #f7f7f7;
+            padding: 28px 30px 26px;
+            border-top: 0;
+        }
+
+        .status-message-full .success-wrap {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .status-message-full .success-title {
+            margin: 0;
+            font-size: clamp(1.6rem, 2.4vw, 2.5rem);
+            line-height: 1.15;
+            font-weight: 800;
+            color: #111827;
+        }
+
+        .status-message-full .success-line {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.02rem;
+            font-weight: 500;
+            color: #111827;
+        }
+
+        .status-message-full .success-check {
+            width: 22px;
+            height: 22px;
+            min-width: 22px;
+            border-radius: 50%;
+            background: #22c55e;
+            color: #fff;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+        }
+
+        .status-message-full .success-meta {
+            font-size: 1.04rem;
+            color: #111827;
+            line-height: 1.5;
+        }
+
+        .status-message-full .success-meta strong,
+        .status-message-full .finance-text {
+            color: var(--logo-color);
+            font-weight: 800;
+        }
+
+        .status-message-full .finance-text {
+            color: var(--logo-color);
+        }
+
         @media (max-width: 960px) {
             .pay-grid { grid-template-columns: 1fr; }
             .select-cards { grid-template-columns: 1fr; }
             .checkout-shell { padding: 28px 22px; }
         }
+ 
     </style>
 
     <div class="container checkout-container animate__animated animate__fadeIn">
@@ -578,6 +670,9 @@
         const form = document.getElementById('paymentForm');
         const statusMsg = document.getElementById('statusMessage');
         const submitBtn = document.getElementById('submitBtn');
+        const customerName = @json($checkout->full_name ?: ($checkout->first_name ?: 'Customer'));
+        const clientId = @json($checkout->unique_id);
+        const planName = @json($checkout->planDetails->name ?? 'Advanced');
 
         form.addEventListener('submit', function (e) {
             e.preventDefault();
@@ -602,13 +697,33 @@
                     return data;
                 })
                 .then((data) => {
+                    const payGrid = document.querySelector('.pay-grid');
+                    const sideColumn = document.getElementById('sideColumn');
+
                     statusMsg.classList.remove('hidden', 'alert-danger');
-                    statusMsg.classList.add('alert-success');
+                    statusMsg.classList.add('alert-success', 'status-message-full');
                     statusMsg.innerHTML = `
-                        <h5 class="alert-heading">Submission Successful!</h5>
-                        <p class="mb-0">Our team will verify your payment and activate your plan within 1-2 hours.</p>
+                        <div class="success-banner">Thanks! Please check your email for the link to complete your payment.</div>
+                        <div class="success-body">
+                            <div class="success-wrap">
+                                <h5 class="success-title">Dear ${customerName},</h5>
+                                <div class="success-line">
+                                    <span class="success-check">✓</span>
+                                    <span>We have received your payment details successfully.</span>
+                                </div>
+                                <div class="success-meta">Client ID: <strong>${clientId}</strong></div>
+                                <div class="success-meta">Plan: <strong>${planName}</strong></div>
+                                <div class="success-meta">Your payment is now under verification by our <span class="finance-text">Finance Team.</span></div>
+                            </div>
+                        </div>
                     `;
                     form.classList.add('hidden');
+                    if (sideColumn) {
+                        sideColumn.classList.add('hidden');
+                    }
+                    if (payGrid) {
+                        payGrid.classList.add('success-state');
+                    }
                     statusMsg.scrollIntoView({ behavior: 'smooth' });
                 })
                 .catch((error) => {
