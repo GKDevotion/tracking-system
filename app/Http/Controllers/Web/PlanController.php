@@ -78,6 +78,7 @@ class PlanController extends Controller
      */
     public function update(Request $request, Plan $plan)
     {
+
         $data = $request->validate([
             'name' => 'required|string|max:255',
             'price' => 'required|string|max:255',
@@ -95,6 +96,10 @@ class PlanController extends Controller
 
         if( !isset( $request->is_highlighted ) && $request->is_highlighted !=1 ){
             $data['is_highlighted'] = 0;
+        }
+
+        if( !isset( $request->is_active ) && $request->is_active !=1 ){
+            $data['is_active'] = 0;
         }
 
         $data['features'] = array_map('trim', explode("\n", $data['features']));
