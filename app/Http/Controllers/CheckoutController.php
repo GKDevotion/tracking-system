@@ -32,7 +32,7 @@ class CheckoutController extends Controller
             'last_name'  => 'required|string|max:255',
             'email'      => ['required', 'email', 'max:255', Rule::unique('pricing_plan_checkout', 'email')],
             'country_id'    => 'required',
-            'platform'   => 'required|in:telegram,whatsapp',
+            // 'platform'   => 'required|in:telegram,whatsapp',
             'telegram_username' => ['nullable', 'string', 'max:255', Rule::unique('pricing_plan_checkout', 'tele_username')],
             'phone'      => ['required', 'string', 'max:255', Rule::unique('pricing_plan_checkout', 'mobile_number')],
         ]);

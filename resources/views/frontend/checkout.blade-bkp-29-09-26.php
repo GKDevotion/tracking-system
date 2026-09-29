@@ -210,9 +210,6 @@
 
         #statusMessage.alert { border-radius: 12px; }
 
-        .iti{
-            width: 100%;
-        }
         @media (max-width: 860px) {
             .checkout-shell { grid-template-columns: 1fr; }
             .side-panel { padding: 36px 28px 28px; }
@@ -286,8 +283,7 @@
 
             {{-- ================= RIGHT PANEL / FORM ================= --}}
             <div class="form-panel">
-                <form id="infoForm" class="needs-validation" novalidate method="POST" action="{{ route('checkout.store') }}" autocomplete="off">
-                    <input type="hidden" name="platform" id="optTelegram" value="telegram">
+                <form id="infoForm" class="needs-validation" novalidate method="POST" action="{{ route('checkout.store') }}">
                     @csrf
                     <input type="hidden" name="plan" value="{{ request('plan') }}">
 
@@ -301,7 +297,8 @@
                         </div>
 
                         <div class="row g-3 mt-1">
-                            <div class="col-md-4">
+                            <div class="col-md-6">
+                                <label class="form-label d-none">First Name *</label>
                                 <div class="input-icon-wrap">
                                     <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
                                     <input type="text" class="form-control" name="first_name" placeholder="Enter your first name here" required>
@@ -309,7 +306,8 @@
                                 <div class="invalid-feedback">Required</div>
                             </div>
 
-                            <div class="col-md-4">
+                            <div class="col-md-6">
+                                <label class="form-label d-none">Last Name *</label>
                                 <div class="input-icon-wrap">
                                     <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
                                     <input type="text" class="form-control" name="last_name" placeholder="Enter your last name here" required>
@@ -317,16 +315,18 @@
                                 <div class="invalid-feedback">Required</div>
                             </div>
 
-                            <div class="col-md-4">
+                            <div class="col-md-6">
+                                <label class="form-label d-none">Email *</label>
                                 <div class="input-icon-wrap">
                                     <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z" opacity="0"></path><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="m22 6-10 7L2 6"></path></svg>
-                                    <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email address" required>
+                                    <input type="email" class="form-control" id="email" placeholder="Enter your email address" required>
                                     <span class="input-notification mt-1" style="color: var(--red-color)" for="email"></span>
                                 </div>
                                 <div class="invalid-feedback">Required / already used</div>
                             </div>
 
-                            <div class="col-md-4">
+                            <div class="col-md-6">
+                                <label class="form-label d-none">Country *</label>
                                 <div class="input-icon-wrap">
                                     <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 0 20 15.3 15.3 0 0 1 0-20z"></path></svg>
                                     <select class="form-select" name="country_id" required>
@@ -338,19 +338,58 @@
                                 </div>
                                 <div class="invalid-feedback">Required</div>
                             </div>
+                        </div>
+                    </div>
 
-                            <div class="col-md-4">
+                    {{-- Receiving Signals --}}
+                    <div class="section-blockd animate__animated animate__fadeInUp mt-3">
+                        <div class="section-heading d-none">
+                            <div class="icon-badge">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                            </div>
+                            <h4>Receiving Signals</h4>
+                        </div>
+                        <p class="section-sub d-none">Where should we send your trading signals?</p>
+
+                        <div class="comm-options d-none">
+                            <label class="comm-card active" id="cardTelegram">
+                                <input class="form-check-input d-none" type="radio" name="platform" id="optTelegram" value="telegram" checked>
+                                <span class="comm-badge tg">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M21.05 3.32 2.93 10.6c-1.2.5-1.19 1.18-.22 1.47l4.66 1.45 1.8 5.5c.22.6.38.85.78.85.39 0 .57-.18.79-.4l1.9-1.83 4.03 2.97c.74.41 1.27.2 1.46-.68l2.64-12.4c.28-1.16-.44-1.68-1.72-1.21Z"></path></svg>
+                                </span>
+                                Telegram
+                            </label>
+                            <label class="comm-card d-none" id="cardWhatsApp">
+                                <input class="form-check-input d-none" type="radio" name="platform" id="optWhatsApp" value="whatsapp">
+                                <span class="comm-badge wa">
+                                 <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M20.52 3.48A11.87 11.87 0 0 0 12.08 0C5.52 0 .18 5.34.18 11.9c0 2.1.55 4.15 1.6 5.96L.1 24l6.28-1.64a11.86 11.86 0 0 0 5.69 1.45h.01c6.56 0 11.9-5.34 11.9-11.9 0-3.18-1.24-6.17-3.46-8.43ZM12.08 21.78h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.73.98 1-3.64-.23-.37a9.84 9.84 0 0 1-1.51-5.25c0-5.45 4.43-9.88 9.89-9.88 2.64 0 5.12 1.03 6.98 2.89a9.82 9.82 0 0 1 2.89 6.99c0 5.45-4.43 9.88-9.88 9.88Zm5.42-7.4c-.3-.15-1.77-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.74-1.64-2.04-.17-.3-.02-.46.13-.61.14-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.05 1.03-1.05 2.51s1.08 2.91 1.23 3.11c.15.2 2.12 3.24 5.13 4.54.72.31 1.28.5 1.72.64.72.23 1.37.2 1.89.12.58-.09 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.07-.12-.27-.2-.57-.35Z"/>
+                                </svg>
+                                </span>
+                                WhatsApp
+                            </label>
+                        </div>
+
+                        <div class="row g-3">
+                            <div class="col-md-6" id="tgField">
+                                <label class="form-label d-none">Telegram Username *</label>
                                 <div class="input-icon-wrap">
                                     <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M16 12v1.5a2.5 2.5 0 0 0 5 0V12a9 9 0 1 0-5.5 8.3"></path></svg>
                                     <input type="text" class="form-control" id="telegramUser" name="telegram_username" placeholder="Enter your telegram username" required>
                                 </div>
                             </div>
 
-                            <div class="col-md-4">
+                            <div class="col-md-6">
+                                <label class="form-label d-none">Phone Number *</label>
                                 <div class="input-icon-wrap">
-                                    <input type="tel" class="form-control" id="phone" name="phone" placeholder="Enter Your Mobile Number" required>
-                                </div>
+                                <input type="tel" class="form-control" id="phone" name="phone" placeholder="Enter Your Mobile Number" required>
+                                 </div>
                             </div>
+                        </div>
+
+                        <div class="info-banner">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                            <span>Make sure your Telegram or WhatsApp is active to receive important updates.</span>
                         </div>
                     </div>
 
@@ -415,10 +454,10 @@
                 cardTelegram.classList.remove('active');
             }
         }
-        // tgRadio.addEventListener('change', toggleComm);
-        // waRadio.addEventListener('change', toggleComm);
-        // cardTelegram.addEventListener('click', () => { tgRadio.checked = true; toggleComm(); });
-        // cardWhatsApp.addEventListener('click', () => { waRadio.checked = true; toggleComm(); });
+        tgRadio.addEventListener('change', toggleComm);
+        waRadio.addEventListener('change', toggleComm);
+        cardTelegram.addEventListener('click', () => { tgRadio.checked = true; toggleComm(); });
+        cardWhatsApp.addEventListener('click', () => { waRadio.checked = true; toggleComm(); });
 
         const form = document.getElementById('infoForm');
         const statusMsg = document.getElementById('statusMessage');
@@ -467,9 +506,9 @@
                     }, 1000);
                 })
                 .catch((error) => {
-                    statusMsg.classList.add('hidden');
-                    // statusMsg.classList.add('alert-danger');
-                    // statusMsg.innerHTML = `<h5 class="alert-heading">Submission Failed</h5><p>${error.message}</p>`;
+                    statusMsg.classList.remove('hidden', 'alert-success');
+                    statusMsg.classList.add('alert-danger');
+                    statusMsg.innerHTML = `<h5 class="alert-heading">Submission Failed</h5><p>${error.message}</p>`;
                     submitBtn.disabled = false;
                     submitBtn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg> Continue`;
                 });
@@ -486,19 +525,5 @@
                 $('.input-notification[for="'+x+'"]').text(errorArray[x][0]).show();
             }
         }
-
-        // Function to strip '@' from the input value
-        function removeAtSymbol(element) {
-            let cleanValue = $(element).val().replace(/@/g, '');
-            $(element).val(cleanValue);
-        }
-
-        // 1. Run on page load for the default selected value
-        removeAtSymbol('#telegramUser');
-
-        // 2. Run dynamically on key press / user typing
-        $('#telegramUser').on('input', function() {
-            removeAtSymbol(this);
-        });
     </script>
 @endsection
