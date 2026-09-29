@@ -220,6 +220,79 @@
             .form-panel { padding: 34px 24px; }
             .comm-options { grid-template-columns: 1fr; }
         }
+
+        /* ---------- SUCCESS DETAILS ---------- */
+
+        #statusMessage.alert-success {
+            background: var(--logo-color);
+            border: 1px solid var(--logo-color);
+            color: #0f172a;
+            border-radius: 12px;
+            padding: 18px 20px;
+        }
+
+        #statusMessage .alert-heading {
+            color: #fff;
+            font-weight: 700;
+            font-size: 1.05rem;
+        }
+
+        .alert-heading-register{
+            color: #0f172a;
+            font-weight: 700;
+            font-size: 1.05rem;
+            padding: 10px 14px;
+        }
+
+        .alert-heading-username{
+            color: var(--logo-color);
+            padding: 10px 14px;
+        }
+
+        .checkout-success-details {
+            margin-top: 14px;
+            background: #fff;
+            border: 1px solid rgba(15, 23, 42, 0.08);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .checkout-detail-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            padding: 10px 14px;
+            font-size: 0.9rem;
+        }
+
+        .checkout-detail-row + .checkout-detail-row {
+            border-top: 1px solid rgba(15, 23, 42, 0.08);
+        }
+
+        .checkout-detail-row span {
+            color: #0f172a;
+            font-size: 1rem;
+        }
+
+        .checkout-detail-row strong {
+            color: #0f172a;
+            font-weight: 700;
+            text-align: right;
+            font-size: 1rem;
+        }
+
+        @media (max-width: 576px) {
+            .checkout-detail-row {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 3px;
+            }
+
+            .checkout-detail-row strong {
+                text-align: left;
+            }
+        }
     </style>
 
     <div class="container checkout-container animate__animated animate__fadeIn">
@@ -247,14 +320,18 @@
                         </div>
                     </div>
                     <div class="feature-card">
+
                         <div class="feature-icon blue">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
                         </div>
+
                         <div>
                             <h6>Secure &amp; Reliable</h6>
                             <p>Your information is safe with us.</p>
                         </div>
+
                     </div>
+
                     <div class="feature-card">
                         <div class="feature-icon blue">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"></path><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path></svg>
@@ -264,6 +341,7 @@
                             <p>Our support team is always ready to assist you.</p>
                         </div>
                     </div>
+
                 </div>
 
                 <div class="side-chart">
@@ -455,8 +533,28 @@
                     statusMsg.classList.remove('hidden', 'alert-danger');
                     statusMsg.classList.add('alert-success');
                     statusMsg.innerHTML = `
-                        <h5 class="alert-heading">${data.message}</h5>
-                        <p class="mb-0">Reference: <strong>${data.unique_id}</strong></p>
+                       
+                        <h5 class="alert-heading mb-2">${data.message}</h5>
+                        <div class="checkout-success-details">
+
+                            <h3 class="alert-heading-username">Hi, ${data.username}</h3>
+                            <h5 class="alert-heading-register mb-2">${data.register}</h5>
+
+                            <div class="checkout-detail-row">
+                                <span>Plan</span>
+                                <strong>${data.plan_name}</strong>
+                            </div>
+
+                            <div class="checkout-detail-row">
+                                <span>Amount</span>
+                                <strong>${data.currency}${data.amount}</strong>
+                            </div>
+
+                            <div class="checkout-detail-row">
+                                <span>Order ID</span>
+                                <strong>${data.order_id}</strong>
+                            </div>
+                        </div>
                     `;
                     form.reset();
                     form.classList.remove('was-validated');

@@ -64,7 +64,21 @@ class CheckoutController extends Controller
         return response()->json([
             'success'     => true,
             'message'     => 'Thanks! Please check your email for the link to complete your payment.',
+            'username'   => $checkout->full_name,
+            'register'  =>  'Thank you for choosing Wealthora Signal. Your registration has been received successfully.',
+            // Checkout details
             'unique_id'   => $checkout->unique_id,
+            'order_id'    => $checkout->unique_id,
+
+            'plan_name'   => $checkout->planDetails?->name ?? 'N/A',
+
+            'amount'      => number_format(
+                (float) ($checkout->planDetails?->price ?? 0),
+                2
+            ),
+
+            'currency'    => '$',
+
             'payment_url' => $checkout->payment_url,
         ]);
     }
