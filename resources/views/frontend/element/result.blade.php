@@ -19,7 +19,7 @@
 
                     /* Header */
                     .sig-table thead tr {
-                        background: #80808080;
+                        background: #80808024;
                     }
                     .sig-table thead th {
                         font-weight: 700;
