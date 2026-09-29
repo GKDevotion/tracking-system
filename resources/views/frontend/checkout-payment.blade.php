@@ -107,7 +107,7 @@
         .upload-zone .file-picked { margin-top: 12px; font-size: 0.85rem; color: var(--navy); font-weight: 600; }
 
         .info-banner {
-            background: var(--amber-tint);
+            background: var(--secondary-color);
             border-radius: 10px;
             padding: 12px 16px;
             display: flex; align-items: center; gap: 10px;
@@ -227,14 +227,14 @@
         <div class="checkout-shell">
 
             {{-- ================= HEADER ================= --}}
-            <div class="pay-header">
+            <div class="pay-header mb-3">
                 <div class="heading-row">
                     <div class="pay-shield">
                         <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><path d="m9 12 2 2 4-4"></path></svg>
                     </div>
                     <div>
                         <h2>Secure Checkout</h2>
-                        <p>Complete your payment using your preferred method</p>
+                        <p class="d-none">Complete your payment using your preferred method</p>
                     </div>
                 </div>
                 <div class="pay-badges">
@@ -247,7 +247,7 @@
                 </div>
             </div>
 
-            <p class="ref-badge">Purchase Id: <strong>{{ $checkout->unique_id }}</strong></p>
+            <p class="ref-badge mb-2">Purchase Id: <strong>{{ $checkout->unique_id }}</strong></p>
 
             @if($alreadySubmitted)
                 <div class="alert alert-info text-center">
@@ -259,10 +259,10 @@
                     @endif
                 </div>
             @else
-                <div class="pay-grid">
+                <div class="pay-grid side-card">
 
                     {{-- ================= LEFT: FORM ================= --}}
-                    <div>
+                    <div class="">
                         <form id="paymentForm" class="needs-validation" novalidate method="POST"
                               action="{{ route('checkout.payment.store', $checkout->payment_token) }}"
                               enctype="multipart/form-data">
@@ -375,7 +375,7 @@
                             {{-- Step 3 --}}
                             <div class="step-block">
                                 <div class="step-num">1</div>
-                                <h5>Confirm Payment</h5>
+                                <h5>Confirm Payment for <span style="color: var(--logo-color);">{{ number_format($checkout->planDetails->price ?? 0, 2) }} USDT</span></h5>
                                 <p class="step-sub">Upload your transaction proof</p>
 
                                 <label class="upload-zone d-block" id="uploadZone" for="proofFile" style="cursor:pointer;">
@@ -387,7 +387,7 @@
                                 <input type="file" class="d-none" id="proofFile" name="proof_file" accept="image/*,.pdf" required>
                                 <div class="invalid-feedback">Required, max 2MB (jpg, png, gif, pdf)</div>
 
-                                <div class="info-banner">
+                                <div class="info-banner text-black">
                                     <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
                                     <span>Please ensure the transaction is completed before uploading.</span>
                                 </div>
@@ -415,7 +415,7 @@
 
                     {{-- ================= RIGHT: SUMMARY / QR ================= --}}
                     <div id="sideColumn">
-                        <div class="side-card">
+                        <div class="side-card d-none">
                             <div class="side-card-title d-none">
                                 <span class="icon-badge">
                                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
@@ -439,7 +439,7 @@
                         <div class="qr-card" id="qrCard">
                             <div class="qr-card-header">
                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
-                                <span id="qrCardTitle">Pay with USDT - TRC20</span>
+                                <span id="qrCardTitle">Pay with <span style="color: var(--logo-color);">{{ number_format($checkout->planDetails->price ?? 0, 2) }}</span> USDT - TRC20</span>
                             </div>
                             <div class="qr-card-body">
                                 <p class="qr-sub">Scan the QR code or copy the address below</p>
@@ -453,7 +453,7 @@
                                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
                                     </button>
                                 </div>
-                                <div class="info-banner mt-3 mb-0">
+                                <div class="info-banner mt-3 mb-0 text-black">
                                     <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
                                     <span id="qrWarningText">Please send only USDT (TRC20) to this address. Sending any other coin may result in permanent loss.</span>
                                 </div>
