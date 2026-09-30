@@ -78,11 +78,11 @@
                                         <div class="pricing-btn">
                                             @if(  strtolower($val['name']) == "free" )
                                                 <a href="https://t.me/Wealthoraofficial" target="_blank" class="btn-default get-pricing-btn-sound">
-                                                    Get Started Now
+                                                    {{ $val['cta'] }}
                                                 </a>
                                             @else
                                                 <a href="{{ url('purchase?plan=' . urlencode($val['name'])) }}" class="btn-default get-pricing-btn-sound">
-                                                    Get Started Now
+                                                    {{ $val['cta'] }}
                                                 </a>
                                             @endif
                                             <audio id="pricingBtnSound" preload="auto">
