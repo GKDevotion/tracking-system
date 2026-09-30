@@ -279,7 +279,7 @@
                                         {{-- Profit --}}
                                        <td class=" {{ $signal->profit > 0 ? 'c-profit' : ($signal->profit < 0 ? 'c-loss' : 'c-zero') }}">
                                             @if ( $signal->profit)
-                                                {{ number_format( $signal->profit, 2 ) }}
+                                                {{ $signal->profit }}
                                             @else
                                                 <span class="text-blue">Running</span>
                                             @endif
